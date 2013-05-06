@@ -1,11 +1,9 @@
 {
-  "name": "pariscafe",
+  "name": "hello-world",
+  "description": "hello world test app",
   "version": "0.0.1",
+  "private": true,
   "dependencies": {
-    "express": "2.2.0"
-  },  
-  "engines": {
-    "node": "0.8.x",
-    "npm": "1.1.x"
+    "express": "3.x"
   }
 }
