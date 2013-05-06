@@ -1,5 +1,9 @@
 var express = require('express');
-var app = express().createServer();
+
+var app = express.createServer(
+	express.logger(),
+	express.static(__dirname + '/public')
+);
 
 app.get('/', function(req, res){
   res.send('Hello World');
