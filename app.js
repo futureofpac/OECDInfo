@@ -7,8 +7,8 @@ app.get('/', function(req, res){
 
 });
 
-// var port = process.env.PORT || 5000;
-var port = 80;
+var port = process.env.PORT || 5000;
+// var port = 80;
 app.listen(port);
 
 // app.listen(3000);
