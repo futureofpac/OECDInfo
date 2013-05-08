@@ -38,28 +38,28 @@ T.get('followers/ids', { screen_name: 'tolga_tezel' },  function (err, reply) {
 //
 //  stream a sample of public statuses
 //
-var stream = T.stream('statuses/sample')
+// var stream = T.stream('statuses/sample')
 
-stream.on('tweet', function (tweet) {
-  console.log(tweet)
-})
+// stream.on('tweet', function (tweet) {
+//   console.log(tweet)
+// })
 
-//
-//  filter the twitter public stream by the word 'mango'. 
-//
-var stream = T.stream('statuses/filter', { track: 'mango' })
+// //
+// //  filter the twitter public stream by the word 'mango'. 
+// //
+// var stream = T.stream('statuses/filter', { track: 'mango' })
 
-stream.on('tweet', function (tweet) {
-  console.log(tweet)
-})
+// stream.on('tweet', function (tweet) {
+//   console.log(tweet)
+// })
 
-//
-// filter the public stream by the latitude/longitude bounded box of San Francisco
-//
-var sanFrancisco = [ '-122.75', '36.8', '-121.75', '37.8' ]
+// //
+// // filter the public stream by the latitude/longitude bounded box of San Francisco
+// //
+// var sanFrancisco = [ '-122.75', '36.8', '-121.75', '37.8' ]
 
-var stream = T.stream('statuses/filter', { locations: sanFrancisco })
+// var stream = T.stream('statuses/filter', { locations: sanFrancisco })
 
-stream.on('tweet', function (tweet) {
-  console.log(tweet)
-})
+// stream.on('tweet', function (tweet) {
+//   console.log(tweet)
+// })
