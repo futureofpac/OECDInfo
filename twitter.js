@@ -21,7 +21,7 @@ var app = express();
 
 app.get('/', function(req, res){
 	// console.log('Version: ' + process.version);
-  res.send('hello world11');
+  // res.send('hello world11');
 
  //  var test = {
 	//   "name": "hello-world",
@@ -32,11 +32,12 @@ app.get('/', function(req, res){
 	//   }
 	// }
 
-	// res.write('aaa');
+	// res.send(test);
+
 	T.get('statuses/user_timeline', { screen_name: 'oecd' },  function (err, reply) {
 		console.log('oecd start');
 		console.log(reply);
-		// res.write(JSON.stringify(reply));
+		res.send(reply);
 	  //  ...    
 	})
 
