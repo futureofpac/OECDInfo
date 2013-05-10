@@ -23,17 +23,30 @@ app.get('/', function(req, res){
 	// console.log('Version: ' + process.version);
   res.send('hello world11');
 
+ //  var test = {
+	//   "name": "hello-world",
+	//   "description": "hello world test app",
+	//   "version": "0.0.1",
+	//   "dependencies": {
+	//     "express": "3.x"
+	//   }
+	// }
+
+	// res.write('aaa');
 	T.get('statuses/user_timeline', { screen_name: 'oecd' },  function (err, reply) {
 		console.log('oecd start');
 		console.log(reply);
-		res.write(JSON.stringify(reply));
+		// res.write(JSON.stringify(reply));
 	  //  ...    
 	})
 
 
 });
 
+// app.listen(3000);
+
 var port = process.env.PORT || 5000;
+app.listen(port);
 
 
 //
