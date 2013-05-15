@@ -20,7 +20,7 @@ db.users.save(user1, function(err, savedUser){
 
 exports.fromMango = function(req, res){
 	res.send('in mango')
-	db.users.find(function(err, user){
+	db.users.find({}, function(err, user){
 		res.send('in find')
 		if(err){
 			console.log('err:' + err);
