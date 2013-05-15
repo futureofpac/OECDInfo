@@ -16,7 +16,8 @@ var T = new Twit({
   , access_token_secret:  'yQLc0KEEurMlT78xO4MjztUIekpjCGCwaP8XGXoSsbk'
 })
 
-var express = require('express');
+var express = require('express'),
+	wines = require('./routes/wines');
 var app = express();
 
 app.get('/', function(req, res){
@@ -43,6 +44,10 @@ app.get('/', function(req, res){
 
 
 });
+
+app.get('/wines', wines.findAll);
+app.get('/wines/:id', wines.findById);
+app.get('/mango', wines.fromMango);
 
 // app.listen(3000);
 
