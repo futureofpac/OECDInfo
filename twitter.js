@@ -48,6 +48,7 @@ app.get('/', function(req, res){
 app.get('/wines', wines.findAll);
 app.get('/wines/:id', wines.findById);
 app.get('/mango', wines.fromMango);
+app.get('/register', wines.register);
 
 // app.listen(3000);
 
