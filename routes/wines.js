@@ -18,6 +18,16 @@ db.users.save(user1, function(err, savedUser){
 	}
 })
 
+exports.register = function(req, res){
+   	res.send("Register hit")
+   	db.users.findOne({first:hoon}, function(err, users) {
+	   	res.send("Register hit2")
+    	res.send(err)
+    	res.send(users);
+ 	})
+ }
+
+
 exports.fromMango = function(req, res){
 	res.send('in mango')
 	db.users.find({}, function(err, user){
