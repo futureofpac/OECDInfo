@@ -1,4 +1,4 @@
-var dburl = 'localhost/mongoapp';
+var dburl = 'mongodb://dev:test@dharma.mongohq.com:10019/oecdinfo';
 var collection = ['users'];
 var db = require('mongojs').connect(dburl, collection);
 
