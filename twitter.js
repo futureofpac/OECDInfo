@@ -50,10 +50,10 @@ app.get('/wines/:id', wines.findById);
 app.get('/mango', wines.fromMango);
 app.get('/register', wines.register);
 
-app.listen(3000);
+// app.listen(3000);
 
-// var port = process.env.PORT || 5000;
-// app.listen(port);
+var port = process.env.PORT || 5000;
+app.listen(port);
 
 
 //
