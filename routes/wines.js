@@ -10,6 +10,7 @@ function user (first, last, email) {
 
 var user1 = new user('hoon', 'jung', 'daum');
 
+
 db.users.save(user1, function(err, savedUser){
 	if(err || !savedUser){
 		console.log('err:' + err);
@@ -20,17 +21,24 @@ db.users.save(user1, function(err, savedUser){
 
 exports.register = function(req, res){
    	res.send("Register hit")
-   	db.users.findOne({first:hoon}, function(err, users) {
-	   	res.send("Register hit2")
-    	res.send(err)
-    	res.send(users);
+   	db.users.findOne({first:'hoon'}, function(err, users) {
+   		console.log(res);
+   		console.log('reg2');
+   		console.log(err);
+   		console.log(users);
+	   	// res.send("Register hit2")
+    	// res.send(err)
+    	// res.send(users);
  	})
  }
 
 
 exports.fromMango = function(req, res){
 	res.send('in mango')
-	db.users.find({}, function(err, user){
+	console.log(db);
+	console.log(db.users);
+
+	db.users.find().forEach(function(err, user) {
 		res.send('in find')
 		if(err){
 			console.log('err:' + err);
@@ -40,6 +48,17 @@ exports.fromMango = function(req, res){
 		}
 	})
 }
+
+// 	db.users.find(function(err, user){
+// 		res.send('in find')
+// 		if(err){
+// 			console.log('err:' + err);
+// 		}else{
+// 			console.log('user:' + user);
+// 			res.send(user);		
+// 		}
+// 	})
+// }
 
 
 exports.findAll = function(req, res) {
