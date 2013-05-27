@@ -30,39 +30,49 @@ app.get('/user_timeline/:screen_names', function(req, res){
 	var screen_names = req.params.screen_names.split(',');
 	var tweets = [];
 
-    async.forEach(screen_names, function(screen_name, callback) { //The second argument (callback) is the "task callback" for a specific messageId
-		T.get('statuses/user_timeline', { screen_name: screen_name, exclude_replies: true },  function (err, data) {
-			console.log('get user_timeline');
-				// result = {};
-			for(var i=0;i<data.length;i++){
-				var tweet = {};
-				tweet.title = data[i].text;
-				tweet.pubDate = data[i].created_at;
-				tweet.image = data[i].user.profile_image_url;
-				tweet.typeName = req.params.screen_name;
-				tweet.link = data[i].user.entities.url.urls.url;
-				tweets.push(tweet);
-			}
-			
+	async.parallel([
+    	function(callback) {
+		    async.forEach(screen_names, function(screen_name, callback) { //The second argument (callback) is the "task callback" for a specific messageId
+				T.get('statuses/user_timeline', { screen_name: screen_name, exclude_replies: true },  function (err, data) {
+					console.log('get user_timeline');
+						// result = {};
+					for(var i=0;i<data.length;i++){
+						var tweet = {};
+						tweet.title = data[i].text;
+						tweet.pubDate = data[i].created_at;
+						tweet.image = data[i].user.profile_image_url;
+						tweet.typeName = data[i].user.name;
+						tweet.link = data[i].user.entities.urls.expanded_url
+						tweets.push(tweet);
+					}
+					callback();
+				})
+		    }
+    	},
+    	function(callback) {
+				T.get('statuses/user_timeline', { screen_name: 'OCDE_francais', exclude_replies: true },  function (err, data) {
+					console.log('get user_timeline');
+						// result = {};
+					for(var i=0;i<data.length;i++){
+						var tweet = {};
+						tweet.title = data[i].text;
+						tweet.pubDate = data[i].created_at;
+						tweet.image = data[i].user.profile_image_url;
+						tweet.typeName = data[i].user.name;
+						tweet.link = data[i].user.entities.urls.expanded_url
+						tweets.push(tweet);
+					}
+					callback();
+				})
+    	},
+		function(err) {
+	        if (err) return next(err);
+			res.jsonp(tweets);
+	    });    	
+	]);
 
-			callback();
-			// var result = req.params.callback + '(' + tweets.toString() + ')';
-			// res.json(result);
-			// app.set('jsonp callback name', req.params.callback);
 
 
-			// res.jsonp(500, { error: 'message' })
-		  //  ...    
-		})
-    }, function(err) {
-        if (err) return next(err);
-        //Tell the user about the great success
-        // res.json({
-        //     success: true,
-        //     message: messageIds.length+' message(s) was deleted.'
-        // });
-		res.jsonp(tweets);
-    });
 
 
 
