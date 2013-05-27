@@ -55,7 +55,7 @@ app.get('/user_timeline/:screen_name', function(req, res){
 });
 
 app.get('/calltest', function(req, res){
-	res.jsonp({ user: 'tobi' })
+	res.jsonp(test1({ user: 'tobi' }))
 });
 
 
