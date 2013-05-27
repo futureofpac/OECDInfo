@@ -49,7 +49,7 @@ app.get('/user_timeline/:screen_name/:callback', function(req, res){
 
 	T.get('statuses/user_timeline', { screen_name: req.params.screen_name, exclude_replies: true },  function (err, data) {
 		console.log('get user_timeline');
-		var tweets = {'tweets': null},
+		var tweets = [],
 			result = {};
 
 		for(var i=0;i<data.length;i++){
@@ -66,7 +66,7 @@ app.get('/user_timeline/:screen_name/:callback', function(req, res){
 		// res.json(result);
 
 
-
+		// res.jsonp(500, { error: 'message' })
 		res.jsonp({'data': tweets});
 	  //  ...    
 	})
