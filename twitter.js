@@ -64,12 +64,19 @@ app.get('/user_timeline/:screen_names', function(req, res){
 					}
 					callback();
 				})
-    	},
+    	}],
 		function(err) {
-	        if (err) return next(err);
-			res.jsonp(tweets);
-	    }    	
-	]);
+			console.log('end');
+	        // if (err) return next(err);
+	        if (err) {
+			console.log(err);
+
+				res.send(err);
+	        }else{
+				res.jsonp(tweets);
+	        }
+	    }  
+	);
 
 
 
