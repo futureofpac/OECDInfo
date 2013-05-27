@@ -49,7 +49,7 @@ app.get('/user_timeline/:screen_name/:callback', function(req, res){
 		var tweets = [],
 			result = {};
 
-		for(var i=0;i<tweets.length;i++){
+		for(var i=0;i<data.length;i++){
 			var tweet = {};
 			tweet.title = data[i].text;
 			tweet.pubDate = data[i].created_at;
@@ -58,7 +58,8 @@ app.get('/user_timeline/:screen_name/:callback', function(req, res){
 			tweet.link = data[i].user.entities.url.urls.url;
 			tweets.push(tweet);
 		}
-		result[req.params.callback] = tweets;
+		
+		result = req.params.callback + '(' + tweets + ')';
 		res.send(result);
 	  //  ...    
 	})
