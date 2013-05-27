@@ -20,7 +20,7 @@ var express = require('express'),
 	wines = require('./routes/wines');
 var app = express();
 
-app.set('jsonp callback name', 'callback');
+// app.set('jsonp callback name', 'callback');
 
 app.get('/user_timeline/:screen_name', function(req, res){
 	// console.log('Version: ' + process.version);
