@@ -20,7 +20,7 @@ var express = require('express'),
 	wines = require('./routes/wines');
 var app = express();
 
-app.get('/user_timeline/:screen_name', function(req, res){
+app.get('/user_timeline/:screen_name/:callback', function(req, res){
 	// console.log('Version: ' + process.version);
   // res.send('hello world11');
 
@@ -44,16 +44,21 @@ app.get('/user_timeline/:screen_name', function(req, res){
 
 	// res.send(test);
 
-	T.get('statuses/user_timeline', { screen_name: req.params.screen_name, exclude_replies: true },  function (err, tweets) {
+	T.get('statuses/user_timeline', { screen_name: req.params.screen_name, exclude_replies: true },  function (err, data) {
 		console.log('get user_timeline');
-		var result = [];
+		var tweets = [],
+			result = {};
+
 		for(var i=0;i<tweets.length;i++){
 			var tweet = {};
-			tweet.title = tweets[i].text;
-			tweet.pubDate = tweets[i].created_at;
-			result.push(tweet);
+			tweet.title = data[i].text;
+			tweet.pubDate = data[i].created_at;
+			tweet.image = data[i].user.profile_image_url;
+			tweet.typeName = req.params.screen_name;
+			tweet.link = data[i].user.entities.url.urls.url;
+			tweets.push(tweet);
 		}
-
+		result[req.params.callback] = tweets;
 		res.send(result);
 	  //  ...    
 	})
