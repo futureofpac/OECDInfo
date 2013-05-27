@@ -60,7 +60,7 @@ app.get('/user_timeline/:screen_name/:callback', function(req, res){
 		}
 		
 		result = req.params.callback + '(' + tweets + ')';
-		res.send(result);
+		res.json(result);
 	  //  ...    
 	})
 
