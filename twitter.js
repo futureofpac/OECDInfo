@@ -1,5 +1,9 @@
 var Twit = require('twit')
 
+var FeedParser = require('feedparser')
+  , request = require('request');
+
+
 // Consumer key	YESBKjjb6RtIsDfKJbf1Q
 // Consumer secret	ottkkdctP55j0VcDrG41nuLXD51FB9ab7KcnWLs
 // Request token URL	https://api.twitter.com/oauth/request_token
@@ -50,20 +54,39 @@ app.get('/user_timeline/:screen_names', function(req, res){
 		    }, callback);
     	},
     	function(callback) {
-				T.get('statuses/user_timeline', { screen_name: 'OCDE_francais', exclude_replies: true },  function (err, data) {
-					console.log('get user_timeline');
-						// result = {};
-					for(var i=0;i<data.length;i++){
-						var tweet = {};
-						tweet.title = data[i].text;
-						tweet.pubDate = data[i].created_at;
-						tweet.image = data[i].user.profile_image_url;
-						// tweet.typeName = data[i].user.name;
-						// tweet.link = data[i].user.entities.urls.expanded_url
-						tweets.push(tweet);
-					}
-					callback();
-				})
+
+			request('http://feeds.feedburner.com/OecdObserver')
+			.pipe(new FeedParser())
+			.on('error', function(error) {
+			// always handle errors
+			})
+			.on('meta', function (meta) {
+			// do something
+			})
+			.on('article', function (article) {
+				console.log(article);
+			// do something else
+			})
+			.on('end', function () {
+			// do the next thing
+			});
+
+
+
+				// T.get('statuses/user_timeline', { screen_name: 'OCDE_francais', exclude_replies: true },  function (err, data) {
+				// 	console.log('get user_timeline');
+				// 		// result = {};
+				// 	for(var i=0;i<data.length;i++){
+				// 		var tweet = {};
+				// 		tweet.title = data[i].text;
+				// 		tweet.pubDate = data[i].created_at;
+				// 		tweet.image = data[i].user.profile_image_url;
+				// 		// tweet.typeName = data[i].user.name;
+				// 		// tweet.link = data[i].user.entities.urls.expanded_url
+				// 		tweets.push(tweet);
+				// 	}
+				// 	callback();
+				// })
     	}],
 		function(err) {
 			console.log('end');
