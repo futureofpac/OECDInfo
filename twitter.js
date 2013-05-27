@@ -20,7 +20,7 @@ var express = require('express'),
 	wines = require('./routes/wines');
 var app = express();
 
-app.get('/user_timeline/:screen_name/:callback', function(req, res){
+app.get('/user_timeline/:screen_name', function(req, res){
 	// console.log('Version: ' + process.version);
   // res.send('hello world11');
 
