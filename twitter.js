@@ -68,7 +68,7 @@ app.get('/user_timeline/:screen_names', function(req, res){
 		function(err) {
 	        if (err) return next(err);
 			res.jsonp(tweets);
-	    });    	
+	    }    	
 	]);
 
 
