@@ -46,7 +46,7 @@ app.get('/user_timeline/:screen_name/:callback', function(req, res){
 
 	T.get('statuses/user_timeline', { screen_name: req.params.screen_name, exclude_replies: true },  function (err, data) {
 		console.log('get user_timeline');
-		var tweets = [],
+		var tweets = {'tweets': null},
 			result = {};
 
 		for(var i=0;i<data.length;i++){
@@ -59,8 +59,13 @@ app.get('/user_timeline/:screen_name/:callback', function(req, res){
 			tweets.push(tweet);
 		}
 		
-		result = req.params.callback + '(' + tweets + ')';
-		res.json(result);
+		// result = req.params.callback + '(' + tweets + ')';
+		// res.json(result);
+
+
+		app.set('jsonp callback name', req.params.callback);
+
+		res.jsonp(tweets);
 	  //  ...    
 	})
 
