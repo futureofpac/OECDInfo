@@ -31,7 +31,7 @@ app.get('/user_timeline/:screen_names', function(req, res){
 	var tweets = [];
 
     async.forEach(screen_names, function(screen_name, callback) { //The second argument (callback) is the "task callback" for a specific messageId
-		T.get('statuses/user_timeline', { screen_name, exclude_replies: true },  function (err, data) {
+		T.get('statuses/user_timeline', { screen_name: screen_name, exclude_replies: true },  function (err, data) {
 			console.log('get user_timeline');
 				// result = {};
 			for(var i=0;i<data.length;i++){
