@@ -35,7 +35,7 @@ app.get('/', function(req, res){
 
 	// res.send(test);
 
-	T.get('statuses/user_timeline', { screen_name: 'oecd' },  function (err, reply) {
+	T.get('statuses/user_timeline', { screen_name: 'oecd', exclude_replies: true },  function (err, reply) {
 		console.log('oecd start');
 		console.log(reply);
 		res.send(reply);
