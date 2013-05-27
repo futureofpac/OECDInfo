@@ -40,14 +40,14 @@ app.get('/user_timeline/:screen_name', function(req, res){
 			tweets.push(tweet);
 		}
 		
-		// var result = req.params.callback + '(' + tweets + ')';
+		var result = req.params.callback + '(' + tweets.toString() + ')';
 		// res.json(result);
 		// app.set('jsonp callback name', req.params.callback);
 
 
 		// res.jsonp(500, { error: 'message' })
-		// res.json(result)
-		res.jsonp(tweets);
+		res.json(result)
+		// res.jsonp(tweets);
 	  //  ...    
 	})
 
