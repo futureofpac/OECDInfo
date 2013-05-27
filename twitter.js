@@ -24,29 +24,6 @@ app.set('jsonp callback name', 'callback');
 
 app.get('/user_timeline/:screen_name', function(req, res){
 	// console.log('Version: ' + process.version);
-  // res.send('hello world11');
-
- //  var test = {
-	//   "name": "hello-world",
-	//   "description": "hello world test app",
-	//   "version": "0.0.1",
-	//   "dependencies": {
-	//     "express": "3.x"
-	//   }
-// 	// }
-// id: createId(type, index),
-//                             type: type,
-//                             typeName: me.common.getType(type).title,
-//                             title: record.text,
-//                             content: '',
-//                             image: record.user.profile_image_url,
-//                             link: "http://www.twitter.com/oecd_centre",
-//                             pubDate: ne
-
-
-	// res.send(test);
-
-
 
 	T.get('statuses/user_timeline', { screen_name: req.params.screen_name, exclude_replies: true },  function (err, data) {
 		console.log('get user_timeline');
@@ -76,6 +53,11 @@ app.get('/user_timeline/:screen_name', function(req, res){
 
 
 });
+
+app.get('/calltest', function(req, res){
+	res.jsonp({ user: 'tobi' })
+});
+
 
 app.get('/wines', wines.findAll);
 app.get('/wines/:id', wines.findById);
