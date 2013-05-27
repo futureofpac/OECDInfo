@@ -20,7 +20,7 @@ var express = require('express'),
 	wines = require('./routes/wines');
 var app = express();
 
-app.get('/', function(req, res){
+app.get('/user_timeline:screen_name', function(req, res){
 	// console.log('Version: ' + process.version);
   // res.send('hello world11');
 
@@ -31,14 +31,30 @@ app.get('/', function(req, res){
 	//   "dependencies": {
 	//     "express": "3.x"
 	//   }
-	// }
+// 	// }
+// id: createId(type, index),
+//                             type: type,
+//                             typeName: me.common.getType(type).title,
+//                             title: record.text,
+//                             content: '',
+//                             image: record.user.profile_image_url,
+//                             link: "http://www.twitter.com/oecd_centre",
+//                             pubDate: ne
+
 
 	// res.send(test);
 
-	T.get('statuses/user_timeline', { screen_name: 'oecd', exclude_replies: true },  function (err, reply) {
-		console.log('oecd start');
-		console.log(reply);
-		res.send(reply);
+	T.get('statuses/user_timeline', { screen_name: req.params.screen_name, exclude_replies: true },  function (err, tweets) {
+		console.log('get user_timeline');
+		var result = [];
+		for(var i=0;i<tweets.length;i++){
+			var tweet = {};
+			tweet.title = tweets[i].text;
+			tweet.pubDate = tweets[i].created_at;
+			result.push(tweet);
+		}
+
+		res.send(result);
 	  //  ...    
 	})
 
