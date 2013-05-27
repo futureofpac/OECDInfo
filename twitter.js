@@ -47,7 +47,7 @@ app.get('/user_timeline/:screen_names', function(req, res){
 					}
 					callback();
 				})
-		    }
+		    })
     	},
     	function(callback) {
 				T.get('statuses/user_timeline', { screen_name: 'OCDE_francais', exclude_replies: true },  function (err, data) {
