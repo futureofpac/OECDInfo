@@ -41,8 +41,8 @@ app.get('/user_timeline/:screen_names', function(req, res){
 						tweet.title = data[i].text;
 						tweet.pubDate = data[i].created_at;
 						tweet.image = data[i].user.profile_image_url;
-						tweet.typeName = data[i].user.name;
-						tweet.link = data[i].user.entities.urls.expanded_url
+						// tweet.typeName = data[i].user.name;
+						// tweet.link = data[i].user.entities.urls.expanded_url
 						tweets.push(tweet);
 					}
 					callback();
@@ -58,8 +58,8 @@ app.get('/user_timeline/:screen_names', function(req, res){
 						tweet.title = data[i].text;
 						tweet.pubDate = data[i].created_at;
 						tweet.image = data[i].user.profile_image_url;
-						tweet.typeName = data[i].user.name;
-						tweet.link = data[i].user.entities.urls.expanded_url
+						// tweet.typeName = data[i].user.name;
+						// tweet.link = data[i].user.entities.urls.expanded_url
 						tweets.push(tweet);
 					}
 					callback();
