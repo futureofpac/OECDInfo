@@ -44,6 +44,8 @@ app.get('/user_timeline/:screen_names', function(req, res){
 				tweets.push(tweet);
 			}
 			
+
+			callback();
 			// var result = req.params.callback + '(' + tweets.toString() + ')';
 			// res.json(result);
 			// app.set('jsonp callback name', req.params.callback);
