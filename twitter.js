@@ -44,7 +44,6 @@ app.get('/user_timeline/:screen_name/:callback', function(req, res){
 
 	// res.send(test);
 
-	app.set('jsonp callback name', req.params.callback);
 
 
 	T.get('statuses/user_timeline', { screen_name: req.params.screen_name, exclude_replies: true },  function (err, data) {
@@ -64,10 +63,11 @@ app.get('/user_timeline/:screen_name/:callback', function(req, res){
 		
 		// result = req.params.callback + '(' + tweets + ')';
 		// res.json(result);
+		app.set('jsonp callback name', req.params.callback);
 
 
 		// res.jsonp(500, { error: 'message' })
-		res.jsonp({'data': tweets});
+		res.jsonp(tweets);
 	  //  ...    
 	})
 
