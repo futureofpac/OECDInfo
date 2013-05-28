@@ -65,7 +65,7 @@ app.get('/user_timeline/:screen_names', function(req, res){
     		var news_urls = [
 			    'http://feeds.feedburner.com/OecdObserver'
 			    ,
-			    // 'http://www.oecd.org/newsroom/index.xml',
+			    'http://www.oecd.org/newsroom/index.xml',
 			    'http://oecdinsights.org/feed/'
 			];
 
@@ -106,8 +106,9 @@ app.get('/user_timeline/:screen_names', function(req, res){
 					.on('end', function () {
 					// do the next thing
 					feeds['called'].push(['end']);
+									callback();
+
 					});
-				callback();
 		    }, callback);
 
 
@@ -141,8 +142,8 @@ app.get('/user_timeline/:screen_names', function(req, res){
 	        	console.log(feeds['news']);
 	        	console.log(feeds['tweets']);
 	        	console.log(feeds['error']);
-				// res.jsonp(feeds['news'].concat(feeds['tweets']));
-				res.jsonp(feeds['called']);
+				res.jsonp(feeds['news'].concat(feeds['tweets']));
+				// res.jsonp(feeds['called']);
 	        }
 	    }  
 	);
