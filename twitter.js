@@ -61,21 +61,22 @@ app.get('/user_timeline/:screen_names', function(req, res){
     	},
     	function(callback) {
     		var news_urls = [
-			    'http://feeds.feedburner.com/OecdObserver',
+			    'http://feeds.feedburner.com/OecdObserver'
+			    // ,
 			    // 'http://www.oecd.org/newsroom/index.xml',
-			    'http://oecdinsights.org/feed/'
+			    // 'http://oecdinsights.org/feed/'
 			];
 
 
-    		// var topics = ['agriculture','corruption','chemicalsafety','competition','corporate','development','economy','education','employment','environment','finance','greengrowth','health','industry','innovation','insurance','migration','internet','investment','governance','regional','regreform','science','social','tax','trade'];
-    		// _.each(topics, function (item, index) {
-    		// 	news_urls.push('http://www.oecd.org/'+ item +'/index.xml');
-    		// });
+    		var topics = ['agriculture','corruption','chemicalsafety','competition','corporate','development','economy','education','employment','environment','finance','greengrowth','health','industry','innovation','insurance','migration','internet','investment','governance','regional','regreform','science','social','tax','trade'];
+    		_.each(topics, function (item, index) {
+    			news_urls.push('http://www.oecd.org/'+ item +'/index.xml');
+    		});
 
-    		// var pub_keys = [30,40,79,31,33,34,36,37,39,77,41,42,43,45,78,48,46,];
-    		// _.each(pub_keys, function (item, index) {
-    		// 	news_urls.push('http://www.oecd-ilibrary.org/rss/content/subject/'+ item +'/latest?fmt=rss');
-    		// });
+    		var pub_keys = [30,40,79,31,33,34,36,37,39,77,41,42,43,45,78,48,46,];
+    		_.each(pub_keys, function (item, index) {
+    			news_urls.push('http://www.oecd-ilibrary.org/rss/content/subject/'+ item +'/latest?fmt=rss');
+    		});
 
 		    async.forEach(news_urls, function(url, callback) { 
 				request(url)
