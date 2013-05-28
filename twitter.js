@@ -81,7 +81,7 @@ app.get('/user_timeline/:screen_names', function(req, res){
     		});
 
 		    async.forEach(news_urls, function(url, callback) { 
-		    	feeds['called'].push(url);
+		    	
 
 				request(url)
 					.pipe(new FeedParser())
@@ -103,6 +103,7 @@ app.get('/user_timeline/:screen_names', function(req, res){
 					})
 					.on('end', function () {
 					// do the next thing
+					feeds['called'].push(['end']);
 					});
 				callback();
 		    }, callback);
