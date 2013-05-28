@@ -3,6 +3,7 @@ var Twit = require('twit')
 var FeedParser = require('feedparser')
   , request = require('request');
 
+var _ = require ('underscore');
 
 // Consumer key	YESBKjjb6RtIsDfKJbf1Q
 // Consumer secret	ottkkdctP55j0VcDrG41nuLXD51FB9ab7KcnWLs
@@ -32,12 +33,17 @@ app.get('/user_timeline/:screen_names', function(req, res){
 
 
 	var screen_names = req.params.screen_names.split(',');
-	var tweets = [];
+
+
+	var feeds = {};
+
+	feeds['tweets'] = [];
+	feeds['news'] = [];
 
 	async.parallel([
     	function(callback) {
 		    async.forEach(screen_names, function(screen_name, callback) { //The second argument (callback) is the "task callback" for a specific messageId
-				T.get('statuses/user_timeline', { screen_name: screen_name, exclude_replies: true },  function (err, data) {
+				T.get('statuses/user_timeline', { screen_name: screen_name, exclude_replies: true, count: 10 },  function (err, data) {
 					console.log('get user_timeline');
 						// result = {};
 					for(var i=0;i<data.length;i++){
@@ -45,31 +51,57 @@ app.get('/user_timeline/:screen_names', function(req, res){
 						tweet.title = data[i].text;
 						tweet.pubDate = data[i].created_at;
 						tweet.image = data[i].user.profile_image_url;
-						// tweet.typeName = data[i].user.name;
+						tweet.typeName = data[i].user.name;
 						// tweet.link = data[i].user.entities.urls.expanded_url
-						tweets.push(tweet);
+						feeds['tweets'].push(tweet);
 					}
 					callback();
 				})
 		    }, callback);
     	},
     	function(callback) {
+    		var news_urls = [
+			    'http://feeds.feedburner.com/OecdObserver',
+			    'http://www.oecd.org/newsroom/index.xml',
+			    'http://oecdinsights.org/feed/'
+			];
 
-			request('http://feeds.feedburner.com/OecdObserver')
-			.pipe(new FeedParser())
-			.on('error', function(error) {
-			// always handle errors
-			})
-			.on('meta', function (meta) {
-			// do something
-			})
-			.on('article', function (article) {
-				console.log(article);
-			// do something else
-			})
-			.on('end', function () {
-			// do the next thing
-			});
+    		var topics = ['agriculture','corruption','chemicalsafety','competition','corporate','development','economy','education','employment','environment','finance','greengrowth','health','industry','innovation','insurance','migration','internet','investment','governance','regional','regreform','science','social','tax','trade'];
+    		_.each(topics, function (item, index) {
+    			news_urls.push('http://www.oecd.org/'+ item +'/index.xml');
+    		});
+
+    		var pub_keys = [30,40,79,31,33,34,36,37,39,77,41,42,43,45,78,48,46,];
+    		_.each(pub_keys, function (item, index) {
+    			news_urls.push('http://www.oecd-ilibrary.org/rss/content/subject/'+ item +'/latest?fmt=rss');
+    		});
+
+		    async.forEach(news_urls, function(url, callback) { 
+				request(url)
+					.pipe(new FeedParser())
+					.on('error', function(error) {
+					// always handle errors
+					})
+					.on('meta', function (meta) {
+					// do something
+					})
+					.on('article', function (article) {
+						var news = {};
+						news.title = article.title;
+						news.pubDate = article.pubDate;
+						news.link = article.link;
+
+						feeds['news'].push(news);
+					// do something else
+					})
+					.on('end', function () {
+					// do the next thing
+					});
+				callback();
+		    }, callback);
+
+
+
 
 
 
@@ -96,7 +128,9 @@ app.get('/user_timeline/:screen_names', function(req, res){
 
 				res.send(err);
 	        }else{
-				res.jsonp(tweets);
+	        	console.log(feeds['news']);
+	        	console.log(feeds['tweets']);
+				res.jsonp(feeds['news'].concat(feeds['tweets']));
 	        }
 	    }  
 	);
