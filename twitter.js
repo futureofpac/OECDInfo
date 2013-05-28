@@ -39,6 +39,7 @@ app.get('/user_timeline/:screen_names', function(req, res){
 
 	feeds['tweets'] = [];
 	feeds['news'] = [];
+	feeds['error'] = [];
 
 	async.parallel([
     	function(callback) {
@@ -83,6 +84,7 @@ app.get('/user_timeline/:screen_names', function(req, res){
 					.pipe(new FeedParser())
 					.on('error', function(error) {
 					// always handle errors
+					feeds['error'].push(error);
 					})
 					.on('meta', function (meta) {
 					// do something
@@ -132,7 +134,9 @@ app.get('/user_timeline/:screen_names', function(req, res){
 	        }else{
 	        	console.log(feeds['news']);
 	        	console.log(feeds['tweets']);
-				res.jsonp(feeds['news'].concat(feeds['tweets']));
+	        	console.log(feeds['error']);
+				// res.jsonp(feeds['news'].concat(feeds['tweets']));
+				res.jsonp(feeds['error']);
 	        }
 	    }  
 	);
