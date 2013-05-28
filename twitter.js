@@ -77,6 +77,7 @@ app.get('/all/:screen_names', function(req, res){
 				// flickr.title = 
 				// extras=date_taken,description&per_page=' + pageSize + '&page=' + currentPage,
 				feeds['flickr'] = response;
+				callback();
 			});
     	},	    	
     	function(callback) {
