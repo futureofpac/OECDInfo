@@ -110,6 +110,7 @@ app.get('/user_timeline/:screen_names', function(req, res){
 					.on('end', function () {
 					// do the next thing
 					// feeds['called'].push(['end']);
+						count = 0;
 						callback();
 					});
 		    }, callback);
