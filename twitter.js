@@ -79,11 +79,12 @@ app.get('/user_timeline/:screen_names', function(req, res){
     		_.each(pub_keys, function (item, index) {
     			news_urls.push('http://www.oecd-ilibrary.org/rss/content/subject/'+ item +'/latest?fmt=rss');
     		});
+			var count = 0;
 
 		    async.forEach(news_urls, function(url, callback) { 
 				feeds['called'].push(url);
 
-
+				count = 0;
 				request(url)
 					.pipe(new FeedParser())
 					.on('error', function(error) {
@@ -95,12 +96,17 @@ app.get('/user_timeline/:screen_names', function(req, res){
 					// do something
 					})
 					.on('article', function (article) {
+						if(count > 10){
+							callback();
+						}
+
 						var news = {};
 						news.title = article.title;
 						news.pubDate = article.pubDate;
 						news.link = article.link;
 
 						feeds['news'].push(news);
+						count++;
 					// do something else
 					})
 					.on('end', function () {
