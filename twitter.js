@@ -96,7 +96,7 @@ app.get('/user_timeline/:screen_names', function(req, res){
 					// // do something
 					// })
 					.on('article', function (article) {
-						if(count < 10){
+						if(count < 5){
 							var news = {};
 							news.title = article.title;
 							news.pubDate = article.pubDate;
