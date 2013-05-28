@@ -28,6 +28,9 @@ var express = require('express'),
 	wines = require('./routes/wines');
 var app = express();
 
+var Flickr = require('flickr').Flickr;
+var flickrApi = new Flickr('7bef8abf2f25d57e715e6fbfd855b5ca', 'b228026c42f02e02');
+
 // app.set('jsonp callback name', 'callback');
 
 app.get('/all/:screen_names', function(req, res){
@@ -42,6 +45,7 @@ app.get('/all/:screen_names', function(req, res){
 	feeds['tweets'] = [];
 	feeds['news'] = [];
 	feeds['youtube'] = [];
+	feeds['flickr'] = [];
 	feeds['error'] = [];
 	feeds['called'] = [];
 
@@ -67,6 +71,14 @@ app.get('/all/:screen_names', function(req, res){
 			 	})
 		    }, callback);
     	},		
+		function(callback) {
+			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', null, true, function(err, response){
+				var flickr = {};
+				// flickr.title = 
+				// extras=date_taken,description&per_page=' + pageSize + '&page=' + currentPage,
+				feeds['flickr'] = response;
+			});
+    	},	    	
     	function(callback) {
 		    async.forEach(screen_names, function(screen_name, callback) { //The second argument (callback) is the "task callback" for a specific messageId
 				T.get('statuses/user_timeline', { screen_name: screen_name, exclude_replies: true, count: 10 },  function (err, data) {
@@ -150,7 +162,7 @@ app.get('/all/:screen_names', function(req, res){
 	        	// console.log(feeds['news']);
 	        	// console.log(feeds['tweets']);
 	        	// console.log(feeds['error']);
-				res.jsonp(feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']));
+				res.jsonp(feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']).concat(feeds['flickr']));
 				// res.jsonp(feeds['called']);
 	        }
 	    }  
