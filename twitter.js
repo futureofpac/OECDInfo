@@ -28,7 +28,7 @@ var app = express();
 
 // app.set('jsonp callback name', 'callback');
 
-app.get('/user_timeline/:screen_names', function(req, res){
+app.get('/all/:screen_names', function(req, res){
 	// console.log('Version: ' + process.version);
 
 
