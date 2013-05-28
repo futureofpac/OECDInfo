@@ -54,7 +54,15 @@ app.get('/all/:screen_names', function(req, res){
 		    async.forEach(playlistkeys, function(key, callback) { //The second argument (callback) is the "task callback" for a specific messageId
 				// PL7D00C15B1EA60D89
 			 	youtube.feeds.playlist(key,{'max-results':10},function(err, videos){
-			 		feeds['youtube'].push(videos);
+
+			 		_.each(videos.items, function(item, index){
+				 		var video = {};
+			 			video.title = item.video.title;
+			 			video.pubDate = item.video.uploaded;
+			 			video.link = item.video.player.default;
+			 			video.content = item.video.description;
+				 		feeds['youtube'].push(video);
+			 		})
 			 		callback();
 			 	})
 		    }, callback);
@@ -117,6 +125,7 @@ app.get('/all/:screen_names', function(req, res){
 							news.title = article.title;
 							news.pubDate = article.pubDate;
 							news.link = article.link;
+							news.content = article.summary;
 
 							feeds['news'].push(news);
 						}
