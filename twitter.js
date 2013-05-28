@@ -179,14 +179,48 @@ app.get('/calltest', function(req, res){
     		// });
 
 			var result = [];
+			var feeds = {};
+
+			feeds['tweets'] = [];
+			feeds['news'] = [];
+			feeds['error'] = [];
+			feeds['called'] = [];
 
 		    async.forEach(news_urls, function(url, callback) { 
 				// feeds['called'].push(url);
-				request(url, function(error, response, body){
-					if(!error && response.statusCode == 200){
-						result.push(body);
-					}
-				})
+
+					request(url)
+					.pipe(new FeedParser())
+					.on('error', function(error) {
+					// always handle errors
+						// feeds['error'].push(error);
+					})
+					.on('meta', function (meta) {
+						result.push(['meta']);
+					// do something
+					})
+					.on('article', function (article) {
+						var news = {};
+						news.title = article.title;
+						news.pubDate = article.pubDate;
+						news.link = article.link;
+
+						result.push(news);
+					// do something else
+					})
+					.on('end', function () {
+					// do the next thing
+						result.push(['end']);
+											callback();
+
+					});
+
+
+				// request(url, function(error, response, body){
+				// 	if(!error && response.statusCode == 200){
+				// 		result.push(body);	
+				// 	}
+				// })
 			}, function(err){
 				res.jsonp(result);
 			});
