@@ -82,72 +82,48 @@ app.get('/user_timeline/:screen_names', function(req, res){
 			var count = 0;
 
 		    async.forEach(news_urls, function(url, callback) { 
-				feeds['called'].push(url);
+				// feeds['called'].push(url);
 
 				count = 0;
 				request(url)
 					.pipe(new FeedParser())
 					.on('error', function(error) {
-					// always handle errors
-					feeds['error'].push(error);
+						// always handle errors
+						feeds['error'].push(error);
 					})
-					.on('meta', function (meta) {
-					feeds['called'].push(['meta']);
-					// do something
-					})
+					// .on('meta', function (meta) {
+					// feeds['called'].push(['meta']);
+					// // do something
+					// })
 					.on('article', function (article) {
-						if(count > 10){
-							callback();
+						if(count < 10){
+							var news = {};
+							news.title = article.title;
+							news.pubDate = article.pubDate;
+							news.link = article.link;
+
+							feeds['news'].push(news);
 						}
-
-						var news = {};
-						news.title = article.title;
-						news.pubDate = article.pubDate;
-						news.link = article.link;
-
-						feeds['news'].push(news);
 						count++;
 					// do something else
 					})
 					.on('end', function () {
 					// do the next thing
-					feeds['called'].push(['end']);
-									callback();
-
+					// feeds['called'].push(['end']);
+						callback();
 					});
 		    }, callback);
-
-
-
-
-
-
-				// T.get('statuses/user_timeline', { screen_name: 'OCDE_francais', exclude_replies: true },  function (err, data) {
-				// 	console.log('get user_timeline');
-				// 		// result = {};
-				// 	for(var i=0;i<data.length;i++){
-				// 		var tweet = {};
-				// 		tweet.title = data[i].text;
-				// 		tweet.pubDate = data[i].created_at;
-				// 		tweet.image = data[i].user.profile_image_url;
-				// 		// tweet.typeName = data[i].user.name;
-				// 		// tweet.link = data[i].user.entities.urls.expanded_url
-				// 		tweets.push(tweet);
-				// 	}
-				// 	callback();
-				// })
     	}],
 		function(err) {
 			console.log('end');
 	        // if (err) return next(err);
 	        if (err) {
-			console.log(err);
-
+				console.log(err);
 				res.send(err);
 	        }else{
-	        	console.log(feeds['news']);
-	        	console.log(feeds['tweets']);
-	        	console.log(feeds['error']);
+	        	// console.log(feeds['news']);
+	        	// console.log(feeds['tweets']);
+	        	// console.log(feeds['error']);
 				res.jsonp(feeds['news'].concat(feeds['tweets']));
 				// res.jsonp(feeds['called']);
 	        }
