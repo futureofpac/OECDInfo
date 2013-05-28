@@ -155,7 +155,14 @@ app.get('/user_timeline/:screen_names', function(req, res){
 });
 
 app.get('/calltest', function(req, res){
-	res.jsonp(test1({ user: 'tobi' }))
+	// res.jsonp(test1({ user: 'tobi' }))
+	// 'http://www.oecd.org/newsroom/index.xml',
+	var url = 'http://oecdinsights.org/feed/';
+	request(url, function(error, res, body){
+		if(!error && res.statusCode == 200){
+			res.jsonp(body);
+		}
+	})
 });
 
 
