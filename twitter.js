@@ -5,6 +5,8 @@ var FeedParser = require('feedparser')
 
 var _ = require ('underscore');
 
+var youtube = require('youtube-feeds')
+
 // Consumer key	YESBKjjb6RtIsDfKJbf1Q
 // Consumer secret	ottkkdctP55j0VcDrG41nuLXD51FB9ab7KcnWLs
 // Request token URL	https://api.twitter.com/oauth/request_token
@@ -39,10 +41,24 @@ app.get('/all/:screen_names', function(req, res){
 
 	feeds['tweets'] = [];
 	feeds['news'] = [];
+	feeds['youtube'] = [];
 	feeds['error'] = [];
 	feeds['called'] = [];
 
 	async.parallel([
+		function(callback) {
+			var playlistkeys = [
+			    'PL7D00C15B1EA60D89',
+			    'PL96BBC83DFCD8447E'
+			];
+		    async.forEach(playlistkeys, function(key, callback) { //The second argument (callback) is the "task callback" for a specific messageId
+				// PL7D00C15B1EA60D89
+			 	youtube.feeds.playlist(key,{'max-results':10},function(videos){
+			 		feeds['youtube'].push(videos);
+			 		callback();
+			 	})
+		    }, callback);
+    	},		
     	function(callback) {
 		    async.forEach(screen_names, function(screen_name, callback) { //The second argument (callback) is the "task callback" for a specific messageId
 				T.get('statuses/user_timeline', { screen_name: screen_name, exclude_replies: true, count: 10 },  function (err, data) {
@@ -125,7 +141,7 @@ app.get('/all/:screen_names', function(req, res){
 	        	// console.log(feeds['news']);
 	        	// console.log(feeds['tweets']);
 	        	// console.log(feeds['error']);
-				res.jsonp(feeds['news'].concat(feeds['tweets']));
+				res.jsonp(feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']));
 				// res.jsonp(feeds['called']);
 	        }
 	    }  
