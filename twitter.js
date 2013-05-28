@@ -158,8 +158,8 @@ app.get('/calltest', function(req, res){
 	// res.jsonp(test1({ user: 'tobi' }))
 	// 'http://www.oecd.org/newsroom/index.xml',
 	var url = 'http://oecdinsights.org/feed/';
-	request(url, function(error, res, body){
-		if(!error && res.statusCode == 200){
+	request(url, function(error, response, body){
+		if(!error && response.statusCode == 200){
 			res.jsonp(body);
 		}
 	})
