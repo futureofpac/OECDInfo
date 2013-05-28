@@ -53,7 +53,7 @@ app.get('/all/:screen_names', function(req, res){
 			];
 		    async.forEach(playlistkeys, function(key, callback) { //The second argument (callback) is the "task callback" for a specific messageId
 				// PL7D00C15B1EA60D89
-			 	youtube.feeds.playlist(key,{'max-results':10},function(videos){
+			 	youtube.feeds.playlist(key,{'max-results':10},function(err, videos){
 			 		feeds['youtube'].push(videos);
 			 		callback();
 			 	})
