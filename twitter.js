@@ -41,7 +41,7 @@ app.get('/all/:screen_names', function(req, res){
 
 			var today = new Date();
 			var today2 = new Date();
-			var numberofdays = 30;
+			var numberofdays = 21;
 			var startDate = new Date(today.setDate(today.getDate() - numberofdays));
 			var endDate = new Date(today2.setDate(today2.getDate() + 1));
 			var datenotchecked = true;
