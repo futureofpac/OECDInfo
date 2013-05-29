@@ -138,7 +138,7 @@ app.get('/all/:screen_names', function(req, res){
 					// // do something
 					// })
 					.on('article', function (article) {
-						// if(count < 5){
+						if(count < 10){
 							var news = {};
 							news.title = article.title;
 							news.pubDate = article.pubDate;
@@ -147,8 +147,8 @@ app.get('/all/:screen_names', function(req, res){
 							news.typeName = 'news';
 
 							feeds['news'].push(news);
-						// }
-						// count++;
+						}
+						count++;
 					// do something else
 					})
 					.on('end', function () {
