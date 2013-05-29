@@ -39,6 +39,13 @@ app.get('/all/:screen_names', function(req, res){
 
 	var screen_names = req.params.screen_names.split(',');
 
+			var today = new Date();
+			var today2 = new Date();
+			var numberofdays = 30;
+			var startDate = new Date(today.setDate(today.getDate() - numberofdays));
+			var endDate = new Date(today2.setDate(today2.getDate() + 1));
+			var datenotchecked = true;
+
 
 	var feeds = {};
 
@@ -123,19 +130,14 @@ app.get('/all/:screen_names', function(req, res){
     		});
 			var count = 0;
 
-			var today = new Date();
-			var today2 = new Date();
-			var numberofdays = 30;
-			var startDate = new Date(today.setDate(today.getDate() - numberofdays));
-			var endDate = new Date(today2.setDate(today2.getDate() + 1));
-			var datenotchecked = true;
+			console.log('how many time?');
 
-
-			console.log(startDate);
-			console.log(endDate);
+			// console.log(startDate);
+			// console.log(endDate);
 
 		    async.forEach(news_urls, function(url, callback) { 
 				// feeds['called'].push(url);
+				datenotchecked = true;
 
 				count = 0;
 				request(url)
@@ -154,19 +156,19 @@ app.get('/all/:screen_names', function(req, res){
 						if(datenotchecked && article.pubDate != null && article.pubDate != ''){
 							var articleDate = new Date(article.pubDate);
 
-							console.log(articleDate);
 
 							if(startDate < articleDate && endDate > articleDate){
 								var news = {};
 								news.title = article.title;
-								news.pubDate = new Date(article.pubDate);
+								news.pubDate = articleDate;
 								news.link = article.link;
 								news.content = article.summary;
 								news.typeName = 'news';
 
 								feeds['news'].push(news);
 							}else{
-								datenotchecked = false;
+							// console.log(articleDate);
+								// datenotchecked = false;
 							}
 						}	
 					// do something else
@@ -191,7 +193,9 @@ app.get('/all/:screen_names', function(req, res){
 	        	// console.log(feeds['error']);
 	        	var result = [];
 	        	result = feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']);
-	        	console.log(result);
+
+	        	console.log('result.length: ');
+	        	console.log(result.length);
 	        	result = _.sortBy(result, function(item){
 	        		// console.log(item);
 	        		// return (new Date(item.pubDate));
