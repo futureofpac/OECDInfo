@@ -177,7 +177,7 @@ app.get('/all/:screen_names', function(req, res){
 	        		return (new Date(item.pubDate));
 	        	});
 
-				res.jsonp(result);
+				res.jsonp(result.reverse());
 				// res.jsonp(feeds['called']);
 	        }
 	    }  
