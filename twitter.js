@@ -128,6 +128,7 @@ app.get('/all/:screen_names', function(req, res){
 			var numberofdays = 30;
 			var startDate = new Date(today.setDate(today.getDate() - numberofdays));
 			var endDate = new Date(today2.setDate(today2.getDate() + 1));
+			var datenotchecked = true;
 
 
 			console.log(startDate);
@@ -150,7 +151,7 @@ app.get('/all/:screen_names', function(req, res){
 					.on('article', function (article) {
 						// if(count < 10){
 
-						if(article.pubDate != null && article.pubDate != ''){
+						if(datenotchecked && article.pubDate != null && article.pubDate != ''){
 							var articleDate = new Date(article.pubDate);
 
 							console.log(articleDate);
@@ -164,15 +165,16 @@ app.get('/all/:screen_names', function(req, res){
 								news.typeName = 'news';
 
 								feeds['news'].push(news);
+							}else{
+								datenotchecked = false;
 							}
 						}	
-						count++;
 					// do something else
 					})
 					.on('end', function () {
 					// do the next thing
 					// feeds['called'].push(['end']);
-						count = 0;
+						datenotchecked = true;
 						callback();
 					});
 		    }, callback);
