@@ -62,7 +62,7 @@ app.get('/all/:screen_names', function(req, res){
 			 		_.each(videos.items, function(item, index){
 				 		var video = {};
 			 			video.title = item.video.title;
-			 			video.pubDate = item.video.uploaded;
+			 			video.pubDate = new Date(item.video.uploaded);
 			 			video.link = item.video.player.default;
 			 			video.content = item.video.description;
 			 			video.typeName = 'youtube';
@@ -93,7 +93,7 @@ app.get('/all/:screen_names', function(req, res){
 					for(var i=0;i<data.length;i++){
 						var tweet = {};
 						tweet.title = data[i].text;
-						tweet.pubDate = data[i].created_at;
+						tweet.pubDate = new Date(data[i].created_at);
 						tweet.image = data[i].user.profile_image_url;
 						tweet.typeName = data[i].user.name;
 						// tweet.link = data[i].user.entities.urls.expanded_url
@@ -159,7 +159,7 @@ app.get('/all/:screen_names', function(req, res){
 							if(startDate < articleDate && endDate > articleDate){
 								var news = {};
 								news.title = article.title;
-								news.pubDate = article.pubDate;
+								news.pubDate = new Date(article.pubDate);
 								news.link = article.link;
 								news.content = article.summary;
 								news.typeName = 'news';
@@ -194,7 +194,8 @@ app.get('/all/:screen_names', function(req, res){
 	        	console.log(result);
 	        	result = _.sortBy(result, function(item){
 	        		// console.log(item);
-	        		return (new Date(item.pubDate));
+	        		// return (new Date(item.pubDate));
+	        		return item.pubDate;
 	        	});
 
 				res.jsonp(result.reverse());
