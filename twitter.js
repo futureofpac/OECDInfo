@@ -29,7 +29,7 @@ var express = require('express'),
 var app = express();
 
 var Flickr = require('flickr').Flickr;
-var flickrApi = new Flickr('7bef8abf2f25d57e715e6fbfd855b5ca', 'b228026c42f02e02');
+var flickrApi = new Flickr('1051127fe1d2ccd24525bee93ffd4129', '73d19cf2007d389e');
 
 // app.set('jsonp callback name', 'callback');
 
@@ -65,6 +65,8 @@ app.get('/all/:screen_names', function(req, res){
 			 			video.pubDate = item.video.uploaded;
 			 			video.link = item.video.player.default;
 			 			video.content = item.video.description;
+			 			video.typeName = 'youtube';
+
 				 		feeds['youtube'].push(video);
 			 		})
 			 		callback();
@@ -72,8 +74,11 @@ app.get('/all/:screen_names', function(req, res){
 		    }, callback);
     	},		
 		function(callback) {
-			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', null, true, function(err, response){
+			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', {'extras':'date_taken,description','page':1,'pageSize':10}, true, function(err, response, ccc){
 				var flickr = {};
+				console.log(err);
+				console.log(response);
+				console.log(ccc);
 				// flickr.title = 
 				// extras=date_taken,description&per_page=' + pageSize + '&page=' + currentPage,
 				feeds['flickr'] = response;
@@ -133,16 +138,17 @@ app.get('/all/:screen_names', function(req, res){
 					// // do something
 					// })
 					.on('article', function (article) {
-						if(count < 5){
+						// if(count < 5){
 							var news = {};
 							news.title = article.title;
 							news.pubDate = article.pubDate;
 							news.link = article.link;
 							news.content = article.summary;
+							news.typeName = 'news';
 
 							feeds['news'].push(news);
-						}
-						count++;
+						// }
+						// count++;
 					// do something else
 					})
 					.on('end', function () {
@@ -163,7 +169,15 @@ app.get('/all/:screen_names', function(req, res){
 	        	// console.log(feeds['news']);
 	        	// console.log(feeds['tweets']);
 	        	// console.log(feeds['error']);
-				res.jsonp(feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']).concat(feeds['flickr']));
+	        	var result = [];
+	        	result = feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']);
+	        	console.log(result);
+	        	result = _.sortBy(result, function(item){
+	        		console.log(item);
+	        		return (new Date(item.pubDate));
+	        	});
+
+				res.jsonp(result);
 				// res.jsonp(feeds['called']);
 	        }
 	    }  
