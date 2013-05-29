@@ -145,18 +145,21 @@ app.get('/all/:screen_names', function(req, res){
 					// })
 					.on('article', function (article) {
 						// if(count < 10){
-						var articleDate = new Date(article.pubDate);
 
-						if(startDate < articleDate && endDate > articleDate){
-							var news = {};
-							news.title = article.title;
-							news.pubDate = article.pubDate;
-							news.link = article.link;
-							news.content = article.summary;
-							news.typeName = 'news';
+						if(article.pubDate != null && article.pubDate != ''){
+							var articleDate = new Date(article.pubDate);
 
-							feeds['news'].push(news);
-						}
+							if(startDate < articleDate && endDate > articleDate){
+								var news = {};
+								news.title = article.title;
+								news.pubDate = article.pubDate;
+								news.link = article.link;
+								news.content = article.summary;
+								news.typeName = 'news';
+
+								feeds['news'].push(news);
+							}
+						}	
 						count++;
 					// do something else
 					})
