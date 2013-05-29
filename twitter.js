@@ -124,10 +124,14 @@ app.get('/all/:screen_names', function(req, res){
 			var count = 0;
 
 			var today = new Date();
+			var today2 = new Date();
 			var numberofdays = 30;
-			var startDate = new Date(today.setDate(today.getDate() + numberofdays));
-			var endDate = new Date(today.setDate(today.getDate() + 1));
+			var startDate = new Date(today.setDate(today.getDate() - numberofdays));
+			var endDate = new Date(today2.setDate(today2.getDate() + 1));
 
+
+			console.log(startDate);
+			console.log(endDate);
 
 		    async.forEach(news_urls, function(url, callback) { 
 				// feeds['called'].push(url);
@@ -148,6 +152,8 @@ app.get('/all/:screen_names', function(req, res){
 
 						if(article.pubDate != null && article.pubDate != ''){
 							var articleDate = new Date(article.pubDate);
+
+							console.log(articleDate);
 
 							if(startDate < articleDate && endDate > articleDate){
 								var news = {};
@@ -185,7 +191,7 @@ app.get('/all/:screen_names', function(req, res){
 	        	result = feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']);
 	        	console.log(result);
 	        	result = _.sortBy(result, function(item){
-	        		console.log(item);
+	        		// console.log(item);
 	        		return (new Date(item.pubDate));
 	        	});
 
