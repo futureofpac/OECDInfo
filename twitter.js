@@ -123,6 +123,12 @@ app.get('/all/:screen_names', function(req, res){
     		});
 			var count = 0;
 
+			var today = new Date();
+			var numberofdays = 30;
+			var startDate = new Date(today.setDate(today.getDate() + numberofdays));
+			var endDate = new Date(today.setDate(today.getDate() + 1));
+
+
 		    async.forEach(news_urls, function(url, callback) { 
 				// feeds['called'].push(url);
 
@@ -138,7 +144,10 @@ app.get('/all/:screen_names', function(req, res){
 					// // do something
 					// })
 					.on('article', function (article) {
-						if(count < 10){
+						// if(count < 10){
+						var articleDate = new Date(article.pubDate);
+
+						if(startDate < articleDate && endDate > articleDate){
 							var news = {};
 							news.title = article.title;
 							news.pubDate = article.pubDate;
