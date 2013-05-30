@@ -2,7 +2,7 @@ Ext.define('OECDInfo.store.testStore', {
 	extend:'Ext.data.Store',
 	config:{
 		// storeId:'WhatsupMem',
-		model:'Whatsup.model.United',
+		model:'OECDInfo.model.United',
 		proxy:{
 			type:'jsonp',
 			url:'http://oecdinfo.herokuapp.com/all/oecd,oecd_pubs,oecdinnovation,oojoo/'
