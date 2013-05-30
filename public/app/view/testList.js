@@ -34,7 +34,7 @@ Ext.define('OECDInfo.view.testList', {
                 },
                 defaults:{
                     xtype:'button'
-                }
+                },
                 items:[
                     {
                         text:'All',
