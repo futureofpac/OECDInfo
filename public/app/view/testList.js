@@ -20,6 +20,26 @@ Ext.define('OECDInfo.view.testList', {
                 //  flex:1
                 //  // style:'margin:3px;padding:0px;'
                 // },
+            },
+            {
+                xtype:'tabPanel',
+                docked:'bottom',
+                items:[
+                    {
+                        title:'All',
+                        iconCls:'info'
+                    },
+                    {
+                        title:'All',
+                        iconCls:'info'
+                    },
+                    {
+                        title:'All',
+                        iconCls:'info'
+                    }
+                ]
+
+
             }
         ],
         emptyText:'<div style="padding:10px;">No Data</div>',

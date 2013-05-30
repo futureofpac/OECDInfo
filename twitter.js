@@ -65,11 +65,7 @@ app.get('/all/:screen_names', function(req, res){
 			    'PL96BBC83DFCD8447E'
 			];
 		    async.forEach(playlistkeys, function(key, callback) { //The second argument (callback) is the "task callback" for a specific messageId
-				// PL7D00C15B1EA60D89
 			 	youtube.feeds.playlist(key,{'max-results':7},function(err, videos){
-
-			 		// console.log(videos);
-
 			 		_.each(videos.items, function(item, index){
 				 		var video = {};
 			 			video.title = item.video.title;
@@ -87,8 +83,6 @@ app.get('/all/:screen_names', function(req, res){
     	},		
 		function(callback) {
 			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', {'user_id':'32771300@N02', 'extras':'date_taken,description','page':1,'pageSize':20}, true, function(err, data){
-				// var photo = data.photos.photo;
-
 		 		_.each(data.photos.photo, function(item, index){
 					var flickr = {};
 					flickr.title = item.title;
@@ -99,7 +93,6 @@ app.get('/all/:screen_names', function(req, res){
 
 					feeds['flickr'].push(flickr);
 		 		});
-
 				callback();
 			});
     	},	    	
@@ -143,9 +136,6 @@ app.get('/all/:screen_names', function(req, res){
 			var count = 0;
 
 			console.log('how many time?');
-
-			// console.log(startDate);
-			// console.log(endDate);
 
 		    async.forEach(news_urls, function(url, callback) { 
 				// feeds['called'].push(url);
@@ -200,31 +190,19 @@ app.get('/all/:screen_names', function(req, res){
 				console.log(err);
 				res.send(err);
 	        }else{
-	        	// console.log(feeds['news']);
-	        	// console.log(feeds['tweets']);
-	        	// console.log(feeds['error']);
 	        	var result = [];
 	        	result = feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']).concat(feeds['flickr']);
 
 	        	console.log('result.length: ');
 	        	console.log(result.length);
 	        	result = _.sortBy(result, function(item){
-	        		// console.log(item);
-	        		// return (new Date(item.pubDate));
 	        		return item.pubDate;
 	        	});
 
 				res.jsonp(result.reverse());
-				// res.jsonp(feeds['called']);
 	        }
 	    }  
 	);
-
-
-
-
-
-
 });
 
 app.get('/calltest', function(req, res){
@@ -313,51 +291,3 @@ var port = process.env.PORT || 5000;
 app.listen(port);
 
 
-//
-//  tweet 'hello world!'
-//
-// T.post('statuses/update', { status: 'hello world!' }, function(err, reply) {
-//   //  ...
-// })
-
-//
-//  search twitter for all tweets containing the word 'banana' since Nov. 11, 2011
-//
-// T.get('search/tweets', { q: 'banana since:2011-11-11' }, function(err, reply) {
-// 	// console.log('search/tweets:');
-// 	// console.log(reply);
-//   //  ...
-// })
-
-//
-//  get the list of user id's that follow @tolga_tezel
-//
-
-//
-//  stream a sample of public statuses
-
-// var stream = T.stream('statuses/sample')
-
-// stream.on('tweet', function (tweet) {
-//   console.log(tweet)
-// })
-
-// //
-// //  filter the twitter public stream by the word 'mango'. 
-// //
-// var stream = T.stream('statuses/filter', { track: 'mango' })
-
-// stream.on('tweet', function (tweet) {
-//   console.log(tweet)
-// })
-
-// //
-// // filter the public stream by the latitude/longitude bounded box of San Francisco
-// //
-// var sanFrancisco = [ '-122.75', '36.8', '-121.75', '37.8' ]
-
-// var stream = T.stream('statuses/filter', { locations: sanFrancisco })
-
-// stream.on('tweet', function (tweet) {
-//   console.log(tweet)
-// })
