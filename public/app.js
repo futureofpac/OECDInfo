@@ -24,7 +24,8 @@ Ext.application({
 
     requires: [
         'Ext.MessageBox',
-        'Ext.data.proxy.JsonP'
+        'Ext.data.proxy.JsonP',
+        'Ext.tab.Panel'
     ],
 
     views: [

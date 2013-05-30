@@ -35,7 +35,10 @@ Ext.define('OECDInfo.view.testList', {
                 items:[
                     {
                         title:'All',
-                        iconCls:'info'
+                        iconCls:'info',
+                        handler:function(){
+                            alert('a')
+                        }
                     },
                     {
                         title:'All2',
