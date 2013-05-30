@@ -24,18 +24,50 @@ Ext.define('OECDInfo.view.testList', {
             {
                 xtype:'tabpanel',
                 docked:'bottom',
+                scrollable:{
+                    direction:'horizontal',
+                    indicators:false
+                },
+                layout:{
+                    pack:'center',
+                    align:'center'
+                },
                 items:[
                     {
                         title:'All',
                         iconCls:'info'
                     },
                     {
-                        title:'All',
-                        iconCls:'info'
+                        title:'All2',
+                        iconCls:'download'
+                    },
+                    {
+                        title:'All3',
+                        iconCls:'favorites'
                     },
                     {
                         title:'All',
                         iconCls:'info'
+                    },
+                    {
+                        title:'All2',
+                        iconCls:'download'
+                    },
+                    {
+                        title:'All3',
+                        iconCls:'favorites'
+                    },
+                    {
+                        title:'All',
+                        iconCls:'info'
+                    },
+                    {
+                        title:'All2',
+                        iconCls:'download'
+                    },
+                    {
+                        title:'All3',
+                        iconCls:'favorites'
                     }
                 ]
 
