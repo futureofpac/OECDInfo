@@ -22,7 +22,7 @@ Ext.define('OECDInfo.view.testList', {
                 // },
             },
             {
-                xtype:'tabPanel',
+                xtype:'tabpanel',
                 docked:'bottom',
                 items:[
                     {
