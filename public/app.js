@@ -27,7 +27,15 @@ Ext.application({
     ],
 
     views: [
-        'Main'
+        'testList'
+    ],
+
+    models: [
+        'United'
+    ],
+
+    stores: [
+        'testStore'
     ],
 
     icon: {
