@@ -42,13 +42,12 @@ app.get('/all/:screen_names', function(req, res){
 
 	var screen_names = req.params.screen_names.split(',');
 
-			var today = new Date();
-			var today2 = new Date();
-			var numberofdays = 21;
-			var startDate = new Date(today.setDate(today.getDate() - numberofdays));
-			var endDate = new Date(today2.setDate(today2.getDate() + 1));
-			var datenotchecked = true;
-
+	var today = new Date();
+	var today2 = new Date();
+	var numberofdays = 21;
+	var startDate = new Date(today.setDate(today.getDate() - numberofdays));
+	var endDate = new Date(today2.setDate(today2.getDate() + 1));
+	var datenotchecked = true;
 
 	var feeds = {};
 
@@ -67,7 +66,9 @@ app.get('/all/:screen_names', function(req, res){
 			];
 		    async.forEach(playlistkeys, function(key, callback) { //The second argument (callback) is the "task callback" for a specific messageId
 				// PL7D00C15B1EA60D89
-			 	youtube.feeds.playlist(key,{'max-results':10},function(err, videos){
+			 	youtube.feeds.playlist(key,{'max-results':7},function(err, videos){
+
+			 		// console.log(videos);
 
 			 		_.each(videos.items, function(item, index){
 				 		var video = {};
@@ -75,7 +76,8 @@ app.get('/all/:screen_names', function(req, res){
 			 			video.pubDate = new Date(item.video.uploaded);
 			 			video.link = item.video.player.default;
 			 			video.content = item.video.description;
-			 			video.typeName = 'youtube';
+			 			video.typeName = 'Youtube';
+			 			video.image = "http://i.ytimg.com/vi/" + item.video.id + "/default.jpg";
 
 				 		feeds['youtube'].push(video);
 			 		})
@@ -84,14 +86,20 @@ app.get('/all/:screen_names', function(req, res){
 		    }, callback);
     	},		
 		function(callback) {
-			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', {'extras':'date_taken,description','page':1,'pageSize':10}, true, function(err, response, ccc){
-				var flickr = {};
-				console.log(err);
-				console.log(response);
-				console.log(ccc);
-				// flickr.title = 
-				// extras=date_taken,description&per_page=' + pageSize + '&page=' + currentPage,
-				feeds['flickr'] = response;
+			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', {'user_id':'32771300@N02', 'extras':'date_taken,description','page':1,'pageSize':20}, true, function(err, data){
+				// var photo = data.photos.photo;
+
+		 		_.each(data.photos.photo, function(item, index){
+					var flickr = {};
+					flickr.title = item.title;
+					flickr.content = item.description._content;
+					flickr.pubDate = new Date(item.datetaken);
+					flickr.image = 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret, 
+					flickr.typeName = 'Flickr';
+
+					feeds['flickr'].push(flickr);
+		 		});
+
 				callback();
 			});
     	},	    	
@@ -104,8 +112,9 @@ app.get('/all/:screen_names', function(req, res){
 						var tweet = {};
 						tweet.title = data[i].text;
 						tweet.pubDate = new Date(data[i].created_at);
+						// tweet.image = data[i].user.profile_image_url;
 						tweet.image = data[i].user.profile_image_url;
-						tweet.typeName = data[i].user.name;
+						tweet.typeName = 'Twitter';
 						// tweet.link = data[i].user.entities.urls.expanded_url
 						feeds['tweets'].push(tweet);
 					}
@@ -166,7 +175,7 @@ app.get('/all/:screen_names', function(req, res){
 								news.pubDate = articleDate;
 								news.link = article.link;
 								news.content = article.summary;
-								news.typeName = 'news';
+								news.typeName = 'News';
 
 								feeds['news'].push(news);
 							}else{
@@ -195,7 +204,7 @@ app.get('/all/:screen_names', function(req, res){
 	        	// console.log(feeds['tweets']);
 	        	// console.log(feeds['error']);
 	        	var result = [];
-	        	result = feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']);
+	        	result = feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']).concat(feeds['flickr']);
 
 	        	console.log('result.length: ');
 	        	console.log(result.length);
