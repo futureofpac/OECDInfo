@@ -28,10 +28,10 @@ Ext.define('OECDInfo.view.testList', {
                     direction:'horizontal',
                     indicators:false
                 },
-                layout:{
-                    pack:'center',
-                    align:'center'
-                },
+                // layout:{
+                //     pack:'center',
+                //     align:'center'
+                // },
                 defaults:{
                     xtype:'button'
                 },
@@ -39,23 +39,43 @@ Ext.define('OECDInfo.view.testList', {
                     {
                         text:'All',
                         handler:function(){
-                            alert('a')
+                            var store = Ext.getStore('testStore');
+                            store.clearFilter(true);
                         }
                     },
                     {
-                        text:'News'
+                        text:'News',
+                        handler:function(){
+                            var store = Ext.getStore('testStore');
+                            store.filter('typeName', 'News');
+                        }
                     },
                     {
-                        text:'Article'
+                        text:'Article',
+                        handler:function(){
+                            var store = Ext.getStore('testStore');
+                            store.filter('typeName', 'Twitter');
+                        }
+
                     },
                     {
                         text:'Books',
                     },
                     {
-                        text:'Photo'
+                        text:'Photo',
+                        handler:function(){
+                            var store = Ext.getStore('testStore');
+                            store.filter('typeName', 'Flickr');
+                        }
+
                     },
                     {
-                        text:'Video'
+                        text:'Video',
+                        handler:function(){
+                            var store = Ext.getStore('testStore');
+                            store.filter('typeName', 'Youtube');
+                        }
+
                     }
                 ]
 
