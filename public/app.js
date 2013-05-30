@@ -23,7 +23,8 @@ Ext.application({
     name: 'OECDInfo',
 
     requires: [
-        'Ext.MessageBox'
+        'Ext.MessageBox',
+        'Ext.data.proxy.JsonP'
     ],
 
     views: [
@@ -61,7 +62,7 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('OECDInfo.view.Main'));
+        Ext.Viewport.add(Ext.create('OECDInfo.view.testList'));
     },
 
     onUpdated: function() {
