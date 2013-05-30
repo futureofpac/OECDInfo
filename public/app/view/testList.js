@@ -22,7 +22,7 @@ Ext.define('OECDInfo.view.testList', {
                 // },
             },
             {
-                xtype:'tabpanel',
+                xtype:'toolbar',
                 docked:'bottom',
                 scrollable:{
                     direction:'horizontal',
@@ -32,45 +32,30 @@ Ext.define('OECDInfo.view.testList', {
                     pack:'center',
                     align:'center'
                 },
+                defaults:{
+                    xtype:'button'
+                }
                 items:[
                     {
-                        title:'All',
-                        iconCls:'info',
+                        text:'All',
                         handler:function(){
                             alert('a')
                         }
                     },
                     {
-                        title:'All2',
-                        iconCls:'download'
+                        text:'News'
                     },
                     {
-                        title:'All3',
-                        iconCls:'favorites'
+                        text:'Article'
                     },
                     {
-                        title:'All',
-                        iconCls:'info'
+                        text:'Books',
                     },
                     {
-                        title:'All2',
-                        iconCls:'download'
+                        text:'Photo'
                     },
                     {
-                        title:'All3',
-                        iconCls:'favorites'
-                    },
-                    {
-                        title:'All',
-                        iconCls:'info'
-                    },
-                    {
-                        title:'All2',
-                        iconCls:'download'
-                    },
-                    {
-                        title:'All3',
-                        iconCls:'favorites'
+                        text:'Video'
                     }
                 ]
 
