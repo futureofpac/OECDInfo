@@ -91,10 +91,10 @@ app.get('/all/:screen_names', function(req, res){
 
 		 		_.each(data.photos.photo, function(item, index){
 					var flickr = {};
-					flickr.title = photo.title;
-					flickr.content = photo.description._content;
-					flickr.pubDate = new Date(photo.datetaken);
-					flickr.image = 'http://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret, 
+					flickr.title = item.title;
+					flickr.content = item.description._content;
+					flickr.pubDate = new Date(item.datetaken);
+					flickr.image = 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret, 
 					flickr.typeName = 'Flickr';
 
 					feeds['flickr'].push(flickr);
