@@ -41,10 +41,11 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 
 
 	var screen_names = req.params.screen_names.split(',');
+	var numberofdays = req.params.numberofdays
 
 	var today = new Date();
 	var today2 = new Date();
-	var numberofdays = 7;
+	// var numberofdays = 7;
 	var startDate = new Date(today.setDate(today.getDate() - numberofdays));
 	var endDate = new Date(today2.setDate(today2.getDate() + 1));
 	var datenotchecked = true;
