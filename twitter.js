@@ -90,7 +90,7 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 		 		_.each(data.photos.photo, function(item, index){
 					var flickr = {};
 					flickr.title = item.title;
-					flickr.content = item.description._content;
+					flickr.content = item.description;
 					flickr.pubDate = new Date(item.datetaken);
 					flickr.image = 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret, 
 					flickr.typeName = 'Flickr';
