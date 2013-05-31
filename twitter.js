@@ -94,7 +94,7 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 					feeds['flickr'].push(flickr);
 		 		});
 				callback();
-			});
+			}); 
     	},	    	
     	function(callback) {
 		    async.forEach(screen_names, function(screen_name, callback) { //The second argument (callback) is the "task callback" for a specific messageId
