@@ -5,7 +5,7 @@ Ext.define('OECDInfo.store.testStore', {
 		model:'OECDInfo.model.United',
 		proxy:{
 			type:'jsonp',
-			url:'http://oecdinfo.herokuapp.com/all/oecd,oecd_pubs,oecdinnovation,oojoo/'
+			url:'http://oecdinfo.herokuapp.com/all/oecd,oecd_pubs,oecdinnovation/7/'
 		},
 		autoLoad:true,
  	// 	sorters:[

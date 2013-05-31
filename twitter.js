@@ -36,7 +36,7 @@ var flickrApi = new Flickr('1051127fe1d2ccd24525bee93ffd4129', '73d19cf2007d389e
 
 // app.set('jsonp callback name', 'callback');
 
-app.get('/all/:screen_names', function(req, res){
+app.get('/all/:screen_names/:numberofdays', function(req, res){
 	// console.log('Version: ' + process.version);
 
 
@@ -44,7 +44,7 @@ app.get('/all/:screen_names', function(req, res){
 
 	var today = new Date();
 	var today2 = new Date();
-	var numberofdays = 21;
+	var numberofdays = 7;
 	var startDate = new Date(today.setDate(today.getDate() - numberofdays));
 	var endDate = new Date(today2.setDate(today2.getDate() + 1));
 	var datenotchecked = true;
