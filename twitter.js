@@ -30,6 +30,9 @@ var app = express();
 
 app.use(express.static(__dirname + '/public'));
 
+// asfas
+
+
 
 var Flickr = require('flickr').Flickr;
 var flickrApi = new Flickr('1051127fe1d2ccd24525bee93ffd4129', '73d19cf2007d389e');
