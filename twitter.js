@@ -82,7 +82,7 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 		    }, callback);
     	},		
 		function(callback) {
-			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', {'user_id':'32771300@N02', 'extras':'date_taken,description','page':1,'pageSize':20}, true, function(err, data){
+			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', {'user_id':'32771300@N02', 'extras':'date_taken,description','page':1,'per_page':20}, true, function(err, data){
 		 		_.each(data.photos.photo, function(item, index){
 					var flickr = {};
 					flickr.title = item.title;
