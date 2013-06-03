@@ -14,30 +14,34 @@ Ext.define("OECDInfo.view.Main", {
     
     config: {
         fullscreen: true,
-        xtype: 'tabpanel',
-        tabBarPosition: 'bottom',
-        layout: {
-            type: 'card',
-            animation: {
-                type: 'fade',
-                direction: 'left'
-            }
-        },
+        // xtype: 'tabpanel',
+        // tabBarPosition: 'bottom',
+        // layout: {
+        //     type: 'card',
+        //     animation: {
+        //         type: 'fade',
+        //         direction: 'left'
+        //     }
+        // },
 
-        items: [{
-            title: 'Home',
-            iconMask: true,
-            iconCls: 'home',
-            html: '<h3>Slide View for Sencha Touch</h3><p>Code available at: http://github.com/wnielson/sencha-SlideView</p>',
-            styleHtmlContent: true,
-            style: 'text-align: center',
-            items: [{
-                docked: 'top',
-                xtype: 'toolbar',
-                title: 'Slide View',
-                ui: 'light'
-            }]
-        },{
+        // items: [{
+        //     title: 'Home',
+        //     iconMask: true,
+        //     iconCls: 'home',
+        //     html: '<h3>Slide View for Sencha Touch</h3><p>Code available at: http://github.com/wnielson/sencha-SlideView</p>',
+        //     styleHtmlContent: true,
+        //     style: 'text-align: center',
+        //     items: [{
+        //         docked: 'top',
+        //         xtype: 'toolbar',
+        //         title: 'Slide View',
+        //         ui: 'light'
+        //     }]
+        // },
+
+
+
+        {
             xtype: 'slideview',
             title: 'Slide View',
             iconMask: true,
@@ -130,7 +134,8 @@ Ext.define("OECDInfo.view.Main", {
                 },{
                     xclass: 'OECDInfo.view.Item',
                     name:   'Item 6'
-                }]
+                }
+                ]
             },
 
             leftContainer: {
@@ -177,6 +182,8 @@ Ext.define("OECDInfo.view.Main", {
                 }]
             }
 
-        }]
-    }
+        }
+
+        // ]
+    // }
 });
