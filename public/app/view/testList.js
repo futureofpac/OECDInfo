@@ -78,10 +78,10 @@ Ext.define('OECDInfo.view.testList', {
             //             }
 
             //         }
-                ]
+            //     ]
 
 
-            }
+            // }
         ],
         emptyText:'<div style="padding:10px;">No Data</div>',
         // itemTpl:'<div style="font-size:small">{typeName} - {title} ({pubDate})</div>'
