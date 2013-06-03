@@ -41,7 +41,7 @@ Ext.define("OECDInfo.view.Main", {
 
 
 
-        {
+        // {
             xtype: 'slideview',
             title: 'Slide View',
             iconMask: true,
