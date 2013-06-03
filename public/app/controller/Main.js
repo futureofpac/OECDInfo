@@ -5,7 +5,7 @@
  *  listen to various events relating to a {@link Ext.ux.slidenavigation.View}.
  *
  */
-Ext.define("SlideNavigationExample.controller.Main", {
+Ext.define("OECDInfo.controller.Main", {
     extend: 'Ext.app.Controller',
     
     config: {
