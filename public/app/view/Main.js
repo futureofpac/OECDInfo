@@ -141,13 +141,13 @@ Ext.define("OECDInfo.view.Main", {
                 xtype: 'list',
                 width: 200,
                 data: [{
-                    name: 'Item 1'
+                    name: 'News'
                 },{
-                    name: 'Item 2'
+                    name: 'Twitter'
                 },{
-                    name: 'Item 3'
+                    name: 'Flickr'
                 },{
-                    name: 'Item 4'
+                    name: 'Youtube'
                 }],
                 itemTpl: '{name}',
                 items: [{
@@ -159,6 +159,10 @@ Ext.define("OECDInfo.view.Main", {
                     itemtap: function(list, index) {
                         var slideview   = list.getParent(),
                             container   = slideview.getContainer();
+
+                        var store = Ext.getStore('testStore');
+                        indexs = ['News', 'Twitter', 'Flickr', 'Youtube'];
+                        store.filter('typeName', indexs[index]);
 
                         container.setActiveItem(index);
                         Ext.defer(slideview.closeContainer, 200, slideview);
