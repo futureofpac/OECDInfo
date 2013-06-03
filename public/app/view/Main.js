@@ -164,7 +164,7 @@ Ext.define("OECDInfo.view.Main", {
                         indexs = ['News', 'Twitter', 'Flickr', 'Youtube'];
                         store.filter('typeName', indexs[index]);
 
-                        container.setActiveItem(index);
+                        // container.setActiveItem(index);
                         Ext.defer(slideview.closeContainer, 200, slideview);
                     },
                     initialize: function(list) {
