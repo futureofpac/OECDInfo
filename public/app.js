@@ -1,44 +1,26 @@
-/*
-    This file is generated and updated by Sencha Cmd. You can edit this file as
-    needed for your application, but these edits will have to be merged by
-    Sencha Cmd when it performs code generation tasks such as generating new
-    models, controllers or views and when running "sencha app upgrade".
-
-    Ideally changes to this file would be limited and most work would be done
-    in other places (such as Controllers). If Sencha Cmd cannot merge your
-    changes and its generated code, it will produce a "merge conflict" that you
-    will need to resolve manually.
-*/
-
-// DO NOT DELETE - this directive is required for Sencha Cmd packages to work.
-//@require @packageOverrides
-
 //<debug>
 Ext.Loader.setPath({
-    'Ext': 'touch/src'
+    'Ext':      'touch/src',
+    'Ext.ux':   './ux'
 });
 //</debug>
 
 Ext.application({
-    name: 'OECDInfo',
+    name: 'SlideExample',
 
     requires: [
-        'Ext.MessageBox',
-        'Ext.data.proxy.JsonP',
-        'Ext.tab.Panel'
+        'Ext.MessageBox'
     ],
 
     views: [
-        'testList'
+        'Main',
+        'CoverList',
+        'Item'
     ],
 
-    models: [
-        'United'
-    ],
-
-    stores: [
-        'testStore'
-    ],
+    //controllers: [
+    //    'Main'
+    //],
 
     icon: {
         '57': 'resources/icons/Icon.png',
@@ -63,17 +45,15 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('OECDInfo.view.testList'));
+        Ext.Viewport.add(Ext.create('SlideExample.view.Main'));
     },
 
     onUpdated: function() {
         Ext.Msg.confirm(
             "Application Update",
             "This application has just successfully been updated to the latest version. Reload now?",
-            function(buttonId) {
-                if (buttonId === 'yes') {
-                    window.location.reload();
-                }
+            function() {
+                window.location.reload();
             }
         );
     }
