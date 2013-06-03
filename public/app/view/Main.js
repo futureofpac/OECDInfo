@@ -1,11 +1,11 @@
 Ext.define("OECDInfo.view.Main", {
-    extend: 'Ext.tab.Panel',
+    extend: 'Ext.ux.slide.View',
     
-    requires: [
-        'Ext.dataview.List',
-        'Ext.ux.slide.View'
-        //'Ext.ux.plugin.ListActions'
-    ],
+    // requires: [
+    //     'Ext.dataview.List',
+    //     'Ext.ux.slide.View'
+    //     //'Ext.ux.plugin.ListActions'
+    // ],
 
     // views: [
     //     'CoverList',
@@ -42,7 +42,7 @@ Ext.define("OECDInfo.view.Main", {
 
 
         // {
-            xtype: 'slideview',
+            // xtype: 'slideview',
             title: 'Slide View',
             iconMask: true,
             iconCls: 'look',
@@ -51,8 +51,7 @@ Ext.define("OECDInfo.view.Main", {
 
             container: {
                 items: [{
-                    xclass: 'OECDInfo.view.Item',
-                    name:   'Item 1'
+                    xclass: 'OECDInfo.view.testList'
                 },{
                     xtype: 'container',
                     layout: 'fit',
@@ -65,7 +64,7 @@ Ext.define("OECDInfo.view.Main", {
                         xclass: 'OECDInfo.view.CoverList'
                     }]
                 },{
-                    xclass: 'OECDInfo.view.testList',
+                    xclass: 'OECDInfo.view.Item',
                     name:   'Item 3'
                 },{
                     xtype: 'list',
