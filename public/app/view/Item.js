@@ -1,4 +1,4 @@
-Ext.define("SlideExample.view.Item", {
+Ext.define("OECDInfo.view.Item", {
     extend: "Ext.Container",
 
     config: {

@@ -20,63 +20,64 @@ Ext.define('OECDInfo.view.testList', {
                 //  flex:1
                 //  // style:'margin:3px;padding:0px;'
                 // },
-            },
-            {
-                xtype:'toolbar',
-                docked:'bottom',
-                scrollable:{
-                    direction:'horizontal',
-                    indicators:false
-                },
-                // layout:{
-                //     pack:'center',
-                //     align:'center'
-                // },
-                defaults:{
-                    xtype:'button'
-                },
-                items:[
-                    {
-                        text:'All',
-                        handler:function(){
-                            var store = Ext.getStore('testStore');
-                            store.clearFilter(true);
-                        }
-                    },
-                    {
-                        text:'News',
-                        handler:function(){
-                            var store = Ext.getStore('testStore');
-                            store.filter('typeName', 'News');
-                        }
-                    },
-                    {
-                        text:'Article',
-                        handler:function(){
-                            var store = Ext.getStore('testStore');
-                            store.filter('typeName', 'Twitter');
-                        }
+            }
+            // ,
+            // {
+            //     xtype:'toolbar',
+            //     docked:'bottom',
+            //     scrollable:{
+            //         direction:'horizontal',
+            //         indicators:false
+            //     },
+            //     // layout:{
+            //     //     pack:'center',
+            //     //     align:'center'
+            //     // },
+            //     defaults:{
+            //         xtype:'button'
+            //     },
+            //     items:[
+            //         {
+            //             text:'All',
+            //             handler:function(){
+            //                 var store = Ext.getStore('testStore');
+            //                 store.clearFilter(true);
+            //             }
+            //         },
+            //         {
+            //             text:'News',
+            //             handler:function(){
+            //                 var store = Ext.getStore('testStore');
+            //                 store.filter('typeName', 'News');
+            //             }
+            //         },
+            //         {
+            //             text:'Article',
+            //             handler:function(){
+            //                 var store = Ext.getStore('testStore');
+            //                 store.filter('typeName', 'Twitter');
+            //             }
 
-                    },
-                    {
-                        text:'Books',
-                    },
-                    {
-                        text:'Photo',
-                        handler:function(){
-                            var store = Ext.getStore('testStore');
-                            store.filter('typeName', 'Flickr');
-                        }
+            //         },
+            //         {
+            //             text:'Books',
+            //         },
+            //         {
+            //             text:'Photo',
+            //             handler:function(){
+            //                 var store = Ext.getStore('testStore');
+            //                 store.filter('typeName', 'Flickr');
+            //             }
 
-                    },
-                    {
-                        text:'Video',
-                        handler:function(){
-                            var store = Ext.getStore('testStore');
-                            store.filter('typeName', 'Youtube');
-                        }
+            //         },
+            //         {
+            //             text:'Video',
+            //             handler:function(){
+            //                 var store = Ext.getStore('testStore');
+            //                 store.filter('typeName', 'Youtube');
+            //             }
 
-                    }
+            //         }
                 ]
 
 

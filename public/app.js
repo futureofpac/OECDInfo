@@ -6,16 +6,28 @@ Ext.Loader.setPath({
 //</debug>
 
 Ext.application({
-    name: 'SlideExample',
+
+    name: 'OECDInfo',
 
     requires: [
-        'Ext.MessageBox'
+        'Ext.MessageBox',
+        'Ext.data.proxy.JsonP',
+        'Ext.tab.Panel'
     ],
 
     views: [
         'Main',
+        'testList',
         'CoverList',
         'Item'
+    ],
+
+    models: [
+        'United'
+    ],
+
+    stores: [
+        'testStore'
     ],
 
     //controllers: [
@@ -45,7 +57,7 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('SlideExample.view.Main'));
+        Ext.Viewport.add(Ext.create('OECDInfo.view.Main'));
     },
 
     onUpdated: function() {

@@ -1,4 +1,4 @@
-Ext.define("SlideExample.view.Main", {
+Ext.define("OECDInfo.view.Main", {
     extend: 'Ext.tab.Panel',
     
     requires: [
@@ -7,10 +7,10 @@ Ext.define("SlideExample.view.Main", {
         //'Ext.ux.plugin.ListActions'
     ],
 
-    views: [
-        'CoverList',
-        'Item'
-    ],
+    // views: [
+    //     'CoverList',
+    //     'Item'
+    // ],
     
     config: {
         fullscreen: true,
@@ -47,7 +47,7 @@ Ext.define("SlideExample.view.Main", {
 
             container: {
                 items: [{
-                    xclass: 'SlideExample.view.Item',
+                    xclass: 'OECDInfo.view.Item',
                     name:   'Item 1'
                 },{
                     xtype: 'container',
@@ -58,10 +58,10 @@ Ext.define("SlideExample.view.Main", {
                         title:  'Item 2',
                         ui:     'light'
                     },{
-                        xclass: 'SlideExample.view.CoverList'
+                        xclass: 'OECDInfo.view.CoverList'
                     }]
                 },{
-                    xclass: 'SlideExample.view.Item',
+                    xclass: 'OECDInfo.view.testList',
                     name:   'Item 3'
                 },{
                     xtype: 'list',
@@ -125,10 +125,10 @@ Ext.define("SlideExample.view.Main", {
                     }]
                     */
                 },{
-                    xclass: 'SlideExample.view.Item',
+                    xclass: 'OECDInfo.view.Item',
                     name:   'Item 5'
                 },{
-                    xclass: 'SlideExample.view.Item',
+                    xclass: 'OECDInfo.view.Item',
                     name:   'Item 6'
                 }]
             },

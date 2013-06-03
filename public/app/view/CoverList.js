@@ -1,4 +1,4 @@
-Ext.define("SlideExample.view.CoverList", {
+Ext.define("OECDInfo.view.CoverList", {
     extend: "Ext.Container",
 
     config: {
