@@ -142,6 +142,8 @@ Ext.define("SlideExample.view.Main", {
                     name: 'Item 2'
                 },{
                     name: 'Item 3'
+                },{
+                    name: 'Item 4'
                 }],
                 itemTpl: '{name}',
                 items: [{
