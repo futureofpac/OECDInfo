@@ -290,7 +290,14 @@ Ext.define("OECDInfo.view.Main", {
                                         value:'Urban, Rural and Regional Development'
                                     }
                                 ]
-                            }                        
+                            },                        
+                            {
+                                xtype:'panel',
+                                height:30,
+                                html:'By Themem',
+                                scrollDock: 'bottom',
+                                style:'background-color:gray;padding:5px 0px 5px 0px;color:#ffffff;text-align:center;'
+                            }
                         ],
                         listeners: {
                             itemtap: function(list, index) {
