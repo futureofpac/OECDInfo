@@ -14,7 +14,13 @@ Ext.define('OECDInfo.view.testList', {
                 xtype:'toolbar',
                 docked:'top',
                 title:'OECD Info',
-                ui:'light'
+                ui:'light',
+                items:[
+                    {
+                        xtype:'button',
+                        iconCls:'more'
+                    }
+                ]
                 // defaults:{
                 //  // xtype:'button',
                 //  flex:1
@@ -91,8 +97,8 @@ Ext.define('OECDInfo.view.testList', {
                     // '<div style="background-image:url({image}_s.jpg);background-repeat:no-repeat;background-position:center center;width:150px;height:150px;"></div>',
                     // '<div style="overflow:hidden;text-overflow:ellipsis;padding-top:7npx;">{title:ellipsis(90, true)}</div>',
                     '<div style="font-family:Arial, sans-serif;">',
-                        '<img src="{image}_q.jpg" style="float:left;width:130px;height:130px;-webkit-border-radius:5px;">',
-                        '<div style="margin-left:140px;">',
+                        '<img src="{image}_q.jpg" style="float:left;width:110px;height:110px;">',
+                        '<div style="margin-left:120px;">',
                         '<div><span style="color:#989898;margin-bottom:8px;">{typeName}</span> : {title}</div>',
                         '<div style="overflow:hidden;text-overflow:ellipsis;padding-top:7px;font-size:smaller;">{content:ellipsis(150, true)}</div>',
                         '<div style="clear:both;margin-bottom:2px;"></div>',

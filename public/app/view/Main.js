@@ -1,6 +1,11 @@
 Ext.define("OECDInfo.view.Main", {
     extend: 'Ext.ux.slide.View',
+    alias:'widget.main',
     
+
+    requires: [
+        'Ext.form.Panel'
+    ],    
     // requires: [
     //     'Ext.dataview.List',
     //     'Ext.ux.slide.View'
@@ -44,6 +49,7 @@ Ext.define("OECDInfo.view.Main", {
         // {
             // xtype: 'slideview',
             title: 'Slide View',
+            containerMask:false,
             iconMask: true,
             iconCls: 'look',
             containerSlideDelay: 5,
@@ -137,53 +143,227 @@ Ext.define("OECDInfo.view.Main", {
                 ]
             },
 
-            leftContainer: {
-                xtype: 'list',
-                width: 200,
-                data: [{
-                    name: 'News'
-                },{
-                    name: 'Twitter'
-                },{
-                    name: 'Flickr'
-                },{
-                    name: 'Youtube'
-                }],
-                itemTpl: '{name}',
-                items: [{
-                    xtype: 'toolbar',
-                    docked: 'top',
-                    title: 'Left Menu'
-                }],
-                listeners: {
-                    itemtap: function(list, index) {
-                        var slideview   = list.getParent(),
-                            container   = slideview.getContainer();
+            leftContainer:
+            {
+                xtype:'panel',
+                width:280,
+                // scrollable:false,
+                layout:'fit',
+                items:[
+                    {
+                        xtype: 'list',
+                        scrollable:false,
+                        // width:280,
+                        // layout:'fit',
+                        // style:'font-size:smaller;',
+                        cls:'fb x-slideview-container-left',
+                        data: [
+                            {
+                                name: 'All Feeds'
+                            },
+                            {
+                                name: 'News'
+                            },
+                            {
+                                name: 'Blog'
+                            },
+                            {
+                                name: 'Publication'
+                            },
+                            {
+                                name: 'Twitter'
+                            },
+                            {
+                                name: 'Flickr'
+                            },
+                            {
+                                name: 'Youtube'
+                            }
+                        ],
+                        itemTpl: '{name}',
+                        items: [
+                            {
+                                xtype:'formpanel',
+                                scrollDock: 'bottom',
+                                // scrollable:'vertical',
+                                height:300,
+                                // style:'font-size:smaller;',
+                                // layout:'fit',
+                                width:280,
+                                defaults:{
+                                    labelWidth:230
+                                },
+                                // labelWrap:true,
+                                items:[
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Agriculture and Food',
+                                        label:'Agriculture and Food',
+                                        value:'Agriculture and Food'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Development',
+                                        label:'Development',
+                                        value:'Development'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Economics',
+                                        label:'Economics',
+                                        value:'Economics'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Education',
+                                        label:'Education',
+                                        value:'Education'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Employment',
+                                        label:'Employment',
+                                        value:'Employment'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Energy',
+                                        label:'Energy',
+                                        value:'Energy'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Environment',
+                                        label:'Environment',
+                                        value:'Environment'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Finance and Investment',
+                                        label:'Finance and Investment',
+                                        value:'Finance and Investment'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Governance',
+                                        label:'Governance',
+                                        value:'Governance'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Industry and Services',
+                                        label:'Industry and Services',
+                                        value:'Industry and Services'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Nuclear Energy',
+                                        label:'Nuclear Energy',
+                                        value:'Nuclear Energy'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Science and Technology',
+                                        label:'Science and Technology',
+                                        value:'Science and Technology'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Social Issues/Migration/Health',
+                                        label:'Social Issues/Migration/Health',
+                                        value:'Social Issues/Migration/Health'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Taxation',
+                                        label:'Taxation',
+                                        value:'Taxation'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Trade',
+                                        label:'Trade',
+                                        value:'Trade'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Transport',
+                                        label:'Transport',
+                                        value:'Transport'
+                                    },
+                                    {
+                                        xtype:'checkboxfield',
+                                        name:'Urban, Rural and Regional Development',
+                                        label:'Urban, Rural and Regional Development',
+                                        value:'Urban, Rural and Regional Development'
+                                    }
+                                ]
+                            }                        
+                        ],
+                        listeners: {
+                            itemtap: function(list, index) {
+                                var slideview   = list.getParent().getParent(),
+                                    container   = slideview.getContainer();
 
-                        var store = Ext.getStore('testStore');
-                        indexs = ['News', 'Twitter', 'Flickr', 'Youtube'];
-                        store.filter('typeName', indexs[index]);
+                                var store = Ext.getStore('testStore');
+                                indexs = ['All Feeds', 'News', 'Blog', 'Publication', 'Twitter', 'Flickr', 'Youtube'];
+                                if(index == 0){
+                                    store.clearFilter(false);
+                                }else if(index == 2 || index == 3){
 
-                        // container.setActiveItem(index);
-                        Ext.defer(slideview.closeContainer, 200, slideview);
+                                }else{
+                                    store.filter('typeName', indexs[index]);
+                                }
+
+                                // container.setActiveItem(index);
+                                Ext.defer(slideview.closeContainer, 200, slideview);
+                            },
+                            initialize: function(list) {
+                                list.select(0);
+                            }
+                        }
                     },
-                    initialize: function(list) {
-                        list.select(0);
-                    }
-                }
+                    
+                ]
             },
             
-            rightContainer: {
-                xtype: 'panel',
-                width: 200,
-                html:'<p>Here is the right panel.  You can put whatever you\'d like over here.</p>',
-                styleHtmlContent: true,
-                items: [{
-                    xtype: 'toolbar',
-                    docked: 'top',
-                    title: 'Right Container'
-                }]
-            }
+            rightContainer:false
+            // rightContainer: {
+            //     xtype: 'panel',
+            //     cls:'fb x-slideview-container-right',
+            //     width: 250,
+            //     layout:'vbox',
+            //     items: [
+            //         {
+            //             xtype: 'panel',
+            //             scrollable:'vertical',
+            //             flex:3
+            //         },
+            //         {
+            //             xtype: 'panel',
+            //             flex:2,
+            //             defaults:{
+            //                 xtype:'button',
+            //                 ui:'action',
+            //                 style:'font-size:smaller;margin:5px 15px 7px 15px;'
+            //             },
+            //             items:[
+            //                 {
+            //                     text:'Open'
+            //                 },
+            //                 {
+            //                     text:'Email'
+            //                 },
+            //                 {
+            //                     text:'Facebook'
+            //                 },
+            //                 {
+            //                     text:'Twitter'
+            //                 }
+            //             ]
+            //         }
+            //     ]
+            // }
 
         }
 
