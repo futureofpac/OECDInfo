@@ -146,13 +146,13 @@ Ext.define("OECDInfo.view.Main", {
             leftContainer:
             {
                 xtype:'panel',
-                width:280,
+                width:260,
                 // scrollable:false,
                 layout:'fit',
                 items:[
                     {
                         xtype: 'list',
-                        scrollable:false,
+                        // scrollable:false,
                         // width:280,
                         // layout:'fit',
                         // style:'font-size:smaller;',
@@ -186,113 +186,105 @@ Ext.define("OECDInfo.view.Main", {
                                 xtype:'formpanel',
                                 scrollDock: 'bottom',
                                 // scrollable:'vertical',
-                                height:300,
-                                // style:'font-size:smaller;',
+                                scrollable:false,
+                                height:700,
+                                // height:300,
+                                style:'font-size:smaller;',
                                 // layout:'fit',
-                                width:280,
+                                width:260,
                                 defaults:{
-                                    labelWidth:230
+                                    xtype:'checkboxfield',
+                                    labelWidth:200
                                 },
                                 // labelWrap:true,
                                 items:[
                                     {
-                                        xtype:'checkboxfield',
+                                        name:'OECD Generic',
+                                        label:'OECD Generic',
+                                        value:'OECD Generic',
+                                        checked:true
+                                    },
+                                    {
                                         name:'Agriculture and Food',
                                         label:'Agriculture and Food',
                                         value:'Agriculture and Food'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Development',
                                         label:'Development',
                                         value:'Development'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Economics',
                                         label:'Economics',
                                         value:'Economics'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Education',
                                         label:'Education',
                                         value:'Education'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Employment',
                                         label:'Employment',
                                         value:'Employment'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Energy',
                                         label:'Energy',
                                         value:'Energy'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Environment',
                                         label:'Environment',
                                         value:'Environment'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Finance and Investment',
                                         label:'Finance and Investment',
                                         value:'Finance and Investment'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Governance',
                                         label:'Governance',
                                         value:'Governance'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Industry and Services',
                                         label:'Industry and Services',
                                         value:'Industry and Services'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Nuclear Energy',
                                         label:'Nuclear Energy',
                                         value:'Nuclear Energy'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Science and Technology',
                                         label:'Science and Technology',
                                         value:'Science and Technology'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Social Issues/Migration/Health',
                                         label:'Social Issues/Migration/Health',
                                         value:'Social Issues/Migration/Health'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Taxation',
                                         label:'Taxation',
                                         value:'Taxation'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Trade',
                                         label:'Trade',
                                         value:'Trade'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Transport',
                                         label:'Transport',
                                         value:'Transport'
                                     },
                                     {
-                                        xtype:'checkboxfield',
                                         name:'Urban, Rural and Regional Development',
                                         label:'Urban, Rural and Regional Development',
                                         value:'Urban, Rural and Regional Development'
