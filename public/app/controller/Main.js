@@ -99,7 +99,7 @@ Ext.define("OECDInfo.controller.Main", {
             menuBtn: {
                 tap:function (me, e, eOpts) {
                     var main = this.getMain();
-                    Ext.defer(main.closeContainer, 200, main);
+                    Ext.defer(main.openContainer, 200, main);
                 }
             }
         }

@@ -39,16 +39,13 @@ var flickrApi = new Flickr('1051127fe1d2ccd24525bee93ffd4129', '73d19cf2007d389e
 
 // app.set('jsonp callback name', 'callback');
 
-app.get('/all/:screen_names/:numberofdays', function(req, res){
-	// console.log('Version: ' + process.version);
+app.get('/api/:themes/:days', function(req, res){
 
-
-	var screen_names = req.params.screen_names.split(',');
-	var numberofdays = req.params.numberofdays
+	var themes = req.params.themes.split(',');
+	var numberofdays = req.params.days;
 
 	var today = new Date();
 	var today2 = new Date();
-	// var numberofdays = 7;
 	var startDate = new Date(today.setDate(today.getDate() - numberofdays));
 	var endDate = new Date(today2.setDate(today2.getDate() + 1));
 	var datenotchecked = true;
@@ -62,6 +59,179 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 	feeds['error'] = [];
 	feeds['called'] = [];
 
+	var getUrl = function (themes, type) {
+		var result = [];
+		_.each(themes, function (theme, index) {
+			if(themeUrls[theme][type]){
+				_.each(themeUrls[theme][type], function (url) {
+					var item = {
+						'type':type,
+						'theme':theme,
+						'url':url
+					}
+					result.push(item);
+				})
+			}
+		});
+		return result;
+	} 
+
+    		// var pub_keys = [30,40,79,31,33,34,36,37,39,77,41,42,43,45,78,48,46,];
+    		// _.each(pub_keys, function (item, index) {
+    		// 	news_urls.push('http://www.oecd-ilibrary.org/rss/content/subject/'+ item +'/latest?fmt=rss');
+    		// });
+
+	var themeUrls = {
+		'Generic' : {
+			'Twitter' : [
+				'OECDlive',
+				'OECD_Stat',
+				'OECD',
+				'OECD_Pubs'
+			],
+			'News' : [
+			    'http://feeds.feedburner.com/OecdObserver',
+			    'http://www.oecd.org/newsroom/index.xml'
+			],
+			'Blog' : [
+				'http://oecdinsights.org/feed/'
+			]
+		},
+		'Agriculture' : {
+			'Twitter' : [
+				'OECDagriculture',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/30/latest?fmt=rss'
+			]
+		},
+		'Development' : {
+			'Twitter' : [
+				'OECD_Centre',
+				'OECD_EVALNET',
+				'OECD_INCAF',
+				'OECDdev'
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/40/latest?fmt=rss'
+			],
+			'Blog' : [
+				'http://feeds.feedburner.com/blogspot/theprogressblog'
+			]
+		},
+		'Economics' : {
+			'Twitter' : [
+				'OECDeconomy',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/79/latest?fmt=rss'
+			]
+		},
+		'Education' : {
+			'Twitter' : [
+				'oecd_edu',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/31/latest?fmt=rss'
+			],
+			'Blog' : [
+				'http://oecdeducationtoday.blogspot.com/feeds/posts/default'
+			]
+		},
+		'Employment' : {
+			'Twitter' : [
+				'OECD_leed',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/33/latest?fmt=rss'
+			]
+		},
+		'Energy' : {
+			'Twitter' : [
+				'IEA',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/34/latest?fmt=rss'
+			]
+		},
+		'Environment' : {
+			'Twitter' : [
+				'OECD_ENV',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/36/latest?fmt=rss'
+			]
+		},
+		'Finance' : {
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/37/latest?fmt=rss'
+			]
+		},
+		'Governance' : {
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/39/latest?fmt=rss'
+			]
+		},
+		'Industry' : {
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/77/latest?fmt=rss'
+			]
+		},
+		'Nuclear' : {
+			'Twitter' : [
+				'OECD_NEA',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/41/latest?fmt=rss'
+			]
+		},
+		'Science' : {
+			'Twitter' : [
+				'OECDinnovation',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/42/latest?fmt=rss'
+			]
+		},
+		'Social' : {
+			'Twitter' : [
+				'',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/43/latest?fmt=rss'
+			],
+			'Blog' : [
+				'http://www.oecdbetterlifeindex.org/feed/'
+			]
+		},
+		'Taxation' : {
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/45/latest?fmt=rss'
+			]
+		},
+		'Trade' : {
+			'Twitter' : [
+				'OECDtrade',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/78/latest?fmt=rss'
+			]
+		},
+		'Transport' : {
+			'Twitter' : [
+				'ITF_Forum',
+			],
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/48/latest?fmt=rss'
+			]
+		},
+		'Urban' : {
+			'Publication' : [
+			    'http://www.oecd-ilibrary.org/rss/content/subject/46/latest?fmt=rss'
+			]
+		}
+	}
+
 	async.parallel([
 		function(callback) {
 			var playlistkeys = [
@@ -69,15 +239,16 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 			    'PL96BBC83DFCD8447E'
 			];
 		    async.forEach(playlistkeys, function(key, callback) { //The second argument (callback) is the "task callback" for a specific messageId
-			 	youtube.feeds.playlist(key,{'max-results':7},function(err, videos){
+			 	youtube.feeds.playlist(key,{'max-results':20},function(err, videos){
 			 		_.each(videos.items, function(item, index){
 				 		var video = {};
-			 			video.title = item.video.title;
-			 			video.pubDate = new Date(item.video.uploaded);
-			 			video.link = item.video.player.default;
-			 			video.content = item.video.description;
 			 			video.typeName = 'Youtube';
+			 			video.theme = 'generic';
+			 			video.title = item.video.title;
 			 			video.image = "http://i.ytimg.com/vi/" + item.video.id + "/default.jpg";
+			 			video.content = item.video.description;
+			 			video.pubDate = new Date(item.video.uploaded);
+			 			// video.link = item.video.player.default;
 
 				 		feeds['youtube'].push(video);
 			 		})
@@ -86,15 +257,16 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 		    }, callback);
     	},		
 		function(callback) {
-			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', {'user_id':'32771300@N02', 'extras':'date_taken,description','page':1,'per_page':50}, true, function(err, data){
+			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', {'user_id':'32771300@N02', 'extras':'date_taken,description','page':1,'per_page':80}, true, function(err, data){
 		 		_.each(data.photos.photo, function(item, index){
 
 					var flickr = {};
+					flickr.typeName = 'Flickr';
+					flickr.theme = 'generic';
 					flickr.title = item.title;
+					flickr.image = 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret, 
 					flickr.content = item.description._content;
 					flickr.pubDate = new Date(item.datetaken);
-					flickr.image = 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret, 
-					flickr.typeName = 'Flickr';
 
 					feeds['flickr'].push(flickr);
 		 		});
@@ -102,31 +274,32 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 			}); 
     	},	    	
     	function(callback) {
+    		var screen_names = getUrl(themes, 'Twitter');
+
 		    async.forEach(screen_names, function(screen_name, callback) { //The second argument (callback) is the "task callback" for a specific messageId
-				T.get('statuses/user_timeline', { screen_name: screen_name, exclude_replies: true, count: 20 },  function (err, data) {
-					console.log('get user_timeline');
-						// result = {};
-					for(var i=0;i<data.length;i++){
-						var tweet = {};
-						tweet.title = data[i].text;
-						tweet.pubDate = new Date(data[i].created_at);
-						// tweet.image = data[i].user.profile_image_url;
-						tweet.image = data[i].user.profile_image_url;
-						tweet.typeName = 'Twitter';
-						// tweet.link = data[i].user.entities.urls.expanded_url
-						feeds['tweets'].push(tweet);
-					}
+				T.get('statuses/user_timeline', { screen_name: screen_name.url, exclude_replies: true, count: 20 },  function (err, data) {
+					_.each(data, function (item, index) {
+						if(item.created_at != null && item.created_at != ''){
+							var articleDate = new Date(item.created_at);
+							if(startDate < articleDate && endDate > articleDate){
+								var tweet = {};
+								tweet.title = item.text;
+								tweet.pubDate = new Date(item.created_at);
+								// tweet.image = data[i].user.profile_image_url;
+								tweet.image = item.user.profile_image_url;
+								tweet.typeName = 'Twitter';
+								// tweet.link = data[i].user.entities.urls.expanded_url
+								feeds['tweets'].push(tweet);
+							}
+						}
+					})	
 					callback();
 				})
 		    }, callback);
     	},
     	function(callback) {
-    		var news_urls = [
-			    'http://feeds.feedburner.com/OecdObserver'
-			    ,
-			    'http://www.oecd.org/newsroom/index.xml',
-			    'http://oecdinsights.org/feed/'
-			];
+
+    		var feeds_themes = getUrl(themes, 'News').concat(getUrl(themes, 'Blog')).concat(getUrl(themes, 'Publication'))
 
 
     		// var topics = ['agriculture','corruption','chemicalsafety','competition','corporate','development','economy','education','employment','environment','finance','greengrowth','health','industry','innovation','insurance','migration','internet','investment','governance','regional','regreform','science','social','tax','trade'];
@@ -134,20 +307,19 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
     		// 	news_urls.push('http://www.oecd.org/'+ item +'/index.xml');
     		// });
 
-    		var pub_keys = [30,40,79,31,33,34,36,37,39,77,41,42,43,45,78,48,46,];
-    		_.each(pub_keys, function (item, index) {
-    			news_urls.push('http://www.oecd-ilibrary.org/rss/content/subject/'+ item +'/latest?fmt=rss');
-    		});
-			var count = 0;
+    		// var pub_keys = [30,40,79,31,33,34,36,37,39,77,41,42,43,45,78,48,46,];
+    		// _.each(pub_keys, function (item, index) {
+    		// 	news_urls.push('http://www.oecd-ilibrary.org/rss/content/subject/'+ item +'/latest?fmt=rss');
+    		// });
+			console.log(feeds_themes);
 
-			console.log('how many time?');
-
-		    async.forEach(news_urls, function(url, callback) { 
+		    async.forEach(feeds_themes, function(feeds_theme, callback) { 
 				// feeds['called'].push(url);
 				datenotchecked = true;
 
-				count = 0;
-				request(url)
+				console.log(feeds_theme);
+
+				request(feeds_theme.url)
 					.pipe(new FeedParser())
 					.on('error', function(error) {
 						// always handle errors
@@ -158,7 +330,6 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 					// // do something
 					// })
 					.on('article', function (article) {
-						// if(count < 10){
 
 						if(datenotchecked && article.pubDate != null && article.pubDate != ''){
 							var articleDate = new Date(article.pubDate);
@@ -166,11 +337,12 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 
 							if(startDate < articleDate && endDate > articleDate){
 								var news = {};
+								news.typeName = feeds_theme.type;
+								news.theme = feeds_theme.theme;
 								news.title = article.title;
+								news.content = article.summary;
 								news.pubDate = articleDate;
 								news.link = article.link;
-								news.content = article.summary;
-								news.typeName = 'News';
 
 								feeds['news'].push(news);
 							}else{
