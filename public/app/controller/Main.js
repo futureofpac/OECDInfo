@@ -119,7 +119,7 @@ Ext.define("OECDInfo.controller.Main", {
         Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading'});
 
         Ext.data.JsonP.request({
-            url:'http://oecdinfo.herokuapp.com/api/Generic,Development,Economy/20/',
+            url:'http://oecdinfo.herokuapp.com/api/Generic,Development/20/',
             callback:function(success, response){
                 console.log(response);
                 me.self.models = [].concat(response);

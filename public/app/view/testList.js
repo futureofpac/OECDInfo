@@ -152,7 +152,7 @@ Ext.define('OECDInfo.view.testList', {
                 '<tpl if="this.isFlickr(typeName)">',
                     // '<div style="background-image:url({image}_s.jpg);background-repeat:no-repeat;background-position:center center;width:150px;height:150px;"></div>',
                     // '<div style="overflow:hidden;text-overflow:ellipsis;padding-top:7npx;">{title:ellipsis(90, true)}</div>',
-                    '<div style="font-family:Arial, sans-serif;">',
+                    '<div style="min-height:120px;font-family:Arial, sans-serif;">',
                         '<img src="{image}_q.jpg" style="float:left;width:110px;height:110px;">',
                         '<div style="margin-left:120px;">',
                         '<div><span style="color:#989898;margin-bottom:8px;">{typeName}</span> : {title}</div>',

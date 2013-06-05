@@ -308,11 +308,12 @@ Ext.define("OECDInfo.view.Main", {
                                 indexs = ['All Feeds', 'News', 'Blog', 'Publication', 'Twitter', 'Flickr', 'Youtube'];
                                 if(index == 0){
                                     store.clearFilter(false);
-                                }else if(index == 2 || index == 3){
+                                // }else if(index == 2 || index == 3){
 
                                 }else{
                                     store.filter('typeName', indexs[index]);
                                 }
+                                alert(indexs[index])
 
                                 // container.setActiveItem(index);
                                 Ext.defer(slideview.closeContainer, 200, slideview);
