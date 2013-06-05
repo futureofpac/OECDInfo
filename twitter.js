@@ -331,32 +331,36 @@ app.get('/api/:themes/:days', function(req, res){
 					// })
 					.on('article', function (article) {
 
-						if(feeds_theme.type == 'Publication'){
-							var news = {};
-							news.typeName = feeds_theme.type;
-							news.theme = feeds_theme.theme;
-							news.title = article.title;
-							news.content = article.summary;
-							news.pubDate = articleDate;
-							news.link = article.link;
+						if(article.pubDate != null && article.pubDate != ''){
+							var articleDate = new Date(article.pubDate);
+							
+							if(feeds_theme.type == 'Publication'){
+								var news = {};
+								news.typeName = feeds_theme.type;
+								news.theme = feeds_theme.theme;
+								news.title = article.title;
+								news.content = article.summary;
+								news.pubDate = articleDate;
+								news.link = article.link;
 
-							feeds['news'].push(news);
+								feeds['news'].push(news);
 
-						}else{
-							if(datenotchecked && article.pubDate != null && article.pubDate != ''){
-								var articleDate = new Date(article.pubDate);
-								if(startDate < articleDate && endDate > articleDate){
-									var news = {};
-									news.typeName = feeds_theme.type;
-									news.theme = feeds_theme.theme;
-									news.title = article.title;
-									news.content = article.summary;
-									news.pubDate = articleDate;
-									news.link = article.link;
+							}else{
+								if(datenotchecked){
+									if(startDate < articleDate && endDate > articleDate){
+										var news = {};
+										news.typeName = feeds_theme.type;
+										news.theme = feeds_theme.theme;
+										news.title = article.title;
+										news.content = article.summary;
+										news.pubDate = articleDate;
+										news.link = article.link;
 
-									feeds['news'].push(news);
-								}
-							}	
+										feeds['news'].push(news);
+									}
+								}	
+							}
+
 						}
 
 					// do something else
