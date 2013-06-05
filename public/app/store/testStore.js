@@ -3,11 +3,14 @@ Ext.define('OECDInfo.store.testStore', {
 	config:{
 		// storeId:'WhatsupMem',
 		model:'OECDInfo.model.United',
+		// proxy:{
+		// 	type:'jsonp',
+		// 	url:'http://oecdinfo.herokuapp.com/all/oecd,oecd_pubs,oecdinnovation/30/'
+		// },
 		proxy:{
-			type:'jsonp',
-			url:'http://oecdinfo.herokuapp.com/all/oecd,oecd_pubs,oecdinnovation/30/'
-		},
-		autoLoad:true,
+			type:'memory'
+		},		
+		autoLoad:false,
  	// 	sorters:[
  	// 		{property:'pubDate', direction:'DESC'},
  	// 		{property:'typeName', direction:'ASC'}

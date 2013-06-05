@@ -1,13 +1,38 @@
 Ext.define('OECDInfo.view.testList', {
     extend:'Ext.List',
     alias:'widget.testList',
+    requires:[
+        // 'Ext.plugin.ListPaging'
+        // , 
+        // 'Ext.plugin.PullRefresh'
+        // ,
+        // 'Ext.SegmentedButton'
+    ],    
     config:{
         store:'testStore', 
         loadingText:'Loading ...',
         autoDestroy:false,
+        scrollToTopOnRefresh:false,
         disableSelection:true,  
         pinHeaders: true,
         grouped:true,
+        plugins: [
+            // {
+            //     xclass:'Ext.plugin.PullRefresh',
+            //     pullRefreshText:'Pull Down to Update',
+            //     refreshFn:function(){
+            //         Ext.defer(function(){
+            //             var list = Ext.widget('testList');
+            //             list.firePullRefresh();
+            //         }, 500)
+            //     }
+            // },
+            // {
+            //       xclass: 'Ext.plugin.ListPaging',
+            //       autoPaging: true,
+            //       hidden:false
+            // }
+       ],           
         // onItemDisclosure:true,
         items:[
             {
@@ -27,6 +52,37 @@ Ext.define('OECDInfo.view.testList', {
                 //  // style:'margin:3px;padding:0px;'
                 // },
             }
+            ,
+            {
+                xtype:'panel',
+                height:80,
+                scrollDock: 'bottom',
+                docked:'bottom',
+                padding:15,
+                width:'100%',
+                centered:true,
+                items:[
+                    {
+                        xtype:'button',
+                        // ui:'gray',
+                        iconMask:true,
+                        iconCls:'arrow_down',
+                        iconAlign:'right',
+                        width:'60%',
+                        centered:true,
+                        text:'<span style="font-size:smaller;">Load More...</span>',
+                        handler:function(me){
+                            console.log(me);
+                            var list = Ext.widget('testList');
+                            list.fireLoadmore();
+                        }
+                        ,
+                        scope:this                      
+                    }
+                ]
+            }        
+
+
             // ,
             // {
             //     xtype:'toolbar',
@@ -151,5 +207,7 @@ Ext.define('OECDInfo.view.testList', {
                 }
             }
         )           
-    }
-});
+    },
+    fireLoadmore:function(){
+        this.fireEvent('loadmoretap');
+    }});

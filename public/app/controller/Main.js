@@ -90,6 +90,10 @@ Ext.define("OECDInfo.controller.Main", {
                     // console.log(this.getMain().getLeftContainer());
                     // console.log(this.getMain().getRightContainer());
                     // body...
+                },
+                loadmoretap:function () {
+                    console.log('called!');
+                    this.paging(++this.self.currentPage);
                 }
             },
             menuBtn: {
@@ -99,5 +103,57 @@ Ext.define("OECDInfo.controller.Main", {
                 }
             }
         }
+    },
+    statics:{
+        currentPage:1,
+        pageSize:30,
+        models:[]
+    },     
+    init:function(){
+        this.callParent(arguments);
+    },
+    launch:function(){
+        this.callParent(arguments);
+
+        var me = this;
+        Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading'});
+
+        Ext.data.JsonP.request({
+            url:'http://oecdinfo.herokuapp.com/all/oecd,oecd_pubs,oecdinnovation/60/',
+            callback:function(success, response){
+                console.log(response);
+                me.self.models = [].concat(response);
+                me.displayList(1);
+                Ext.Viewport.setMasked(false);
+
+            } 
+        });
+    },
+    displayList:function (page) {
+
+        var data = this.self.models.slice(0,page * this.self.pageSize);
+
+        var store = Ext.getStore('testStore'),
+            list = this.getList();
+
+        console.log(data);
+
+        store.setData(data);
+        // list.setGrouped(true);
+        // list.setStore(store);
+        if(page == 1){
+            store.load();
+        }
+
+    },
+    paging:function (page) {
+        var data = this.self.models.slice((page * this.self.pageSize)-this.self.pageSize, page * this.self.pageSize);
+
+        var store = Ext.getStore('testStore'),
+            list = this.getList();
+
+        console.log(data);
+
+        store.add(data)
     }
 });
