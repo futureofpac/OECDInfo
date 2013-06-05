@@ -86,7 +86,7 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
 		    }, callback);
     	},		
 		function(callback) {
-			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', {'user_id':'32771300@N02', 'extras':'date_taken,description','page':1,'per_page':20}, true, function(err, data){
+			flickrApi.executeAPIRequest('flickr.people.getPublicPhotos', {'user_id':'32771300@N02', 'extras':'date_taken,description','page':1,'per_page':50}, true, function(err, data){
 		 		_.each(data.photos.photo, function(item, index){
 
 					var flickr = {};
@@ -103,7 +103,7 @@ app.get('/all/:screen_names/:numberofdays', function(req, res){
     	},	    	
     	function(callback) {
 		    async.forEach(screen_names, function(screen_name, callback) { //The second argument (callback) is the "task callback" for a specific messageId
-				T.get('statuses/user_timeline', { screen_name: screen_name, exclude_replies: true, count: 10 },  function (err, data) {
+				T.get('statuses/user_timeline', { screen_name: screen_name, exclude_replies: true, count: 20 },  function (err, data) {
 					console.log('get user_timeline');
 						// result = {};
 					for(var i=0;i<data.length;i++){
