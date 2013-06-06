@@ -328,43 +328,43 @@ Ext.define("OECDInfo.view.Main", {
                 ]
             },
             
-            // rightContainer:false
-            rightContainer: {
-                xtype: 'panel',
-                cls:'fb x-slideview-container-right',
-                width: 200,
-                layout:'vbox',
-                items: [
-                    {
-                        xtype: 'panel',
-                        scrollable:'vertical',
-                        flex:3
-                    },
-                    {
-                        xtype: 'panel',
-                        flex:2,
-                        defaults:{
-                            xtype:'button',
-                            ui:'action',
-                            style:'font-size:smaller;margin:5px 15px 7px 15px;'
-                        },
-                        items:[
-                            {
-                                text:'Open'
-                            },
-                            {
-                                text:'Email'
-                            },
-                            {
-                                text:'Facebook'
-                            },
-                            {
-                                text:'Twitter'
-                            }
-                        ]
-                    }
-                ]
-            }
+            rightContainer:false
+            // rightContainer: {
+            //     xtype: 'panel',
+            //     cls:'fb x-slideview-container-right',
+            //     width: 200,
+            //     layout:'vbox',
+            //     items: [
+            //         {
+            //             xtype: 'panel',
+            //             scrollable:'vertical',
+            //             flex:3
+            //         },
+            //         {
+            //             xtype: 'panel',
+            //             flex:2,
+            //             defaults:{
+            //                 xtype:'button',
+            //                 ui:'action',
+            //                 style:'font-size:smaller;margin:5px 15px 7px 15px;'
+            //             },
+            //             items:[
+            //                 {
+            //                     text:'Open'
+            //                 },
+            //                 {
+            //                     text:'Email'
+            //                 },
+            //                 {
+            //                     text:'Facebook'
+            //                 },
+            //                 {
+            //                     text:'Twitter'
+            //                 }
+            //             ]
+            //         }
+            //     ]
+            // }
 
         }
 

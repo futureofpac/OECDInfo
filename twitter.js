@@ -333,8 +333,8 @@ app.get('/api/:themes/:days', function(req, res){
 
 						if(article.pubDate != null && article.pubDate != ''){
 							var articleDate = new Date(article.pubDate);
-							
-							if(feeds_theme.type == 'Publication'){
+
+							if(feeds_theme.type == 'Publication' || feeds_theme.type == 'Blog'){
 								var news = {};
 								news.typeName = feeds_theme.type;
 								news.theme = feeds_theme.theme;

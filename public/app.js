@@ -17,6 +17,7 @@ Ext.application({
 
     views: [
         'Main',
+        'Detail',
         'testList',
         'CoverList',
         'Item'

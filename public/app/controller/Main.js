@@ -82,14 +82,11 @@ Ext.define("OECDInfo.controller.Main", {
                 }
             },
             list:{
-                itemtap:function (me, index, target, record, e, eOpts) {
-                    var main = this.getMain();
-                    // Ext.defer(main.moveContainer, 200, main);
-                    main.moveContainer(null, -200, 200)
-
-                    // console.log(this.getMain().getLeftContainer());
-                    // console.log(this.getMain().getRightContainer());
-                    // body...
+                itemsingletap:function (me, index, target, record, e, eOpts) {
+                    // var main = this.getMain();
+                    // // Ext.defer(main.moveContainer, 200, main);
+                    // main.moveContainer(null, -200, 200)
+                    this.openDetail(record);
                 },
                 loadmoretap:function () {
                     console.log('called!');
@@ -108,34 +105,81 @@ Ext.define("OECDInfo.controller.Main", {
     statics:{
         currentPage:1,
         pageSize:30,
-        models:[]
+        models:[],
+        detail:null
     },     
     init:function(){
         this.callParent(arguments);
     },
     launch:function(){
         this.callParent(arguments);
+        // this.initMenu();
+        this.initMenu();
         this.callService('Education');        
     },
-    openLeftMenu:function(){
-        var main = this.getMain();
-        console.log(main);
-        Ext.defer(main.openContainer, 200, main);
-        // main.moveContainer(null, 200, 200)
+    initMenu:function(){
+        this.self.detail = Ext.Viewport.add(Ext.widget('detail'));
+        // this.self.detail = Ext.Viewport.add({
+        //     xtype:'panel',
+        //     id:'detail',
+        //     hidden:true,
+        //     modal:true,
+        //     hideOnMaskTap:true,
+        //     zIndex:100,
+        //     width:300,
+        //     height:'100%',
+        //     right:0,
+        //     style:'border:none;',
+        //     showAnimation:{
+        //         type:'slide',
+        //         direction:'left',
+        //         duration:150
+        //     }
+
+        // });
+        // var detail = Ext.Viewport.add({
+        //     xtype:'actionsheet',
+        //     zIndex:200000,
+        //     defaults:{
+        //         iconMask:true
+        //     },
+        //     items:[
+        //         {
+        //             text:'test1',
+        //             scope:this,
+        //             handler:function () {
+        //                 detail.hide();
+        //             }
+        //         },
+        //         {
+        //             text:'test2',
+        //             scope:this,
+        //             handler:function () {
+        //                 detail.hide();
+        //             }
+        //         }
+        //     ]
+        // });
+
+        // detail.show();
+    },
+    openDetail:function(){
+        // console.log('detail');
+        // this.self.detail.animateActiveItem(1, {type:'slide', direction:'left'})
+        // console.log(this.self.detail);
+        this.self.detail.show();
     },
     callService:function (themes) {
         var me = this;
         // Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading'});
 
         Ext.data.JsonP.request({
-            url:'http://oecdinfo.herokuapp.com/api/'+themes+'/30/',
+            url:'http://oecdinfo.herokuapp.com/api/'+themes+'/10/',
             callback:function(success, response){
                 console.log(response);
                 me.self.models = [].concat(response);
                 me.displayList(1);
                 // Ext.Viewport.setMasked(false);
-        me.openLeftMenu();
-
             } 
         });
     },
