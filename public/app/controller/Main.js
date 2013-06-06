@@ -129,7 +129,7 @@ Ext.define("OECDInfo.controller.Main", {
         this.callParent(arguments);
         // this.initMenu();
         this.initMenu();
-        this.callService('Education');        
+        this.callService('Generic');        
     },
     initMenu:function(){
         // this.self.detail = Ext.Viewport.add(Ext.widget('detail'));
