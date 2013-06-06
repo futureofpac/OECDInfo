@@ -62,79 +62,29 @@ Ext.define('OECDInfo.view.Detail', {
                 scrollable:true,
                 flex:1
             },
-            {
-                xtype:'toolbar',
-                docked:'bottom',
-                layout:'hbox',
-                height:'44px',
-                ui:'light',
+			{
+                xtype: 'panel',
+                height:150,
                 defaults:{
                     xtype:'button',
-                    // margin:4
-                    style:'margin:6px 4px 4px 4px'
+                    ui:'action',
+                    style:'font-size:smaller;margin:5px 15px 7px 15px;'
                 },
                 items:[
-                    {   
-                        xtype:'button',
-                        text:'Close',
-                        action:'close',
-                        hidden:true,
-                        // iconMask:true,
-                        // iconCls:'delete',
-                        // ui:'confirm',
-                        flex:1,
-                        handler:function(){
-                            // this.createComplex(record);
-                        },
-                        scope:this                                
-                    }
-                    ,                
-                    // {
-                    //     xtype:'button',
-                    //     text:'Favourite',
-                    //     // ui:'confirm',
-                    //     action:'favorite',
-                    //     iconMask:true,
-                    //     iconCls:'star',
-                    //     flex:4,
-                    //     handler:function(){
-                    //         // console.log();
-                    //         // this.addFavorite(record.data);
-                    //     },
-                    //     scope:this
-                    // },
-                    {   
-                        xtype:'button',
-                        action:'link',
-                        text:'Open',
-                        iconMask:true,
-                        iconCls:'arrow_up',
-                        // ui:'confirm',
-                        flex:3,
-                        handler:function(){
-                            // var isWithChild = true;
-                            // if(data.type') == 'Youtube'){
-                            //     isWithChild = false;
-                            // }
-                            // this.openLink(data.link'), isWithChild);
-                        },
-                        scope:this
+                    {
+                        text:'Open'
                     },
-                    {   
-                        xtype:'button',
-                        text:'Share',
-                        action:'share',
-                        iconMask:true,
-                        iconCls:'action',
-                        // ui:'confirm',
-                        flex:3,
-                        handler:function(){
-                            // this.createComplex(record);
-                        },
-                        scope:this                                
-                    }   
+                    {
+                        text:'Email'
+                    },
+                    {
+                        text:'Facebook'
+                    },
+                    {
+                        text:'Twitter'
+                    }
                 ]
-            }
+            }            
         ],
         listeners: [
             {

@@ -152,6 +152,8 @@ Ext.define("OECDInfo.view.Main", {
                 items:[
                     {
                         xtype: 'list',
+                        id:'menu',
+                        itemHeight:46,
                         // scrollable:false,
                         // width:280,
                         // layout:'fit',
@@ -159,32 +161,39 @@ Ext.define("OECDInfo.view.Main", {
                         cls:'fb x-slideview-container-left',
                         data: [
                             {
-                                name: 'All Feeds'
+                                name: 'All Feeds',
+                                type:'All'
                             },
                             {
-                                name: 'News'
+                                name: 'News',
+                                type:'News'
                             },
                             {
-                                name: 'Blog'
+                                name: 'Blog',
+                                type:'B'
                             },
                             {
-                                name: 'Publication'
+                                name: 'Publication',
+                                type:'.png'
                             },
                             {
-                                name: 'Twitter'
+                                name: 'Twitter',
+                                type:'.png'
                             },
                             {
-                                name: 'Flickr'
+                                name: 'Flickr',
+                                type:'.png'
                             },
                             {
-                                name: 'Youtube'
+                                name: 'Youtube',
+                                type:'.png'
                             }
                         ],
-                        itemTpl: '{name}',
+                        itemTpl:'<span class="menuicon {name}"></span> <span class="menutext">{name}</span>',
                         items: [
                             {
                                 xtype:'formpanel',
-                                id:'leftmenu',
+                                id:'theme',
                                 scrollDock: 'bottom',
                                 // scrollable:'vertical',
                                 scrollable:false,
@@ -195,7 +204,17 @@ Ext.define("OECDInfo.view.Main", {
                                 width:200,
                                 defaults:{
                                     xtype:'checkboxfield',
-                                    labelWidth:160
+                                    labelWidth:160,
+                                    listeners: {change: function(me){
+                                        console.log('Changed');
+                                        var result = [];
+                                        Ext.Object.each(me.getParent().getValues(), function(key, value, myself) {
+                                            if(value != null){
+                                                result.push(value)
+                                            }
+                                        }); 
+                                        this.fireEvent('themetap', result);
+                                    }}
                                     // ,
                                     // style:'word-wrap:break-word'
                                 },
@@ -204,13 +223,13 @@ Ext.define("OECDInfo.view.Main", {
                                     {
                                         name:'OECD Generic',
                                         label:'OECD Generic',
-                                        value:'OECD Generic',
+                                        value:'Generic',
                                         checked:true
                                     },
                                     {
                                         name:'Agriculture and Food',
                                         label:'Agriculture and Food',
-                                        value:'Agriculture and Food'
+                                        value:'Agriculture'
                                     },
                                     {
                                         name:'Development',
@@ -245,7 +264,7 @@ Ext.define("OECDInfo.view.Main", {
                                     {
                                         name:'Finance and Investment',
                                         label:'Finance and Investment',
-                                        value:'Finance and Investment'
+                                        value:'Finance'
                                     },
                                     {
                                         name:'Governance',
@@ -255,22 +274,22 @@ Ext.define("OECDInfo.view.Main", {
                                     {
                                         name:'Industry and Services',
                                         label:'Industry and Services',
-                                        value:'Industry and Services'
+                                        value:'Industry'
                                     },
                                     {
                                         name:'Nuclear Energy',
                                         label:'Nuclear Energy',
-                                        value:'Nuclear Energy'
+                                        value:'Nuclear'
                                     },
                                     {
                                         name:'Science and Technology',
                                         label:'Science and Technology',
-                                        value:'Science and Technology'
+                                        value:'Science'
                                     },
                                     {
                                         name:'Social Issues/Migration/Health',
                                         label:'Social Issues/Migration/Health',
-                                        value:'Social Issues/Migration/Health'
+                                        value:'Social'
                                     },
                                     {
                                         name:'Taxation',
@@ -290,9 +309,21 @@ Ext.define("OECDInfo.view.Main", {
                                     {
                                         name:'Urban, Rural and Regional Development',
                                         label:'Urban, Rural and Regional Development',
-                                        value:'Urban, Rural and Regional Development'
+                                        value:'Urban'
                                     }
-                                ]
+                                ]                               
+                                // listeners: {
+                                //     change:function(me, newValue, oldValue, eOpts){
+                                //         console.log(me);
+                                //         this.fireEvent('change', 'assad');
+                                //         // form.getValues
+                                //     },
+                                //     check:function(a,b,c){
+                                //         console.log(a);
+                                //         this.fireEvent('check', 'assad');
+                                //         // form.getValues
+                                //     }
+                                // }
                             },                        
                             {
                                 xtype:'panel',
@@ -303,20 +334,24 @@ Ext.define("OECDInfo.view.Main", {
                             }
                         ],
                         listeners: {
+                            change: function(field, newValue, oldValue) {
+                                alert('a')
+                            },
                             itemtap: function(list, index) {
                                 var slideview   = list.getParent().getParent(),
                                     container   = slideview.getContainer();
 
-                                var store = Ext.getStore('testStore');
-                                indexs = ['All Feeds', 'News', 'Blog', 'Publication', 'Twitter', 'Flickr', 'Youtube'];
-                                if(index == 0){
-                                    store.clearFilter(false);
-                                // }else if(index == 2 || index == 3){
+                                // var store = Ext.getStore('testStore');
+                                indexs = ['All', 'News', 'Blog', 'Publication', 'Twitter', 'Flickr', 'Youtube'];
+                                // if(index == 0){
+                                //     store.clearFilter(false);
+                                // // }else if(index == 2 || index == 3){
 
-                                }else{
-                                    store.filter('typeName', indexs[index]);
-                                }
+                                // }else{
+                                //     store.filter('typeName', indexs[index]);
+                                // }
                                 // container.setActiveItem(index);
+                                this.fireEvent('typetap', indexs[index]);
                                 Ext.defer(slideview.closeContainer, 200, slideview);
                             },
                             initialize: function(list) {

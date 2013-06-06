@@ -12,6 +12,8 @@ Ext.define("OECDInfo.controller.Main", {
         refs: {
             list: 'testList',
             main:                   'main',
+            menu: '#menu',
+            theme: '#theme checkboxfield',
             menuBtn: 'testList toolbar button',
             moviePosterListContainer:   'slidenavigationview container[title="Item 8"]'
         },
@@ -90,7 +92,7 @@ Ext.define("OECDInfo.controller.Main", {
                 },
                 loadmoretap:function () {
                     console.log('called!');
-                    this.paging(++this.self.currentPage);
+                    this.displayList(++this.self.currentPage);
                 }
             },
             menuBtn: {
@@ -99,10 +101,22 @@ Ext.define("OECDInfo.controller.Main", {
                     // Ext.defer(main.openContainer, 200, main);
                     main.moveContainer(null, 200, 200)
                 }
+            },
+            menu: {
+                typetap:function (type) {
+                    this.self.currentType = type;
+                    this.displayList(1);
+                }
+            },
+            theme:{
+                themetap:function(themes){
+                    this.callService(themes.join(','));
+                }
             }
         }
     },
     statics:{
+        currentType:'',
         currentPage:1,
         pageSize:30,
         models:[],
@@ -118,7 +132,8 @@ Ext.define("OECDInfo.controller.Main", {
         this.callService('Education');        
     },
     initMenu:function(){
-        this.self.detail = Ext.Viewport.add(Ext.widget('detail'));
+        // this.self.detail = Ext.Viewport.add(Ext.widget('detail'));
+        this.self.detail = Ext.widget('detail');
         // this.self.detail = Ext.Viewport.add({
         //     xtype:'panel',
         //     id:'detail',
@@ -171,43 +186,51 @@ Ext.define("OECDInfo.controller.Main", {
     },
     callService:function (themes) {
         var me = this;
-        // Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading'});
-
+        Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
+        console.log(themes);
         Ext.data.JsonP.request({
             url:'http://oecdinfo.herokuapp.com/api/'+themes+'/10/',
             callback:function(success, response){
                 console.log(response);
                 me.self.models = [].concat(response);
                 me.displayList(1);
-                // Ext.Viewport.setMasked(false);
+                Ext.Viewport.setMasked(false);
             } 
         });
     },
     displayList:function (page) {
+        var me = this;
 
-        var data = this.self.models.slice(0,page * this.self.pageSize);
+        var filterFn = function (element, index, array) {
+            var type = me.self.currentType;
+            console.log(type);
+            console.log(element.typeName);
+            return (element.typeName == type);
+        }
+        var data = ((this.self.currentType == '' || this.self.currentType == 'All') ? this.self.models.slice(0,page * this.self.pageSize) : this.self.models.filter(filterFn).slice(0,page * this.self.pageSize));
 
         var store = Ext.getStore('testStore'),
             list = this.getList();
 
-        console.log(data);
+
+        // console.log('data:');
+        // console.log(data);
 
         store.setData(data);
         // list.setGrouped(true);
         // list.setStore(store);
-        if(page == 1){
-            store.load();
-        }
+        store.load();
 
-    },
-    paging:function (page) {
-        var data = this.self.models.slice((page * this.self.pageSize)-this.self.pageSize, page * this.self.pageSize);
-
-        var store = Ext.getStore('testStore'),
-            list = this.getList();
-
-        console.log(data);
-
-        store.add(data)
     }
+    // ,
+    // paging:function (page) {
+    //     var data = this.self.models.slice((page * this.self.pageSize)-this.self.pageSize, page * this.self.pageSize);
+
+    //     var store = Ext.getStore('testStore'),
+    //         list = this.getList();
+
+    //     console.log(data);
+
+    //     store.add(data)
+    // }
 });
