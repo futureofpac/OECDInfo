@@ -146,7 +146,7 @@ Ext.define("OECDInfo.view.Main", {
             leftContainer:
             {
                 xtype:'panel',
-                width:260,
+                width:200,
                 // scrollable:false,
                 layout:'fit',
                 items:[
@@ -184,17 +184,20 @@ Ext.define("OECDInfo.view.Main", {
                         items: [
                             {
                                 xtype:'formpanel',
+                                id:'leftmenu',
                                 scrollDock: 'bottom',
                                 // scrollable:'vertical',
                                 scrollable:false,
-                                height:700,
+                                height:750,
                                 // height:300,
                                 style:'font-size:smaller;',
                                 // layout:'fit',
-                                width:260,
+                                width:200,
                                 defaults:{
                                     xtype:'checkboxfield',
-                                    labelWidth:200
+                                    labelWidth:160
+                                    // ,
+                                    // style:'word-wrap:break-word'
                                 },
                                 // labelWrap:true,
                                 items:[
@@ -313,8 +316,6 @@ Ext.define("OECDInfo.view.Main", {
                                 }else{
                                     store.filter('typeName', indexs[index]);
                                 }
-                                alert(indexs[index])
-
                                 // container.setActiveItem(index);
                                 Ext.defer(slideview.closeContainer, 200, slideview);
                             },
@@ -327,43 +328,43 @@ Ext.define("OECDInfo.view.Main", {
                 ]
             },
             
-            rightContainer:false
-            // rightContainer: {
-            //     xtype: 'panel',
-            //     cls:'fb x-slideview-container-right',
-            //     width: 250,
-            //     layout:'vbox',
-            //     items: [
-            //         {
-            //             xtype: 'panel',
-            //             scrollable:'vertical',
-            //             flex:3
-            //         },
-            //         {
-            //             xtype: 'panel',
-            //             flex:2,
-            //             defaults:{
-            //                 xtype:'button',
-            //                 ui:'action',
-            //                 style:'font-size:smaller;margin:5px 15px 7px 15px;'
-            //             },
-            //             items:[
-            //                 {
-            //                     text:'Open'
-            //                 },
-            //                 {
-            //                     text:'Email'
-            //                 },
-            //                 {
-            //                     text:'Facebook'
-            //                 },
-            //                 {
-            //                     text:'Twitter'
-            //                 }
-            //             ]
-            //         }
-            //     ]
-            // }
+            // rightContainer:false
+            rightContainer: {
+                xtype: 'panel',
+                cls:'fb x-slideview-container-right',
+                width: 200,
+                layout:'vbox',
+                items: [
+                    {
+                        xtype: 'panel',
+                        scrollable:'vertical',
+                        flex:3
+                    },
+                    {
+                        xtype: 'panel',
+                        flex:2,
+                        defaults:{
+                            xtype:'button',
+                            ui:'action',
+                            style:'font-size:smaller;margin:5px 15px 7px 15px;'
+                        },
+                        items:[
+                            {
+                                text:'Open'
+                            },
+                            {
+                                text:'Email'
+                            },
+                            {
+                                text:'Facebook'
+                            },
+                            {
+                                text:'Twitter'
+                            }
+                        ]
+                    }
+                ]
+            }
 
         }
 

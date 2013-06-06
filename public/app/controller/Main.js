@@ -85,7 +85,7 @@ Ext.define("OECDInfo.controller.Main", {
                 itemtap:function (me, index, target, record, e, eOpts) {
                     var main = this.getMain();
                     // Ext.defer(main.moveContainer, 200, main);
-                    main.moveContainer(null, 200, 200)
+                    main.moveContainer(null, -200, 200)
 
                     // console.log(this.getMain().getLeftContainer());
                     // console.log(this.getMain().getRightContainer());
@@ -99,7 +99,8 @@ Ext.define("OECDInfo.controller.Main", {
             menuBtn: {
                 tap:function (me, e, eOpts) {
                     var main = this.getMain();
-                    Ext.defer(main.openContainer, 200, main);
+                    // Ext.defer(main.openContainer, 200, main);
+                    main.moveContainer(null, 200, 200)
                 }
             }
         }
@@ -114,17 +115,26 @@ Ext.define("OECDInfo.controller.Main", {
     },
     launch:function(){
         this.callParent(arguments);
-
+        this.callService('Education');        
+    },
+    openLeftMenu:function(){
+        var main = this.getMain();
+        console.log(main);
+        Ext.defer(main.openContainer, 200, main);
+        // main.moveContainer(null, 200, 200)
+    },
+    callService:function (themes) {
         var me = this;
-        Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading'});
+        // Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading'});
 
         Ext.data.JsonP.request({
-            url:'http://oecdinfo.herokuapp.com/api/Generic,Development/20/',
+            url:'http://oecdinfo.herokuapp.com/api/'+themes+'/30/',
             callback:function(success, response){
                 console.log(response);
                 me.self.models = [].concat(response);
                 me.displayList(1);
-                Ext.Viewport.setMasked(false);
+                // Ext.Viewport.setMasked(false);
+        me.openLeftMenu();
 
             } 
         });
