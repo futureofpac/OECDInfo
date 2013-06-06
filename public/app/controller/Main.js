@@ -115,6 +115,9 @@ Ext.define("OECDInfo.controller.Main", {
             }
         }
     },
+
+
+    
     statics:{
         currentType:'',
         currentPage:1,
