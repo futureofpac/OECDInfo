@@ -169,11 +169,11 @@ Ext.define("OECDInfo.view.Main", {
                                 type:'News'
                             },
                             {
-                                name: 'Blog',
+                                name: 'Articles',
                                 type:'B'
                             },
                             {
-                                name: 'Publication',
+                                name: 'Publications',
                                 type:'.png'
                             },
                             {
@@ -181,11 +181,11 @@ Ext.define("OECDInfo.view.Main", {
                                 type:'.png'
                             },
                             {
-                                name: 'Flickr',
+                                name: 'Photos',
                                 type:'.png'
                             },
                             {
-                                name: 'Youtube',
+                                name: 'Videos',
                                 type:'.png'
                             }
                         ],
