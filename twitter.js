@@ -288,6 +288,20 @@ app.get('/api/:themes/:days', function(req, res){
 								// tweet.image = data[i].user.profile_image_url;
 								tweet.image = item.user.profile_image_url;
 								tweet.typeName = 'Twitter';
+
+			                    var userData = item.user,
+			                        userInfo = {
+			                            name:               userData.name,
+			                            screen_name:        userData.screen_name,
+			                            description:        userData.description,
+			                            url:                userData.url,
+			                            profile_banner_url: userData.profile_banner_url,
+			                            statuses_count:     userData.statuses_count,
+			                            friends_count:      userData.friends_count,
+			                            followers_count:    userData.followers_count 
+			                        };
+
+								tweet.userInfo = userInfo;
 								// tweet.link = data[i].user.entities.urls.expanded_url
 								feeds['tweets'].push(tweet);
 							}

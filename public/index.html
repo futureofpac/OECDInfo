@@ -79,41 +79,41 @@
           vertical-align: middle;
         }
         span.menuicon.All {
-          background: url(resources/images/rss.png);
-          background-size:30px 30px;
+/*          background: url(resources/images/rss.png);
+*/          background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.Twitter {
-          background: url(resources/images/twitter.png);
+          background: url(resources/images/icon-twitter.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.Youtube {
-          background: url(resources/images/youtube.png);
+          background: url(resources/images/icon-videos.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.Flickr {
-          background: url(resources/images/flickr.png);
+          background: url(resources/images/icon-photos.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.News {
-          background: url(resources/images/msg.png);
+          background: url(resources/images/icon-news.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.Blog {
-          background: url(resources/images/document.png);
+          background: url(resources/images/icon-blog.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.Publication {
-          background: url(resources/images/notepad.png);
+          background: url(resources/images/icon-publications.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
-        span.menuicon.Insight {
+  /*      span.menuicon.Insight {
           background: url(resources/images/lightning.png);
           background-size:30px 30px;
           background-repeat: no-repeat;
@@ -133,6 +133,36 @@
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
+*/
+        #detail .header,#detail .header{
+          background-image:none;background-color:#eeeeee;
+          background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #fbfbfb), color-stop(100%, #e1e1e1));
+          background-image:-webkit-linear-gradient(top, #ffffff,#fbfbfb 3%,#e1e1e1);
+          background-image:linear-gradient(top, #ffffff,#fbfbfb 3%,#e1e1e1);
+          border-bottom:1px solid #ccc;
+          border-top:1px solid #ddd;padding:1em 0.8em;
+          padding:10px 14px;
+        }
+
+        #detail .header h4 {
+          font-size: smaller;
+          padding-top: 7px;
+          color: gray;
+        }
+
+        #detail .header.Twitter h3 {
+          line-height:160%
+        }
+
+        #detail p {
+          padding: 14px;
+        }
+
+        #detail span.link,span.username,span.hashtag{
+          text-decoration:underline;
+          color:blue;
+        }
+       
     </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <script id="microloader" type="text/javascript" src="touch/microloader/development.js"></script>
