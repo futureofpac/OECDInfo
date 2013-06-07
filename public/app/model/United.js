@@ -13,6 +13,7 @@ Ext.define('OECDInfo.model.United', {
 			{name:'content', type:'string'},
 			{name:'link', type:'string'},
 			{name:'image', type:'string'},
+			{name:'userInfo'},
 			{name:'favorite', type:'boolean', defaultValue: false},
 			{name:'pubDate', type:'date', dateFormat:'c'},
 			{name:'createDate', type:'date', dateFormat:'c'}

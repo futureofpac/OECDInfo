@@ -185,8 +185,8 @@ Ext.define("OECDInfo.controller.Main", {
         // console.log('detail');
         // this.self.detail.animateActiveItem(1, {type:'slide', direction:'left'})
         // console.log(this.self.detail);
-        // console.log(record);
-        var content = this.getDetailContent(record.data, {}, false),
+        console.log(record);
+        var content = this.getDetailContent(record.data, record.data.userInfo, false),
             detail = this.self.detail,
             currentData = detail.getData(),
             carousel = detail.query('carousel')[0],
@@ -194,6 +194,10 @@ Ext.define("OECDInfo.controller.Main", {
             type = record.data.typeName,
             userInfo = record.data.userInfo,
             html = '';
+
+            console.log('userInfo:');
+
+            console.log(userInfo);
 
         if(userInfo == null){
             carousel.setHidden(true);
@@ -218,11 +222,11 @@ Ext.define("OECDInfo.controller.Main", {
                 carousel.getItems().items[1].setHtml(html[0]);
                 carousel.getItems().items[2].setHtml(html[1]);
 
-                if(fromTablet == true){
-                    carousel.setHeight(180);
-                }else{
+                // if(fromTablet == true){
+                //     carousel.setHeight(180);
+                // }else{
                     carousel.setHeight(140);
-                }
+                // }
             }
             carousel.setHidden(false);
             carousel.setActiveItem(0);
