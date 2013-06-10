@@ -19,8 +19,7 @@ Ext.application({
         'Main',
         'Detail',
         'testList',
-        'CoverList',
-        'Item'
+        'Share'
     ],
 
     models: [

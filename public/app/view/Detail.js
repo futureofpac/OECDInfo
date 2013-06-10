@@ -1,7 +1,10 @@
 Ext.define('OECDInfo.view.Detail', {
     extend:'Ext.Panel',
     alias:'widget.detail',
-    requires:['Ext.carousel.Carousel'],
+    requires:[
+        'Ext.carousel.Carousel',
+        'Ext.ActionSheet'
+    ],
     initialize:function(){
         this.callParent();
     },
@@ -12,11 +15,11 @@ Ext.define('OECDInfo.view.Detail', {
         userInfo:null,
         id:'detail',
         hidden:true,
-        modal:true,
-        hideOnMaskTap:true,
+        // modal:true,
+        // hideOnMaskTap:true,
         zIndex:100,
-        // width:'100%',
-        width:280,
+        width:'100%',
+        // width:280,
         height:'100%',
         right:0,
         showAnimation:{
@@ -24,6 +27,11 @@ Ext.define('OECDInfo.view.Detail', {
             direction:'left',
             duration:150
         },
+        // hideAnimation:{
+        //     type:'slide',
+        //     direction:'right',
+        //     duration:150
+        // },
 
         // id:'detail',
         // model:true,
@@ -90,18 +98,20 @@ Ext.define('OECDInfo.view.Detail', {
                 xtype:'toolbar',
                 docked:'top',
                 items:[
-                    // {
-                    //     xtype:'button',
-                    //     // ui:'back',
-                    //     // text:'Back'
-                    //     iconCls:'delete'
-                    // },
+                    {
+                        xtype:'button',
+                        // ui:'back',
+                        // text:'Back'
+                        iconCls:'delete',
+                        action:'close'
+                    },
                     {
                         xtype:'spacer'
                     },
                     {
                         xtype:'button',
-                        iconCls:'action'
+                        iconCls:'action',
+                        action:'share'
                     }
                 ]
             },
@@ -126,7 +136,7 @@ Ext.define('OECDInfo.view.Detail', {
                     // },
                     {
                         // iconCls:'reply'
-                        text:'Browser',
+                        text:'Open',
                         action:'open'
                     },
                     {
@@ -201,6 +211,20 @@ Ext.define('OECDInfo.view.Detail', {
                 event:'tap',
                 fn:function(){
                     this.fireEvent('opentap');
+                }
+            },
+            {
+                delegate: ['button[action=share]'],
+                event:'tap',
+                fn:function(){
+                    this.fireEvent('sharetap');
+                }
+            },
+            {
+                delegate: ['button[action=close]'],
+                event:'tap',
+                fn:function(){
+                    this.fireEvent('hidetap');
                 }
             }
         ]

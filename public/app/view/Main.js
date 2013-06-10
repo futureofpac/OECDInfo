@@ -58,88 +58,91 @@ Ext.define("OECDInfo.view.Main", {
             container: {
                 items: [{
                     xclass: 'OECDInfo.view.testList'
-                },{
-                    xtype: 'container',
-                    layout: 'fit',
-                    items: [{
-                        xtype: 'toolbar',
-                        docked: 'top',
-                        title:  'Item 2',
-                        ui:     'light'
-                    },{
-                        xclass: 'OECDInfo.view.CoverList'
-                    }]
-                },{
-                    xclass: 'OECDInfo.view.Item',
-                    name:   'Item 3'
-                },{
-                    xtype: 'list',
-                    itemTpl: '{name}',
-                    data: [{
-                        name: 'Item 1'
-                    },{
-                        name: 'Item 2'
-                    },{
-                        name: 'Item 3'
-                    },{
-                        name: 'Item 4'
-                    },{
-                        name: 'Item 5'
-                    },{
-                        name: 'Item 6'
-                    },{
-                        name: 'Item 7'
-                    },{
-                        name: 'Item 8'
-                    },{
-                        name: 'Item 9'
-                    },{
-                        name: 'Item 10'
-                    }],
-                    items: {
-                        docked: 'top',
-                        xtype: 'toolbar',
-                        title: 'Item 4',
-                        layout: {
-                            pack: 'right'
-                        }/*,
-                        items: [{
-                            xtype: 'button',
-                            name: 'listactions'
-                        }]
-                        */
-                    }/*,
-                    plugins: [{
-                        xclass: 'Ext.ux.plugin.ListActions',
-                        actionsToolbar: {
-                            items: [{
-                                text: 'Delete (0)',
-                                ui: 'decline',
-                                eventName: 'delete'
-                            },{
-                                text: 'Move (0)',
-                                eventName: 'move'
-                            },{
-                                text: 'Mark (0)',
-                                eventName: 'mark'
-                            }]
-                        },
-                        actionToggleButton: {
-                            selector: function(list) {
-                                return list.down('button[name="listactions"]');
-                            },
-                            enableText: 'select',
-                            disableText: 'cancel'
-                        }
-                    }]
-                    */
-                },{
-                    xclass: 'OECDInfo.view.Item',
-                    name:   'Item 5'
-                },{
-                    xclass: 'OECDInfo.view.Item',
-                    name:   'Item 6'
                 }
+
+                
+                // ,{
+                //     xtype: 'container',
+                //     layout: 'fit',
+                //     items: [{
+                //         xtype: 'toolbar',
+                //         docked: 'top',
+                //         title:  'Item 2',
+                //         ui:     'light'
+                //     },{
+                //         xclass: 'OECDInfo.view.CoverList'
+                //     }]
+                // },{
+                //     xclass: 'OECDInfo.view.Item',
+                //     name:   'Item 3'
+                // },{
+                //     xtype: 'list',
+                //     itemTpl: '{name}',
+                //     data: [{
+                //         name: 'Item 1'
+                //     },{
+                //         name: 'Item 2'
+                //     },{
+                //         name: 'Item 3'
+                //     },{
+                //         name: 'Item 4'
+                //     },{
+                //         name: 'Item 5'
+                //     },{
+                //         name: 'Item 6'
+                //     },{
+                //         name: 'Item 7'
+                //     },{
+                //         name: 'Item 8'
+                //     },{
+                //         name: 'Item 9'
+                //     },{
+                //         name: 'Item 10'
+                //     }],
+                //     items: {
+                //         docked: 'top',
+                //         xtype: 'toolbar',
+                //         title: 'Item 4',
+                //         layout: {
+                //             pack: 'right'
+                //         }/*,
+                //         items: [{
+                //             xtype: 'button',
+                //             name: 'listactions'
+                //         }]
+                //         */
+                //     }/*,
+                //     plugins: [{
+                //         xclass: 'Ext.ux.plugin.ListActions',
+                //         actionsToolbar: {
+                //             items: [{
+                //                 text: 'Delete (0)',
+                //                 ui: 'decline',
+                //                 eventName: 'delete'
+                //             },{
+                //                 text: 'Move (0)',
+                //                 eventName: 'move'
+                //             },{
+                //                 text: 'Mark (0)',
+                //                 eventName: 'mark'
+                //             }]
+                //         },
+                //         actionToggleButton: {
+                //             selector: function(list) {
+                //                 return list.down('button[name="listactions"]');
+                //             },
+                //             enableText: 'select',
+                //             disableText: 'cancel'
+                //         }
+                //     }]
+                //     */
+                // },{
+                //     xclass: 'OECDInfo.view.Item',
+                //     name:   'Item 5'
+                // },{
+                //     xclass: 'OECDInfo.view.Item',
+                //     name:   'Item 6'
+                // }
                 ]
             },
 
