@@ -15,7 +15,8 @@ Ext.define('OECDInfo.view.Detail', {
         modal:true,
         hideOnMaskTap:true,
         zIndex:100,
-        width:300,
+        // width:'100%',
+        width:280,
         height:'100%',
         right:0,
         showAnimation:{
@@ -62,29 +63,80 @@ Ext.define('OECDInfo.view.Detail', {
                 scrollable:true,
                 flex:1
             },
-			{
-                xtype: 'panel',
-                height:150,
+			// {
+   //              xtype: 'panel',
+   //              height:150,
+   //              defaults:{
+   //                  xtype:'button',
+   //                  ui:'action',
+   //                  style:'font-size:smaller;margin:5px 15px 7px 15px;'
+   //              },
+   //              items:[
+   //                  {
+   //                      text:'Open'
+   //                  },
+   //                  {
+   //                      text:'Email'
+   //                  },
+   //                  {
+   //                      text:'Facebook'
+   //                  },
+   //                  {
+   //                      text:'Twitter'
+   //                  }
+   //              ]
+   //          }            
+            {
+                xtype:'toolbar',
+                docked:'top',
+                items:[
+                    // {
+                    //     xtype:'button',
+                    //     // ui:'back',
+                    //     // text:'Back'
+                    //     iconCls:'delete'
+                    // },
+                    {
+                        xtype:'spacer'
+                    },
+                    {
+                        xtype:'button',
+                        iconCls:'action'
+                    }
+                ]
+            },
+            {
+                xtype:'toolbar',
+                docked:'bottom',
                 defaults:{
                     xtype:'button',
-                    ui:'action',
-                    style:'font-size:smaller;margin:5px 15px 7px 15px;'
+                    flex:1,
+                    style:''
                 },
                 items:[
                     {
-                        text:'Open'
+                        // iconCls:'arrow_left',
+                        ui:'back',
+                        text:'Prev',
+                        action:'prev'
+                    },
+                    // {
+                    //     // iconCls:'action'
+                    //     text:'Share'
+                    // },
+                    {
+                        // iconCls:'reply'
+                        text:'Browser',
+                        action:'open'
                     },
                     {
-                        text:'Email'
-                    },
-                    {
-                        text:'Facebook'
-                    },
-                    {
-                        text:'Twitter'
+                        // iconCls:'arrow_right',
+                        ui:'forward',
+                        text:'Next',
+                        action:'next'
                     }
                 ]
-            }            
+            }
         ],
         listeners: [
             {
@@ -131,24 +183,24 @@ Ext.define('OECDInfo.view.Detail', {
                 }
             },
             {
-                delegate: ['button[action=link]'],
+                delegate: ['button[action=prev]'],
                 event:'tap',
                 fn:function(){
-                    this.fireEvent('linktap', this.getData().link);
+                    this.fireEvent('prevtap');
                 }
             },
             {
-                delegate: ['button[action=share]'],
+                delegate: ['button[action=next]'],
                 event:'tap',
                 fn:function(){
-                    this.fireEvent('sharetap', this.getData());
+                    this.fireEvent('nexttap');
                 }
             },
             {
-                delegate: ['button[action=close]'],
+                delegate: ['button[action=open]'],
                 event:'tap',
                 fn:function(){
-                    this.fireEvent('closetap', this.getData());
+                    this.fireEvent('opentap');
                 }
             }
         ]

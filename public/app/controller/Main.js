@@ -15,7 +15,8 @@ Ext.define("OECDInfo.controller.Main", {
             menu: '#menu',
             theme: '#theme checkboxfield',
             menuBtn: 'testList toolbar button',
-            moviePosterListContainer:   'slidenavigationview container[title="Item 8"]'
+            moviePosterListContainer:   'slidenavigationview container[title="Item 8"]',
+            detail:'#detail'
         },
 
         control: {
@@ -85,14 +86,38 @@ Ext.define("OECDInfo.controller.Main", {
             },
             list:{
                 itemsingletap:function (me, index, target, record, e, eOpts) {
+                    console.log(me);
+                    console.log(index);
+                    console.log(record.data);
+                    this.self.currentIndex = index;
                     // var main = this.getMain();
                     // // Ext.defer(main.moveContainer, 200, main);
                     // main.moveContainer(null, -200, 200)
-                    this.openDetail(record);
+                    this.openDetail(record.data);
                 },
                 loadmoretap:function () {
                     console.log('called!');
                     this.displayList(++this.self.currentPage);
+                }
+            },
+            detail:{
+                prevtap:function () {
+                    var data = this.getDataByIndex('prev', this.self.currentIndex);
+                    if(data == 'first'){
+                        Ext.Msg.alert('', 'This is the first item')
+                    }else{
+                        this.self.currentIndex--;
+                        this.openDetail(data);
+                    }
+                },
+                nexttap:function () {
+                    var data = this.getDataByIndex('next', this.self.currentIndex);
+                    if(data == 'last'){
+                        Ext.Msg.alert('', 'This is the last item')
+                    }else{
+                        this.self.currentIndex++;
+                        this.openDetail(data);
+                    }
                 }
             },
             menuBtn: {
@@ -121,7 +146,8 @@ Ext.define("OECDInfo.controller.Main", {
     statics:{
         currentType:'',
         currentPage:1,
-        pageSize:30,
+        currentIndex:-1,
+        pageSize:40,
         models:[],
         detail:null
     },     
@@ -136,68 +162,27 @@ Ext.define("OECDInfo.controller.Main", {
     },
     initMenu:function(){
         this.self.detail = Ext.Viewport.add({xtype:'detail'});
-        // this.self.detail = Ext.widget('detail');
-        // this.self.detail = Ext.Viewport.add({
-        //     xtype:'panel',
-        //     id:'detail',
-        //     hidden:true,
-        //     modal:true,
-        //     hideOnMaskTap:true,
-        //     zIndex:100,
-        //     width:300,
-        //     height:'100%',
-        //     right:0,
-        //     style:'border:none;',
-        //     showAnimation:{
-        //         type:'slide',
-        //         direction:'left',
-        //         duration:150
-        //     }
-
-        // });
-        // var detail = Ext.Viewport.add({
-        //     xtype:'actionsheet',
-        //     zIndex:200000,
-        //     defaults:{
-        //         iconMask:true
-        //     },
-        //     items:[
-        //         {
-        //             text:'test1',
-        //             scope:this,
-        //             handler:function () {
-        //                 detail.hide();
-        //             }
-        //         },
-        //         {
-        //             text:'test2',
-        //             scope:this,
-        //             handler:function () {
-        //                 detail.hide();
-        //             }
-        //         }
-        //     ]
-        // });
-
-        // detail.show();
     },
-    openDetail:function(record){
+    openDetail:function(data){
         // console.log('detail');
         // this.self.detail.animateActiveItem(1, {type:'slide', direction:'left'})
         // console.log(this.self.detail);
-        console.log(record);
-        var content = this.getDetailContent(record.data, record.data.userInfo, false),
+        // console.log(record);
+        var content = this.getDetailContent(data, false),
             detail = this.self.detail,
             currentData = detail.getData(),
+            topmenu = detail.query('toolbar')[0],
             carousel = detail.query('carousel')[0],
             panel = detail.query('panel'),
-            type = record.data.typeName,
-            userInfo = record.data.userInfo,
+            type = data.typeName,
+            userInfo = data.userInfo,
             html = '';
 
             console.log('userInfo:');
 
             console.log(userInfo);
+
+        topmenu.setTitle(type)
 
         if(userInfo == null){
             carousel.setHidden(true);
@@ -254,6 +239,42 @@ Ext.define("OECDInfo.controller.Main", {
             } 
         });
     },
+    filterFn:function (element, index, array) {
+        var type = this.self.currentType;
+        // console.log(type);
+        // console.log(element.typeName);
+        return (element.typeName == type);
+    },
+    getDataByIndex:function(direction, index){
+        var me = this;
+        var filterFn = function (element, index, array) {
+            var type = me.self.currentType;
+            console.log(type);
+            console.log(element.typeName);
+            return (element.typeName == type);
+        }
+        var data = (
+            (
+                this.self.currentType == '' || this.self.currentType == 'All'
+            ) ? 
+            this.self.models : 
+            this.self.models.filter(filterFn)
+        );
+
+        if(direction == 'prev'){
+            if(index == 0){
+                return 'first';
+            }else{
+                return data[index-1];
+            }
+        }else if(direction == 'next'){
+            if(index == data.length){
+                return 'last';
+            }else{
+                return data[index+1];
+            }
+        }
+    },
     displayList:function (page) {
         var me = this;
 
@@ -263,11 +284,21 @@ Ext.define("OECDInfo.controller.Main", {
             console.log(element.typeName);
             return (element.typeName == type);
         }
-        var data = ((this.self.currentType == '' || this.self.currentType == 'All') ? this.self.models.slice(0,page * this.self.pageSize) : this.self.models.filter(filterFn).slice(0,page * this.self.pageSize));
+
+        var data = (
+            (
+                this.self.currentType == '' || this.self.currentType == 'All'
+            ) ? 
+            this.self.models.slice(0,page * this.self.pageSize) : 
+            this.self.models.filter(filterFn).slice(0,page * this.self.pageSize)
+        );
 
         var store = Ext.getStore('testStore'),
             list = this.getList();
 
+            if(page == 1){
+                list.getScrollable().getScroller().scrollTo(0,0, false);
+            }
 
         // console.log('data:');
         // console.log(data);
@@ -278,8 +309,7 @@ Ext.define("OECDInfo.controller.Main", {
         store.load();
 
     },
-
-getDetailContent:function(data, userInfo, fromTablet){
+    getDetailContent:function(data, fromTablet){
         var replaceLinks = function(html, replace){
             if(html == null) {
                 return '';
@@ -350,6 +380,7 @@ getDetailContent:function(data, userInfo, fromTablet){
             // console.log(userInfo);
             var image = data.image,
                 type = data.type,
+                userInfo = data.userInfo,
                 header = '',
                 header2 = '',
                 indicator = '',
