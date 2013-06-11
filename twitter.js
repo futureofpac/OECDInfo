@@ -66,19 +66,11 @@ app.get('/api/:themes/:days', function(req, res){
 		_.each(themes, function (theme, index) {
 			if(themeUrls[theme][type]){
 				_.each(themeUrls[theme][type], function (item) {
-					if(item.provider){
-						var item = {
-							'type':type,
-							'theme':theme,
-							'url':item.url,
-							'provider':item.provider
-						}
-					}else{
-						var item = {
-							'type':type,
-							'theme':theme,
-							'url':item.url
-						}
+					var item = {
+						'type':type,
+						'theme':theme,
+						'url':(item.url ? item.url : item),
+						'provider':(item.provider ? item.provider : '')
 					}
 					result.push(item);
 				})
@@ -367,7 +359,7 @@ app.get('/api/:themes/:days', function(req, res){
 								publication.content = article.description;
 								publication.pubDate = articleDate;
 								publication.link = article.link;
-								publication.provider = (feeds_theme.provider ? feeds_theme.provider : '')
+								publication.provider = feeds_theme.provider;
 
 								feeds['publication'].push(publication);
 							}else if(feeds_theme.type == 'Blog'){
@@ -379,7 +371,7 @@ app.get('/api/:themes/:days', function(req, res){
 								// article.content2 = article.description;
 								article.pubDate = articleDate;
 								article.link = article.link;
-								article.provider = (feeds_theme.provider ? feeds_theme.provider : '')
+								article.provider = feeds_theme.provider;
 
 								feeds['article'].push(article);
 
@@ -400,7 +392,7 @@ app.get('/api/:themes/:days', function(req, res){
 										}
 										news.pubDate = articleDate;
 										news.link = article.link;
-										news.provider = (feeds_theme.provider ? feeds_theme.provider : '')
+										news.provider = feeds_theme.provider;
 
 										feeds['news'].push(news);
 									}
