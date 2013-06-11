@@ -49,13 +49,13 @@ Ext.define('OECDInfo.view.Detail', {
         // style:'background-color:white',
         layout:'vbox',
         items:[  
-            {
-                xtype:'panel',
-                scrollable:{
-                    direction:'horizontal'
-                },
-                height:30
-            },
+            // {
+            //     xtype:'panel',
+            //     scrollable:{
+            //         direction:'horizontal'
+            //     },
+            //     height:30
+            // },
             {
                 xtype:'carousel',
                 direction:'vertical',
@@ -174,8 +174,23 @@ Ext.define('OECDInfo.view.Detail', {
                 delegate: ['.header'],
                 event:'swipe',
                 fn:function(evt, node, options){
+                    if(evt.direction == 'up'){
+                        this.fireEvent('providertap', 'up');
+                    }else if(evt.direction == 'down'){
+                        this.fireEvent('providertap', 'down');
+                    }
                     // this.openLink(node.getAttribute('name'));
-                    this.fireEvent('detailswipe', this.getData(), evt);
+                    // this.fireEvent('detailswipe', this.getData(), evt);
+                }
+            },
+            {
+                element: 'element',
+                //if service is getting stable, username and hashtag can be included
+                // delegate: ['span.link','span.username','span.hashtag'],
+                delegate: ['.header'],
+                event:'tap',
+                fn:function(evt, node, options){
+                    this.fireEvent('providertap', 'up');
                 }
             },
             {

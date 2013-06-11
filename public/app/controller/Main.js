@@ -124,6 +124,9 @@ Ext.define("OECDInfo.controller.Main", {
                 },
                 sharetap:function(){
                     this.showShare();
+                },
+                providertap:function(direction){
+                    this.controlProvider(direction);
                 }
             },
             menuBtn: {
@@ -186,14 +189,15 @@ Ext.define("OECDInfo.controller.Main", {
             type = data.typeName,
             userInfo = data.userInfo,
             html = '',
-            panelTitle = panel[1],
-            panelContent = panel[2],
-            panelProvider = panel[0];
+            panelTitle = panel[0],
+            panelContent = panel[1],
+            carousel1 = carousel.getItems().items[1],
+            carousel2 = carousel.getItems().items[2];
+            // panelProvider = panel[1];
 
         topmenu.setTitle(type)
 
         if(userInfo == null){
-            carousel.setHidden(true);
 
             if(type == 'Flickr'){
                 html = content.createFlickrBody();
@@ -206,19 +210,25 @@ Ext.define("OECDInfo.controller.Main", {
 
                 panelTitle.setHidden(false);
                 panelTitle.setHtml(html[0]);
-                panelContent.setHtml(html[1]);
-
+ 
+                carousel.setHidden(true);
                 if(data.provider){
-                    panelProvider.setHidden(false)
-                    panelProvider.setHtml(content.createProvider());
+                    var provider = content.createProvider();
+                    carousel1.setHtml(provider[0]);
+                    carousel2.setHtml(provider[1]);
+                    carousel.setHeight(100);
+                //     // panelContent.setHtml('<div style="text-align:right;padding:10px 30px 0px 0px;">By <a href=# class=providername>' + data.provider.name + '</a></div><div id=providerinfo></div>' + html[1]);
+                // }else{
+                //     carousel.setHidden(true);
                 }
+                panelContent.setHtml(html[1]);
             }
         }else{
             html = content.createTwitterBody();
 
             if(currentData == null || currentData.type != type){
-                carousel.getItems().items[1].setHtml(html[0]);
-                carousel.getItems().items[2].setHtml(html[1]);
+                carousel1.setHtml(html[0]);
+                carousel2.setHtml(html[1]);
 
                 // if(fromTablet == true){
                 //     carousel.setHeight(180);
@@ -232,7 +242,7 @@ Ext.define("OECDInfo.controller.Main", {
             panelTitle.setHidden(false);
             panelTitle.setHtml(html[2]);
             panelContent.setHtml(html[3]);
-            panelProvider.setHidden(true)
+            // panelProvider.setHidden(true)
 
         }
 
@@ -338,6 +348,17 @@ Ext.define("OECDInfo.controller.Main", {
         // store.load();
         Ext.Viewport.setMasked(false);
     },
+    controlProvider:function(direction){
+        var detail = this.self.detail,
+            carousel = detail.query('carousel')[0];
+
+        if(direction == 'up'){
+            carousel.setHidden(false);
+        }else{
+            carousel.setHidden(true);
+        }
+
+    },
     getDetailContent:function(data, fromTablet){
         var replaceLinks = function(html, replace){
             if(html == null) {
@@ -387,7 +408,7 @@ Ext.define("OECDInfo.controller.Main", {
                 header =
                 '<div class=header '+ type +'>' + 
                     '<h3><strong>'+ replaceLinks(data.title) +'</strong></h3>' +
-                    '<h4>'+ getDateStr(data.pubDate) +'</h4>' +
+                    '<h4>'+ data.theme + ' | ' + getDateStr(data.pubDate) +'</h4>' +
                 '</div>';
             }
 
@@ -466,7 +487,25 @@ Ext.define("OECDInfo.controller.Main", {
             return header;
         },
         createProvider = function(){
-            return data.provider.name + ' ' + data.provider.url + ' ' + data.provider.description
+            var header = '', header2 = '';
+
+                header =
+                '<div style="background-size:100%;height:100px;padding-top:10px;background-color:#444;">' +
+                    '<div style="position:relative;padding:0px;margin-top:10px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
+                        '<h3><strong style="font-size:larger;margin-bottom:12px;">' + (data.provider.logo ? '<img src="'+ data.provider.logo +'" width="40"> ':'') + data.provider.name +'</strong></h3>' +
+                        '<h4 style="padding:5px;"><a href="'+ data.provider.url +'" target="_new" style="color:white">'+ data.provider.url +'</a></h4>' +
+                    '</div>' +
+                '</div>';
+
+                header2 =
+                '<div style="background-size:100%;height:100px;padding:7px;background-color:#444;">' +
+                    '<div style="position:relative;margin-top:10px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
+                        '<h4 style="font-size:smaller">'+ data.provider.description +'</h4>' +
+                    '</div>' +
+                '</div>';
+
+            // return data.provider.name + ' ' + data.provider.url + ' ' + data.provider.description
+            return [header, header2];
         }
 
         return {

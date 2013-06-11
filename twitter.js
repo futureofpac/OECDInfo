@@ -93,11 +93,11 @@ app.get('/api/:themes/:days', function(req, res){
 				'OECD_Pubs'
 			],
 			'News' : [
-			    {provider:{name:'Observer', description:'An award-winning magazine to keep you ahead of today\'s economic and social policy challenges.', url:'http://www.oecdobserver.org/'}, url:'http://feeds.feedburner.com/OecdObserver'},
-			    {provider:{name:'Newsroom', description:'', url:''}, url:'http://www.oecd.org/newsroom/index.xml'}
+			    {provider:{name:'Observer', logo:'http://profile.ak.fbcdn.net/hprofile-ak-prn1/50250_160758993981155_1215480564_q.jpg', description:'An award-winning magazine to keep you ahead of today\'s economic and social policy challenges.', url:'http://www.oecdobserver.org/'}, url:'http://feeds.feedburner.com/OecdObserver'},
+			    {provider:{name:'Newsroom', description:'OECD Newsroom', url:'http://www.oecd.org'}, url:'http://www.oecd.org/newsroom/index.xml'}
 			],
 			'Blog' : [
-				{provider:{name:'OECD Insights', description:'The OECD Insights series explains the important issues facing society in a way that is clear and comprehensible. The Insights blog gives you a voice in shaping those explanations.', url:'http://oecdinsights.org/'}, url:'http://oecdinsights.org/feed/'}
+				{provider:{name:'OECD Insights', description:'The OECD Insights series explains the important issues facing society in a way that is clear and comprehensible.', url:'http://oecdinsights.org/'}, url:'http://oecdinsights.org/feed/'}
 			]
 		},
 		'Agriculture' : {
@@ -204,7 +204,7 @@ app.get('/api/:themes/:days', function(req, res){
 			    'http://www.oecd-ilibrary.org/rss/content/subject/43/latest?fmt=rss'
 			],
 			'Blog' : [
-				{provider:{name:'Better Life Index', description:'Your Better Life Index is designed to let you visualise and compare some of the key factors – like education, housing, environment, and so on – that contribute to well-being in OECD countries. It’s an interactive tool that allows you to see how countries perform according to the importance you give to each of 11 topics that make for a better life.', url:'http://www.oecdbetterlifeindex.org/'}, url:'http://www.oecdbetterlifeindex.org/feed/'}
+				{provider:{name:'Better Life Index', description:'Your Better Life Index is designed to let you visualise and compare some of the key factors – like education, housing, environment, and so on', url:'http://www.oecdbetterlifeindex.org/'}, url:'http://www.oecdbetterlifeindex.org/feed/'}
 			]
 		},
 		'Taxation' : {

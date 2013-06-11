@@ -165,7 +165,7 @@ Ext.define('OECDInfo.view.testList', {
                             '<tpl if="this.isTwitter(typeName)">',
                                 '<img src="{image}" style="float:left;width:45px;-webkit-border-radius:5px;">',
                                 '<div style="margin-left:55px;">',
-                                '<div><span style="color:#989898;margin-bottom:8px;">{typeName}</span></div>',
+                                '<div><span style="color:#989898;margin-bottom:8px;">{typeName} : @{userInfo.name}</span></div>',
                                 '<div style="padding-top:7px;">{title}</div>',
                                 '<div style="clear:both;margin-bottom:2px;"></div>',
                             '</div>',
