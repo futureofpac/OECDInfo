@@ -362,6 +362,7 @@ app.get('/api/:themes/:days', function(req, res){
 								publication.provider = {
 									logo:'http://insightsblog.oecdcode.org/wp-content/uploads/2012/06/ilibrary_nameonly_small.jpeg',
 									name:'OECD iLibrary',
+									url:'http://www.oecd-ilibrary.org/',
 									description:'OECD iLibrary'
 								}
 

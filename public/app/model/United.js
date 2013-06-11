@@ -18,8 +18,8 @@ Ext.define('OECDInfo.model.United', {
 			{name:'provider'},
 			// {name:'favorite', type:'boolean', defaultValue: false},
 			{name:'pubDate', type:'date', dateFormat:'c'}
-			// ,
-			// {name:'createDate', type:'date', dateFormat:'c'}
+			,
+			{name:'createDate', type:'date', dateFormat:'c'}
 		]
 	}
 })			

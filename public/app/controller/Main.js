@@ -492,7 +492,7 @@ Ext.define("OECDInfo.controller.Main", {
                 header =
                 '<div style="background-size:100%;height:100px;padding-top:10px;background-color:#444;">' +
                     '<div style="position:relative;padding:0px;margin-top:10px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
-                        '<h3><strong style="font-size:larger;margin-bottom:12px;">' + (data.provider.logo ? '<img src="'+ data.provider.logo +'" width="40"> ':'') + data.provider.name +'</strong></h3>' +
+                        '<h3><strong style="font-size:larger;margin-bottom:12px;">' + (data.provider.logo ? '<img src="'+ data.provider.logo +'" height="40"> ':'') + data.provider.name +'</strong></h3>' +
                         '<h4 style="padding:5px;"><a href="'+ data.provider.url +'" target="_new" style="color:white">'+ data.provider.url +'</a></h4>' +
                     '</div>' +
                 '</div>';
