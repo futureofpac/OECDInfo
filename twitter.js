@@ -435,12 +435,12 @@ app.get('/api/:themes/:days', function(req, res){
 
 	        	// console.log('result.length: ');
 	        	// console.log(result.length);
-	   //      	result = _.sortBy(result, function(item){
-	   //      		return item.pubDate;
-	   //      	});
+	        	result = _.sortBy(result, function(item){
+	        		return item.pubDate;
+	        	});
 
-				// res.jsonp(result.reverse());
-				res.jsonp(result);
+				res.jsonp(result.reverse());
+				// res.jsonp(result);
 	        }
 	    }  
 	);

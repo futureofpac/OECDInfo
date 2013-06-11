@@ -126,6 +126,8 @@ Ext.define("OECDInfo.controller.Main", {
                     this.showShare();
                 },
                 providertap:function(direction){
+                    var detail =  this.self.detail;
+
                     this.controlProvider(direction);
                 }
             },
@@ -352,11 +354,17 @@ Ext.define("OECDInfo.controller.Main", {
         var detail = this.self.detail,
             carousel = detail.query('carousel')[0];
 
-        if(direction == 'up'){
+        if(carousel.getHidden()){
             carousel.setHidden(false);
         }else{
             carousel.setHidden(true);
         }
+
+        // if(direction == 'up'){
+
+        // }else{
+        //     carousel.setHidden(true);
+        // }
 
     },
     getDetailContent:function(data, fromTablet){
