@@ -359,7 +359,7 @@ app.get('/api/:themes/:days', function(req, res){
 								news.link = article.link;
 
 								feeds['news'].push(news);
-							else if(feeds_theme.type == 'Blog'){
+							}else if(feeds_theme.type == 'Blog'){
 								var news = {};
 								news.typeName = feeds_theme.type;
 								news.theme = feeds_theme.theme;
