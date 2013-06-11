@@ -54,6 +54,8 @@ app.get('/api/:themes/:days', function(req, res){
 
 	feeds['tweets'] = [];
 	feeds['news'] = [];
+	feeds['article'] = [];
+	feeds['publication'] = [];
 	feeds['youtube'] = [];
 	feeds['flickr'] = [];
 	feeds['error'] = [];
@@ -63,11 +65,20 @@ app.get('/api/:themes/:days', function(req, res){
 		var result = [];
 		_.each(themes, function (theme, index) {
 			if(themeUrls[theme][type]){
-				_.each(themeUrls[theme][type], function (url) {
-					var item = {
-						'type':type,
-						'theme':theme,
-						'url':url
+				_.each(themeUrls[theme][type], function (item) {
+					if(item.provider){
+						var item = {
+							'type':type,
+							'theme':theme,
+							'url':item.url,
+							'provider':item.provider
+						}
+					}else{
+						var item = {
+							'type':type,
+							'theme':theme,
+							'url':url
+						}
 					}
 					result.push(item);
 				})
@@ -90,11 +101,11 @@ app.get('/api/:themes/:days', function(req, res){
 				'OECD_Pubs'
 			],
 			'News' : [
-			    'http://feeds.feedburner.com/OecdObserver',
-			    'http://www.oecd.org/newsroom/index.xml'
+			    {provider:{name:'Observer', description:'', url:''}, url:'http://feeds.feedburner.com/OecdObserver'},
+			    {provider:{name:'Newsroom', description:'', url:''}, url:'http://www.oecd.org/newsroom/index.xml'}
 			],
 			'Blog' : [
-				'http://oecdinsights.org/feed/'
+				{provider:{name:'OECD Insights', description:'', url:''}, url:'http://oecdinsights.org/feed/'}
 			]
 		},
 		'Agriculture' : {
@@ -116,7 +127,7 @@ app.get('/api/:themes/:days', function(req, res){
 			    'http://www.oecd-ilibrary.org/rss/content/subject/40/latest?fmt=rss'
 			],
 			'Blog' : [
-				'http://feeds.feedburner.com/blogspot/theprogressblog'
+				{provider:{name:'The progress blog', description:'', url:''}, url:'http://feeds.feedburner.com/blogspot/theprogressblog'}
 			]
 		},
 		'Economics' : {
@@ -135,7 +146,7 @@ app.get('/api/:themes/:days', function(req, res){
 			    'http://www.oecd-ilibrary.org/rss/content/subject/31/latest?fmt=rss'
 			],
 			'Blog' : [
-				'http://oecdeducationtoday.blogspot.com/feeds/posts/default'
+				{provider:{name:'OECD Education Today', description:'', url:''}, url:'http://oecdeducationtoday.blogspot.com/feeds/posts/default'}
 			]
 		},
 		'Employment' : {
@@ -201,7 +212,7 @@ app.get('/api/:themes/:days', function(req, res){
 			    'http://www.oecd-ilibrary.org/rss/content/subject/43/latest?fmt=rss'
 			],
 			'Blog' : [
-				'http://www.oecdbetterlifeindex.org/feed/'
+				{provider:{name:'Better Life Index', description:'', url:''}, url:'http://www.oecdbetterlifeindex.org/feed/'}
 			]
 		},
 		'Taxation' : {
@@ -349,38 +360,47 @@ app.get('/api/:themes/:days', function(req, res){
 							var articleDate = new Date(article.pubDate);
 
 							if(feeds_theme.type == 'Publication'){
-								var news = {};
-								news.typeName = feeds_theme.type;
-								news.theme = feeds_theme.theme;
-								news.title = article.title;
-								news.content = article.description;
-								// news.content2 = article.description;
-								news.pubDate = articleDate;
-								news.link = article.link;
+								var publication = {};
+								publication.typeName = feeds_theme.type;
+								publication.theme = feeds_theme.theme;
+								publication.title = article.title;
+								publication.content = article.description;
+								publication.pubDate = articleDate;
+								publication.link = article.link;
+								publication.provider = (feeds_theme.provider ? feeds_theme.provider : '')
 
-								feeds['news'].push(news);
+								feeds['publication'].push(publication);
 							}else if(feeds_theme.type == 'Blog'){
-								var news = {};
-								news.typeName = feeds_theme.type;
-								news.theme = feeds_theme.theme;
-								news.title = article.title;
-								news.content = article.summary;
-								// news.content2 = article.description;
-								news.pubDate = articleDate;
-								news.link = article.link;
+								var article = {};
+								article.typeName = feeds_theme.type;
+								article.theme = feeds_theme.theme;
+								article.title = article.title;
+								article.content = article.summary;
+								// article.content2 = article.description;
+								article.pubDate = articleDate;
+								article.link = article.link;
+								article.provider = (feeds_theme.provider ? feeds_theme.provider : '')
 
-								feeds['news'].push(news);
+								feeds['article'].push(article);
 
-							}else{
+							}else if(feeds_theme.type == 'News'){
 								if(datenotchecked){
 									if(startDate < articleDate && endDate > articleDate){
 										var news = {};
+										var providerName = feeds_theme.provider.name;
+
 										news.typeName = feeds_theme.type;
 										news.theme = feeds_theme.theme;
 										news.title = article.title;
-										news.content = article.summary;
+
+										if(providerName == 'Observer' || providerName == 'Newsroom'){
+											news.content = article.description;
+										}else{
+											news.content = article.summary;
+										}
 										news.pubDate = articleDate;
 										news.link = article.link;
+										news.provider = (feeds_theme.provider ? feeds_theme.provider : '')
 
 										feeds['news'].push(news);
 									}
@@ -407,15 +427,22 @@ app.get('/api/:themes/:days', function(req, res){
 				res.send(err);
 	        }else{
 	        	var result = [];
-	        	result = feeds['news'].concat(feeds['tweets']).concat(feeds['youtube']).concat(feeds['flickr']);
+	        	result = feeds['news'].concat(
+	        				feeds['article']).concat(
+		        				feeds['publication']).concat(
+			        				feeds['tweets']).concat(
+			        					feeds['youtube']).concat(
+			        						feeds['flickr']
+			        						);
 
-	        	console.log('result.length: ');
-	        	console.log(result.length);
-	        	result = _.sortBy(result, function(item){
-	        		return item.pubDate;
-	        	});
+	        	// console.log('result.length: ');
+	        	// console.log(result.length);
+	   //      	result = _.sortBy(result, function(item){
+	   //      		return item.pubDate;
+	   //      	});
 
-				res.jsonp(result.reverse());
+				// res.jsonp(result.reverse());
+				res.jsonp(result);
 	        }
 	    }  
 	);
