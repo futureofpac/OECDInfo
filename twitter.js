@@ -77,7 +77,7 @@ app.get('/api/:themes/:days', function(req, res){
 						var item = {
 							'type':type,
 							'theme':theme,
-							'url':url
+							'url':item.url
 						}
 					}
 					result.push(item);
