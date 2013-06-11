@@ -285,7 +285,8 @@ Ext.define("OECDInfo.controller.Main", {
     },
     displayList:function (page) {
         Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
-        var me = this;
+        var me = this,
+            pageSize = this.self.pageSize;
 
         var filterFn = function (element, index, array) {
             var type = me.self.currentType;
@@ -293,29 +294,39 @@ Ext.define("OECDInfo.controller.Main", {
             console.log(element.typeName);
             return (element.typeName == type);
         }
+        console.log(this.self.currentType);
+        console.log(page);
+        console.log(pageSize);
 
         var data = (
             (
                 this.self.currentType == '' || this.self.currentType == 'All'
             ) ? 
-            this.self.models.slice(0,page * this.self.pageSize) : 
-            this.self.models.filter(filterFn).slice(0,page * this.self.pageSize)
+            this.self.models.slice(((page - 1) * pageSize),page * pageSize) : 
+            this.self.models.filter(filterFn).slice((page - 1 * pageSize),page * pageSize)
         );
 
         var store = Ext.getStore('testStore'),
             list = this.getList();
 
+            console.log(data);
+
             if(page == 1){
                 list.getScrollable().getScroller().scrollTo(0,0, false);
+                store.setData(data);
+                store.load();
+            }else{
+                store.add(data);
             }
+
 
         // console.log('data:');
         // console.log(data);
 
-        store.setData(data);
-        // list.setGrouped(true);
-        // list.setStore(store);
-        store.load();
+        // store.setData(data);
+        // // list.setGrouped(true);
+        // // list.setStore(store);
+        // store.load();
         Ext.Viewport.setMasked(false);
     },
     getDetailContent:function(data, fromTablet){
