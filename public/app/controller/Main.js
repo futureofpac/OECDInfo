@@ -197,10 +197,12 @@ Ext.define("OECDInfo.controller.Main", {
             carousel2 = carousel.getItems().items[2];
             // panelProvider = panel[1];
 
-        topmenu.setTitle(type)
+        topmenu.setTitle(type);
+        carousel.setActiveItem(0);
 
         if(userInfo == null){
 
+            carousel.setHidden(true);
             if(type == 'Flickr'){
                 html = content.createFlickrBody();
                 panelTitle.setHidden(true);
@@ -213,7 +215,6 @@ Ext.define("OECDInfo.controller.Main", {
                 panelTitle.setHidden(false);
                 panelTitle.setHtml(html[0]);
  
-                carousel.setHidden(true);
                 if(data.provider){
                     var provider = content.createProvider();
                     carousel1.setHtml(provider[0]);
@@ -239,7 +240,6 @@ Ext.define("OECDInfo.controller.Main", {
                 // }
             }
             carousel.setHidden(false);
-            carousel.setActiveItem(0);
 
             panelTitle.setHidden(false);
             panelTitle.setHtml(html[2]);

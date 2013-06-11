@@ -205,7 +205,7 @@ app.get('/api/:themes/:days', function(req, res){
 			    'http://www.oecd-ilibrary.org/rss/content/subject/43/latest?fmt=rss'
 			],
 			'Blog' : [
-				{provider:{name:'Better Life Index', description:'Your Better Life Index is designed to let you visualise and compare some of the key factors – like education, housing, environment, and so on', logo:'http://www.epha.org/local/cache-vignettes/L200xH104/arton5169-fd6c0.png', url:'http://www.oecdbetterlifeindex.org/'}, url:'http://www.oecdbetterlifeindex.org/feed/'}
+				{provider:{name:'Better Life Index', description:'Your Better Life Index is designed to let you visualise and compare some of the key factors – like education, housing, environment, and so on – that contribute to well-being in OECD countries. It’s an interactive tool that allows you to see how countries perform according to the importance you give to each of 11 topics that make for a better life.', logo:'http://www.epha.org/local/cache-vignettes/L200xH104/arton5169-fd6c0.png', url:'http://www.oecdbetterlifeindex.org/'}, url:'http://www.oecdbetterlifeindex.org/feed/'}
 			]
 		},
 		'Taxation' : {
@@ -370,7 +370,7 @@ app.get('/api/:themes/:days', function(req, res){
 								feeds['publication'].push(publication);
 							}else if(feeds_theme.type == 'Blog'){
 								var blog = {};
-								blog.typeName = feeds_theme.type;
+								blog.typeName = 'Articles';
 								blog.theme = feeds_theme.theme;
 								blog.title = article.title;
 								blog.content = article.summary;
