@@ -43,7 +43,16 @@ Ext.define('OECDInfo.view.MainList', {
                 items:[
                     {
                         xtype:'button',
-                        iconCls:'more'
+                        iconCls:'more',
+                        action:'menu'
+                    },
+                    {
+                        xtype:'spacer'
+                    },
+                    {
+                        xtype:'button',
+                        iconCls:'refresh',
+                        action:'refresh'
                     }
                 ]
                 // defaults:{
