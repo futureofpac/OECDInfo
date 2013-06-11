@@ -353,7 +353,8 @@ app.get('/api/:themes/:days', function(req, res){
 								news.typeName = feeds_theme.type;
 								news.theme = feeds_theme.theme;
 								news.title = article.title;
-								news.content = article.content;
+								news.content = article.summary;
+								news.content2 = article.description;
 								news.pubDate = articleDate;
 								news.link = article.link;
 
