@@ -97,7 +97,8 @@ app.get('/api/:themes/:days', function(req, res){
 			    {provider:{name:'Newsroom', logo:'http://profile.ak.fbcdn.net/hprofile-ak-prn1/50250_160758993981155_1215480564_q.jpg', description:'OECD Newsroom', url:'http://www.oecd.org'}, url:'http://www.oecd.org/newsroom/index.xml'}
 			],
 			'Blog' : [
-				{provider:{name:'OECD Insights', description:'The OECD Insights series explains the important issues facing society in a way that is clear and comprehensible.', url:'http://oecdinsights.org/'}, url:'http://oecdinsights.org/feed/'}
+				// {provider:{name:'OECD Insights', description:'The OECD Insights series explains the important issues facing society in a way that is clear and comprehensible.', url:'http://oecdinsights.org/'}, url:'http://oecdinsights.org/feed/'}
+				{url:'http://oecdinsights.org/feed/'}
 			]
 		},
 		'Agriculture' : {

@@ -216,7 +216,7 @@ Ext.define("OECDInfo.controller.Main", {
                     var provider = content.createProvider();
                     carousel1.setHtml(provider[0]);
                     carousel2.setHtml(provider[1]);
-                    carousel.setHeight(100);
+                    carousel.setHeight(140);
                 //     // panelContent.setHtml('<div style="text-align:right;padding:10px 30px 0px 0px;">By <a href=# class=providername>' + data.provider.name + '</a></div><div id=providerinfo></div>' + html[1]);
                 // }else{
                 //     carousel.setHidden(true);
@@ -490,15 +490,16 @@ Ext.define("OECDInfo.controller.Main", {
             var header = '', header2 = '';
 
                 header =
-                '<div style="background-size:100%;height:100px;padding-top:10px;background-color:#444;">' +
+                '<div style="background-size:100%;height:140px;padding-top:10px;background-color:#444;">' +
                     '<div style="position:relative;padding:0px;margin-top:10px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
-                        '<h3><strong style="font-size:larger;margin-bottom:12px;">' + (data.provider.logo ? '<img src="'+ data.provider.logo +'" height="40"> ':'') + data.provider.name +'</strong></h3>' +
+                    + (data.provider.logo ? '<img src="'+ data.provider.logo +'" height="40"> ':'') 
+                        '<h3><strong style="font-size:larger;margin-bottom:12px;">' + data.provider.name +'</strong></h3>' +
                         '<h4 style="padding:5px;"><a href="'+ data.provider.url +'" target="_new" style="color:white">'+ data.provider.url +'</a></h4>' +
                     '</div>' +
                 '</div>';
 
                 header2 =
-                '<div style="background-size:100%;height:100px;padding:7px;background-color:#444;">' +
+                '<div style="background-size:100%;height:140px;padding:7px;background-color:#444;">' +
                     '<div style="position:relative;margin-top:10px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
                         '<h4 style="font-size:smaller">'+ data.provider.description +'</h4>' +
                     '</div>' +
