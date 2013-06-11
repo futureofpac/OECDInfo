@@ -309,8 +309,8 @@ Ext.define("OECDInfo.controller.Main", {
 
         var filterFn = function (element, index, array) {
             var type = me.self.currentType;
-            console.log(type);
-            console.log(element.typeName);
+            // console.log(type);
+            // console.log(element.typeName);
             return (element.typeName == type);
         }
         console.log(this.self.currentType);
@@ -322,7 +322,7 @@ Ext.define("OECDInfo.controller.Main", {
                 this.self.currentType == '' || this.self.currentType == 'All'
             ) ? 
             this.self.models.slice(((page - 1) * pageSize),page * pageSize) : 
-            this.self.models.filter(filterFn).slice((page - 1 * pageSize),page * pageSize)
+            this.self.models.filter(filterFn).slice(((page - 1) * pageSize),page * pageSize)
         );
 
         var store = Ext.getStore('testStore'),
@@ -492,7 +492,7 @@ Ext.define("OECDInfo.controller.Main", {
                 header =
                 '<div style="background-size:100%;height:140px;padding-top:10px;background-color:#444;">' +
                     '<div style="position:relative;padding:0px;margin-top:10px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
-                    + (data.provider.logo ? '<img src="'+ data.provider.logo +'" height="40"> ':'') 
+                        (data.provider.logo ? '<img src="'+ data.provider.logo +'" height="40"> ':'') +
                         '<h3><strong style="font-size:larger;margin-bottom:12px;">' + data.provider.name +'</strong></h3>' +
                         '<h4 style="padding:5px;"><a href="'+ data.provider.url +'" target="_new" style="color:white">'+ data.provider.url +'</a></h4>' +
                     '</div>' +
