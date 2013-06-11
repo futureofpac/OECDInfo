@@ -185,7 +185,10 @@ Ext.define("OECDInfo.controller.Main", {
             panel = detail.query('panel'),
             type = data.typeName,
             userInfo = data.userInfo,
-            html = '';
+            html = '',
+            panelTitle = panel[1],
+            panelContent = panel[2],
+            panelProvider = panel[0];
 
         topmenu.setTitle(type)
 
@@ -194,16 +197,21 @@ Ext.define("OECDInfo.controller.Main", {
 
             if(type == 'Flickr'){
                 html = content.createFlickrBody();
-                panel[0].setHidden(true);
-                panel[1].setHidden(false);
-                panel[1].setHtml(html);
+                panelTitle.setHidden(true);
+                panelContent.setHidden(false);
+                panelContent.setHtml(html);
 
             }else{            
                 html = content.createBody();
 
-                panel[0].setHidden(false);
-                panel[0].setHtml(html[0]);
-                panel[1].setHtml(html[1]);
+                panelTitle.setHidden(false);
+                panelTitle.setHtml(html[0]);
+                panelContent.setHtml(html[1]);
+
+                if(data.provider){
+                    panelProvider.setHidden(false)
+                    panelProvider.setHtml(content.createProvider());
+                }
             }
         }else{
             html = content.createTwitterBody();
@@ -221,9 +229,10 @@ Ext.define("OECDInfo.controller.Main", {
             carousel.setHidden(false);
             carousel.setActiveItem(0);
 
-            panel[0].setHidden(false);
-            panel[0].setHtml(html[2]);
-            panel[1].setHtml(html[3]);
+            panelTitle.setHidden(false);
+            panelTitle.setHtml(html[2]);
+            panelContent.setHtml(html[3]);
+            panelProvider.setHidden(true)
 
         }
 
@@ -455,12 +464,16 @@ Ext.define("OECDInfo.controller.Main", {
                      '<div style="background-color:#fff;padding:10px;color:#000;"><strong>'+ data.title + '</strong></br></br><span style="font-size:smaller;">' + data.content +'</span></div>';
             // return [header, body];
             return header;
+        },
+        createProvider = function(){
+            return data.provider.name + ' ' + data.provider.url + ' ' + data.provider.description
         }
 
         return {
             createBody:         createBody,
             createTwitterBody:  createTwitterBody,
-            createFlickrBody:   createFlickrBody
+            createFlickrBody:   createFlickrBody,
+            createProvider: createProvider
         }
     },   
     showShare:function(){

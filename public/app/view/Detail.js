@@ -50,6 +50,13 @@ Ext.define('OECDInfo.view.Detail', {
         layout:'vbox',
         items:[  
             {
+                xtype:'panel',
+                scrollable:{
+                    direction:'horizontal'
+                },
+                height:30
+            },
+            {
                 xtype:'carousel',
                 direction:'vertical',
                 height:140,
