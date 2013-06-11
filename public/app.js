@@ -16,18 +16,19 @@ Ext.application({
     ],
 
     views: [
-        'Main',
+        // 'Main',
+        'Menu',
         'Detail',
-        'testList',
+        'MainList',
         'Share'
     ],
 
     models: [
-        'United'
+        'Feed'
     ],
 
     stores: [
-        'testStore'
+        'MainStore'
     ],
 
     controllers: [
@@ -51,13 +52,86 @@ Ext.application({
         '1536x2008': 'resources/startup/1536x2008.png',
         '1496x2048': 'resources/startup/1496x2048.png'
     },
-
+    themes:[
+        {
+            name:'OECD Generic',
+            key:'Generic'
+        },
+        {
+            name:'Agriculture and Food',
+            key:'Agriculture'
+        },
+        {
+            name:'Development',
+            key:'Development'
+        },
+        {
+            name:'Economics',
+            key:'Economics'
+        },
+        {
+            name:'Education',
+            key:'Education'
+        },
+        {
+            name:'Employment',
+            key:'Employment'
+        },
+        {
+            name:'Energy',
+            key:'Energy'
+        },
+        {
+            name:'Environment',
+            key:'Environment'
+        },
+        {
+            name:'Finance and Investment',
+            key:'Finance'
+        },
+        {
+            name:'Governance',
+            key:'Governance'
+        },
+        {
+            name:'Industry and Services',
+            key:'Industry'
+        },
+        {
+            name:'Nuclear Energy',
+            key:'Nuclear'
+        },
+        {
+            name:'Science and Technology',
+            key:'Science'
+        },
+        {
+            name:'Social Issues/Migration/Health',
+            key:'Social'
+        },
+        {
+            name:'Taxation',
+            key:'Taxation'
+        },
+        {
+            name:'Trade',
+            key:'Trade'
+        },
+        {
+            name:'Transport',
+            key:'Transport'
+        },
+        {
+            name:'Urban, Rural and Regional Development',
+            key:'Urban'
+        }
+    ],
     launch: function() {
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('OECDInfo.view.Main'));
+        Ext.Viewport.add(Ext.create('OECDInfo.view.MainList'));
     },
 
     onUpdated: function() {

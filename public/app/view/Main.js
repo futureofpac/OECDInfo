@@ -57,7 +57,7 @@ Ext.define("OECDInfo.view.Main", {
 
             container: {
                 items: [{
-                    xclass: 'OECDInfo.view.testList'
+                    xclass: 'OECDInfo.view.MainList'
                 }
 
                 
@@ -345,7 +345,7 @@ Ext.define("OECDInfo.view.Main", {
                                     container   = slideview.getContainer();
 
                                 // var store = Ext.getStore('testStore');
-                                indexs = ['All', 'News', 'Blog', 'Publication', 'Twitter', 'Flickr', 'Youtube'];
+                                indexs = ['All', 'News', 'Articles', 'Publications', 'Twitter', 'Photos', 'Videos'];
                                 // if(index == 0){
                                 //     store.clearFilter(false);
                                 // // }else if(index == 2 || index == 3){

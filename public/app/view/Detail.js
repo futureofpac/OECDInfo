@@ -2,6 +2,7 @@ Ext.define('OECDInfo.view.Detail', {
     extend:'Ext.Panel',
     alias:'widget.detail',
     requires:[
+        'Ext.form.Panel',
         'Ext.carousel.Carousel',
         'Ext.ActionSheet'
     ],

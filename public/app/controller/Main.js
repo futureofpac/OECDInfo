@@ -10,80 +10,78 @@ Ext.define("OECDInfo.controller.Main", {
     
     config: {
         refs: {
-            list: 'testList',
-            main:                   'main',
-            menu: '#menu',
+            list: 'mainlist',
+            // main: 'main',
+            menu: 'menu',
+            menulist: '#menu',
             theme: '#theme checkboxfield',
-            menuBtn: 'testList toolbar button',
-            moviePosterListContainer:   'slidenavigationview container[title="Item 8"]',
+            menuBtn: 'mainlist toolbar button',
+            // moviePosterListContainer:   'slidenavigationview container[title="Item 8"]',
             detail:'#detail'
         },
 
         control: {
-            /**
-             *  Here are examples of the various events you can listen for.
-             */
-            main: {
-                open: function(nav, position, duration) {
-                    console.log('Container open (position='+position+',duration='+duration+')');
-                },
+            // main: {
+            //     open: function(nav, position, duration) {
+            //         console.log('Container open (position='+position+',duration='+duration+')');
+            //     },
 
-                close: function(nav, position, duration) {
-                    console.log('Container close (position='+position+',duration='+duration+')');
-                },
+            //     close: function(nav, position, duration) {
+            //         console.log('Container close (position='+position+',duration='+duration+')');
+            //     },
 
-                select: function(nav, item, index) {
-                    console.log('Selected item (index='+index+')');
-                },
+            //     select: function(nav, item, index) {
+            //         console.log('Selected item (index='+index+')');
+            //     },
 
-                opened: function(nav, aa, bb) {
-                    console.log('Container opened');
-                    console.log(nav);
-                    console.log(aa);
-                    console.log(bb);
-                },
+            //     opened: function(nav, aa, bb) {
+            //         console.log('Container opened');
+            //         console.log(nav);
+            //         console.log(aa);
+            //         console.log(bb);
+            //     },
 
-                closed: function(nav) {
-                    console.log('Container closed');
-                },
+            //     closed: function(nav) {
+            //         console.log('Container closed');
+            //     },
 
-                slideend: function(nav, aa, bb) {
-                    console.log('Container slideend');
-                    console.log(nav);
-                    console.log(aa);
-                    console.log(bb);
-                },
+            //     slideend: function(nav, aa, bb) {
+            //         console.log('Container slideend');
+            //         console.log(nav);
+            //         console.log(aa);
+            //         console.log(bb);
+            //     },
 
-                slidestart: function(nav, aa, bb) {
-                    console.log('Container slidestart');
-                    console.log(nav);
-                    console.log(aa);
-                    console.log(bb);
-                },
+            //     slidestart: function(nav, aa, bb) {
+            //         console.log('Container slidestart');
+            //         console.log(nav);
+            //         console.log(aa);
+            //         console.log(bb);
+            //     },
 
-                dragstart: function(nav) {
-                    console.log('Container dragstart');
+            //     dragstart: function(nav) {
+            //         console.log('Container dragstart');
 
-                },
+            //     },
 
-                dragend: function(nav, aa, bb) {
-                    console.log('Container dragend');
-                    console.log(nav);
-                    console.log(aa);
-                    console.log(bb);
-                }
-            },
+            //     dragend: function(nav, aa, bb) {
+            //         console.log('Container dragend');
+            //         console.log(nav);
+            //         console.log(aa);
+            //         console.log(bb);
+            //     }
+            // },
 
-            /**
-             *  The 'activate' event fires on the container, not the child
-             *  element.
-             *
-             */
-            moviePosterListContainer: {
-                activate: function(container) {
-                    console.log('Activate moviePosterListContainer');
-                }
-            },
+            // /**
+            //  *  The 'activate' event fires on the container, not the child
+            //  *  element.
+            //  *
+            //  */
+            // moviePosterListContainer: {
+            //     activate: function(container) {
+            //         console.log('Activate moviePosterListContainer');
+            //     }
+            // },
             list:{
                 itemsingletap:function (me, index, target, record, e, eOpts) {
                     console.log(me);
@@ -133,15 +131,22 @@ Ext.define("OECDInfo.controller.Main", {
             },
             menuBtn: {
                 tap:function (me, e, eOpts) {
-                    var main = this.getMain();
-                    // Ext.defer(main.openContainer, 200, main);
-                    main.moveContainer(null, 200, 200)
+                    // var main = this.getMain();
+                    // main.moveContainer(null, 200, 200)
+                    console.log(this.getMenu());
+                    if(this.getMenu().getHidden()){
+                        this.openMenu();
+                    }else{
+                        this.closeMenu();
+                    }
                 }
             },
-            menu: {
+            menulist: {
                 typetap:function (type) {
+
                     this.self.currentType = type;
                     this.displayList(1);
+                    this.closeMenu();
                 }
             },
             theme:{
@@ -161,6 +166,7 @@ Ext.define("OECDInfo.controller.Main", {
         pageSize:40,
         models:[],
         detail:null,
+        menu:null,
         actionsheet:null
     },     
     init:function(){
@@ -174,8 +180,15 @@ Ext.define("OECDInfo.controller.Main", {
     },
     initMenu:function(){
         var me = this;
+        this.self.menu = Ext.Viewport.add({xtype:'menu'});
         this.self.detail = Ext.Viewport.add({xtype:'detail'});
         this.self.actionsheet = Ext.Viewport.add({xtype:'share'});
+    },
+    openMenu:function(){
+        this.self.menu.show();
+    },
+    closeMenu:function(){
+        this.self.menu.hide();
     },
     openDetail:function(data){
         // console.log('detail');
@@ -327,7 +340,7 @@ Ext.define("OECDInfo.controller.Main", {
             this.self.models.filter(filterFn).slice(((page - 1) * pageSize),page * pageSize)
         );
 
-        var store = Ext.getStore('testStore'),
+        var store = Ext.getStore('MainStore'),
             list = this.getList();
 
             console.log(data);
@@ -367,7 +380,19 @@ Ext.define("OECDInfo.controller.Main", {
         // }
 
     },
+    getThemeByKey:function(key){
+        var themes = OECDInfo.app.themes,
+        result = '';
+        for(var i=0;i<themes.length;i++){
+            if(themes[i].key == key){
+                result = themes[i].name;
+                break;
+            }
+        }
+        return result;
+    },
     getDetailContent:function(data, fromTablet){
+        var me = this;
         var replaceLinks = function(html, replace){
             if(html == null) {
                 return '';
@@ -403,6 +428,7 @@ Ext.define("OECDInfo.controller.Main", {
                 header = '',
                 body = '';
 
+
             if(image != null && image != ""){
                 header =
                 '<div class=\"header '+ type +'\">' +
@@ -416,7 +442,7 @@ Ext.define("OECDInfo.controller.Main", {
                 header =
                 '<div class=header '+ type +'>' + 
                     '<h3><strong>'+ replaceLinks(data.title) +'</strong></h3>' +
-                    '<h4>'+ data.theme + ' | ' + getDateStr(data.pubDate) +'</h4>' +
+                    '<h4>'+ me.getThemeByKey(data.theme) + ' | ' + getDateStr(data.pubDate) +'</h4>' +
                 '</div>';
             }
 

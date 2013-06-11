@@ -246,7 +246,7 @@ app.get('/api/:themes/:days', function(req, res){
 			 	youtube.feeds.playlist(key,{'max-results':20},function(err, videos){
 			 		_.each(videos.items, function(item, index){
 				 		var video = {};
-			 			video.typeName = 'Youtube';
+			 			video.typeName = 'Videos';
 			 			video.theme = 'generic';
 			 			video.title = item.video.title;
 			 			video.image = "http://i.ytimg.com/vi/" + item.video.id + "/default.jpg";
@@ -265,7 +265,7 @@ app.get('/api/:themes/:days', function(req, res){
 		 		_.each(data.photos.photo, function(item, index){
 
 					var flickr = {};
-					flickr.typeName = 'Flickr';
+					flickr.typeName = 'Photos';
 					flickr.theme = 'generic';
 					flickr.title = item.title;
 					flickr.image = 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret, 
@@ -354,7 +354,7 @@ app.get('/api/:themes/:days', function(req, res){
 
 							if(feeds_theme.type == 'Publication'){
 								var publication = {};
-								publication.typeName = feeds_theme.type;
+								publication.typeName = 'Publications';
 								publication.theme = feeds_theme.theme;
 								publication.title = article.title;
 								publication.content = article.description;
