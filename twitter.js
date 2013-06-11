@@ -348,12 +348,23 @@ app.get('/api/:themes/:days', function(req, res){
 						if(article.pubDate != null && article.pubDate != ''){
 							var articleDate = new Date(article.pubDate);
 
-							if(feeds_theme.type == 'Publication' || feeds_theme.type == 'Blog'){
+							if(feeds_theme.type == 'Publication'){
 								var news = {};
 								news.typeName = feeds_theme.type;
 								news.theme = feeds_theme.theme;
 								news.title = article.title;
 								news.content = article.description;
+								// news.content2 = article.description;
+								news.pubDate = articleDate;
+								news.link = article.link;
+
+								feeds['news'].push(news);
+							else if(feeds_theme.type == 'Blog'){
+								var news = {};
+								news.typeName = feeds_theme.type;
+								news.theme = feeds_theme.theme;
+								news.title = article.title;
+								news.content = article.summary;
 								// news.content2 = article.description;
 								news.pubDate = articleDate;
 								news.link = article.link;
