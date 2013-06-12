@@ -198,9 +198,6 @@ app.get('/api/:themes/:days', function(req, res){
 			]
 		},
 		'Social' : {
-			'Twitter' : [
-				'',
-			],
 			'Publication' : [
 			    'http://www.oecd-ilibrary.org/rss/content/subject/43/latest?fmt=rss'
 			],

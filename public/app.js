@@ -16,7 +16,7 @@ Ext.application({
     ],
 
     views: [
-        // 'Main',
+        'Main',
         'Menu',
         'Detail',
         'MainList',
@@ -131,7 +131,7 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('OECDInfo.view.MainList'));
+        Ext.Viewport.add(Ext.create('OECDInfo.view.Main'));
     },
 
     onUpdated: function() {

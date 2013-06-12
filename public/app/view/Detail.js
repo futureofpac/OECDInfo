@@ -19,8 +19,8 @@ Ext.define('OECDInfo.view.Detail', {
         // modal:true,
         // hideOnMaskTap:true,
         zIndex:100,
-        width:'100%',
-        // width:280,
+        // width:'100%',
+        width:340,
         height:'100%',
         right:0,
         showAnimation:{

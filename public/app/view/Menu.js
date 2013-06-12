@@ -6,11 +6,12 @@ Ext.define('OECDInfo.view.Menu', {
     },
     config:{
         width:200,
-        zIndex:9900,
+        zIndex:1001,
         hidden:true,
         modal:true,
         hideOnMaskTap:true,
         layout:'fit',
+        style:'border:solid 1px gray',
         showAnimation:{
             type:'slide',
             direction:'right',
@@ -67,7 +68,10 @@ Ext.define('OECDInfo.view.Menu', {
                         width:200,
                         defaults:{
                             xtype:'checkboxfield',
-                            labelWidth:160,
+                            labelWidth:160
+                            // ,
+                            // labelAlign:'right'
+                            ,
                             listeners: {change: function(me){
                                 console.log('Changed');
                                 var result = [];
@@ -86,8 +90,9 @@ Ext.define('OECDInfo.view.Menu', {
                             {
                                 name:'OECD Generic',
                                 label:'OECD Generic',
-                                value:'Generic',
-                                checked:true
+                                value:'Generic'
+                                // ,
+                                // checked:true
                             },
                             {
                                 name:'Agriculture and Food',
@@ -197,9 +202,6 @@ Ext.define('OECDInfo.view.Menu', {
                     }
                 ],
                 listeners: {
-                    change: function(field, newValue, oldValue) {
-                        alert('a')
-                    },
                     itemtap: function(list, index) {
                         // var slideview   = list.getParent().getParent(),
                         //     container   = slideview.getContainer();
