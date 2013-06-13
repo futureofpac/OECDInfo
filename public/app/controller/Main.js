@@ -10,9 +10,11 @@ Ext.define("OECDInfo.controller.Main", {
     
     config: {
         refs: {
+            main:'main',
             list: 'mainlist',
+            loadmore:'mainlist panel button',
             // main: 'main',
-            menu: 'menu',
+            menu: 'menu', 
             menulist: '#menu',
             menutheme: '#theme',
             menuthemefield: '#theme checkboxfield',
@@ -36,10 +38,17 @@ Ext.define("OECDInfo.controller.Main", {
                     this.openDetail(record.data);
                 },
                 loadmoretap:function () {
+                    // console.log('called!');
+                    // this.displayList(++this.self.currentPage);
+                }
+            },
+            loadmore:{
+                tap:function(){
+                    this.getLoadmore().getParent().setHidden(true);
                     console.log('called!');
                     this.displayList(++this.self.currentPage);
                 }
-            },
+            },            
             detail:{
                 hidetap:function(){
                     this.hideDetail();
@@ -64,6 +73,9 @@ Ext.define("OECDInfo.controller.Main", {
                 },
                 sharetap:function(){
                     this.showShare();
+                },
+                opentap:function(link){
+                    window.open(link, 'OECD Info')
                 },
                 providertap:function(direction){
                     var detail =  this.self.detail;
@@ -90,18 +102,17 @@ Ext.define("OECDInfo.controller.Main", {
             },
             menulist: {
                 typetap:function (type) {
+                    var title = (type == 'All' ? 'OECD Info' : type);
+                    toolbar = this.getList().query('toolbar')[0];
+                    toolbar.setTitle(title);
 
                     this.self.currentType = type;
+                    OECDInfo.app.currentType = type;
+
                     this.displayList(1);
-                    this.closeMenu();
-                }
-            },
-            menutheme:{
-                themetap:function(themes){
-                    alert('a')
-                },
-                change:function(){
-                    alert('c')
+                    if(!this.self.isTablet){
+                        this.closeMenu();
+                    }
                 }
             },
             menuthemefield:{
@@ -133,15 +144,16 @@ Ext.define("OECDInfo.controller.Main", {
         detail:null,
         menu:null,
         actionsheet:null,
-        stopCheckEvent:false
-    },     
+        stopCheckEvent:false,
+        isTablet:false
+    },  
     init:function(){
         this.callParent(arguments);
     },
     launch:function(){
         this.callParent(arguments);
         // this.initMenu();
-        this.initMenu();
+        this.initOptions();
         var themes = this.getTheme();
         this.callService(themes);
         this.self.stopCheckEvent = true;
@@ -184,10 +196,25 @@ Ext.define("OECDInfo.controller.Main", {
 
         this.getMenutheme().setValues(themesArray);
     },
-    initMenu:function(){
+    initOptions:function(){
         var me = this;
-        // this.self.menu = Ext.Viewport.add({xtype:'menu'});
-        this.self.detail = Ext.Viewport.add({xtype:'detail'});
+        console.log(this.self.isTablet);
+        this.self.isTablet = OECDInfo.app.isTablet;
+        if(this.self.isTablet){
+            this.self.detail = Ext.Viewport.add(
+                {
+                    xtype:'detail',
+                    fromTablet:true,
+                    modal:true,
+                    hideOnMaskTap:true,
+                    width:350,
+                    right:0
+                }
+            );
+        }else{
+            this.self.menu = Ext.Viewport.add({xtype:'menu'});
+            this.self.detail = Ext.Viewport.add({xtype:'detail'});
+        }
         this.self.actionsheet = Ext.Viewport.add({xtype:'share'});
     },
     getTheme:function(){
@@ -200,17 +227,27 @@ Ext.define("OECDInfo.controller.Main", {
         window.localStorage.setItem('themes', JSON.stringify(themes));
     },
     openMenu:function(){
-        this.self.menu.show();
+        if(this.self.isTablet){
+            this.getMain().query('menu')[0].setHidden(false);
+        }else{
+            this.self.menu.show();
+        }
     },
     closeMenu:function(){
-        this.self.menu.hide();
+        if(this.self.isTablet){
+            this.getMain().query('menu')[0].setHidden(true);
+        }else{
+            this.self.menu.hide();
+        }
     },
     openDetail:function(data){
         // console.log('detail');
         // this.self.detail.animateActiveItem(1, {type:'slide', direction:'left'})
         // console.log(this.self.detail);
         // console.log(record);
-        var content = this.getDetailContent(data, false),
+
+        var fromTablet = this.self.isTablet,
+            content = this.getDetailContent(data, fromTablet)
             detail = this.self.detail,
             currentData = detail.getData(),
             topmenu = detail.query('toolbar')[0],
@@ -224,6 +261,7 @@ Ext.define("OECDInfo.controller.Main", {
             carousel1 = carousel.getItems().items[1],
             carousel2 = carousel.getItems().items[2];
             // panelProvider = panel[1];
+            detail.setData(data)
 
         topmenu.setTitle(type);
         carousel.setActiveItem(0);
@@ -261,11 +299,11 @@ Ext.define("OECDInfo.controller.Main", {
                 carousel1.setHtml(html[0]);
                 carousel2.setHtml(html[1]);
 
-                // if(fromTablet == true){
-                //     carousel.setHeight(180);
-                // }else{
+                if(fromTablet == true){
+                    carousel.setHeight(170);
+                }else{
                     carousel.setHeight(140);
-                // }
+                }
             }
             carousel.setHidden(false);
 
@@ -343,17 +381,32 @@ Ext.define("OECDInfo.controller.Main", {
             // console.log(element.typeName);
             return (element.typeName == type);
         }
-        console.log(this.self.currentType);
-        console.log(page);
-        console.log(pageSize);
+        // console.log(this.self.currentType);
+        // console.log(page);
+        // console.log(pageSize);
 
-        var data = (
+        // var models = (
+        //     (
+        //         this.self.currentType == '' || this.self.currentType == 'All'
+        //     ) ? 
+        //     this.self.models.slice(((page - 1) * pageSize),page * pageSize) : 
+        //     this.self.models.filter(filterFn).slice(((page - 1) * pageSize),page * pageSize)
+        // );
+        var models = (
             (
                 this.self.currentType == '' || this.self.currentType == 'All'
             ) ? 
-            this.self.models.slice(((page - 1) * pageSize),page * pageSize) : 
-            this.self.models.filter(filterFn).slice(((page - 1) * pageSize),page * pageSize)
+            this.self.models :
+            this.self.models.filter(filterFn)
         );
+
+        var data = models.slice(((page - 1) * pageSize),page * pageSize);
+
+        if(models.length > data.length){
+            this.getLoadmore().getParent().setHidden(false);
+        }else{
+            this.getLoadmore().getParent().setHidden(true);
+        }
 
         var store = Ext.getStore('MainStore'),
             list = this.getList();
@@ -362,8 +415,12 @@ Ext.define("OECDInfo.controller.Main", {
 
             if(page == 1){
                 list.getScrollable().getScroller().scrollTo(0,0, false);
-                store.setData(data);
-                store.load();
+                if(data.length == 0){
+                    store.removeAll();
+                }else{
+                    store.setData(data);
+                    store.load();
+                }
             }else{
                 store.add(data);
             }
@@ -376,6 +433,9 @@ Ext.define("OECDInfo.controller.Main", {
         // // list.setGrouped(true);
         // // list.setStore(store);
         // store.load();
+
+        this.self.currentPage++;
+
         Ext.Viewport.setMasked(false);
     },
     controlProvider:function(direction){
@@ -415,6 +475,8 @@ Ext.define("OECDInfo.controller.Main", {
             
             html = html.replace(/(http:\/\/[^\s]*)/g, "<span class=\"link\" name=\"$1\">$1</span>");
             html = html.replace(/(www.[^\s]*)/g, "<span class=\"link\" name=\"http://$1\">$1</span>");
+            html = html.replace(/(@[^\s]*)/g, "<span class=\"at\" name=\"http://$1\">$1</span>");
+            html = html.replace(/(#[^\s]*)/g, "<span class=\"shap\" name=\"http://$1\">$1</span>");
 
             return html;
         },  
@@ -484,9 +546,9 @@ Ext.define("OECDInfo.controller.Main", {
                 header2 = '',
                 indicator = '',
                 body = '',
-                height = (fromTablet?180:140),
+                height = (fromTablet?170:140),
                 layerHeight = (fromTablet?90:60),
-                top = (fromTablet?25:7),
+                top = (fromTablet?17:7),
 
                 header =
                 '<div style="background-image:url('+ userInfo.profile_banner_url +'/mobile);background-size:100%;height:'+ height +'px;padding-top:'+ top +'px;background-color:#444;">' +
@@ -520,7 +582,7 @@ Ext.define("OECDInfo.controller.Main", {
                     // '<div style="color:#000;font-weight:normal;vertical-align:middle;font-size:small;text-align:center;">Tweets:'+ userInfo.statuses_count + ', Followers:'+ userInfo.followers_count +'</div>' +
                 '</div>';
               
-            body += '<div style="'+ (fromTablet?'line-height:150%;padding:25px 15px 15px 15px;font-size:larger;':'line-height:120%;padding:10px;') +'background-color:white;">'+ replaceLinks(data.title) +'</div>';
+            body += '<div style="'+ (fromTablet?'line-height:140%;padding:20px 15px 15px 15px;font-size:18px;':'line-height:120%;padding:10px;') +'background-color:white;">'+ replaceLinks(data.title) +'</div>';
             return [header, header2, indicator, body];
         },
         // createFlickrBody = function(width, height){

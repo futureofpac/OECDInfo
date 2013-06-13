@@ -68,25 +68,36 @@ Ext.define('OECDInfo.view.MainList', {
                 scrollDock: 'bottom',
                 docked:'bottom',
                 padding:15,
+                hidden:true,
                 width:'100%',
-                centered:true,
+                // centered:true,
+                // layout:'hbox',
+                // http://i.cdn.turner.com/cnn/.element/img/3.0/global/misc/loading_black.gif
                 items:[
+                    // {
+                    //     xtype:'img',
+                    //     src:'https://www.isof.cnr.it/docmgr/themes/default/images/loading.gif',
+                    //     // width:60
+                    //     flex:1
+                    // }
+                    // ,
                     {
                         xtype:'button',
                         // ui:'gray',
-                        iconMask:true,
-                        iconCls:'arrow_down',
-                        iconAlign:'right',
-                        width:'60%',
+                        // iconMask:true,
+                        // iconCls:'arrow_down',
+                        // iconAlign:'right',
+                        width:'50%',
                         centered:true,
-                        text:'<span style="font-size:smaller;">Load More...</span>',
-                        handler:function(me){
-                            console.log(me);
-                            var list = Ext.widget('mainlist');
-                            list.fireLoadmore();
-                        }
-                        ,
-                        scope:this                      
+                        text:'<span style="font-size:smaller;">Load More...</span>'
+                        // ,
+                        // handler:function(me){
+                        //     console.log(me);
+                        //     var list = Ext.widget('mainlist');
+                        //     list.fireLoadmore();
+                        // }
+                        // ,
+                        // scope:this                      
                     }
                 ]
             }        
@@ -154,7 +165,7 @@ Ext.define('OECDInfo.view.MainList', {
 
             // }
         ],
-        emptyText:'<div style="padding:10px;">No Data</div>',
+        emptyText:'<div style="padding:10px;">There is no data</div>',
         // itemTpl:'<div style="font-size:small">{typeName} - {title} ({pubDate})</div>'
         itemTpl: 
             new Ext.XTemplate(
@@ -162,9 +173,9 @@ Ext.define('OECDInfo.view.MainList', {
                     // '<div style="background-image:url({image}_s.jpg);background-repeat:no-repeat;background-position:center center;width:150px;height:150px;"></div>',
                     // '<div style="overflow:hidden;text-overflow:ellipsis;padding-top:7npx;">{title:ellipsis(90, true)}</div>',
                     '<div style="min-height:120px;font-family:Arial, sans-serif;">',
-                        '<img src="{image}_q.jpg" style="float:left;width:120px;height:130px;">',
+                        '<img src="{image}_q.jpg" style="float:left;width:120px;height:120px;">',
                         '<div style="margin-left:130px;">',
-                        '<div><span style="color:#989898;margin-bottom:8px;">{typeName}</span> : {title}</div>',
+                        '<div><tpl if="this.isTypeAll()"><span style="color:#989898;margin-bottom:8px;">{typeName} : </span></tpl>{title}</div>',
                         '<div style="overflow:hidden;text-overflow:ellipsis;padding-top:7px;font-size:smaller;">{content:ellipsis(130, true)}</div>',
                         '<div style="clear:both;margin-bottom:2px;"></div>',
                     '</div>',
@@ -174,21 +185,21 @@ Ext.define('OECDInfo.view.MainList', {
                             '<tpl if="this.isTwitter(typeName)">',
                                 '<img src="{image}" style="float:left;width:45px;-webkit-border-radius:5px;">',
                                 '<div style="margin-left:55px;">',
-                                '<div><span style="color:#989898;margin-bottom:8px;">{typeName} @{userInfo.screen_name}</span></div>',
+                                '<div><span style="color:#989898;margin-bottom:8px;"><tpl if="this.isTypeAll()">{typeName}</tpl> @{userInfo.screen_name}</span></div>',
                                 '<div style="padding-top:7px;">{title}</div>',
                                 '<div style="clear:both;margin-bottom:2px;"></div>',
                             '</div>',
                             '<tpl else>',
                                 '<img src="{image}" style="float:left;width:80px;-webkit-border-radius:5px;">',
                                 '<div style="margin-left:90px;">',
-                                '<div><span style="color:#989898;margin-bottom:8px;">{typeName}</span> : {title}</div>',
+                                '<div><tpl if="this.isTypeAll()"><span style="color:#989898;margin-bottom:8px;">{typeName} : </span></tpl>{title}</div>',
                                 '<div style="overflow:hidden;text-overflow:ellipsis;padding-top:7px;font-size:smaller;">{content:ellipsis(130, true)}</div>',
                                 '<div style="clear:both;margin-bottom:2px;"></div>',
                             '</div>',
                             '</tpl>',
                         '</div>',
                     '<tpl else>',
-                        '<div><span style="color:#989898;margin-bottom:8px;">{typeName}</span> : {title}</div>',
+                        '<div><tpl if="this.isTypeAll()"><span style="color:#989898;margin-bottom:8px;">{typeName} : </span></tpl>{title}</div>',
                         '<div style="overflow:hidden;text-overflow:ellipsis;padding-top:7px;font-size:smaller;">{content:ellipsis(130, true)}</div>',
                     '</tpl>',
                 '</tpl>',
@@ -208,7 +219,14 @@ Ext.define('OECDInfo.view.MainList', {
                     }
                 },
                 isFlickr: function(type){
-                    if(type == 'Flickr'){
+                    if(type == 'Photos'){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                },
+                isTypeAll:function(){
+                    if(OECDInfo.app.currentType == 'All'){
                         return true;
                     }else{
                         return false;

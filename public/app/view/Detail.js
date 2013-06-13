@@ -7,22 +7,23 @@ Ext.define('OECDInfo.view.Detail', {
         'Ext.ActionSheet'
     ],
     initialize:function(){
+        if(this.getFromTablet()){
+            this.query('button[action=close]')[0].hide();
+        }
         this.callParent();
     },
     config:{
         // showAnimation:'fadeIn',
-        favoriteId:'',
         fromTablet:false,
+        favoriteId:'',
         userInfo:null,
         id:'detail',
         hidden:true,
         // modal:true,
         // hideOnMaskTap:true,
         zIndex:100,
-        // width:'100%',
-        width:340,
+        width:'100%',
         height:'100%',
-        right:0,
         showAnimation:{
             type:'slide',
             direction:'left',
@@ -47,7 +48,7 @@ Ext.define('OECDInfo.view.Detail', {
         // width: '100%',
         // height: '100%',
         // html:this.createBody()
-        // style:'background-color:white',
+        style:'background-color:white',
         layout:'vbox',
         items:[  
             // {
@@ -165,7 +166,7 @@ Ext.define('OECDInfo.view.Detail', {
                 event:'tap',
                 fn:function(evt, node, options){
                     // this.openLink(node.getAttribute('name'));
-                    this.fireEvent('linktap', node.getAttribute('name'));
+                    this.fireEvent('opentap', node.getAttribute('name'));
                 }
             },
             {
@@ -233,7 +234,10 @@ Ext.define('OECDInfo.view.Detail', {
                 delegate: ['button[action=open]'],
                 event:'tap',
                 fn:function(){
-                    this.fireEvent('opentap');
+                    // console.log(this.getData());
+                    var link = this.getData().link;
+
+                    this.fireEvent('opentap', link);
                 }
             },
             {

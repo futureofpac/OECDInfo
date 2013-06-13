@@ -126,12 +126,20 @@ Ext.application({
             key:'Urban'
         }
     ],
+    isTablet:false,
+    currentType:'All',
     launch: function() {
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 
+        var width = window.innerWidth;
+        if(width > 500){
+            this.isTablet = true; 
+        }
+        console.log(this.isTablet);
+
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('OECDInfo.view.Main'));
+        Ext.Viewport.add((this.isTablet ? Ext.create('OECDInfo.view.Main') : Ext.create('OECDInfo.view.MainList')));
     },
 
     onUpdated: function() {

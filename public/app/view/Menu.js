@@ -69,8 +69,8 @@ Ext.define('OECDInfo.view.Menu', {
                         defaults:{
                             xtype:'checkboxfield',
                             labelWidth:160
-                            // ,
-                            // labelAlign:'right'
+                            ,
+                            labelAlign:'right'
                             ,
                             listeners: {change: function(me){
                                 console.log('Changed');
