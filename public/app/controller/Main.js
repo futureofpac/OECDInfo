@@ -325,7 +325,7 @@ Ext.define("OECDInfo.controller.Main", {
         Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
         console.log(themes);
         Ext.data.JsonP.request({
-            url:'http://oecdinfo.herokuapp.com/api/'+themes+'/10/',
+            url:'http://oecdinfo.herokuapp.com/api/'+themes+'/14/',
             callback:function(success, response){
                 console.log(response);
                 me.self.models = [].concat(response);
@@ -374,7 +374,7 @@ Ext.define("OECDInfo.controller.Main", {
         if(page == 1){
             this.self.currentPage = 1;
         } 
-        
+
         Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
         var me = this,
             pageSize = this.self.pageSize;
