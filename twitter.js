@@ -350,34 +350,37 @@ app.get('/api/:themes/:days', function(req, res){
 							var articleDate = new Date(article.pubDate);
 
 							if(feeds_theme.type == 'Publication'){
-								var publication = {};
-								publication.typeName = 'Publications';
-								publication.theme = feeds_theme.theme;
-								publication.title = article.title;
-								publication.content = article.description;
-								publication.pubDate = articleDate;
-								publication.link = article.link;
-								publication.provider = {
-									logo:'http://insightsblog.oecdcode.org/wp-content/uploads/2012/06/ilibrary_nameonly_small.jpeg',
-									name:'OECD iLibrary',
-									url:'http://www.oecd-ilibrary.org/',
-									description:'OECD iLibrary'
+								if(endDate > articleDate){
+									var publication = {};
+									publication.typeName = 'Publications';
+									publication.theme = feeds_theme.theme;
+									publication.title = article.title;
+									publication.content = article.description;
+									publication.pubDate = articleDate;
+									publication.link = article.link;
+									publication.provider = {
+										logo:'http://insightsblog.oecdcode.org/wp-content/uploads/2012/06/ilibrary_nameonly_small.jpeg',
+										name:'OECD iLibrary',
+										url:'http://www.oecd-ilibrary.org/',
+										description:'OECD iLibrary'
+									}
+
+									feeds['publication'].push(publication);
 								}
-
-								feeds['publication'].push(publication);
 							}else if(feeds_theme.type == 'Blog'){
-								var blog = {};
-								blog.typeName = 'Articles';
-								blog.theme = feeds_theme.theme;
-								blog.title = article.title;
-								blog.content = article.summary;
-								// article.content2 = article.description;
-								blog.pubDate = articleDate;
-								blog.link = article.link;
-								blog.provider = feeds_theme.provider;
+								if(endDate > articleDate){
+									var blog = {};
+									blog.typeName = 'Articles';
+									blog.theme = feeds_theme.theme;
+									blog.title = article.title;
+									blog.content = article.summary;
+									// article.content2 = article.description;
+									blog.pubDate = articleDate;
+									blog.link = article.link;
+									blog.provider = feeds_theme.provider;
 
-								feeds['article'].push(blog);
-
+									feeds['article'].push(blog);
+								}
 							}else if(feeds_theme.type == 'News'){
 								if(datenotchecked){
 									if(startDate < articleDate && endDate > articleDate){

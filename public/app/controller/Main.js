@@ -371,6 +371,10 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     displayList:function (page) {
+        if(page == 1){
+            this.self.currentPage = 1;
+        } 
+        
         Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
         var me = this,
             pageSize = this.self.pageSize;
@@ -433,8 +437,6 @@ Ext.define("OECDInfo.controller.Main", {
         // // list.setGrouped(true);
         // // list.setStore(store);
         // store.load();
-
-        this.self.currentPage++;
 
         Ext.Viewport.setMasked(false);
     },

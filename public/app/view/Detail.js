@@ -105,6 +105,7 @@ Ext.define('OECDInfo.view.Detail', {
    //          }            
             {
                 xtype:'toolbar',
+                ui:'light',
                 docked:'top',
                 items:[
                     {
