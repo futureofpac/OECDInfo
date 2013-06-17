@@ -380,10 +380,11 @@ Ext.define("OECDInfo.controller.Main", {
         var store = Ext.getStore('MainStore'),
             list = this.getList();
         list.getScrollable().getScroller().scrollTo(0,0, false);
+        list.setGrouped(false);
 
         store.removeAll();
 
-        store.setData(this.self.menu);
+        store.setData(this.self.links);
         store.load();
     },
     displayList:function (page) {
@@ -430,6 +431,7 @@ Ext.define("OECDInfo.controller.Main", {
 
         var store = Ext.getStore('MainStore'),
             list = this.getList();
+            list.setGrouped(true);
 
             console.log(data);
 
