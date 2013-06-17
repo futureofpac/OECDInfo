@@ -109,7 +109,11 @@ Ext.define("OECDInfo.controller.Main", {
                     this.self.currentType = type;
                     OECDInfo.app.currentType = type;
 
-                    this.displayList(1);
+                    if(type == 'Links'){
+                        this.displayMenu();
+                    }else{
+                        this.displayList(1);
+                    }
                     if(!this.self.isTablet){
                         this.closeMenu();
                     }
@@ -140,7 +144,8 @@ Ext.define("OECDInfo.controller.Main", {
         currentPage:1,
         currentIndex:-1,
         pageSize:40,
-        models:[],
+        feeds:[],
+        links:[],
         detail:null,
         menu:null,
         actionsheet:null,
@@ -328,7 +333,8 @@ Ext.define("OECDInfo.controller.Main", {
             url:'http://oecdinfo.herokuapp.com/api/'+themes+'/14/',
             callback:function(success, response){
                 console.log(response);
-                me.self.models = [].concat(response);
+                me.self.feeds = [].concat(response.feeds);
+                me.self.links = [].concat(response.links);
                 me.displayList(1);
                 Ext.Viewport.setMasked(false);
             } 
@@ -352,8 +358,8 @@ Ext.define("OECDInfo.controller.Main", {
             (
                 this.self.currentType == '' || this.self.currentType == 'All'
             ) ? 
-            this.self.models : 
-            this.self.models.filter(filterFn)
+            this.self.feeds : 
+            this.self.feeds.filter(filterFn)
         );
 
         if(direction == 'prev'){
@@ -369,6 +375,16 @@ Ext.define("OECDInfo.controller.Main", {
                 return data[index+1];
             }
         }
+    },
+    displayMenu:function(){
+        var store = Ext.getStore('MainStore'),
+            list = this.getList();
+        list.getScrollable().getScroller().scrollTo(0,0, false);
+
+        store.removeAll();
+
+        store.setData(this.self.menu);
+        store.load();
     },
     displayList:function (page) {
         if(page == 1){
@@ -389,24 +405,24 @@ Ext.define("OECDInfo.controller.Main", {
         // console.log(page);
         // console.log(pageSize);
 
-        // var models = (
+        // var feeds = (
         //     (
         //         this.self.currentType == '' || this.self.currentType == 'All'
         //     ) ? 
-        //     this.self.models.slice(((page - 1) * pageSize),page * pageSize) : 
-        //     this.self.models.filter(filterFn).slice(((page - 1) * pageSize),page * pageSize)
+        //     this.self.feeds.slice(((page - 1) * pageSize),page * pageSize) : 
+        //     this.self.feeds.filter(filterFn).slice(((page - 1) * pageSize),page * pageSize)
         // );
-        var models = (
+        var feeds = (
             (
                 this.self.currentType == '' || this.self.currentType == 'All'
             ) ? 
-            this.self.models :
-            this.self.models.filter(filterFn)
+            this.self.feeds :
+            this.self.feeds.filter(filterFn)
         );
 
-        var data = models.slice(((page - 1) * pageSize),page * pageSize);
+        var data = feeds.slice(((page - 1) * pageSize),page * pageSize);
 
-        if(models.length > data.length){
+        if(feeds.length > data.length){
             this.getLoadmore().getParent().setHidden(false);
         }else{
             this.getLoadmore().getParent().setHidden(true);

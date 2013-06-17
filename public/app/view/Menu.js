@@ -51,6 +51,10 @@ Ext.define('OECDInfo.view.Menu', {
                     {
                         name: 'Videos',
                         type:'.png'
+                    },
+                    {
+                        name: 'Links',
+                        type:'.png'
                     }
                 ],
                 itemTpl:'<span class="menuicon {name}"></span> <span class="menutext">{name}</span>',
@@ -207,7 +211,7 @@ Ext.define('OECDInfo.view.Menu', {
                         //     container   = slideview.getContainer();
 
                         // var store = Ext.getStore('testStore');
-                        indexs = ['All', 'News', 'Articles', 'Publications', 'Twitter', 'Photos', 'Videos'];
+                        indexs = ['All', 'News', 'Articles', 'Publications', 'Twitter', 'Photos', 'Videos', 'Links'];
                         // if(index == 0){
                         //     store.clearFilter(false);
                         // // }else if(index == 2 || index == 3){
