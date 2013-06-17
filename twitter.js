@@ -443,12 +443,14 @@ app.get('/api/:themes/:days', function(req, res){
 	        	result.feeds = resultFeeds.reverse();
 	        	result.links = [
 	        		{
+	        			typeName:'Links',
 		        		title:'OECD',
 		        		link:'http://www.oecd.org',
 		        		image:'http://a0.twimg.com/profile_images/2240372332/OECD_globe_20cm.JPG',
 		        		content:'This is the official site of the OECD'
 	        		},
 	        		{
+	        			typeName:'Links',
 		        		title:'OECD',
 		        		link:'http://www.oecd.org',
 		        		image:'http://a0.twimg.com/profile_images/2240372332/OECD_globe_20cm.JPG',

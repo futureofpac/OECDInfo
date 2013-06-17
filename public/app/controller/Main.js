@@ -35,7 +35,11 @@ Ext.define("OECDInfo.controller.Main", {
                     // var main = this.getMain();
                     // // Ext.defer(main.moveContainer, 200, main);
                     // main.moveContainer(null, -200, 200)
-                    this.openDetail(record.data);
+                    if(record.data.typeName == 'Links'){
+                        this.openLink(record.data.link);
+                    }else{
+                        this.openDetail(record.data);
+                    }
                 },
                 loadmoretap:function () {
                     // console.log('called!');
@@ -75,7 +79,7 @@ Ext.define("OECDInfo.controller.Main", {
                     this.showShare();
                 },
                 opentap:function(link){
-                    window.open(link, 'OECD Info')
+                    this.openLink(link);
                 },
                 providertap:function(direction){
                     var detail =  this.self.detail;
@@ -383,6 +387,7 @@ Ext.define("OECDInfo.controller.Main", {
         list.setGrouped(false);
 
         store.removeAll();
+        this.getLoadmore().getParent().setHidden(true);
 
         store.setData(this.self.links);
         store.load();
@@ -398,21 +403,9 @@ Ext.define("OECDInfo.controller.Main", {
 
         var filterFn = function (element, index, array) {
             var type = me.self.currentType;
-            // console.log(type);
-            // console.log(element.typeName);
             return (element.typeName == type);
         }
-        // console.log(this.self.currentType);
-        // console.log(page);
-        // console.log(pageSize);
 
-        // var feeds = (
-        //     (
-        //         this.self.currentType == '' || this.self.currentType == 'All'
-        //     ) ? 
-        //     this.self.feeds.slice(((page - 1) * pageSize),page * pageSize) : 
-        //     this.self.feeds.filter(filterFn).slice(((page - 1) * pageSize),page * pageSize)
-        // );
         var feeds = (
             (
                 this.self.currentType == '' || this.self.currentType == 'All'
@@ -447,16 +440,10 @@ Ext.define("OECDInfo.controller.Main", {
                 store.add(data);
             }
 
-
-        // console.log('data:');
-        // console.log(data);
-
-        // store.setData(data);
-        // // list.setGrouped(true);
-        // // list.setStore(store);
-        // store.load();
-
         Ext.Viewport.setMasked(false);
+    },
+    openLink:function(link){
+        window.open(link, 'OECD Info')
     },
     controlProvider:function(direction){
         var detail = this.self.detail,
