@@ -383,8 +383,8 @@ Ext.define("OECDInfo.controller.Main", {
     displayMenu:function(){
         var store = Ext.getStore('MainStore'),
             list = this.getList();
+        // list.setGrouped(false);
         list.getScrollable().getScroller().scrollTo(0,0, false);
-        list.setGrouped(false);
 
         store.removeAll();
         this.getLoadmore().getParent().setHidden(true);
@@ -393,6 +393,9 @@ Ext.define("OECDInfo.controller.Main", {
         store.load();
     },
     displayList:function (page) {
+        var store = Ext.getStore('MainStore'),
+            list = this.getList();
+            
         if(page == 1){
             this.self.currentPage = 1;
         } 
@@ -422,9 +425,6 @@ Ext.define("OECDInfo.controller.Main", {
             this.getLoadmore().getParent().setHidden(true);
         }
 
-        var store = Ext.getStore('MainStore'),
-            list = this.getList();
-            list.setGrouped(true);
 
             console.log(data);
 
@@ -433,6 +433,7 @@ Ext.define("OECDInfo.controller.Main", {
                 if(data.length == 0){
                     store.removeAll();
                 }else{
+                    store.removeAll();
                     store.setData(data);
                     store.load();
                 }
@@ -440,6 +441,7 @@ Ext.define("OECDInfo.controller.Main", {
                 store.add(data);
             }
 
+        // list.setGrouped(true);
         Ext.Viewport.setMasked(false);
     },
     openLink:function(link){

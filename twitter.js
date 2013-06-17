@@ -444,17 +444,31 @@ app.get('/api/:themes/:days', function(req, res){
 	        	result.links = [
 	        		{
 	        			typeName:'Links',
-		        		title:'OECD',
+		        		title:'OECD Website',
 		        		link:'http://www.oecd.org',
-		        		image:'http://a0.twimg.com/profile_images/2240372332/OECD_globe_20cm.JPG',
-		        		content:'This is the official site of the OECD'
+		        		image:'http://s3.timetoast.com/public/uploads/photos/2912365/OECD_globe_10cm_4c_small_square.png',
+		        		content:''
 	        		},
 	        		{
 	        			typeName:'Links',
-		        		title:'OECD',
-		        		link:'http://www.oecd.org',
-		        		image:'http://a0.twimg.com/profile_images/2240372332/OECD_globe_20cm.JPG',
-		        		content:'This is the official site of the OECD'
+		        		title:'Online Bookshop',
+		        		link:'http://www.oecdbookshop.org/',
+		        		image:'http://s3.timetoast.com/public/uploads/photos/2912365/OECD_globe_10cm_4c_small_square.png',
+		        		content:''
+	        		},
+	        		{
+	        			typeName:'Links',
+		        		title:'iLibrary',
+		        		link:'http://www.oecd-ilibrary.org/',
+		        		image:'http://insightsblog.oecdcode.org/wp-content/uploads/2012/06/ilibrary_nameonly_small.jpeg',
+		        		content:''
+	        		},
+	        		{
+	        			typeName:'Links',
+		        		title:'Better Life Index',
+		        		link:'http://www.oecdbetterlifeindex.org',
+		        		image:'http://www.epha.org/local/cache-vignettes/L200xH104/arton5169-fd6c0.png',
+		        		content:''
 	        		}
 	        	];
 
