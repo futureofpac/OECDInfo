@@ -92,8 +92,8 @@ Ext.define('OECDInfo.view.Menu', {
                         // labelWrap:true,
                         items:[
                             {
-                                name:'OECD Generic',
-                                label:'OECD Generic',
+                                name:'OECD News',
+                                label:'OECD News',
                                 value:'Generic'
                                 // ,
                                 // checked:true

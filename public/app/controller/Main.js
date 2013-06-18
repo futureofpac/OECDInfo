@@ -76,7 +76,7 @@ Ext.define("OECDInfo.controller.Main", {
                     }
                 },
                 sharetap:function(){
-                    this.showShare();
+                    this.openShare();
                 },
                 opentap:function(link){
                     this.openLink(link);
@@ -220,11 +220,30 @@ Ext.define("OECDInfo.controller.Main", {
                     right:0
                 }
             );
+            this.self.actionsheet = Ext.Viewport.add(
+                {
+                    xtype:'share',
+                    width:200,
+                    height:160,
+                    style:'font-size:smaller;',
+                    // modal:true,
+                    showAnimation:{
+                        type:'fadeIn',
+                        // direction:'top',
+                        duration:150
+                    },
+                    hideAnimation:{
+                        type:'fadeOut',
+                        // direction:'top',
+                        duration:150
+                    }
+                }
+            );
         }else{
             this.self.menu = Ext.Viewport.add({xtype:'menu'});
             this.self.detail = Ext.Viewport.add({xtype:'detail'});
+            this.self.actionsheet = Ext.Viewport.add({xtype:'share'});
         }
-        this.self.actionsheet = Ext.Viewport.add({xtype:'share'});
     },
     getTheme:function(){
         var local = window.localStorage.getItem('themes');
@@ -395,7 +414,7 @@ Ext.define("OECDInfo.controller.Main", {
     displayList:function (page) {
         var store = Ext.getStore('MainStore'),
             list = this.getList();
-            
+
         if(page == 1){
             this.self.currentPage = 1;
         } 
@@ -636,9 +655,14 @@ Ext.define("OECDInfo.controller.Main", {
             createProvider: createProvider
         }
     },   
-    showShare:function(){
+    openShare:function(){
+        if(this.self.isTablet){
+            var btnShare = this.getDetail().query('button[action=share]')[0];
+            this.self.actionsheet.showBy(btnShare);
+        }else{
+            this.self.actionsheet.show();
+        }
         // console.log(actionsheet);
-        this.self.actionsheet.show();
     }
 });
 
