@@ -293,10 +293,11 @@ app.get('/api/:themes/:days', function(req, res){
 							if(startDate < articleDate && endDate > articleDate){
 								var tweet = {};
 								tweet.title = item.text;
+								tweet.theme = item.theme;
+								tweet.typeName = 'Twitter';
 								tweet.pubDate = new Date(item.created_at);
 								// tweet.image = data[i].user.profile_image_url;
 								tweet.image = item.user.profile_image_url;
-								tweet.typeName = 'Twitter';
 
 			                    var userData = item.user,
 			                        userInfo = {

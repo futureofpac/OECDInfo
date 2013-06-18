@@ -560,14 +560,16 @@ Ext.define("OECDInfo.controller.Main", {
                     '<img src='+ image +' style="float:left;width:'+ (type == 'Youtube' ? '60' : '45') +'px;-webkit-border-radius:5px;">' +
                     '<div style="margin-left:'+ (type == 'Youtube' ? '70' : '55') +'px;">' + 
                         '<h3><strong>'+ replaceLinks(data.title) +'</strong></h3>' +
-                        '<h4>'+ getDateStr(data.pubDate) +'</h4>' +
+                        '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
+                        '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
                     '</div>' +
                 '</div>';
             }else{
                 header =
                 '<div class=header '+ type +'>' + 
                     '<h3><strong>'+ replaceLinks(data.title) +'</strong></h3>' +
-                    '<h4>'+ me.getThemeByKey(data.theme) + ' | ' + getDateStr(data.pubDate) +'</h4>' +
+                    '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
+                    '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
                 '</div>';
             }
 
@@ -629,8 +631,13 @@ Ext.define("OECDInfo.controller.Main", {
                     // Tweets:'+ userInfo.statuses_count + ', Followers:'+ userInfo.followers_count +'
                     // '<div style="color:#000;font-weight:normal;vertical-align:middle;font-size:small;text-align:center;">Tweets:'+ userInfo.statuses_count + ', Followers:'+ userInfo.followers_count +'</div>' +
                 '</div>';
-              
-            body += '<div style="'+ (fromTablet?'line-height:140%;padding:20px 15px 15px 15px;font-size:18px;':'line-height:120%;padding:10px;') +'background-color:white;">'+ replaceLinks(data.title) +'</div>';
+console.log(data);
+                body +=
+                '<div style="font-size:smaller;color:gray;'+ (fromTablet?'padding:10px 15px 15px 15px;':'padding:10px;') +'">' + 
+                    '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
+                    '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
+                '</div>' +
+                '<div style="'+ (fromTablet?'line-height:140%;padding:20px 15px 15px 15px;font-size:18px;':'line-height:120%;padding:0px 10px 10px 10px;') +'background-color:white;">'+ replaceLinks(data.title) +'</div>';
             return [header, header2, indicator, body];
         },
         // createFlickrBody = function(width, height){
