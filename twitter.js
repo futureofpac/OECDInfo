@@ -343,7 +343,7 @@ app.get('/api/:themes/:days', function(req, res){
 				console.log(feeds_theme);
 
 				request(feeds_theme.url)
-					.pipe(new FeedParser({normalize:false}))
+					.pipe(new FeedParser())
 					.on('error', function(error) {
 						// always handle errors
 						feeds['error'].push(error);

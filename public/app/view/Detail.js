@@ -114,15 +114,16 @@ Ext.define('OECDInfo.view.Detail', {
                         // text:'Back'
                         iconCls:'delete',
                         action:'close'
-                    },
-                    {
-                        xtype:'spacer'
-                    },
-                    {
-                        xtype:'button',
-                        iconCls:'action',
-                        action:'share'
                     }
+                    // ,
+                    // {
+                    //     xtype:'spacer'
+                    // },
+                    // {
+                    //     xtype:'button',
+                    //     iconCls:'action',
+                    //     action:'share'
+                    // }
                 ]
             },
             {
@@ -140,10 +141,11 @@ Ext.define('OECDInfo.view.Detail', {
                         text:'Prev',
                         action:'prev'
                     },
-                    // {
-                    //     // iconCls:'action'
-                    //     text:'Share'
-                    // },
+                    {
+                        // iconCls:'action'
+                        text:'Share',
+                        action:'share'
+                    },
                     {
                         // iconCls:'reply'
                         text:'Open',
@@ -194,27 +196,6 @@ Ext.define('OECDInfo.view.Detail', {
                 event:'tap',
                 fn:function(evt, node, options){
                     this.fireEvent('providertap', 'up');
-                }
-            },
-            {
-                delegate: ['button[action=favorite]'],
-                event:'tap',
-                fn:function(){
-                    var favoriteId = this.getFavoriteId(),
-                        data = this.getData(),
-                        btn = this.query('button[action=favorite]')[0];
-
-                    if(favoriteId == ''){
-                        this.fireEvent('favoriteadd', data);
-                        this.setFavoriteId(data.id);
-                        // btn.setText('Remove Favorite');
-                        btn.setUi('decline');
-                    }else{
-                        this.fireEvent('favoriteremove', favoriteId);
-                        this.setFavoriteId('');
-                        btn.setUi('action');
-                        // btn.setText('Add Favorite');
-                    }
                 }
             },
             {
