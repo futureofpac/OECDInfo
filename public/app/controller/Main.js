@@ -157,6 +157,16 @@ Ext.define("OECDInfo.controller.Main", {
                 facebooktap:function(data){
                 },
                 twittertap:function(data){
+
+                    var data = this.self.detail.getData();
+                    console.log(data);
+                    // window.open('mailto:""', 'email')
+                    var a = document.createElement('a');
+                    a.target = '_new';
+                    // a.href='mailto:?subject=OECD Info:data&body=sss';
+                    a.href='https://twitter.com/intent/tweet';
+                    // a.href='mailto:';
+                    a.click();
                 }
             }
         }
@@ -274,6 +284,18 @@ Ext.define("OECDInfo.controller.Main", {
         // window.localStorage.removeItem('themes');
         window.localStorage.setItem('themes', JSON.stringify(themes));
     },
+    setFeeds:function(feeds){
+        console.log(feeds);
+        // window.localStorage.removeItem('themes');
+        window.localStorage.setItem('feeds', JSON.stringify(feeds));
+        // window.localStorage.setItem('feeds', feeds);
+    },
+    getFeeds:function(){
+        var local = window.localStorage.getItem('feeds');
+        var json = JSON.parse(local);
+        return ((json == '' || json == null) ? [] : json);
+        // return local;
+    },
     openMenu:function(){
         if(this.self.isTablet){
             this.getMain().query('menu')[0].setHidden(false);
@@ -369,19 +391,45 @@ Ext.define("OECDInfo.controller.Main", {
         this.self.detail.hide();
     },
     callService:function (themes) {
-        var me = this;
-        Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
-        console.log(themes);
-        Ext.data.JsonP.request({
-            url:'http://oecdinfo.herokuapp.com/api/'+themes+'/5/',
-            callback:function(success, response){
-                console.log(response);
-                me.self.feeds = [].concat(response.feeds);
-                me.self.links = [].concat(response.links);
-                me.displayList(1);
-                Ext.Viewport.setMasked(false);
-            } 
-        });
+        if(navigator.onLine){
+            var me = this;
+            Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
+            console.log(themes);
+            Ext.data.JsonP.request({
+                url:'http://oecdinfo.herokuapp.com/api/'+themes+'/5/',
+                callback:function(success, response){
+                    console.log(response);
+                    me.self.feeds = [].concat(response.feeds);
+                    me.self.links = [].concat(response.links);
+                    me.displayList(1);
+                    // me.setFeeds([{test:'aaaa'}]);
+                    var localFeeds = [], type = '';
+                    for(var i=0;i<response.feeds.length;i++){
+                        type = response.feeds[i].typeName;
+                        if(type != 'Articles' && type != 'Photos' && type != 'Videos'){
+                            localFeeds.push(response.feeds[i]);
+                        }
+                    }
+                    me.setFeeds(localFeeds);
+                    // me.setFeeds(response.links);
+                    Ext.Viewport.setMasked(false);
+                } 
+            });
+        }else{
+            Ext.Msg.alert('Notice', 'No Internet connection, data will be loaded from the cache and some features might be limited.')
+            var cache = this.getFeeds();
+
+            console.log(cache);
+
+            if(cache){
+                this.self.feeds = [].concat(cache);
+            }
+            // if(cache.links){
+            //     this.self.links = [].concat(cache.links);
+            // }
+            this.displayList(1);
+        }
+
     },
     filterFn:function (element, index, array) {
         var type = this.self.currentType;
@@ -579,11 +627,12 @@ Ext.define("OECDInfo.controller.Main", {
                 // body = '<video controls="controls" x-webkit-airplay="allow" src="'+ data.link +'&html5=True" width="95%" style="margin:5px;"></video>';
             }
             
-            if(type == 'Insight' || type == 'Wordpress'){
-                body += '<div id="detailContent">'+ filterTags(data.content) +'</div>';
-            }else{
-                body += '<p>'+ replaceLinks(data.content) +'</p>';
-            }        
+            // if(type == 'Insight' || type == 'Wordpress'){
+            //     body += '<div id="detailContent">'+ filterTags(data.content) +'</div>';
+            // }else{
+            //     body += '<p>'+ replaceLinks(data.content) +'</p>';
+            // }        
+            body += '<div style="padding:10px">'+ filterTags(data.content) +'</div>';
 
             return [header, body];
         },
