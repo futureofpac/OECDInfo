@@ -120,7 +120,7 @@ app.get('/api/:themes/:days', function(req, res){
 			    'http://www.oecd-ilibrary.org/rss/content/subject/40/latest?fmt=rss'
 			],
 			'Blog' : [
-				{provider:{name:'The progress blog', description:'Blogging for progress in Society', url:'http://theblogprogress.blogspot.fr/'}, url:'http://feeds.feedburner.com/blogspot/theprogressblog'}
+				{provider:{name:'The progress blog', description:'Blogging for progress in Society', url:'http://feeds.feedburner.com/blogspot/theprogressblog?format=xml'}, url:'http://feeds.feedburner.com/blogspot/theprogressblog'}
 			]
 		},
 		'Economics' : {
