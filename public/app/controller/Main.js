@@ -213,13 +213,14 @@ Ext.define("OECDInfo.controller.Main", {
     },
     shareEmail:function(){
         var data = this.self.detail.getData();
-        console.log(data);
-        // window.open('mailto:""', 'email')
-        var a = document.createElement('a');
-        // a.href='mailto:?subject=OECD Info:data&body=sss';
-        a.href='mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content;
-        // a.href='mailto:';
-        a.click();
+        // console.log(data);
+        // // window.open('mailto:""', 'email')
+        // var a = document.createElement('a');
+        // // a.href='mailto:?subject=OECD Info:data&body=sss';
+        // a.href='mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content;
+        // // a.href='mailto:';
+        // a.click();
+        window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content);
     },
     shareFacebook:function(){
     },
@@ -419,7 +420,7 @@ Ext.define("OECDInfo.controller.Main", {
             Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
             console.log(themes);
             Ext.data.JsonP.request({
-                url:'http://oecdinfo.herokuapp.com/api/'+themes+'/200/',
+                url:'http://oecdinfo.herokuapp.com/api/'+themes+'/20/',
                 callback:function(success, response){
                     console.log(response);
                     me.self.feeds = [].concat(response.feeds);
@@ -696,9 +697,13 @@ Ext.define("OECDInfo.controller.Main", {
                 // border-bottom-left-radius:5px;border-bottom-right-radius:5px;
                     // '<h3><strong>Tweets:'+ userInfo.statuses_count +' Following:'+ userInfo.friends_count +' Followers:'+ userInfo.followers_count +' </strong></h3>' +
                     // '<span>'+ this.getDateStr(data.pubDate) +'</span>' +
-                    '<span style="padding:5px 5px 5px 12px;float:left;border-right:rgba(0,0,0, 0.0976563) solid 1px;font-weight:bold;font-size:medium;width:33%;height:100%;">'+ userInfo.statuses_count + '</br><span style="color:gray;font-weight:lighter;font-size:small">Tweets</span></span>' +
-                    '<span style="padding:5px 5px 5px 12px;float:left;border-right:rgba(0,0,0, 0.0976563) solid 1px;font-weight:bold;font-size:medium;width:33%;height:100%;">'+ userInfo.followers_count + '</br><span style="color:gray;font-weight:lighter;font-size:small">Followers</span></span>' +
-                    '<span style="padding:5px 5px 5px 12px;float:left;font-weight:bold;font-size:medium;width:33%;height:100%;">'+ userInfo.friends_count + '</br><span style="color:gray;font-weight:lighter;font-size:small">Following</span></span>' +
+                    '<span style="padding:5px 5px 5px 12px;float:left;border-right:rgba(0,0,0, 0.0976563) solid 1px;font-weight:bold;font-size:medium;width:24%;height:100%;">'+ userInfo.statuses_count + '</br><span style="color:gray;font-weight:lighter;font-size:small">Tweets</span></span>' +
+                    '<span style="padding:5px 5px 5px 12px;float:left;border-right:rgba(0,0,0, 0.0976563) solid 1px;font-weight:bold;font-size:medium;width:24%;height:100%;">'+ userInfo.followers_count + '</br><span style="color:gray;font-weight:lighter;font-size:small">Followers</span></span>' +
+                    '<span style="padding:5px 5px 5px 12px;float:left;font-weight:bold;font-size:medium;width:24%;height:100%;">'+ userInfo.friends_count + '</br><span style="color:gray;font-weight:lighter;font-size:small">Following</span></span>' +
+                    '<span style="padding:9px 8px 5px 5px;float:right;font-weight:bold;font-size:medium;width:28%;height:100%;">' +
+                        '<img src="https://twitter.com/images/resources/twitter-bird-light-bgs.png" width=35 style="vertical-align:middle;">' +
+                        '<a href="https://twitter.com/intent/user?screen_name='+ userInfo.screen_name +'" target="_new" style="text-decoration:none;font-size:smaller;color:black;">Follow</a>' +
+                    '</span>' +
                     '<span style="clear:both;"></span>' +
                     // Tweets:'+ userInfo.statuses_count + ', Followers:'+ userInfo.followers_count +'
                     // '<div style="color:#000;font-weight:normal;vertical-align:middle;font-size:small;text-align:center;">Tweets:'+ userInfo.statuses_count + ', Followers:'+ userInfo.followers_count +'</div>' +
