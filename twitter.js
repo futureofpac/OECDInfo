@@ -378,10 +378,15 @@ app.get('/api/:themes/:days', function(req, res){
 							}else if(feeds_theme.type == 'Blog'){
 								if(endDate > articleDate){
 									var blog = {};
+									var providerName = feeds_theme.provider.name;
 									blog.typeName = 'Articles';
 									blog.theme = feeds_theme.theme;
 									blog.title = article.title;
-									blog.content = article.summary;
+									if(providerName == 'OECD Insights'){
+										blog.content = article.description;
+									}else{
+										blog.content = article.summary;
+									}
 									// article.content2 = article.description;
 									blog.pubDate = articleDate;
 									blog.link = article.link;
@@ -484,7 +489,7 @@ app.get('/api/:themes/:days', function(req, res){
 				// res.jsonp(feeds['called']);
 				// res.setEncoding('utf8')
 				// res.writeHead(200, {'Content-Type':'text/plain; charset=utf8'});
-				res.charset = 'utf-8';
+				// res.charset = 'utf-8';
 				res.jsonp(result);
 				// res.jsonp(result);
 	        }
