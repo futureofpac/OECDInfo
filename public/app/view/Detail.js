@@ -9,6 +9,8 @@ Ext.define('OECDInfo.view.Detail', {
     initialize:function(){
         if(this.getFromTablet()){
             this.query('button[action=close]')[0].hide();
+            this.query('button[action=share]')[0].hide();
+            this.query('panel[id=shareContainer]')[0].show();
         }
         this.callParent();
     },
@@ -80,29 +82,31 @@ Ext.define('OECDInfo.view.Detail', {
                 scrollable:true,
                 flex:1
             },
-			// {
-   //              xtype: 'panel',
-   //              height:150,
-   //              defaults:{
-   //                  xtype:'button',
-   //                  ui:'action',
-   //                  style:'font-size:smaller;margin:5px 15px 7px 15px;'
-   //              },
-   //              items:[
-   //                  {
-   //                      text:'Open'
-   //                  },
-   //                  {
-   //                      text:'Email'
-   //                  },
-   //                  {
-   //                      text:'Facebook'
-   //                  },
-   //                  {
-   //                      text:'Twitter'
-   //                  }
-   //              ]
-   //          }            
+			{
+                xtype: 'panel',
+                id:'shareContainer',
+                hidden:true,
+                height:115,
+                defaults:{
+                    xtype:'button',
+                    // ui:'action',
+                    style:'font-size:smaller;margin:5px 15px 7px 15px;'
+                },
+                items:[
+                    // {
+                    //     text:'Open'
+                    // },
+                    {
+                        text:'Email'
+                    },
+                    {
+                        text:'Facebook'
+                    },
+                    {
+                        text:'Twitter'
+                    }
+                ]
+            },            
             {
                 xtype:'toolbar',
                 ui:'light',

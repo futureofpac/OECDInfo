@@ -158,15 +158,17 @@ Ext.define("OECDInfo.controller.Main", {
                 },
                 twittertap:function(data){
 
-                    var data = this.self.detail.getData();
-                    console.log(data);
-                    // window.open('mailto:""', 'email')
-                    var a = document.createElement('a');
-                    a.target = '_new';
-                    // a.href='mailto:?subject=OECD Info:data&body=sss';
-                    a.href='https://twitter.com/intent/tweet';
-                    // a.href='mailto:';
-                    a.click();
+                    window.open('https://twitter.com/intent/tweet');
+
+                    // var data = this.self.detail.getData();
+                    // console.log(data);
+                    // // window.open('mailto:""', 'email')
+                    // var a = document.createElement('a');
+                    // a.target = '_new';
+                    // // a.href='mailto:?subject=OECD Info:data&body=sss';
+                    // a.href='https://twitter.com/intent/tweet';
+                    // // a.href='mailto:';
+                    // a.click();
                 }
             }
         }
@@ -650,7 +652,7 @@ Ext.define("OECDInfo.controller.Main", {
                 top = (fromTablet?17:7),
 
                 header =
-                '<div style="background-image:url('+ userInfo.profile_banner_url +'/mobile);background-size:100%;height:'+ height +'px;padding-top:'+ top +'px;background-color:#444;">' +
+                '<div style="background-image:url('+ userInfo.profile_banner_url +'/' + (fromTablet?'web':'mobile') + ');background-size:100%;height:'+ height +'px;padding-top:'+ top +'px;background-color:#444;">' +
                     '<div style="width:100%;height:'+ layerHeight +'px;position:absolute;top:'+ (height - layerHeight) +'px;background-image:-webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.54902) 100%);text-shadow: rgb(255, 255, 255) 0px 1px 0px;background-color: rgba(0, 0, 0, 0);background-origin: padding-box;"></div>' + 
                     '<img src='+ image +' style="display:block;-webkit-border-radius:5px;margin-top:7px;margin-left:auto;margin-right:auto;">' +
                     '<div style="position:relative;padding:0px;margin-top:'+ top +'px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
@@ -660,7 +662,7 @@ Ext.define("OECDInfo.controller.Main", {
                 '</div>';
 
                 header2 =
-                '<div style="background-image:url('+ userInfo.profile_banner_url +'/mobile);background-size:100%;height:'+ height +'px;padding-top:5px;background-color:#444;">' +
+                '<div style="background-image:url('+ userInfo.profile_banner_url +'/' + (fromTablet?'web':'mobile') + ');background-size:100%;height:'+ height +'px;padding-top:5px;background-color:#444;">' +
                     '<div style="width:100%;height:'+ layerHeight +'px;position:absolute;top:'+ (height - layerHeight) +'px;background-image:-webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.54902) 100%);text-shadow: rgb(255, 255, 255) 0px 1px 0px;background-color: rgba(0, 0, 0, 0);background-origin: padding-box;"></div>' + 
                     '<div style="position:relative;margin-top:'+ top +'px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
                         '<h4 style="margin-bottom:'+ top +'px;"><span class=link name='+ userInfo.url +' style="color:white;text-decoration:none;">'+ userInfo.url +'</span></h4>' +
@@ -682,11 +684,11 @@ Ext.define("OECDInfo.controller.Main", {
                 '</div>';
 console.log(data);
                 body +=
-                '<div style="font-size:smaller;color:gray;'+ (fromTablet?'padding:10px 15px 15px 15px;':'padding:10px;') +'">' + 
+                '<div style="font-size:smaller;color:gray;'+ (fromTablet?'padding:10px 15px 15px 10px;':'padding:10px;') +'">' + 
                     '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
                     '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
                 '</div>' +
-                '<div style="'+ (fromTablet?'line-height:140%;padding:20px 15px 15px 15px;font-size:18px;':'line-height:120%;padding:0px 10px 10px 10px;') +'background-color:white;">'+ replaceLinks(data.title) +'</div>';
+                '<div style="'+ (fromTablet?'line-height:140%;padding:0px 15px 15px 15px;font-size:17px;':'line-height:120%;padding:0px 10px 10px 10px;') +'background-color:white;">'+ replaceLinks(data.title) +'</div>';
             return [header, header2, indicator, body];
         },
         // createFlickrBody = function(width, height){
