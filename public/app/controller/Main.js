@@ -419,7 +419,7 @@ Ext.define("OECDInfo.controller.Main", {
             Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
             console.log(themes);
             Ext.data.JsonP.request({
-                url:'http://oecdinfo.herokuapp.com/api/'+themes+'/5/',
+                url:'http://oecdinfo.herokuapp.com/api/'+themes+'/200/',
                 callback:function(success, response){
                     console.log(response);
                     me.self.feeds = [].concat(response.feeds);
