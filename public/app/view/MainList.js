@@ -37,6 +37,17 @@ Ext.define('OECDInfo.view.MainList', {
         items:[
             {
                 xtype:'toolbar',
+                // initialize:function(){
+                //     this.on({
+                //         tap:function(){
+                //             console.log('a');
+                //             console.log(this.getParent());
+                //             this.getParent().getScrollable().getScroller().scrollTo(0,0, false);
+
+                //             this.fireEvent('toptap');
+                //         }
+                //     })
+                // },
                 docked:'top',
                 title:'OECD Info',
                 ui:'light',

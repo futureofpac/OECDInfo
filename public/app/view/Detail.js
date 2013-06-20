@@ -97,13 +97,16 @@ Ext.define('OECDInfo.view.Detail', {
                     //     text:'Open'
                     // },
                     {
-                        text:'Email'
+                        text:'Email',
+                        action:'email'
                     },
                     {
-                        text:'Facebook'
+                        text:'Facebook',
+                        action:'facebook'
                     },
                     {
-                        text:'Twitter'
+                        text:'Twitter',
+                        action:'twitter'
                     }
                 ]
             },            
@@ -231,6 +234,27 @@ Ext.define('OECDInfo.view.Detail', {
                 event:'tap',
                 fn:function(){
                     this.fireEvent('sharetap');
+                }
+            },
+            {
+                delegate: ['button[action=email]'],
+                event:'tap',
+                fn:function(){
+                    this.fireEvent('emailtap');
+                }
+            },
+            {
+                delegate: ['button[action=facebook]'],
+                event:'tap',
+                fn:function(){
+                    this.fireEvent('facebooktap');
+                }
+            },
+            {
+                delegate: ['button[action=twitter]'],
+                event:'tap',
+                fn:function(){
+                    this.fireEvent('twittertap');
                 }
             },
             {

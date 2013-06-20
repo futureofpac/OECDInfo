@@ -12,6 +12,7 @@ Ext.define("OECDInfo.controller.Main", {
         refs: {
             main:'main',
             list: 'mainlist',
+            listtop: 'mainlist toolbar',
             loadmore:'mainlist panel button',
             // main: 'main',
             menu: 'menu', 
@@ -45,6 +46,11 @@ Ext.define("OECDInfo.controller.Main", {
                 loadmoretap:function () {
                     // console.log('called!');
                     // this.displayList(++this.self.currentPage);
+                }
+            },
+            listtop:{
+                toptap:function(){
+                    alert('a')
                 }
             },
             loadmore:{
@@ -86,6 +92,15 @@ Ext.define("OECDInfo.controller.Main", {
                     var detail =  this.self.detail;
 
                     this.controlProvider(direction);
+                },
+                emailtap:function(data){
+                    this.shareEmail(data);
+                },
+                facebooktap:function(data){
+                    this.shareFacebook();
+                },
+                twittertap:function(data){
+                    this.shareTwitter();
                 }
             },
             menuBtn: {
@@ -144,21 +159,12 @@ Ext.define("OECDInfo.controller.Main", {
             },
             share:{
                 emailtap:function(){
-                    var data = this.self.detail.getData();
-                    console.log(data);
-                    // window.open('mailto:""', 'email')
-                    var a = document.createElement('a');
-                    // a.href='mailto:?subject=OECD Info:data&body=sss';
-                    a.href='mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content;
-                    // a.href='mailto:';
-                    a.click();
 
                 },
                 facebooktap:function(data){
                 },
                 twittertap:function(data){
-
-                    window.open('https://twitter.com/intent/tweet');
+                    this.shareTwitter(data);
 
                     // var data = this.self.detail.getData();
                     // console.log(data);
@@ -204,6 +210,21 @@ Ext.define("OECDInfo.controller.Main", {
         //     // console.log(item.getLabel());
         //     console.log(key.getLabel());
         // }); 
+    },
+    shareEmail:function(){
+        var data = this.self.detail.getData();
+        console.log(data);
+        // window.open('mailto:""', 'email')
+        var a = document.createElement('a');
+        // a.href='mailto:?subject=OECD Info:data&body=sss';
+        a.href='mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content;
+        // a.href='mailto:';
+        a.click();
+    },
+    shareFacebook:function(){
+    },
+    shareTwitter:function(){
+        window.open('https://twitter.com/intent/tweet');
     },
     checkTheme:function(themes){
         // console.log(themes);
@@ -652,7 +673,7 @@ Ext.define("OECDInfo.controller.Main", {
                 top = (fromTablet?17:7),
 
                 header =
-                '<div style="background-image:url('+ userInfo.profile_banner_url +'/' + (fromTablet?'web':'mobile') + ');background-size:100%;height:'+ height +'px;padding-top:'+ top +'px;background-color:#444;">' +
+                '<div style="background-image:url('+ userInfo.profile_banner_url +'/mobile);background-size:100%;height:'+ height +'px;padding-top:'+ top +'px;background-color:#444;">' +
                     '<div style="width:100%;height:'+ layerHeight +'px;position:absolute;top:'+ (height - layerHeight) +'px;background-image:-webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.54902) 100%);text-shadow: rgb(255, 255, 255) 0px 1px 0px;background-color: rgba(0, 0, 0, 0);background-origin: padding-box;"></div>' + 
                     '<img src='+ image +' style="display:block;-webkit-border-radius:5px;margin-top:7px;margin-left:auto;margin-right:auto;">' +
                     '<div style="position:relative;padding:0px;margin-top:'+ top +'px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
@@ -662,7 +683,7 @@ Ext.define("OECDInfo.controller.Main", {
                 '</div>';
 
                 header2 =
-                '<div style="background-image:url('+ userInfo.profile_banner_url +'/' + (fromTablet?'web':'mobile') + ');background-size:100%;height:'+ height +'px;padding-top:5px;background-color:#444;">' +
+                '<div style="background-image:url('+ userInfo.profile_banner_url +'/mobile);background-size:100%;height:'+ height +'px;padding-top:5px;background-color:#444;">' +
                     '<div style="width:100%;height:'+ layerHeight +'px;position:absolute;top:'+ (height - layerHeight) +'px;background-image:-webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.54902) 100%);text-shadow: rgb(255, 255, 255) 0px 1px 0px;background-color: rgba(0, 0, 0, 0);background-origin: padding-box;"></div>' + 
                     '<div style="position:relative;margin-top:'+ top +'px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
                         '<h4 style="margin-bottom:'+ top +'px;"><span class=link name='+ userInfo.url +' style="color:white;text-decoration:none;">'+ userInfo.url +'</span></h4>' +
@@ -682,7 +703,7 @@ Ext.define("OECDInfo.controller.Main", {
                     // Tweets:'+ userInfo.statuses_count + ', Followers:'+ userInfo.followers_count +'
                     // '<div style="color:#000;font-weight:normal;vertical-align:middle;font-size:small;text-align:center;">Tweets:'+ userInfo.statuses_count + ', Followers:'+ userInfo.followers_count +'</div>' +
                 '</div>';
-console.log(data);
+
                 body +=
                 '<div style="font-size:smaller;color:gray;'+ (fromTablet?'padding:10px 15px 15px 10px;':'padding:10px;') +'">' + 
                     '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
