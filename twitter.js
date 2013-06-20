@@ -482,7 +482,8 @@ app.get('/api/:themes/:days', function(req, res){
 
 				// res.header("Content-Type", "application/javascri; charset=utf-8");
 				// res.jsonp(feeds['called']);
-				res.setEncoding('utf8')
+				// res.setEncoding('utf8')
+				res.writeHead(200, {'Content-Type':'text/plain; charset=utf8'});
 				res.jsonp(result);
 				// res.jsonp(result);
 	        }
