@@ -248,7 +248,7 @@ app.get('/api/:themes/:days', function(req, res){
 				 			video.theme = 'generic';
 				 			video.title = item.video.title;
 				 			// video.image = "http://i.ytimg.com/vi/" + item.video.id + "/default.jpg";
-				 			video.image = item.video.thumbnail.default;
+				 			video.image = item.video.thumbnail.sqDefault;
 				 			video.content = item.video.description;
 				 			video.pubDate = new Date(item.video.uploaded);
 				 			// video.link = item.video.player.mobile;
