@@ -55,9 +55,7 @@ Ext.define("OECDInfo.controller.Main", {
             },
             loadmore:{
                 tap:function(){
-                    this.getLoadmore().getParent().setHidden(true);
-                    console.log('called!');
-                    this.displayList(++this.self.currentPage);
+                    this.loadMore();
                 }
             },            
             detail:{
@@ -69,6 +67,7 @@ Ext.define("OECDInfo.controller.Main", {
                     if(data == 'first'){
                         Ext.Msg.alert('', 'This is the first item')
                     }else{
+                        this.scrollListSelected(this.self.currentIndex);
                         this.self.currentIndex--;
                         this.openDetail(data);
                     }
@@ -78,6 +77,10 @@ Ext.define("OECDInfo.controller.Main", {
                     if(data == 'last'){
                         Ext.Msg.alert('', 'This is the last item')
                     }else{
+                        if(this.self.currentIndex == (this.self.currentPage * this.self.pageSize)-1){
+                            this.loadMore();
+                        } 
+                        this.scrollListSelected(this.self.currentIndex);
                         this.self.currentIndex++;
                         this.openDetail(data);
                     }
@@ -201,6 +204,14 @@ Ext.define("OECDInfo.controller.Main", {
         //     // console.log(item.getLabel());
         //     console.log(key.getLabel());
         // }); 
+    },
+    scrollListSelected:function(){
+        var list = this.getList(),
+            els = list.getViewItems(),
+            el = els[this.self.currentIndex],
+            offset = el.bodyElement.dom.offsetTop-26;
+
+        list.getScrollable().getScroller().scrollTo(0, offset);
     },
     shareEmail:function(){
         var data = this.self.detail.getData();
@@ -452,8 +463,6 @@ Ext.define("OECDInfo.controller.Main", {
         var me = this;
         var filterFn = function (element, index, array) {
             var type = me.self.currentType;
-            console.log(type);
-            console.log(element.typeName);
             return (element.typeName == type);
         }
         var data = (
@@ -489,6 +498,11 @@ Ext.define("OECDInfo.controller.Main", {
 
         store.setData(this.self.links);
         store.load();
+    },
+    loadMore:function(){
+        this.getLoadmore().getParent().setHidden(true);
+        console.log('called!');
+        this.displayList(++this.self.currentPage);
     },
     displayList:function (page) {
         var store = Ext.getStore('MainStore'),
