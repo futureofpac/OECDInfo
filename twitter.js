@@ -251,7 +251,8 @@ app.get('/api/:themes/:days', function(req, res){
 				 			video.image = item.video.thumbnail.default;
 				 			video.content = item.video.description;
 				 			video.pubDate = new Date(item.video.uploaded);
-				 			video.link = item.video.player.mobile;
+				 			// video.link = item.video.player.mobile;
+				 			video.link = 'http://www.youtube.com/embed/' + item.video.id + '?autoplay=1';
 
 					 		feeds['youtube'].push(video);
 				 		})
@@ -310,7 +311,7 @@ app.get('/api/:themes/:days', function(req, res){
 			                            followers_count:    userData.followers_count 
 			                        };
 
-								tweet.link = 'https://www.twitter.com/' +  userData.screen_name + '/status/' + item.id;
+								tweet.link = 'https://www.twitter.com/' +  userData.screen_name + '/status/' + item.id_str;
 								tweet.pubDate = new Date(item.created_at);
 								// tweet.image = data[i].user.profile_image_url;
 								tweet.image = item.user.profile_image_url;
