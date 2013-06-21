@@ -273,7 +273,7 @@ app.get('/api/:themes/:days', function(req, res){
 						flickr.title = item.title;
 						flickr.image = 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret, 
 						flickr.content = item.description._content;
-						flicker.link = 'http://www.flickr.com/photos/OECD/' + item.id;
+						flickr.link = 'http://www.flickr.com/photos/OECD/' + item.id;
 						flickr.pubDate = new Date(item.datetaken);
 
 						feeds['flickr'].push(flickr);
