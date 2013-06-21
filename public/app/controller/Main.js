@@ -159,22 +159,13 @@ Ext.define("OECDInfo.controller.Main", {
             },
             share:{
                 emailtap:function(){
-
+                    this.shareEmail();
                 },
-                facebooktap:function(data){
+                facebooktap:function(){
+                    this.shareFacebook();
                 },
-                twittertap:function(data){
-                    this.shareTwitter(data);
-
-                    // var data = this.self.detail.getData();
-                    // console.log(data);
-                    // // window.open('mailto:""', 'email')
-                    // var a = document.createElement('a');
-                    // a.target = '_new';
-                    // // a.href='mailto:?subject=OECD Info:data&body=sss';
-                    // a.href='https://twitter.com/intent/tweet';
-                    // // a.href='mailto:';
-                    // a.click();
+                twittertap:function(){
+                    this.shareTwitter();
                 }
             }
         }
@@ -213,19 +204,14 @@ Ext.define("OECDInfo.controller.Main", {
     },
     shareEmail:function(){
         var data = this.self.detail.getData();
-        // console.log(data);
-        // // window.open('mailto:""', 'email')
-        // var a = document.createElement('a');
-        // // a.href='mailto:?subject=OECD Info:data&body=sss';
-        // a.href='mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content;
-        // // a.href='mailto:';
-        // a.click();
         window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content);
     },
     shareFacebook:function(data){
+        var data = this.self.detail.getData();
         window.open('https://www.facebook.com/sharer/sharer.php?u=' + data.link, 'fbsharer');
     },
     shareTwitter:function(data){
+        var data = this.self.detail.getData();
         window.open('https://twitter.com/intent/tweet?url='+ data.link +'&text=' + data.title);
     },
     checkTheme:function(themes){
