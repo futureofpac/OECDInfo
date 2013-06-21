@@ -160,9 +160,9 @@ Ext.application({
         var width = window.innerWidth;
         var device = queryString.d;
         if(device == 'phone'){
-                this.isTablet = false; 
+            this.isTablet = false; 
         }else if(device == 'tablet'){
-                this.isTablet = true; 
+            this.isTablet = true; 
         }else{
             if(width > 500){
                 this.isTablet = true; 

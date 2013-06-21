@@ -97,10 +97,10 @@ Ext.define("OECDInfo.controller.Main", {
                     this.shareEmail(data);
                 },
                 facebooktap:function(data){
-                    this.shareFacebook();
+                    this.shareFacebook(data);
                 },
                 twittertap:function(data){
-                    this.shareTwitter();
+                    this.shareTwitter(data);
                 }
             },
             menuBtn: {
@@ -222,10 +222,11 @@ Ext.define("OECDInfo.controller.Main", {
         // a.click();
         window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content);
     },
-    shareFacebook:function(){
+    shareFacebook:function(data){
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + data.link, 'fbsharer');
     },
-    shareTwitter:function(){
-        window.open('https://twitter.com/intent/tweet');
+    shareTwitter:function(data){
+        window.open('https://twitter.com/intent/tweet?url='+ data.link +'&text=' + data.title);
     },
     checkTheme:function(themes){
         // console.log(themes);
