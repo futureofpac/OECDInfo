@@ -59,6 +59,11 @@ Ext.define("OECDInfo.controller.Main", {
                 }
             },            
             detail:{
+                hide:function(){
+                    if(this.self.currentIndex > -1){
+                        this.scrollListSelected();
+                    }
+                },
                 hidetap:function(){
                     this.hideDetail();
                 },
@@ -67,7 +72,7 @@ Ext.define("OECDInfo.controller.Main", {
                     if(data == 'first'){
                         Ext.Msg.alert('', 'This is the first item')
                     }else{
-                        this.scrollListSelected(this.self.currentIndex);
+                        // this.scrollListSelected(this.self.currentIndex);
                         this.self.currentIndex--;
                         this.openDetail(data);
                     }
@@ -78,9 +83,9 @@ Ext.define("OECDInfo.controller.Main", {
                         Ext.Msg.alert('', 'This is the last item')
                     }else{
                         if(this.self.currentIndex == (this.self.currentPage * this.self.pageSize)-1){
+                        // this.scrollListSelected(this.self.currentIndex);
                             this.loadMore();
                         } 
-                        this.scrollListSelected(this.self.currentIndex);
                         this.self.currentIndex++;
                         this.openDetail(data);
                     }
@@ -208,7 +213,7 @@ Ext.define("OECDInfo.controller.Main", {
     scrollListSelected:function(){
         var list = this.getList(),
             els = list.getViewItems(),
-            el = els[this.self.currentIndex],
+            el = els[this.self.currentIndex-2],
             offset = el.bodyElement.dom.offsetTop-26;
 
         list.getScrollable().getScroller().scrollTo(0, offset);
