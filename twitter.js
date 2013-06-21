@@ -247,10 +247,11 @@ app.get('/api/:themes/:days', function(req, res){
 				 			video.typeName = 'Videos';
 				 			video.theme = 'generic';
 				 			video.title = item.video.title;
-				 			video.image = "http://i.ytimg.com/vi/" + item.video.id + "/default.jpg";
+				 			// video.image = "http://i.ytimg.com/vi/" + item.video.id + "/default.jpg";
+				 			video.image = item.video.thumbnail.default;
 				 			video.content = item.video.description;
 				 			video.pubDate = new Date(item.video.uploaded);
-				 			// video.link = item.video.player.default;
+				 			video.link = item.video.player.mobile;
 
 					 		feeds['youtube'].push(video);
 				 		})
@@ -272,6 +273,7 @@ app.get('/api/:themes/:days', function(req, res){
 						flickr.title = item.title;
 						flickr.image = 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret, 
 						flickr.content = item.description._content;
+						flicker.link = 'http://www.flickr.com/photos/OECD/' + item.id;
 						flickr.pubDate = new Date(item.datetaken);
 
 						feeds['flickr'].push(flickr);
@@ -295,9 +297,6 @@ app.get('/api/:themes/:days', function(req, res){
 								tweet.title = item.text;
 								tweet.theme = screen_name.theme;
 								tweet.typeName = 'Twitter';
-								tweet.pubDate = new Date(item.created_at);
-								// tweet.image = data[i].user.profile_image_url;
-								tweet.image = item.user.profile_image_url;
 
 			                    var userData = item.user,
 			                        userInfo = {
@@ -310,6 +309,11 @@ app.get('/api/:themes/:days', function(req, res){
 			                            friends_count:      userData.friends_count,
 			                            followers_count:    userData.followers_count 
 			                        };
+
+								tweet.link = 'https://www.twitter.com/' +  userData.screen_name + '/status/' + item.id;
+								tweet.pubDate = new Date(item.created_at);
+								// tweet.image = data[i].user.profile_image_url;
+								tweet.image = item.user.profile_image_url;
 
 								tweet.userInfo = userInfo;
 								// tweet.link = data[i].user.entities.urls.expanded_url

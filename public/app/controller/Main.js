@@ -213,10 +213,25 @@ Ext.define("OECDInfo.controller.Main", {
     scrollListSelected:function(){
         var list = this.getList(),
             els = list.getViewItems(),
-            el = els[this.self.currentIndex-2],
+            el = els[this.self.currentIndex-1],
             offset = el.bodyElement.dom.offsetTop-26;
 
         list.getScrollable().getScroller().scrollTo(0, offset);
+    },
+    getLink:function(){
+        var replaceLinks = function(html, replace){
+            if(html == null) {
+                return '';
+            }
+            
+            html = html.replace(/(http:\/\/[^\s]*)/g, "<span class=\"link\" name=\"$1\">$1</span>");
+            html = html.replace(/(www.[^\s]*)/g, "<span class=\"link\" name=\"http://$1\">$1</span>");
+            html = html.replace(/(@[^\s]*)/g, "<span class=\"at\" name=\"http://$1\">$1</span>");
+            html = html.replace(/(#[^\s]*)/g, "<span class=\"shap\" name=\"http://$1\">$1</span>");
+
+            return html;
+        }  
+
     },
     shareEmail:function(){
         var data = this.self.detail.getData();

@@ -86,11 +86,11 @@ Ext.define('OECDInfo.view.Detail', {
                 xtype: 'panel',
                 id:'shareContainer',
                 hidden:true,
-                height:115,
+                height:125,
                 defaults:{
                     xtype:'button',
                     // ui:'action',
-                    style:'font-size:smaller;margin:5px 15px 7px 15px;'
+                    style:'font-size:smaller;margin:7px 15px 8px 15px;'
                 },
                 items:[
                     // {
