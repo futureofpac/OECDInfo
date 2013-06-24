@@ -451,12 +451,18 @@ Ext.define("OECDInfo.controller.Main", {
 
             this.self.prev.setLeft(90);
             this.self.next.setRight(90);
+
+            this.self.detail.setWidth(440);
+            this.self.detail.setHeight('80%');
         }else{
-            this.self.prev.setTop(450);
-            this.self.next.setTop(450);
+            this.self.prev.setTop(500);
+            this.self.next.setTop(500);
 
             this.self.prev.setLeft(50);
             this.self.next.setRight(50);
+
+            this.self.detail.setWidth(400);
+            this.self.detail.setHeight('70%');
         }
     },
     openDetail:function(data){
