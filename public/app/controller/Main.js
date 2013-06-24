@@ -442,6 +442,23 @@ Ext.define("OECDInfo.controller.Main", {
             this.self.menu.hide();
         }
     },
+    handleOrientationDetail:function(){
+        var width = window.innerWidth;
+
+        if(width > 800){
+            this.self.prev.setTop(330);
+            this.self.next.setTop(330);
+
+            this.self.prev.setLeft(90);
+            this.self.next.setRight(90);
+        }else{
+            this.self.prev.setTop(450);
+            this.self.next.setTop(450);
+
+            this.self.prev.setLeft(50);
+            this.self.next.setRight(50);
+        }
+    },
     openDetail:function(data){
         // console.log('detail');
         // this.self.detail.animateActiveItem(1, {type:'slide', direction:'left'})
@@ -462,8 +479,12 @@ Ext.define("OECDInfo.controller.Main", {
             panelContent = panel[1],
             carousel1 = carousel.getItems().items[1],
             carousel2 = carousel.getItems().items[2];
+
+            if(fromTablet){
+                this.handleOrientationDetail();
+            }
             // panelProvider = panel[1];
-            detail.setData(data)
+            detail.setData(data);
 
         topmenu.setTitle(type);
         carousel.setActiveItem(0);
