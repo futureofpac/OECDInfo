@@ -8,9 +8,26 @@ Ext.define('OECDInfo.view.Detail', {
     ],
     initialize:function(){
         if(this.getFromTablet()){
+            // this.query('toolbar')[0].hide();
+
             this.query('button[action=close]')[0].hide();
             this.query('button[action=share]')[0].hide();
-            this.query('panel[id=shareContainer]')[0].show();
+            this.query('button[action=prev]')[0].hide();
+            this.query('button[action=next]')[0].hide();
+
+            this.query('button[action=email]')[0].show();
+            this.query('button[action=facebook]')[0].show();
+            this.query('button[action=twitter]')[0].show();
+            // this.query('panel[id=shareContainer]')[0].show();
+        }else{
+            this.query('button[action=close]')[0].show();
+            this.query('button[action=share]')[0].show();
+            this.query('button[action=prev]')[0].show();
+            this.query('button[action=next]')[0].show();
+
+            this.query('button[action=email]')[0].hide();
+            this.query('button[action=facebook]')[0].hide();
+            this.query('button[action=twitter]')[0].hide();
         }
         this.callParent();
     },
@@ -81,35 +98,43 @@ Ext.define('OECDInfo.view.Detail', {
                 layout:'fit',
                 scrollable:true,
                 flex:1
-            },
-			{
-                xtype: 'panel',
-                id:'shareContainer',
-                hidden:true,
-                height:125,
-                defaults:{
-                    xtype:'button',
-                    // ui:'action',
-                    style:'font-size:smaller;margin:7px 15px 8px 15px;'
-                },
-                items:[
-                    // {
-                    //     text:'Open'
-                    // },
-                    {
-                        text:'Email',
-                        action:'email'
-                    },
-                    {
-                        text:'Facebook',
-                        action:'facebook'
-                    },
-                    {
-                        text:'Twitter',
-                        action:'twitter'
-                    }
-                ]
-            },            
+            }
+            ,
+			// {
+   //              xtype: 'panel',
+   //              id:'shareContainer',
+   //              // centered:true,
+   //              style:'margin:0px 0px 0px 30px',
+   //              width:340,
+   //              hidden:true,
+   //              layout:'hbox',
+   //              // height:125,
+   //              defaults:{
+   //                  xtype:'button',
+   //                  // ui:'action',
+   //                  flex:1,
+   //                  height:35,
+   //                  // style:'font-size:smaller;margin:7px 15px 8px 15px;'
+   //                  style:'font-size:smaller;margin:10px;'
+   //              },
+   //              items:[
+   //                  // {
+   //                  //     text:'Open'
+   //                  // },
+   //                  {
+   //                      text:'Email',
+   //                      action:'email'
+   //                  },
+   //                  {
+   //                      text:'Facebook',
+   //                      action:'facebook'
+   //                  },
+   //                  {
+   //                      text:'Twitter',
+   //                      action:'twitter'
+   //                  }
+   //              ]
+   //          },            
             {
                 xtype:'toolbar',
                 ui:'light',
@@ -153,6 +178,19 @@ Ext.define('OECDInfo.view.Detail', {
                         text:'Share',
                         action:'share'
                     },
+                    {
+                        text:'Email',
+                        action:'email'
+                    },
+                    {
+                        text:'Facebook',
+                        action:'facebook'
+                    },
+                    {
+                        text:'Twitter',
+                        action:'twitter'
+                    },
+
                     {
                         // iconCls:'reply'
                         text:'Open',
