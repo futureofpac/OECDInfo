@@ -29,7 +29,11 @@ Ext.define("OECDInfo.controller.Main", {
         },
 
         control: {
-            
+            viewport:{
+                onrientationchange:function () {
+                    alert('change')
+                }
+            },
             list:{
                 itemsingletap:function (me, index, target, record, e, eOpts) {
                     console.log(me);
