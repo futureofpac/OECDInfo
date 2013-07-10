@@ -13,7 +13,7 @@ Ext.define('OECDInfo.view.MainList', {
         loadingText:'Loading ...',
         autoDestroy:false,
         scrollToTopOnRefresh:false,
-        disableSelection:true,  
+        // disableSelection:true,  
         pinHeaders: true,
         grouped:true,
         plugins: [

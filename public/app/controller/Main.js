@@ -259,6 +259,8 @@ Ext.define("OECDInfo.controller.Main", {
             offset = el.bodyElement.dom.offsetTop-26;
 
         list.getScrollable().getScroller().scrollTo(0, offset);
+        list.deselectAll();
+        list.select(this.self.currentIndex);
     },
     getLink:function(){
         var replaceLinks = function(html, replace){
