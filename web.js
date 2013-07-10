@@ -24,8 +24,8 @@ var T = new Twit({
 })
 
 var express = require('express'),
-	async = require('async'),
-	wines = require('./routes/wines');
+	async = require('async');
+	// ,wines = require('./routes/wines');
 var app = express();
 
 app.use(express.static(__dirname + '/public'));
@@ -502,10 +502,10 @@ app.get('/api/:themes/:days', function(req, res){
 	);
 });
 
-app.get('/wines', wines.findAll);
-app.get('/wines/:id', wines.findById);
-app.get('/mango', wines.fromMango);
-app.get('/register', wines.register);
+// app.get('/wines', wines.findAll);
+// app.get('/wines/:id', wines.findById);
+// app.get('/mango', wines.fromMango);
+// app.get('/register', wines.register);
 
 // app.listen(3000);
 
