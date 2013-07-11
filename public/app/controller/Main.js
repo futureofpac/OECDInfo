@@ -561,19 +561,23 @@ Ext.define("OECDInfo.controller.Main", {
                 callback:function(success, response){
                     console.log(response);
 
-                    me.self.feeds = [].concat(response.feeds);
-                    me.self.links = [].concat(response.links);
-                    me.displayList(1);
-                    // me.setFeeds([{test:'aaaa'}]);
-                    var localFeeds = [], type = '';
-                    for(var i=0;i<response.feeds.length;i++){
-                        type = response.feeds[i].typeName;
-                        if(type != 'Articles' && type != 'Photos' && type != 'Videos'){
-                            localFeeds.push(response.feeds[i]);
+                    if(response == null){
+                        Ext.Msg.alert('Alert', 'No Data, Try it later again');
+                        me.displayList(1);
+                    }else{
+                        me.self.feeds = [].concat(response.feeds);
+                        me.self.links = [].concat(response.links);
+                        me.displayList(1);
+                        // me.setFeeds([{test:'aaaa'}]);
+                        var localFeeds = [], type = '';
+                        for(var i=0;i<response.feeds.length;i++){
+                            type = response.feeds[i].typeName;
+                            if(type != 'Articles' && type != 'Photos' && type != 'Videos'){
+                                localFeeds.push(response.feeds[i]);
+                            }
                         }
+                        me.setFeeds(localFeeds);
                     }
-                    me.setFeeds(localFeeds);
-                    // me.setFeeds(response.links);
                     Ext.Viewport.setMasked(false);
                 } 
             });
