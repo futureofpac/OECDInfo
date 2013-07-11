@@ -239,11 +239,8 @@ Ext.define("OECDInfo.controller.Main", {
     launch:function(){
         this.callParent(arguments);
         // this.initMenu();
-        alert('test 1');
         this.initOptions();
-        alert('test 2');
         var themes = this.getTheme();
-        alert('test 3');
         this.callService(themes);
         this.self.stopCheckEvent = true;
         this.checkTheme(themes.split(','));        
@@ -556,14 +553,12 @@ Ext.define("OECDInfo.controller.Main", {
     },
     callService:function (themes) {
         // if(navigator.onLine){
-                        alert('before display0')
             var me = this;
             Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
             console.log(themes);
             Ext.data.JsonP.request({
                 url: OECDInfo.app.serviceRoot() + '/api/'+themes+'/20/',
                 callback:function(success, response){
-                        alert('before display1')
                     console.log(response);
 
                     if(response == null){
@@ -572,9 +567,7 @@ Ext.define("OECDInfo.controller.Main", {
                     }else{
                         me.self.feeds = [].concat(response.feeds);
                         me.self.links = [].concat(response.links);
-                        alert('before display2')
                         me.displayList(1);
-                        alert('after display')
                         // me.setFeeds([{test:'aaaa'}]);
                         var localFeeds = [], type = '';
                         for(var i=0;i<response.feeds.length;i++){
