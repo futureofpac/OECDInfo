@@ -128,6 +128,15 @@ Ext.application({
     ],
     isTablet:false,
     currentType:'All',
+    serviceRoot:function(){
+        var protocol = location.protocol;
+        console.log(protocol)
+        if(protocol == 'file:'){
+            return 'http://test-oecdinfo.herokuapp.com';
+        }else{
+            return '';
+        }
+    },
     launch: function() {
 
         var queryString = function () {
