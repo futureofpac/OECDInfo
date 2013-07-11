@@ -239,8 +239,11 @@ Ext.define("OECDInfo.controller.Main", {
     launch:function(){
         this.callParent(arguments);
         // this.initMenu();
+        alert('test 1');
         this.initOptions();
+        alert('test 2');
         var themes = this.getTheme();
+        alert('test 3');
         this.callService(themes);
         this.self.stopCheckEvent = true;
         this.checkTheme(themes.split(','));        
