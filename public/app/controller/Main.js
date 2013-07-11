@@ -552,7 +552,7 @@ Ext.define("OECDInfo.controller.Main", {
         this.self.detail.hide();
     },
     callService:function (themes) {
-        if(navigator.onLine){
+        // if(navigator.onLine){
             var me = this;
             Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
             console.log(themes);
@@ -581,20 +581,20 @@ Ext.define("OECDInfo.controller.Main", {
                     Ext.Viewport.setMasked(false);
                 } 
             });
-        }else{
-            Ext.Msg.alert('Notice', 'No Internet connection, data will be loaded from the cache and some features might be limited.')
-            var cache = this.getFeeds();
+        // }else{
+        //     Ext.Msg.alert('Notice', 'No Internet connection, data will be loaded from the cache and some features might be limited.')
+        //     var cache = this.getFeeds();
 
-            console.log(cache);
+        //     console.log(cache);
 
-            if(cache){
-                this.self.feeds = [].concat(cache);
-            }
-            // if(cache.links){
-            //     this.self.links = [].concat(cache.links);
-            // }
-            this.displayList(1);
-        }
+        //     if(cache){
+        //         this.self.feeds = [].concat(cache);
+        //     }
+        //     // if(cache.links){
+        //     //     this.self.links = [].concat(cache.links);
+        //     // }
+        //     this.displayList(1);
+        // }
 
     },
     filterFn:function (element, index, array) {
