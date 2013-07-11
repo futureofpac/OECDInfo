@@ -567,7 +567,9 @@ Ext.define("OECDInfo.controller.Main", {
                     }else{
                         me.self.feeds = [].concat(response.feeds);
                         me.self.links = [].concat(response.links);
+                        alert('before display')
                         me.displayList(1);
+                        alert('after display')
                         // me.setFeeds([{test:'aaaa'}]);
                         var localFeeds = [], type = '';
                         for(var i=0;i<response.feeds.length;i++){
@@ -576,7 +578,7 @@ Ext.define("OECDInfo.controller.Main", {
                                 localFeeds.push(response.feeds[i]);
                             }
                         }
-                        me.setFeeds(localFeeds);
+                        // me.setFeeds(localFeeds);
                     }
                     Ext.Viewport.setMasked(false);
                 } 
