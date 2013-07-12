@@ -462,15 +462,13 @@ app.get('/api/:themes/:days', function(req, res){
 	        	resultFeeds = _.sortBy(resultFeeds, function(item){
 	        		return item.pubDate;
 	        	});
-
+	        	resultFeeds = resultFeeds.reverse();
 	        	_.each(resultFeeds, function(feed, index){
-	        		console.log(feed);
-	        		console.log(index);
 	        		feed.id = index;
 	        	});
 
 	        	var result = {};
-	        	result.feeds = resultFeeds.reverse();
+	        	result.feeds = resultFeeds;
 
 	        	result.links = [
 	        		{
