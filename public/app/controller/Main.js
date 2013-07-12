@@ -72,6 +72,7 @@ Ext.define("OECDInfo.controller.Main", {
                     }else{
                         // this.scrollListSelected(this.self.currentIndex);
                         this.self.currentIndex--;
+                        this.scrollListSelected();
                         this.openDetail(data);
                     }
                 }
@@ -88,6 +89,7 @@ Ext.define("OECDInfo.controller.Main", {
                             this.loadMore();
                         } 
                         this.self.currentIndex++;
+                        this.scrollListSelected();
                         this.openDetail(data);
                     }
                 }
