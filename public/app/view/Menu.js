@@ -200,7 +200,7 @@ Ext.define('OECDInfo.view.Menu', {
                     {
                         xtype:'panel',
                         height:30,
-                        html:'By Themem',
+                        html:'By Themes',
                         scrollDock: 'bottom',
                         style:'background-color:gray;padding:5px 0px 5px 0px;color:#ffffff;text-align:center;'
                     }
