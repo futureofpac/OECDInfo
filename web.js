@@ -463,12 +463,14 @@ app.get('/api/:themes/:days', function(req, res){
 	        		return item.pubDate;
 	        	});
 
-	        	var result = {};
-	        	result.feeds = resultFeeds.reverse();
-
-	        	_.each(feeds, function(feed, index){
+	        	_.each(resultFeeds, function(feed, index){
+	        		console.log(feed);
+	        		console.log(index);
 	        		feed.id = index;
 	        	});
+
+	        	var result = {};
+	        	result.feeds = resultFeeds.reverse();
 
 	        	result.links = [
 	        		{
