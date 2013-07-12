@@ -11,10 +11,11 @@ Ext.define('OECDInfo.store.MainStore', {
 			type:'memory'
 		},		
 		autoLoad:false,
- 	// 	sorters:[
- 	// 		{property:'pubDate', direction:'DESC'},
- 	// 		{property:'typeName', direction:'ASC'}
-		// ],
+ 		sorters:[
+ 			{property:'id', direction:'ASC'}
+ 			// {property:'pubDate', direction:'DESC'},
+ 			// {property:'typeName', direction:'ASC'}
+		],
 		grouper:{
 			sortProperty:'pubDate',
 			direction:'DESC',

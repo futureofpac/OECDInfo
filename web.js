@@ -244,6 +244,7 @@ app.get('/api/:themes/:days', function(req, res){
 				 	youtube.feeds.playlist(key,{'max-results':20},function(err, videos){
 				 		_.each(videos.items, function(item, index){
 					 		var video = {};
+					 		video.id = -1;
 				 			video.typeName = 'Videos';
 				 			video.theme = 'generic';
 				 			video.title = item.video.title;
@@ -269,6 +270,7 @@ app.get('/api/:themes/:days', function(req, res){
 			 		_.each(data.photos.photo, function(item, index){
 
 						var flickr = {};
+				 		flickr.id = -1;
 						flickr.typeName = 'Photos';
 						flickr.theme = 'generic';
 						flickr.title = item.title;
@@ -295,6 +297,7 @@ app.get('/api/:themes/:days', function(req, res){
 							var articleDate = new Date(item.created_at);
 							if(startDate < articleDate && endDate > articleDate){
 								var tweet = {};
+								tweet.id = -1;
 								tweet.title = item.text;
 								tweet.theme = screen_name.theme;
 								tweet.typeName = 'Twitter';
@@ -365,6 +368,7 @@ app.get('/api/:themes/:days', function(req, res){
 							if(feeds_theme.type == 'Publication'){
 								if(endDate > articleDate){
 									var publication = {};
+									publication.id = -1;
 									publication.typeName = 'Publications';
 									publication.theme = feeds_theme.theme;
 									publication.title = article.title;
@@ -384,6 +388,7 @@ app.get('/api/:themes/:days', function(req, res){
 								if(endDate > articleDate){
 									var blog = {};
 									var providerName = feeds_theme.provider.name;
+									blog.id = -1;
 									blog.typeName = 'Articles';
 									blog.theme = feeds_theme.theme;
 									blog.title = article.title;
@@ -405,6 +410,7 @@ app.get('/api/:themes/:days', function(req, res){
 										var news = {};
 										var providerName = feeds_theme.provider.name;
 
+										news.id = -1;
 										news.typeName = feeds_theme.type;
 										news.theme = feeds_theme.theme;
 										news.title = article.title;
@@ -459,6 +465,11 @@ app.get('/api/:themes/:days', function(req, res){
 
 	        	var result = {};
 	        	result.feeds = resultFeeds.reverse();
+
+	        	_.each(feeds, function(feed, index){
+	        		feed.id = index;
+	        	});
+
 	        	result.links = [
 	        		{
 	        			typeName:'Links',

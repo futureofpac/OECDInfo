@@ -5,7 +5,7 @@ Ext.define('OECDInfo.model.Feed', {
 		// identifier:'uuid',
 		
 		fields: [
-			{name:'id', type:'string'},
+			{name:'id', type:'int'},
 			// {name:'type', type:'string'},
 			{name:'typeName', type:'string'},
 			{name:'theme', type:'string'},

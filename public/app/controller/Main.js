@@ -101,6 +101,7 @@ Ext.define("OECDInfo.controller.Main", {
                     }
                 },
                 hide:function(){
+                    console.log(this.self.currentIndex);
                     if(this.self.currentIndex > -1 && !this.self.isTablet){
                         this.scrollListSelected();
                     }
