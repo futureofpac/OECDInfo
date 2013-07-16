@@ -413,22 +413,26 @@ Ext.define("OECDInfo.controller.Main", {
         this.self.next.hide();
     },
     getTheme:function(){
-        var local = window.localStorage.getItem('themes');
+        // var local = localStorage.getItem('themes');
+        var local = localStorage['themes'];
         var json = JSON.parse(local);
         return ((json == '' || json == null) ? 'Generic' : json);
     },
     setTheme:function(themes){
         // window.localStorage.removeItem('themes');
-        window.localStorage.setItem('themes', JSON.stringify(themes));
+        // localStorage.setItem('themes', JSON.stringify(themes));
+        localStorage['themes'] = JSON.stringify(themes);
     },
     setFeeds:function(feeds){
         console.log(feeds);
         // window.localStorage.removeItem('themes');
-        window.localStorage.setItem('feeds', JSON.stringify(feeds));
+        // localStorage.setItem('feeds', JSON.stringify(feeds));
+        localStorage['feeds'] = JSON.stringify(feeds);
         // window.localStorage.setItem('feeds', feeds);
     },
     getFeeds:function(){
-        var local = window.localStorage.getItem('feeds');
+        // var local = localStorage.getItem('feeds');
+        var local = localStorage['feeds'];
         var json = JSON.parse(local);
         return ((json == '' || json == null) ? [] : json);
         // return local;
