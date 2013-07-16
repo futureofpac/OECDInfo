@@ -287,7 +287,7 @@ Ext.define("OECDInfo.controller.Main", {
         // window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content);
         // window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link);
         alert('a')
-        window.open('mailto:?subject=OECD Info:' );
+        window.open('mailto:?subject=OECD Info:', 'email' );
     },
     shareFacebook:function(data){
         var data = this.self.detail.getData();
@@ -295,7 +295,7 @@ Ext.define("OECDInfo.controller.Main", {
     },
     shareTwitter:function(data){
         var data = this.self.detail.getData();
-        window.open('https://twitter.com/intent/tweet?url='+ data.link +'&text=' + data.title);
+        window.open('https://twitter.com/intent/tweet?url='+ data.link +'&text=' + data.title, 'twitter');
     },
     checkTheme:function(themes){
         // console.log(themes);
