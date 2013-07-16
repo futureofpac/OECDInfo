@@ -245,7 +245,7 @@ Ext.define("OECDInfo.controller.Main", {
         this.initOptions();
         // var themes = this.getTheme();
         var themes = 'Generic';
-        
+
         this.callService(themes);
         this.self.stopCheckEvent = true;
         this.checkTheme(themes.split(','));        
@@ -855,9 +855,9 @@ Ext.define("OECDInfo.controller.Main", {
                 // border-bottom-left-radius:5px;border-bottom-right-radius:5px;
                     // '<h3><strong>Tweets:'+ userInfo.statuses_count +' Following:'+ userInfo.friends_count +' Followers:'+ userInfo.followers_count +' </strong></h3>' +
                     // '<span>'+ this.getDateStr(data.pubDate) +'</span>' +
-                    '<span style="padding:5px 5px 5px 12px;float:left;border-right:rgba(0,0,0, 0.0976563) solid 1px;font-weight:bold;font-size:medium;width:24%;height:100%;">'+ userInfo.statuses_count + '</br><span style="color:gray;font-weight:lighter;font-size:small">Tweets</span></span>' +
-                    '<span style="padding:5px 5px 5px 12px;float:left;border-right:rgba(0,0,0, 0.0976563) solid 1px;font-weight:bold;font-size:medium;width:24%;height:100%;">'+ userInfo.followers_count + '</br><span style="color:gray;font-weight:lighter;font-size:small">Followers</span></span>' +
-                    '<span style="padding:5px 5px 5px 12px;float:left;font-weight:bold;font-size:medium;width:24%;height:100%;">'+ userInfo.friends_count + '</br><span style="color:gray;font-weight:lighter;font-size:small">Following</span></span>' +
+                    '<span style="padding:5px 5px 5px 12px;float:left;border-right:rgba(0,0,0, 0.0976563) solid 1px;font-weight:bold;font-size:medium;width:24%;height:100%;">'+ userInfo.statuses_count + '</br><span style="float:left;color:gray;font-weight:lighter;font-size:small">Tweets</span></span>' +
+                    '<span style="padding:5px 5px 5px 12px;float:left;border-right:rgba(0,0,0, 0.0976563) solid 1px;font-weight:bold;font-size:medium;width:24%;height:100%;">'+ userInfo.followers_count + '</br><span style="float:left;color:gray;font-weight:lighter;font-size:small">Followers</span></span>' +
+                    '<span style="padding:5px 5px 5px 12px;float:left;font-weight:bold;font-size:medium;width:24%;height:100%;">'+ userInfo.friends_count + '</br><span style="float:left;color:gray;font-weight:lighter;font-size:small">Following</span></span>' +
                     '<span style="padding:12px 5px 5px 5px;float:right;font-weight:bold;font-size:medium;width:28%;height:100%;">' +
                         '<img src="resources/images/twitter_32.png" width=30 style="vertical-align:middle;margin-right:4px;">' +
                         '<a href="https://twitter.com/intent/user?screen_name='+ userInfo.screen_name +'" target="_new" style="text-decoration:none;font-size:smaller;color:black;">Follow</a>' +
