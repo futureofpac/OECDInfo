@@ -180,6 +180,11 @@ Ext.application({
 
         console.log(this.isTablet);
 
+        Ext.Viewport.on('orientationchange', function() {
+            if (Ext.os.is.Android) {
+                Ext.Viewport.setSize(window.innerWidth,window.innerHeight);
+            }
+        });
         // Initialize the main view
         Ext.Viewport.add((this.isTablet ? Ext.create('OECDInfo.view.Main') : Ext.create('OECDInfo.view.MainList')));
     },
