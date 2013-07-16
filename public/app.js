@@ -12,7 +12,8 @@ Ext.application({
     requires: [
         'Ext.MessageBox',
         'Ext.data.proxy.JsonP',
-        'Ext.tab.Panel'
+        'Ext.tab.Panel',
+        'Ext.Img'
     ],
 
     views: [
