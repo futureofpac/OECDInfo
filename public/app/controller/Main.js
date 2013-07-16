@@ -285,7 +285,8 @@ Ext.define("OECDInfo.controller.Main", {
     shareEmail:function(){
         var data = this.self.detail.getData();
         // window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content);
-        window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link);
+        // window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link);
+        window.open('mailto:?subject=OECD Info:' );
     },
     shareFacebook:function(data){
         var data = this.self.detail.getData();
