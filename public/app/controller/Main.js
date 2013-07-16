@@ -288,6 +288,7 @@ Ext.define("OECDInfo.controller.Main", {
     },
     shareFacebook:function(data){
         var data = this.self.detail.getData();
+        alert(data.link);
         window.open('https://www.facebook.com/sharer/sharer.php?u=' + data.link, 'fbsharer');
     },
     shareTwitter:function(data){
