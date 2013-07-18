@@ -1,15 +1,13 @@
-//dumy change for the test for auto deploy
-
 
 var Twit = require('twit')
+
+var video = require('./routes/video');
+
 
 var FeedParser = require('feedparser')
   , request = require('request');
 
 var _ = require ('underscore');
-
-var youtube = require('youtube-feeds')
-
 
 // Consumer key	YESBKjjb6RtIsDfKJbf1Q
 // Consumer secret	ottkkdctP55j0VcDrG41nuLXD51FB9ab7KcnWLs
@@ -35,7 +33,7 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 
 // asfas
-
+	
 
 
 var Flickr = require('flickr').Flickr;
@@ -88,6 +86,7 @@ app.get('/api/:themes/:days', function(req, res){
     		// 	news_urls.push('http://www.oecd-ilibrary.org/rss/content/subject/'+ item +'/latest?fmt=rss');
     		// });
 
+	// module themeUrl.js
 	var themeUrls = {
 		'Generic' : {
 			'Twitter' : [
@@ -245,24 +244,29 @@ app.get('/api/:themes/:days', function(req, res){
 			];
 			if(_.indexOf(themes, 'Generic') > -1){
 			    async.forEach(playlistkeys, function(key, callback) { //The second argument (callback) is the "task callback" for a specific messageId
-				 	youtube.feeds.playlist(key,{'max-results':20},function(err, videos){
-				 		_.each(videos.items, function(item, index){
-					 		var video = {};
-					 		video.id = -1;
-				 			video.typeName = 'Videos';
-				 			video.theme = 'generic';
-				 			video.title = item.video.title;
-				 			// video.image = "http://i.ytimg.com/vi/" + item.video.id + "/default.jpg";
-				 			video.image = item.video.thumbnail.sqDefault;
-				 			video.content = item.video.description;
-				 			video.pubDate = new Date(item.video.uploaded);
-				 			// video.link = item.video.player.mobile;
-				 			video.link = 'http://www.youtube.com/embed/' + item.video.id + '?autoplay=1';
 
-					 		feeds['youtube'].push(video);
-				 		})
-				 		callback();
-				 	})
+			    	video.feed(feeds['youtube'], callback)
+
+				 	// youtube.feeds.playlist(key,{'max-results':20},function(err, videos){
+				 	// 	_.each(videos.items, function(item, index){
+					 // 		var video = {};
+					 // 		video.id = -1;
+				 	// 		video.typeName = 'Videos';
+				 	// 		video.theme = 'generic';
+				 	// 		video.title = item.video.title;
+				 	// 		// video.image = "http://i.ytimg.com/vi/" + item.video.id + "/default.jpg";
+				 	// 		video.image = item.video.thumbnail.sqDefault;
+				 	// 		video.content = item.video.description;
+				 	// 		video.pubDate = new Date(item.video.uploaded);
+				 	// 		// video.link = item.video.player.mobile;
+				 	// 		video.link = 'http://www.youtube.com/embed/' + item.video.id + '?autoplay=1';
+
+					 // 		feeds['youtube'].push(video);
+				 	// 	})
+				 	// 	callback();
+				 	// })
+
+
 			    }, callback);
 			}else{
 				callback();
@@ -336,17 +340,6 @@ app.get('/api/:themes/:days', function(req, res){
     	function(callback) {
 
     		var feeds_themes = getUrl(themes, 'News').concat(getUrl(themes, 'Blog')).concat(getUrl(themes, 'Publication'))
-
-
-    		// var topics = ['agriculture','corruption','chemicalsafety','competition','corporate','development','economy','education','employment','environment','finance','greengrowth','health','industry','innovation','insurance','migration','internet','investment','governance','regional','regreform','science','social','tax','trade'];
-    		// _.each(topics, function (item, index) {
-    		// 	news_urls.push('http://www.oecd.org/'+ item +'/index.xml');
-    		// });
-
-    		// var pub_keys = [30,40,79,31,33,34,36,37,39,77,41,42,43,45,78,48,46,];
-    		// _.each(pub_keys, function (item, index) {
-    		// 	news_urls.push('http://www.oecd-ilibrary.org/rss/content/subject/'+ item +'/latest?fmt=rss');
-    		// });
 			console.log(feeds_themes);
 
 		    async.forEach(feeds_themes, function(feeds_theme, callback) { 
