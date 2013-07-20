@@ -6,6 +6,7 @@ var feed = function(record) {
 	this.content = record.content || '';
 	this.pubDate = record.pubDate;
 	this.link = record.link;
+	this.image = record.image;
 	this.provider = record.provider || '';
 	// this.provider = record.provider || {
 	// 	logo:'http://insightsblog.oecdcode.org/wp-content/uploads/2012/06/ilibrary_nameonly_small.jpeg',

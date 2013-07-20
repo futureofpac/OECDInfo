@@ -18,8 +18,8 @@ var feed = function(feeds, callback){
 			// flickr.pubDate = new Date(item.datetaken);
 
 			var f = new model({
-				theme: 'Photos',
-				typeName: 'generic',
+				theme: 'generic',
+				typeName: 'Photos',
 				title: item.title,
 				content: item.description._content,
 				link: 'http://www.flickr.com/photos/OECD/' + item.id,
