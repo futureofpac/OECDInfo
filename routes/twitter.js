@@ -1,7 +1,8 @@
-var _ = require ('underscore');
-var Twit = require('twit')
+var _ = require ('underscore'),
+	twit = require('twit'),
+	model = require('./feed');
 
-var T = new Twit({
+var T = new twit({
     consumer_key:         'YESBKjjb6RtIsDfKJbf1Q'
   , consumer_secret:      'ottkkdctP55j0VcDrG41nuLXD51FB9ab7KcnWLs'
   , access_token:         '92711180-XKHDV6E0yFfjk92NHmR6c9nllUAq4pwcLTU27WA'
@@ -14,12 +15,6 @@ var feed = function(screen_name, startDate, endDate, feeds, callback){
 			if(item.created_at != null && item.created_at != ''){
 				var articleDate = new Date(item.created_at);
 				if(startDate < articleDate && endDate > articleDate){
-					var tweet = {};
-					tweet.id = -1;
-					tweet.title = item.text;
-					tweet.theme = screen_name.theme;
-					tweet.typeName = 'Twitter';
-
 		            var userData = item.user,
 		                userInfo = {
 		                    name:               userData.name,
@@ -31,15 +26,30 @@ var feed = function(screen_name, startDate, endDate, feeds, callback){
 		                    friends_count:      userData.friends_count,
 		                    followers_count:    userData.followers_count 
 		                };
+		                
+					var f = new model({
+						theme: screen_name.theme,
+						typeName: 'Twitter',
+						title: item.text,
+						link: 'https://www.twitter.com/' +  userData.screen_name + '/status/' + item.id_str,
+						pubDate: new Date(item.created_at),
+						image: item.user.profile_image_url,
+						userInfo: userInfo
+					});
 
-					tweet.link = 'https://www.twitter.com/' +  userData.screen_name + '/status/' + item.id_str;
-					tweet.pubDate = new Date(item.created_at);
-					// tweet.image = data[i].user.profile_image_url;
-					tweet.image = item.user.profile_image_url;
+					// f.title = ;
+					// f.theme = screen_name.theme;
+					// f.typeName = 'Twitter';
 
-					tweet.userInfo = userInfo;
+
+					// f.link = 'https://www.twitter.com/' +  userData.screen_name + '/status/' + item.id_str;
+					// f.pubDate = new Date(item.created_at);
+					// // tweet.image = data[i].user.profile_image_url;
+					// f.image = item.user.profile_image_url;
+
+					// f.userInfo = userInfo;
 					// tweet.link = data[i].user.entities.urls.expanded_url
-					feeds.push(tweet);
+					feeds.push(f);
 				}
 			}
 		})	
