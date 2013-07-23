@@ -1,9 +1,5 @@
-// var dburl = 'localhost/mongoapp';
-var dburl = 'mongodb://heroku:cec3385d1e40aceb16bac14a350a6ceb@linus.mongohq.com:10049/app12453431';
-
-var collection = ['links'];
-var db = require('mongojs').connect(dburl, collection);
-
+var mongodb = require('mongodb');
+ 
 // function user (first, last, email) {
 // 	this.first = first;
 // 	this.last = last;
@@ -13,7 +9,18 @@ var db = require('mongojs').connect(dburl, collection);
 // var user1 = new user('hoon', 'jung', 'daum');
 
 function loadLinks(){
-	return db.links.find({}).limit(10)
+	// return db.links.find({}).limit(10)
+
+	var record = [];
+
+	mongodb.Db.connect('mongodb://heroku:cec3385d1e40aceb16bac14a350a6ceb@linus.mongohq.com:10049/app12453431', function(error, client) {
+		client.collectionNames(function(error, names){
+			names.forEach(function(colData){
+				record.push(colData);
+			});
+		}
+	}
+	return record;
 }
 
 var themes = {
