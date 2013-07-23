@@ -10,17 +10,11 @@ var mongodb = require('mongodb');
 
 function loadLinks(){
 	// return db.links.find({}).limit(10)
-
-	var record = [];
-
 	mongodb.Db.connect('mongodb://heroku:cec3385d1e40aceb16bac14a350a6ceb@linus.mongohq.com:10049/app12453431', function(error, client) {
-		client.collectionNames(function(error, names){
-			names.forEach(function(colData){
-				record.push(colData);
-			});
-		}
+		var collection = new mongodb.Collection(client, 'links');
+	    var documents = collection.find({}, {limit:5});
 	}
-	return record;
+	return documents;
 }
 
 var themes = {
