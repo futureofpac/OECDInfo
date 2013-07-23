@@ -284,8 +284,8 @@ Ext.define("OECDInfo.controller.Main", {
     },
     preloadImg:function(srcs){
         for(var i=0;i<srcs.length;i++){
-            images[i] = new Image()
-            images[i].src = srcs[i];
+            var images = new Image()
+            images.src = srcs[i];
         }
     },
     shareEmail:function(){
