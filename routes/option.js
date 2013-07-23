@@ -1,4 +1,6 @@
-var dburl = 'localhost/mongoapp';
+// var dburl = 'localhost/mongoapp';
+var dburl = 'mongodb://nayahun2@gmail.com:oecd23@dharma.mongohq.com:10019/oecdinfo';
+
 var collection = ['links'];
 var db = require('mongojs').connect(dburl, collection);
 
