@@ -1,6 +1,6 @@
 var _ = require ('underscore'),
 	Flickr = require('flickr').Flickr,
-	flickrApi = new Flickr(process.env.flickr_consumer_key, '73d19cf2007d389e'),
+	flickrApi = new Flickr(process.env.flickr_consumer_key, process.env.flickr_consumer_secret),
 	model = require('./feed');
 
 var feed = function(feeds, callback){

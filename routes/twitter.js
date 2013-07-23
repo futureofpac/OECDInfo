@@ -3,10 +3,10 @@ var _ = require ('underscore'),
 	model = require('./feed');
 
 var T = new twit({
-    consumer_key:         'YESBKjjb6RtIsDfKJbf1Q'
-  , consumer_secret:      'ottkkdctP55j0VcDrG41nuLXD51FB9ab7KcnWLs'
-  , access_token:         '92711180-XKHDV6E0yFfjk92NHmR6c9nllUAq4pwcLTU27WA'
-  , access_token_secret:  'yQLc0KEEurMlT78xO4MjztUIekpjCGCwaP8XGXoSsbk'
+    consumer_key:         process.env.twitter_consumer_key
+  , consumer_secret:      process.env.twitter_consumer_secret
+  , access_token:         process.env.twitter_access_token
+  , access_token_secret:  process.env.twitter_access_token_secret
 })
 
 var feed = function(screen_name, startDate, endDate, feeds, callback){
