@@ -282,6 +282,12 @@ Ext.define("OECDInfo.controller.Main", {
         }  
 
     },
+    preloadImg:function(srcs){
+        for(var i=0;i<srcs.length;i++){
+            images[i] = new Image()
+            images[i].src = srcs[i];
+        }
+    },
     shareEmail:function(){
         var data = this.self.detail.getData();
         // window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content);
@@ -403,6 +409,12 @@ Ext.define("OECDInfo.controller.Main", {
                     // }
                 }
             );
+
+            this.preloadImg([
+                'resources/images/arrow_left.png',
+                'resources/images/arrow_right.png'
+            ]);
+
         }else{
             this.self.menu = Ext.Viewport.add({xtype:'menu'});
             this.self.detail = Ext.Viewport.add({xtype:'detail'});
@@ -715,6 +727,16 @@ Ext.define("OECDInfo.controller.Main", {
 
         // list.setGrouped(true);
         Ext.Viewport.setMasked(false);
+
+        var imgs = [];
+        for(var i=0;i<data.length;i++){
+            if(data[i].typeName == 'Photos'){
+                imgs.push(data[i].image + '.jpg');
+            }
+        }
+        if(imgs.length > 0){
+            this.preloadImg(imgs);            
+        }
     },
     openLink:function(link){
         window.open(link, 'OECD Info')
