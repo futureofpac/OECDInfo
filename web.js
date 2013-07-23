@@ -125,7 +125,7 @@ app.get('/api/:themes/:days', function(req, res){
 
 	        	var result = {};
 	        	result.feeds = feeds;
-	        	result.links = option.links;
+	        	result.links = option.links();
 
 				res.jsonp(result);
 				// res.header("Content-Type", "application/javascri; charset=utf-8");

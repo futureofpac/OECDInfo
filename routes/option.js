@@ -1,3 +1,19 @@
+var dburl = 'localhost/mongoapp';
+var collection = ['links'];
+var db = require('mongojs').connect(dburl, collection);
+
+// function user (first, last, email) {
+// 	this.first = first;
+// 	this.last = last;
+// 	this.email = email;
+// }
+
+// var user1 = new user('hoon', 'jung', 'daum');
+
+function loadLinks(){
+	return db.links.find({}).limit(10)
+}
+
 var themes = {
 		'Generic' : {
 			'Twitter' : [
@@ -147,6 +163,8 @@ var themes = {
 		}
 	}
 
+
+
 var	links = [
 	{
 		typeName:'Links',
@@ -179,4 +197,5 @@ var	links = [
 ];
 
 module.exports.themes = themes;
-module.exports.links = links;
+// module.exports.links = links;
+module.exports.links = loadLinks;
