@@ -1,5 +1,5 @@
-var dburl = 'localhost/mongoapp';
 // var dburl = 'localhost/mongoapp';
+var dburl = 'mongodb://heroku:cec3385d1e40aceb16bac14a350a6ceb@linus.mongohq.com:10049/app12453431';
 
 var collection = ['links'];
 var db = require('mongojs').connect(dburl, collection);
