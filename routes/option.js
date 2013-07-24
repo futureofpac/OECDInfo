@@ -1,4 +1,4 @@
-var mongodb = require('mongodb');
+var mongodb = require('mongojs');
  
 // function user (first, last, email) {
 // 	this.first = first;
@@ -9,11 +9,15 @@ var mongodb = require('mongodb');
 // var user1 = new user('hoon', 'jung', 'daum');
 
 function loadLinks(){
-	// return db.links.find({}).limit(10)
+	console.log('aaa');
+
 	mongodb.Db.connect('mongodb://heroku:cec3385d1e40aceb16bac14a350a6ceb@linus.mongohq.com:10049/app12453431', function(error, client) {
+		console.log('bbb');
 		var collection = new mongodb.Collection(client, 'links');
+		console.log('ccc');
 	    var documents = collection.find({}, {limit:5});
 	}
+	console.log('ddd');
 	return documents;
 }
 
