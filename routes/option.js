@@ -1,53 +1,13 @@
-// var mongojs = require('mongojs');
- 
-// function user (first, last, email) {
-// 	this.first = first;
-// 	this.last = last;
-// 	this.email = email;
-// }
-
-// var user1 = new user('hoon', 'jung', 'daum');
-
 var dburl = 'mongodb://dev:test@dharma.mongohq.com:10019/oecdinfo';
 var collection = ['links'];
 var db = require('mongojs').connect(dburl, collection);
 
-
-function loadLinks(){
+function getLinks(callback){
 	db.links.find().toArray(function(err, items) {
 		console.log(err);
         console.log(items);
+        callback(items);
     });
-
-// console.log('asas')
-// 	var db = mongojs('mongodb://hoonjung:oecd23@dharma.mongohq.com:10019/oecdinfo', ['links']);
-// 	// var db = mongojs('mongodb://heroku:cec3385d1e40aceb16bac14a350a6ceb@linus.mongohq.com:10049/app12453431', ['links']);
-// 	var records = [];
-// 	console.log(db);
-// 	console.log('---------');
-// 	console.log(db.links);
-// 	db.links.find(function(err, docs) {
-// 		console.log(err);
-// 		console.log('---------');
-
-// 		console.log(docs);
-// 		records.push(docs)
-// 	});
-// 	return records;
-    // docs is an array of all the documents in mycollection
-// });
-	// console.log('aaa');
-	// console.log(mongodb);
-
-	// mongodb.connect('mongodb://heroku:cec3385d1e40aceb16bac14a350a6ceb@linus.mongohq.com:10049/app12453431', function(error, client) {
-	// 	console.log('bbb');
-	// 	console.log('run web.js');
-	// 	var collection = new mongodb.Collection(client, 'links');
-	// 	console.log('ccc');
-	//     var documents = collection.find({}, {limit:5});
-	// });
-	// console.log('ddd');
-	// return documents;
 }
 
 var themes = {
@@ -234,4 +194,4 @@ var	links = [
 
 module.exports.themes = themes;
 // module.exports.links = links;
-module.exports.links = loadLinks;
+module.exports.getLinks = getLinks;

@@ -126,7 +126,8 @@ app.get('/api/:themes/:days', function(req, res){
 
 	        	var result = {};
 	        	result.feeds = feeds;
-	        	result.links = option.links();
+	        	// result.links = option.links();
+	        	result.links = null;
 
 				res.jsonp(result);
 				// res.header("Content-Type", "application/javascri; charset=utf-8");
@@ -138,6 +139,12 @@ app.get('/api/:themes/:days', function(req, res){
 	        }
 	    }  
 	);
+});
+
+app.get('/api/links', function(req, res, next){
+	option.getLinks(function(links){
+		res.jsonp(links);
+	})
 });
 
 
