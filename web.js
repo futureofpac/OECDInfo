@@ -14,6 +14,7 @@ var express = require('express'),
 
 app.use(express.static(__dirname + '/public'));
 
+
 app.get('/api/:themes/:days', function(req, res){
 
 	var themes = req.params.themes.split(','),
@@ -138,6 +139,7 @@ app.get('/api/:themes/:days', function(req, res){
 	    }  
 	);
 });
+
 
 var port = process.env.PORT || 5000;
 app.listen(port);
