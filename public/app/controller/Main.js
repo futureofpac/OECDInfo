@@ -587,7 +587,7 @@ Ext.define("OECDInfo.controller.Main", {
                     Ext.Msg.alert('Alert', 'No Data, Try it later again');
                     me.displayMenu();
                 }else{
-                    me.self.links = [].concat(response.links);
+                    me.self.links = [].concat(response);
                     me.displayMenu();
                 }
                 Ext.Viewport.setMasked(false);
