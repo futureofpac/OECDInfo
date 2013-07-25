@@ -1,13 +1,14 @@
 // var dburl = 'mongodb://dev:test@dharma.mongohq.com:10019/oecdinfo';
-// var collection = ['links'];
-// var db = require('mongojs').connect(dburl, collection);
+var dburl = 'mongodb://nayahun2:test23@dharma.mongohq.com:10019/oecdinfo';
+var collection = ['links'];
+var db = require('mongojs').connect(dburl, collection);
 
 function getLinks(callback){
-	// db.links.find().toArray(function(err, items) {
-	// 	console.log(err);
- //        console.log(items);
- //        callback(items);
- //    });
+	db.links.find().toArray(function(err, items) {
+		console.log(err);
+        console.log(items);
+        callback(items);
+    });
 }
 
 var themes = {
