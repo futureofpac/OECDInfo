@@ -27,15 +27,6 @@ app.get('/api/:themes/:days', function(req, res){
 		datenotchecked = true,
 		feeds = [];
 
-	// feeds['tweets'] = [];
-	// feeds['news'] = [];
-	// feeds['article'] = [];
-	// feeds['publication'] = [];
-	// feeds['youtube'] = [];
-	// feeds['flickr'] = [];
-	// feeds['error'] = [];
-	// feeds['called'] = [];
-
 	var getUrl = function (themes, type) {
 		var result = [];
 		_.each(themes, function (theme, index) {
@@ -101,21 +92,6 @@ app.get('/api/:themes/:days', function(req, res){
 				console.log(err);
 				res.send(err);
 	        }else{
-	    //     	var resultFeeds = [];
-	    //     	resultFeeds = 
-					// feeds['article'].concat(
-	    // 				feeds['tweets']).concat(
-	    // 					feeds['youtube']).concat(
-	    // 						feeds['flickr']
-	    // 						);
-
-	        	// resultFeeds = _.sortBy(resultFeeds, function(item){
-	        	// 	return item.pubDate;
-	        	// });
-	        	// resultFeeds = resultFeeds.reverse();
-	        	// _.each(resultFeeds, function(feed, index){
-	        	// 	feed.id = index;
-	        	// });
 	        	feeds = _.sortBy(feeds, function(item){
 	        		return item.pubDate;
 	        	});

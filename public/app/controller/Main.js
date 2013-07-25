@@ -183,7 +183,8 @@ Ext.define("OECDInfo.controller.Main", {
                     OECDInfo.app.currentType = type;
 
                     if(type == 'Links'){
-                        this.displayMenu();
+                        // this.displayMenu();
+                        this.callLinks();
                     }else{
                         this.displayList(1);
                     }
@@ -575,6 +576,25 @@ Ext.define("OECDInfo.controller.Main", {
     hideDetail:function(){
         this.self.detail.hide();
     },
+    callLinks:function () {
+        var me = this;
+        Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
+        console.log(themes);
+        Ext.data.JsonP.request({
+            url: OECDInfo.app.serviceRoot() + '/api/links/',
+            callback:function(success, response){
+
+                if(response == null){
+                    Ext.Msg.alert('Alert', 'No Data, Try it later again');
+                    me.displayMenu();
+                }else{
+                    me.self.links = [].concat(response.links);
+                    me.displayMenu();
+                }
+                Ext.Viewport.setMasked(false);
+            } 
+        });
+    },
     callService:function (themes) {
         // if(navigator.onLine){
             var me = this;
@@ -590,7 +610,7 @@ Ext.define("OECDInfo.controller.Main", {
                         me.displayList(1);
                     }else{
                         me.self.feeds = [].concat(response.feeds);
-                        me.self.links = [].concat(response.links);
+                        // me.self.links = [].concat(response.links);
                         me.displayList(1);
                         // me.setFeeds([{test:'aaaa'}]);
                         var localFeeds = [], type = '';
