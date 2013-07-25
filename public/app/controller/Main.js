@@ -579,7 +579,6 @@ Ext.define("OECDInfo.controller.Main", {
     callLinks:function () {
         var me = this;
         Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
-        console.log(themes);
         Ext.data.JsonP.request({
             url: OECDInfo.app.serviceRoot() + '/api/links/',
             callback:function(success, response){
