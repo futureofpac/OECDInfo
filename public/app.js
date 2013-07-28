@@ -141,6 +141,7 @@ Ext.application({
     launch: function() {
 
         var queryString = function () {
+            
           // This function is anonymous, is executed immediately and 
           // the return value is assigned to QueryString!
           var query_string = {};
