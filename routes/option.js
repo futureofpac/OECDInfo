@@ -1,4 +1,5 @@
-var dburl = 'mongodb://dev:test@dharma.mongohq.com:10019/oecdinfo';
+var dburl = 'mongodb://dev:pacps@dharma.mongohq.com:10088/OECDInfo';
+
 // var dburl = 'mongodb://nayahun2:test23@dharma.mongohq.com:10019/oecdinfo';
 var collection = ['links'];
 var db = require('mongojs').connect(dburl, collection);
