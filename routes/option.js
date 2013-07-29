@@ -34,7 +34,7 @@ db.themes.find(function(err, items) {
 	var result = {};
 
 	for(var i=0;i<items.length;i++){
-		var obj = result[items.name];
+		var obj = result[items[i].name];
 		if(obj.hasOwnProperty('Twitter')){
 			obj = items[i].Twitter;
 		}
@@ -235,6 +235,6 @@ var	links = [
 ];
 
 module.exports.themes = themes;
-module.exports.getThemes = getThemes
+module.exports.getThemes = getThemes;
 // module.exports.links = links;
 module.exports.getLinks = getLinks;
