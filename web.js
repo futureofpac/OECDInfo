@@ -123,6 +123,12 @@ app.get('/api/links', function(req, res, next){
 	})
 });
 
+app.get('/api/test', function(req, res, next){
+	option.getThemes(function(result){
+		res.jsonp(result);
+	})
+});
+
 
 var port = process.env.PORT || 5000;
 app.listen(port);

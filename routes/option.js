@@ -1,8 +1,11 @@
 var dburl = 'mongodb://dev:pacps@dharma.mongohq.com:10088/OECDInfo';
 
 // var dburl = 'mongodb://nayahun2:test23@dharma.mongohq.com:10019/oecdinfo';
-var collection = ['links'];
+var collection = ['links', 'themes'];
 var db = require('mongojs').connect(dburl, collection);
+var colTheme;
+var emitterTheme = new require('events').EventEmitter;
+
 
 function getLinks(callback){
 	db.links.find().toArray(function(err, items) {
@@ -11,6 +14,43 @@ function getLinks(callback){
         callback(items);
     });
 }
+
+function getThemes(callback){
+	if(colTheme === undefined){
+		emitterTheme.on('themes-ready', function(){
+			callback(colTheme);
+		})
+	}else{
+		callback(colTheme)
+	}
+}
+
+db.themes.find(function(err, items) {
+	console.log(err);
+    console.log(items);
+    // callback(items);
+	// colTheme = items;
+
+	var result = {};
+
+	for(var i=0;i<items.length;i++){
+		var obj = result[items.name];
+		if(obj.hasOwnProperty('Twitter')){
+			obj = items[i].Twitter;
+		}
+		if(obj.hasOwnProperty('News')){
+			obj = items[i].News;
+		}
+		if(obj.hasOwnProperty('Blog')){
+			obj = items[i].Blog;
+		}
+		if(obj.hasOwnProperty('Publication')){
+			obj = items[i].Publication;
+		}
+	}
+	colTheme = result;
+	emitterTheme.emit('themes-ready');
+});
 
 var themes = {
 		'Generic' : {
@@ -195,5 +235,6 @@ var	links = [
 ];
 
 module.exports.themes = themes;
+module.exports.getThemes = getThemes
 // module.exports.links = links;
 module.exports.getLinks = getLinks;
