@@ -26,16 +26,17 @@ app.get('/api/:themes/:days', function(req, res){
 		startDate = new Date(today.setDate(today.getDate() - numberofdays)),
 		endDate = new Date(todayCopy.setDate(todayCopy.getDate() + 1)),
 		datenotchecked = true,
-		feeds = [],
-		themesDB = null;
+		feeds = [];
+		// ,
+		// themesDB = null;
 
 	var getUrl = function (themes, type) {
 		var result = [];
 		_.each(themes, function (theme, index) {
 			// if(option.themes[theme][type]){
 			// 	_.each(option.themes[theme][type], function (item) {
-			if(themesDB[theme][type]){
-				_.each(themesDB[theme][type], function (item) {
+			if(glbThemes[theme][type]){
+				_.each(glbThemes[theme][type], function (item) {
 					var item = {
 						'type':type,
 						'theme':theme,
@@ -50,11 +51,16 @@ app.get('/api/:themes/:days', function(req, res){
 	} 	
 	async.series([
 		function(callback){
-			option.getThemes(function(result){
-				// res.jsonp(result);
-				themesDB = result;
+			if(glbThemes != null){
+				console.log('already got it!');
 				callback();
-			})
+			}else{
+				option.getThemes(function(result){
+					// res.jsonp(result);
+					glbThemes = result;
+					callback();
+				})
+			}
 		},
 		function(callback){
 			async.parallel([
