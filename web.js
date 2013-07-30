@@ -151,7 +151,7 @@ app.get('/api/themes', function(req, res, next){
 	})
 });
 
-app.get('/api/themes/clear', function(req, res){
+app.get('/api/clearthemes', function(req, res){
 	glbThemes = null;
 	res.jsonp({
 		result:'cleared!'
