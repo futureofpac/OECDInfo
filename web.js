@@ -151,6 +151,11 @@ app.get('/api/themes', function(req, res, next){
 	})
 });
 
+app.get('/api/themes/clear', function(req, res, next){
+	glbThemes = null;
+});
+
+
 
 var port = process.env.PORT || 5000;
 app.listen(port);
