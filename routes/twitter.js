@@ -36,19 +36,6 @@ var feed = function(screen_name, startDate, endDate, feeds, callback){
 						image: item.user.profile_image_url,
 						userInfo: userInfo
 					});
-
-					// f.title = ;
-					// f.theme = screen_name.theme;
-					// f.typeName = 'Twitter';
-
-
-					// f.link = 'https://www.twitter.com/' +  userData.screen_name + '/status/' + item.id_str;
-					// f.pubDate = new Date(item.created_at);
-					// // tweet.image = data[i].user.profile_image_url;
-					// f.image = item.user.profile_image_url;
-
-					// f.userInfo = userInfo;
-					// tweet.link = data[i].user.entities.urls.expanded_url
 					feeds.push(f);
 				}
 			}

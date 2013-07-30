@@ -3,8 +3,8 @@ var dburl = 'mongodb://dev:pacps@dharma.mongohq.com:10088/OECDInfo';
 // var dburl = 'mongodb://nayahun2:test23@dharma.mongohq.com:10019/oecdinfo';
 var collection = ['links', 'themes'];
 var db = require('mongojs').connect(dburl, collection);
-var colTheme;
-var emitterTheme = new require('events').EventEmitter;
+// var colTheme;
+// var emitterTheme = new require('events').EventEmitter;
 
 
 function getLinks(callback){
@@ -16,41 +16,48 @@ function getLinks(callback){
 }
 
 function getThemes(callback){
-	if(colTheme === undefined){
-		emitterTheme.on('themes-ready', function(){
-			callback(colTheme);
-		})
-	}else{
-		callback(colTheme)
-	}
+	// if(colTheme === undefined){
+	// 	emitterTheme.on('themes-ready', function(){
+	// 		callback(colTheme);
+	// 	})
+	// }else{
+	// 	callback(colTheme)
+	// }
+
+	db.themes.find(function(err, items) {
+		console.log(err);
+	    console.log(items);
+	    // callback(items);
+		// colTheme = items;
+
+		var result = {};
+
+		for(var i=0;i<items.length;i++){
+			console.log(items[i].name);
+			// var obj = result[items[i].name];
+			result[items[i].name] = {};
+			if(items[i].Twitter){
+				result[items[i].name]['Twitter'] = items[i].Twitter;
+			}
+			if(items[i].News){
+				result[items[i].name]['News'] = items[i].News;
+			}
+			if(items[i].Blog){
+				result[items[i].name]['Blog'] = items[i].Blog;
+			}
+			if(items[i].Publication){
+				result[items[i].name]['Publication'] = items[i].Publication;
+			}
+		}
+		// colTheme = result;
+		console.log(result);
+		// emitterTheme.emit('themes-ready');
+		callback(result)
+	});
+
+
 }
 
-db.themes.find(function(err, items) {
-	console.log(err);
-    console.log(items);
-    // callback(items);
-	// colTheme = items;
-
-	var result = {};
-
-	for(var i=0;i<items.length;i++){
-		var obj = result[items[i].name];
-		if(obj.hasOwnProperty('Twitter')){
-			obj = items[i].Twitter;
-		}
-		if(obj.hasOwnProperty('News')){
-			obj = items[i].News;
-		}
-		if(obj.hasOwnProperty('Blog')){
-			obj = items[i].Blog;
-		}
-		if(obj.hasOwnProperty('Publication')){
-			obj = items[i].Publication;
-		}
-	}
-	colTheme = result;
-	emitterTheme.emit('themes-ready');
-});
 
 var themes = {
 		'Generic' : {
