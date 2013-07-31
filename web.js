@@ -154,7 +154,7 @@ app.get('/api/themes', function(req, res, next){
 });
 
 app.get('/api/test', function(req, res, next){
-	option.addUserLog(req, function(geo, ip){
+	option.testLog(req, function(geo, ip){
 		res.jsonp([geo, ip]);
 	})
 });
