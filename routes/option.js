@@ -14,7 +14,7 @@ function getLinks(callback){
 }
 
 function addUserLog(req){
-	var geo = geoip.lookup(ip);
+	var geo = geoip.lookup(req.ip);
 	db.usagelog.save({
 		themes: req.params.themes,
 		country: geo.country,
