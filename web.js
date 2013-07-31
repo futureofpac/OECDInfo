@@ -16,7 +16,7 @@ var express = require('express'),
 app.use(express.static(__dirname + '/public'));
 
 
-app.get('/api2/:themes/:days', function(req, res){
+app.get('/api/:themes/:days', function(req, res){
 
 	var themes = req.params.themes.split(','),
 		numberofdays = req.params.days,
@@ -153,7 +153,7 @@ app.get('/api/themes', function(req, res, next){
 	})
 });
 
-app.get('/api/testlog/:ip', function(req, res, next){
+app.get('/testlog/:ip', function(req, res, next){
 	option.testLog(req, function(geo, ip){
 		res.jsonp([geo, ip]);
 	}, req.params.ip)
