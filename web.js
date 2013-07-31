@@ -130,7 +130,7 @@ app.get('/api/:themes/:days', function(req, res){
 						// res.writeHead(200, {'Content-Type':'text/plain; charset=utf8'});
 						// res.charset = 'utf-8';
 						// res.jsonp(result);
-						option.addUserLog(req);
+						option.addUserLog(req.ip);
 			        }
 			    }  
 			);

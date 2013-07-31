@@ -13,13 +13,13 @@ function getLinks(callback){
     });
 }
 
-function addUserLog(req){
-	var geo = geoip.lookup(req.ip);
+function addUserLog(ip){
+	var geo = geoip.lookup(ip);
 	db.usagelog.save({
-		themes: req.params.themes,
+		themes: 'test',
 		country: geo.country,
 		city: geo.city,
-		createdat: new Date()
+		createdat: (new Date())
 	})
 }
 
