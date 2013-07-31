@@ -34,6 +34,11 @@ function addUserLog(req){
 
 	db.usagelog.save(log)
 }
+function testLog(req, callback){
+	var geo = geoip.lookup(req.ip),
+		log;
+	callback(geo, req.ip)
+}
 
 // function addUserLog(ip){
 // 	var geo = geoip.lookup('110.47.51.146');

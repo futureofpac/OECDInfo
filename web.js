@@ -130,7 +130,7 @@ app.get('/api/:themes/:days', function(req, res){
 						// res.writeHead(200, {'Content-Type':'text/plain; charset=utf8'});
 						// res.charset = 'utf-8';
 						// res.jsonp(result);
-						
+
 						option.addUserLog(req);
 			        }
 			    }  
@@ -150,6 +150,12 @@ app.get('/api/themes', function(req, res, next){
 	option.getThemes(function(result){
 		glbThemes = result;
 		// res.jsonp(result);
+	})
+});
+
+app.get('/api/test', function(req, res, next){
+	option.addUserLog(req, function(geo, ip){
+		res.jsonp([geo, ip]);
 	})
 });
 
