@@ -153,10 +153,10 @@ app.get('/api/themes', function(req, res, next){
 	})
 });
 
-app.get('/api/test', function(req, res, next){
+app.get('/api/test/:ip', function(req, res, next){
 	option.testLog(req, function(geo, ip){
 		res.jsonp([geo, ip]);
-	})
+	}, , req.params.ip)
 });
 
 app.get('/api/clearthemes', function(req, res){

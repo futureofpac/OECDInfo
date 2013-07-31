@@ -34,8 +34,8 @@ function addUserLog(req){
 
 	db.usagelog.save(log)
 }
-function testLog(req, callback){
-	var geo = geoip.lookup(req.ip),
+function testLog(req, callback, ip){
+	var geo = geoip.lookup((ip === undefined) ? req.ip : ip)),
 		log;
 	callback(geo, req.ip)
 }
