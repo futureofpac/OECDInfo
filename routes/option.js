@@ -13,15 +13,41 @@ function getLinks(callback){
     });
 }
 
-function addUserLog(ip){
-	var geo = geoip.lookup(ip);
-	db.usagelog.save({
-		themes: 'test',
-		country: geo.country,
-		city: geo.city,
-		createdat: (new Date())
-	})
+function addUserLog(req){
+	var geo = geoip.lookup(req.ip),
+		log;
+	if(geo == null){
+		log = {
+			themes: req.params.themes,
+			country: '',
+			city: '',
+			createdat: (new Date())
+		}
+	}else{
+		log = {
+			themes: req.params.themes,
+			country: geo.country,
+			city: geo.city,
+			createdat: (new Date())
+		}
+	}
+
+	db.usagelog.save(log)
 }
+
+// function addUserLog(ip){
+// 	var geo = geoip.lookup('110.47.51.146');
+// 	console.log(geo);
+// 	var country = geo.country,
+// 		city = geo.city;
+
+// 	db.usagelog.save({
+// 		themes: 'test',
+// 		country: country,
+// 		city: city,
+// 		createdat: (new Date())
+// 	})
+// }
 
 function getThemes(callback){
 	// if(colTheme === undefined){
