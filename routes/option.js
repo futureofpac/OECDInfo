@@ -285,3 +285,4 @@ module.exports.getThemes = getThemes;
 // module.exports.links = links;
 module.exports.getLinks = getLinks;
 module.exports.addUserLog = addUserLog;
+module.exports.testLog = testLog;
