@@ -1,17 +1,26 @@
 var dburl = process.env.mongodb_uri;
 
-var collection = ['links', 'themes'];
-var db = require('mongojs').connect(dburl, collection);
+var collection = ['links', 'themes', 'usagelog'];
+var db = require('mongojs').connect(dburl, collection),
+	geoip = require('geoip-lite');
 // var colTheme;
 // var emitterTheme = new require('events').EventEmitter;
-
-
 function getLinks(callback){
 	db.links.find().toArray(function(err, items) {
 		console.log(err);
         console.log(items);
         callback(items);
     });
+}
+
+function addUserLog(req){
+	var geo = geoip.lookup(ip);
+	db.usagelog.save({
+		themes: req.params.themes,
+		country: geo.country,
+		city: geo.city,
+		createdat: new Date()
+	})
 }
 
 function getThemes(callback){
@@ -244,3 +253,4 @@ module.exports.themes = themes;
 module.exports.getThemes = getThemes;
 // module.exports.links = links;
 module.exports.getLinks = getLinks;
+module.exports.addUserLog = addUserLog;
