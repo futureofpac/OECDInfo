@@ -866,15 +866,16 @@ Ext.define("OECDInfo.controller.Main", {
                         '<h3><strong>'+ replaceLinks(data.title) +'</strong></h3>' +
                         // '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
                         // '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
-                        '<h4 style="font-size:14px;">'+ getDateStr(data.pubDate) +' | '+ me.getThemeByKey(data.theme) +'</h4>' +
+                        '<h4 style="font-size:14px;">'+ me.getThemeByKey(data.theme) +' | '+ getDateStr(data.pubDate) +'</h4>' +
                     '</div>' +
                 '</div>';
             }else{
                 header =
                 '<div class=header '+ type +'>' + 
                     '<h3><strong>'+ replaceLinks(data.title) +'</strong></h3>' +
-                    '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
-                    '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
+                    // '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
+                    // '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
+                    '<h4 style="font-size:14px;">'+ me.getThemeByKey(data.theme) +' | '+ getDateStr(data.pubDate) +'</h4>' +
                 '</div>';
             }
 
@@ -946,7 +947,7 @@ Ext.define("OECDInfo.controller.Main", {
                 '<div style="font-size:14px;color:gray;'+ (fromTablet?'padding:10px 15px 15px 10px;':'padding:7px 10px 5px 10px;') +'">' + 
                     // '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
                     // '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
-                    '<h4>'+ getDateStr(data.pubDate) +' | '+ me.getThemeByKey(data.theme) +'</h4>' +
+                    '<h4>'+ me.getThemeByKey(data.theme) +' | '+ getDateStr(data.pubDate) +'</h4>' +
                 '</div>' +
                 '<div style="'+ (fromTablet?'line-height:140%;padding:0px 15px 15px 15px;font-size:17px;':'line-height:110%;padding:0px 10px 10px 10px;') +'background-color:white;">'+ replaceLinks(data.title) +'</div>';
             return [header, header2, indicator, body];
