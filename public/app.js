@@ -58,7 +58,7 @@ Ext.application({
     },    
     themes:[
         {
-            name:'OECD Generic',
+            name:'OECD News',
             key:'Generic'
         },
         {

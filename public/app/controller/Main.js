@@ -571,7 +571,7 @@ Ext.define("OECDInfo.controller.Main", {
                     var provider = content.createProvider();
                     carousel1.setHtml(provider[0]);
                     carousel2.setHtml(provider[1]);
-                    carousel.setHeight(140);
+                    carousel.setHeight(130);
                 //     // panelContent.setHtml('<div style="text-align:right;padding:10px 30px 0px 0px;">By <a href=# class=providername>' + data.provider.name + '</a></div><div id=providerinfo></div>' + html[1]);
                 // }else{
                 //     carousel.setHidden(true);
@@ -588,7 +588,7 @@ Ext.define("OECDInfo.controller.Main", {
                 if(fromTablet == true){
                     carousel.setHeight(170);
                 }else{
-                    carousel.setHeight(140);
+                    carousel.setHeight(130);
                 }
             }
             carousel.setHidden(false);
@@ -901,9 +901,9 @@ Ext.define("OECDInfo.controller.Main", {
                 header2 = '',
                 indicator = '',
                 body = '',
-                height = (fromTablet?170:140),
+                height = (fromTablet?170:130),
                 layerHeight = (fromTablet?90:60),
-                top = (fromTablet?17:7),
+                top = (fromTablet?17:5),
 
                 header =
                 '<div style="background-image:url('+ userInfo.profile_banner_url +'/mobile);background-size:100%;height:'+ height +'px;padding-top:'+ top +'px;background-color:#444;">' +
@@ -920,7 +920,7 @@ Ext.define("OECDInfo.controller.Main", {
                     '<div style="width:100%;height:'+ layerHeight +'px;position:absolute;top:'+ (height - layerHeight) +'px;background-image:-webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.54902) 100%);text-shadow: rgb(255, 255, 255) 0px 1px 0px;background-color: rgba(0, 0, 0, 0);background-origin: padding-box;"></div>' + 
                     '<div style="position:relative;margin-top:'+ top +'px;color:white;text-align:center;text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;">' + 
                         '<h4 style="margin-bottom:'+ top +'px;"><span class=link name='+ userInfo.url +' style="color:white;text-decoration:none;">'+ userInfo.url +'</span></h4>' +
-                        '<h4>'+ userInfo.description +'</h4>' +
+                        '<h4 style="font-size:smaller">'+ userInfo.description +'</h4>' +
                     '</div>' +
                 '</div>';
 
@@ -942,7 +942,7 @@ Ext.define("OECDInfo.controller.Main", {
                 '</div>';
 
                 body +=
-                '<div style="font-size:12px;color:gray;'+ (fromTablet?'padding:10px 15px 15px 10px;':'padding:7px 10px 2px 10px;') +'">' + 
+                '<div style="font-size:14px;color:gray;'+ (fromTablet?'padding:10px 15px 15px 10px;':'padding:7px 10px 5px 10px;') +'">' + 
                     '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
                     '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
                 '</div>' +
