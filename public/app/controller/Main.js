@@ -942,11 +942,11 @@ Ext.define("OECDInfo.controller.Main", {
                 '</div>';
 
                 body +=
-                '<div style="font-size:smaller;color:gray;'+ (fromTablet?'padding:10px 15px 15px 10px;':'padding:10px;') +'">' + 
+                '<div style="font-size:12px;color:gray;'+ (fromTablet?'padding:10px 15px 15px 10px;':'padding:7px 10px 2px 10px;') +'">' + 
                     '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
                     '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
                 '</div>' +
-                '<div style="'+ (fromTablet?'line-height:140%;padding:0px 15px 15px 15px;font-size:17px;':'line-height:120%;padding:0px 10px 10px 10px;') +'background-color:white;">'+ replaceLinks(data.title) +'</div>';
+                '<div style="'+ (fromTablet?'line-height:140%;padding:0px 15px 15px 15px;font-size:17px;':'line-height:110%;padding:0px 10px 10px 10px;') +'background-color:white;">'+ replaceLinks(data.title) +'</div>';
             return [header, header2, indicator, body];
         },
         // createFlickrBody = function(width, height){
