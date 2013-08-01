@@ -159,6 +159,10 @@ app.get('/testlog/:ip', function(req, res, next){
 	}, req.params.ip)
 });
 
+app.get('/testip', function(req, res, next){
+	res.jsonp(req.ip);
+});
+
 app.get('/api/clearthemes', function(req, res){
 	glbThemes = null;
 	res.jsonp({
