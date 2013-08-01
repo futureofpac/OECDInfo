@@ -14,7 +14,7 @@ var express = require('express'),
 	glbThemes = null;
 
 app.use(express.static(__dirname + '/public'));
-
+app.use(express.bodyParser());
 
 app.get('/api/:themes/:days', function(req, res){
 
@@ -131,7 +131,7 @@ app.get('/api/:themes/:days', function(req, res){
 						// res.charset = 'utf-8';
 						// res.jsonp(result);
 
-						option.addUserLog(req);
+						// option.addUserLog(req);
 			        }
 			    }  
 			);
@@ -153,8 +153,8 @@ app.get('/api/themes', function(req, res, next){
 	})
 });
 
-app.post('/log/init', function(req, res, next){
-	option.saveInitLog(req.params.log)
+app.post('/log/init', function(req, res){
+	option.saveInitLog(req.body.log)
 });
 
 
