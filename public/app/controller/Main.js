@@ -276,8 +276,12 @@ Ext.define("OECDInfo.controller.Main", {
                     createdat:(new Date())
                 };
 
-                var img = new Image();
-                img.src = OECDInfo.app.serviceRoot() + '/log/' + log
+                Ext.Ajax.request({
+                    url: OECDInfo.app.serviceRoot() + '/log/init',
+                    method:'POST',
+                    params:log,
+                    timeout: 10000
+                });
             } 
         });
     },

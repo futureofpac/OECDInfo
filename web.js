@@ -153,7 +153,7 @@ app.get('/api/themes', function(req, res, next){
 	})
 });
 
-app.get('/log/:log', function(req, res, next){
+app.post('/log/init', function(req, res, next){
 	option.saveInitLog(req.params.log)
 });
 
