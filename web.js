@@ -13,7 +13,7 @@ var express = require('express'),
 	app = express(),
 	glbThemes = null;
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + process.env.publicpath));
 app.use(express.bodyParser());
 
 app.get('/api/:themes/:days', function(req, res){
