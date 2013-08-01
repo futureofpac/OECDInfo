@@ -13,7 +13,7 @@ var express = require('express'),
 	app = express(),
 	glbThemes = null;
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/production'));
 app.use(express.bodyParser());
 
 app.get('/api/:themes/:days', function(req, res){
@@ -154,22 +154,22 @@ app.get('/api/themes', function(req, res, next){
 });
 
 app.post('/log/init', function(req, res){
-	var param = req.body;
+	// var param = req.body;
 
-	option.saveInitLog({
-		ip:param.ip,
-	    deviceType:param.deviceType,
-	    os:param.os,
-	    osversion:param.osversion,
-	    country:param.country,
-	    countryCode:param.countryCode,
-	    city:param.city,
-	    createdat:param.createdat		
-	})
+	// option.saveInitLog({
+	// 	ip:param.ip,
+	//     deviceType:param.deviceType,
+	//     os:param.os,
+	//     osversion:param.osversion,
+	//     country:param.country,
+	//     countryCode:param.countryCode,
+	//     city:param.city,
+	//     createdat:param.createdat		
+	// })
 
-	res.jsonp({
-		result:'saved!'
-	});
+	// res.jsonp({
+	// 	result:'saved!'
+	// });
 });
 
 
