@@ -153,6 +153,11 @@ app.get('/api/themes', function(req, res, next){
 	})
 });
 
+app.get('/log/:log', function(req, res, next){
+	option.saveInitLog(req.params.log)
+});
+
+
 app.get('/testlog/:ip', function(req, res, next){
 	option.testLog(req, function(geo, ip){
 		res.jsonp([geo, ip]);

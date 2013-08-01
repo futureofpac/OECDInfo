@@ -13,6 +13,10 @@ function getLinks(callback){
     });
 }
 
+function saveInitLog(log){
+	db.usagelog.save(log)
+}
+
 function addUserLog(req){
 	var geo = geoip.lookup(req.ip),
 		log;
@@ -286,3 +290,4 @@ module.exports.getThemes = getThemes;
 module.exports.getLinks = getLinks;
 module.exports.addUserLog = addUserLog;
 module.exports.testLog = testLog;
+module.exports.saveInitLog = saveInitLog;

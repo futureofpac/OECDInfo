@@ -238,6 +238,7 @@ Ext.define("OECDInfo.controller.Main", {
         isTablet:false
     },  
     init:function(){
+        this.callInitLog();
         this.callParent(arguments);
     },
     launch:function(){
@@ -257,6 +258,28 @@ Ext.define("OECDInfo.controller.Main", {
         //     // console.log(item.getLabel());
         //     console.log(key.getLabel());
         // }); 
+    },
+    callInitLog:function(){
+        var me = this;
+        Ext.data.JsonP.request({
+            url: 'http://smart-ip.net/geoip-json',
+            // url: OECDInfo.app.serviceRoot() + '/api/links/',
+            callback:function(success, response){
+                var log = {
+                    ip:response.host,
+                    deviceType:Ext.os.deviceType,
+                    os:Ext.os.name,
+                    osversion:Ext.os.version,
+                    country:response.countryName,
+                    countryCode:response.countryCode,
+                    city:response.city,
+                    createdat:(new Date())
+                };
+
+                var img = new Image();
+                img.src = OECDInfo.app.serviceRoot() + '/log/' + log
+            } 
+        });
     },
     scrollListSelected:function(){
         var list = this.getList(),
