@@ -238,7 +238,7 @@ Ext.define("OECDInfo.controller.Main", {
         isTablet:false
     },  
     init:function(){
-        this.callInitLog();
+        // this.callInitLog();
         this.callParent(arguments);
     },
     launch:function(){
@@ -282,7 +282,7 @@ Ext.define("OECDInfo.controller.Main", {
                     params:log,
                     timeout: 10000,
                     callback:function(success, response){
-                        
+
                     }
                 });
             } 
@@ -901,9 +901,9 @@ Ext.define("OECDInfo.controller.Main", {
                 header2 = '',
                 indicator = '',
                 body = '',
-                height = (fromTablet?170:140),
+                height = (fromTablet?170:130),
                 layerHeight = (fromTablet?90:60),
-                top = (fromTablet?17:7),
+                top = (fromTablet?17:5),
 
                 header =
                 '<div style="background-image:url('+ userInfo.profile_banner_url +'/mobile);background-size:100%;height:'+ height +'px;padding-top:'+ top +'px;background-color:#444;">' +
