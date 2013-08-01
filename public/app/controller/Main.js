@@ -864,8 +864,9 @@ Ext.define("OECDInfo.controller.Main", {
                     '<img src='+ image +' style="float:left;width:'+ (type == 'Youtube' ? '60' : '45') +'px;-webkit-border-radius:5px;">' +
                     '<div style="margin-left:'+ (type == 'Youtube' ? '70' : '55') +'px;">' + 
                         '<h3><strong>'+ replaceLinks(data.title) +'</strong></h3>' +
-                        '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
-                        '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
+                        // '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
+                        // '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
+                        '<h4 style="font-size:14px;">'+ getDateStr(data.pubDate) +' | '+ me.getThemeByKey(data.theme) +'</h4>' +
                     '</div>' +
                 '</div>';
             }else{
@@ -943,8 +944,9 @@ Ext.define("OECDInfo.controller.Main", {
 
                 body +=
                 '<div style="font-size:14px;color:gray;'+ (fromTablet?'padding:10px 15px 15px 10px;':'padding:7px 10px 5px 10px;') +'">' + 
-                    '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
-                    '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
+                    // '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
+                    // '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
+                    '<h4>'+ getDateStr(data.pubDate) +' | '+ me.getThemeByKey(data.theme) +'</h4>' +
                 '</div>' +
                 '<div style="'+ (fromTablet?'line-height:140%;padding:0px 15px 15px 15px;font-size:17px;':'line-height:110%;padding:0px 10px 10px 10px;') +'background-color:white;">'+ replaceLinks(data.title) +'</div>';
             return [header, header2, indicator, body];
