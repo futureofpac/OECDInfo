@@ -901,9 +901,9 @@ Ext.define("OECDInfo.controller.Main", {
                 header2 = '',
                 indicator = '',
                 body = '',
-                height = (fromTablet?170:130),
+                height = (fromTablet?170:140),
                 layerHeight = (fromTablet?90:60),
-                top = (fromTablet?17:5),
+                top = (fromTablet?17:7),
 
                 header =
                 '<div style="background-image:url('+ userInfo.profile_banner_url +'/mobile);background-size:100%;height:'+ height +'px;padding-top:'+ top +'px;background-color:#444;">' +

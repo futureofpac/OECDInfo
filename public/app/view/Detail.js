@@ -80,7 +80,7 @@ Ext.define('OECDInfo.view.Detail', {
             {
                 xtype:'carousel',
                 direction:'vertical',
-                height:130,
+                height:140,
                 items:[
                     {
                         html:''
