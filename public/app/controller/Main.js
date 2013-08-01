@@ -944,7 +944,7 @@ Ext.define("OECDInfo.controller.Main", {
                 '</div>';
 
                 body +=
-                '<div style="font-size:14px;color:gray;'+ (fromTablet?'padding:10px 15px 15px 10px;':'padding:7px 10px 5px 10px;') +'">' + 
+                '<div style="font-size:14px;color:gray;'+ (fromTablet?'padding:10px 15px 15px 10px;':'padding:7px 10px 8px 10px;') +'">' + 
                     // '<h4><strong>Theme: '+ me.getThemeByKey(data.theme) +'</strong></h4>' +
                     // '<h4>Published at: '+ getDateStr(data.pubDate) +'</h4>' +
                     '<h4>'+ me.getThemeByKey(data.theme) +' | '+ getDateStr(data.pubDate) +'</h4>' +
