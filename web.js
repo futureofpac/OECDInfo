@@ -154,7 +154,22 @@ app.get('/api/themes', function(req, res, next){
 });
 
 app.post('/log/init', function(req, res){
-	option.saveInitLog(req.body.log)
+	var param = req.body;
+
+	option.saveInitLog({
+		ip:param.ip,
+	    deviceType:param.deviceType,
+	    os:param.os,
+	    osversion:param.osversion,
+	    country:param.country,
+	    countryCode:param.countryCode,
+	    city:param.city,
+	    createdat:param.createdat		
+	})
+
+	res.jsonp({
+		result:'saved!'
+	});
 });
 
 

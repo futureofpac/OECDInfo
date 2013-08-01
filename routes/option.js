@@ -13,8 +13,17 @@ function getLinks(callback){
     });
 }
 
-function saveInitLog(log){
-	db.usagelog.save(log)
+function saveInitLog(param){
+	db.usagelog.save({
+		ip:param.ip,
+	    deviceType:param.deviceType,
+	    os:param.os,
+	    osversion:param.osversion,
+	    country:param.country,
+	    countryCode:param.countryCode,
+	    city:param.city,
+	    createdat:param.createdat		
+	})
 }
 
 function addUserLog(req){

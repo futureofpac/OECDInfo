@@ -280,7 +280,10 @@ Ext.define("OECDInfo.controller.Main", {
                     url: OECDInfo.app.serviceRoot() + '/log/init',
                     method:'POST',
                     params:log,
-                    timeout: 10000
+                    timeout: 10000,
+                    callback:function(success, response){
+                        
+                    }
                 });
             } 
         });
