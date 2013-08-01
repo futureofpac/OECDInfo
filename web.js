@@ -160,7 +160,7 @@ app.get('/testlog/:ip', function(req, res, next){
 });
 
 app.get('/testip', function(req, res, next){
-	res.jsonp(req.ip);
+	res.jsonp(req);
 });
 
 app.get('/api/clearthemes', function(req, res){
