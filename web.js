@@ -181,7 +181,7 @@ app.post('/log/theme', function(req, res){
 	for(var i=0;i<themes.length;i++){
 		weblog.saveLogTheme({
 			theme:themes[i],
-		    createdat:(new Date());
+		    createdat:(new Date())
 		})
 	}
 
