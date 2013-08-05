@@ -4,7 +4,8 @@ var video = require('./routes/video'),
 	photo = require('./routes/photo'),
 	twitter = require('./routes/twitter'),
 	article = require('./routes/article'),
-	option = require('./routes/option');
+	option = require('./routes/option'),
+	weblog = require('./routes/log');
 
 console.log('run web.js');
 
@@ -154,22 +155,55 @@ app.get('/api/themes', function(req, res, next){
 });
 
 app.post('/log/init', function(req, res){
-	// var param = req.body;
+	var param = req.body;
 
-	// option.saveInitLog({
-	// 	ip:param.ip,
-	//     deviceType:param.deviceType,
-	//     os:param.os,
-	//     osversion:param.osversion,
-	//     country:param.country,
-	//     countryCode:param.countryCode,
-	//     city:param.city,
-	//     createdat:param.createdat		
-	// })
+	weblog.saveLogInit({
+		ip:param.ip,
+	    deviceType:param.deviceType,
+	    os:param.os,
+	    osversion:param.osversion,
+	    country:param.country,
+	    countryCode:param.countryCode,
+	    city:param.city,
+	    createdat:(new Date())		
+	})
 
-	// res.jsonp({
-	// 	result:'saved!'
-	// });
+	res.jsonp({
+		result:'saved!'
+	});
+});
+
+app.post('/log/theme', function(req, res){
+	var param = req.body;
+
+	themes = param.themes.split(',');
+
+	for(var i=0;i<themes.length;i++){
+		weblog.saveLogTheme({
+			theme:themes[i],
+		    createdat:(new Date());
+		})
+	}
+
+	res.jsonp({
+		result:'saved!'
+	});
+});
+
+app.post('/log/item', function(req, res){
+	var param = req.body;
+
+	weblog.saveLogItem({
+		type:param.type,
+		title:param.title,
+		image:param.image,
+		pubdate:param.pubdate,
+		createdat:(new Date())
+	})
+
+	res.jsonp({
+		result:'saved!'
+	});
 });
 
 

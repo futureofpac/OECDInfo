@@ -1,8 +1,7 @@
 var dburl = process.env.mongodb_uri;
 
-var collection = ['links', 'themes', 'usagelog'];
-var db = require('mongojs').connect(dburl, collection),
-	geoip = require('geoip-lite');
+var collection = ['links', 'themes'];
+var db = require('mongojs').connect(dburl, collection);
 // var colTheme;
 // var emitterTheme = new require('events').EventEmitter;
 function getLinks(callback){
@@ -12,60 +11,6 @@ function getLinks(callback){
         callback(items);
     });
 }
-
-function saveInitLog(param){
-	db.usagelog.save({
-		ip:param.ip,
-	    deviceType:param.deviceType,
-	    os:param.os,
-	    osversion:param.osversion,
-	    country:param.country,
-	    countryCode:param.countryCode,
-	    city:param.city,
-	    createdat:param.createdat		
-	})
-}
-
-function addUserLog(req){
-	var geo = geoip.lookup(req.ip),
-		log;
-	if(geo == null){
-		log = {
-			themes: req.params.themes,
-			country: '',
-			city: '',
-			createdat: (new Date())
-		}
-	}else{
-		log = {
-			themes: req.params.themes,
-			country: geo.country,
-			city: geo.city,
-			createdat: (new Date())
-		}
-	}
-
-	db.usagelog.save(log)
-}
-function testLog(req, callback, ip){
-	var geo = geoip.lookup((ip === undefined) ? req.ip : ip),
-		log;
-	callback(geo, req.ip)
-}
-
-// function addUserLog(ip){
-// 	var geo = geoip.lookup('110.47.51.146');
-// 	console.log(geo);
-// 	var country = geo.country,
-// 		city = geo.city;
-
-// 	db.usagelog.save({
-// 		themes: 'test',
-// 		country: country,
-// 		city: city,
-// 		createdat: (new Date())
-// 	})
-// }
 
 function getThemes(callback){
 	// if(colTheme === undefined){
@@ -260,8 +205,6 @@ var themes = {
 		}
 	}
 
-
-
 var	links = [
 	{
 		typeName:'Links',
@@ -297,6 +240,3 @@ module.exports.themes = themes;
 module.exports.getThemes = getThemes;
 // module.exports.links = links;
 module.exports.getLinks = getLinks;
-module.exports.addUserLog = addUserLog;
-module.exports.testLog = testLog;
-module.exports.saveInitLog = saveInitLog;

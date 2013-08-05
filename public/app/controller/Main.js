@@ -47,6 +47,7 @@ Ext.define("OECDInfo.controller.Main", {
                         this.openLink(record.data.link);
                     }else{
                         this.openDetail(record.data);
+                        this.callLogItem(record.data)
                     }
                 },
                 loadmoretap:function () {
@@ -238,7 +239,7 @@ Ext.define("OECDInfo.controller.Main", {
         isTablet:false
     },  
     init:function(){
-        // this.callInitLog();
+        this.callLogInit();
         this.callParent(arguments);
     },
     launch:function(){
@@ -259,11 +260,12 @@ Ext.define("OECDInfo.controller.Main", {
         //     console.log(key.getLabel());
         // }); 
     },
-    callInitLog:function(){
+    callLogInit:function(){
         var me = this;
         Ext.data.JsonP.request({
             url: 'http://smart-ip.net/geoip-json',
             // url: OECDInfo.app.serviceRoot() + '/api/links/',
+            timeout: 20000,
             callback:function(success, response){
                 var log = {
                     ip:response.host,
@@ -280,12 +282,36 @@ Ext.define("OECDInfo.controller.Main", {
                     url: OECDInfo.app.serviceRoot() + '/log/init',
                     method:'POST',
                     params:log,
-                    timeout: 10000,
                     callback:function(success, response){
 
                     }
                 });
             } 
+        });
+    },
+    callLogTheme:function(){
+        Ext.Ajax.request({
+            url: OECDInfo.app.serviceRoot() + '/log/theme',
+            method:'POST',
+            params:log,
+            callback:function(success, response){
+
+            }
+        });
+    },
+    callLogItem:function(data){
+        Ext.Ajax.request({
+            url: OECDInfo.app.serviceRoot() + '/log/item',
+            method:'POST',
+            params:{
+                type:data.type,
+                title:data.title,
+                image:data.image,
+                pubdate:data.pubDate
+            },
+            callback:function(success, response){
+
+            }
         });
     },
     scrollListSelected:function(){
@@ -603,13 +629,7 @@ Ext.define("OECDInfo.controller.Main", {
         // detail.setData(data);
         detail.show();
 
-        _gaq.push(['_trackEvent', 'type', type]);
-        // _gaq.push(['_setCustomVar',
-        //     1,                   // This custom var is set to slot #1.  Required parameter.
-        //     'Items Removed',     // The name acts as a kind of category for the user activity.  Required parameter.
-        //     'Yes',               // This value of the custom variable.  Required parameter.
-        //     2                    // Sets the scope to session-level.  Optional parameter.
-        // ]);        
+        // _gaq.push(['_trackEvent', 'type', type]);
     },
     hideDetail:function(){
         this.self.detail.hide();
@@ -676,7 +696,7 @@ Ext.define("OECDInfo.controller.Main", {
         //     // }
         //     this.displayList(1);
         // }
-
+        this.callLogTheme(themes);
     },
     filterFn:function (element, index, array) {
         var type = this.self.currentType;
