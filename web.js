@@ -176,7 +176,7 @@ app.post('/log/init', function(req, res){
 app.post('/log/theme', function(req, res){
 	var param = req.body;
 
-	themes = param.themes.split(',');
+	themes = param.themes.toString().split(',');
 
 	for(var i=0;i<themes.length;i++){
 		weblog.saveLogTheme({
