@@ -289,11 +289,11 @@ Ext.define("OECDInfo.controller.Main", {
             } 
         });
     },
-    callLogTheme:function(){
+    callLogTheme:function(themes){
         Ext.Ajax.request({
             url: OECDInfo.app.serviceRoot() + '/log/theme',
             method:'POST',
-            params:log,
+            params:{theme:themes},
             callback:function(success, response){
 
             }
