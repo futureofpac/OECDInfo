@@ -293,7 +293,7 @@ Ext.define("OECDInfo.controller.Main", {
         Ext.Ajax.request({
             url: OECDInfo.app.serviceRoot() + '/log/theme',
             method:'POST',
-            params:{theme:themes},
+            params:{themes:themes},
             callback:function(success, response){
 
             }
