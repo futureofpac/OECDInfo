@@ -602,6 +602,12 @@ Ext.define("OECDInfo.controller.Main", {
 
         // detail.setData(data);
         detail.show();
+
+        _gaq.push(['_setCustomVar',
+            1,                   // This custom var is set to slot #1.  Required parameter.
+            'detail',     // The name acts as a kind of category for the user activity.  Required parameter.
+            type                // Sets the scope to session-level.  Optional parameter.
+        ]);        
     },
     hideDetail:function(){
         this.self.detail.hide();
