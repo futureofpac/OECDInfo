@@ -176,11 +176,12 @@ app.post('/log/init', function(req, res){
 app.post('/log/theme', function(req, res){
 	var param = req.body;
 
-	themes = param.themes.toString().split(',');
+	var themes = param.themes;
+	var a_themes = themes.split(',');
 
-	for(var i=0;i<themes.length;i++){
+	for(var i=0;i<a_themes.length;i++){
 		weblog.saveLogTheme({
-			theme:themes[i],
+			theme:a_themes[i],
 		    createdat:(new Date())
 		})
 	}
