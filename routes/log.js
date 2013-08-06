@@ -55,7 +55,7 @@ function getLogTheme(callback){
 
 function getLogItem(callback){
 	db.logItem.group({
-		key: { title: 1, image: 1, pubdate:1, typeName},
+		key: { title: 1, image: 1, pubdate:1, typeName:1},
 		// cond: { ord_dt: { $gt: new Date( '01/01/2012' ) } },
 		reduce: function ( curr, result ) {
 			result.count++;
