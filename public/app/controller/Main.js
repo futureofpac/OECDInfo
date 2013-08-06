@@ -64,6 +64,9 @@ Ext.define("OECDInfo.controller.Main", {
             searchfield:{
                 searchtap:function(search){
                     this.callService(this.getTheme(), search)
+                },
+                cleartap:function(){
+                    this.callService(this.getTheme());
                 }
             },
             loadmore:{

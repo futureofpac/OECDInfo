@@ -33,6 +33,9 @@ Ext.define('OECDInfo.view.Menu', {
                                   // alert('User pressed enter'+me.getValue());
                                   this.fireEvent('searchtap', me.getValue());
                                 }
+                            },
+                            clearicontap: function(me, e, eOpts){
+                              this.fireEvent('cleartap');
                             }
                         }
                     }
