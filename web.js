@@ -198,7 +198,7 @@ app.post('/log/item', function(req, res){
 	var param = req.body;
 
 	weblog.saveLogItem({
-		type:param.type,
+		typeName:param.typeName,
 		title:param.title,
 		image:param.image,
 		pubdate:param.pubdate,
