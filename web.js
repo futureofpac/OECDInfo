@@ -114,8 +114,8 @@ function getFeed(req, res){
 			        }else{
 			        	if(search && search != ''){
 			        		feeds = _.filter(feeds, function(item){
-			        			// return (item.title.indexOf(search) > 0 || item.content.indexOf(search) > 0)
-			        			return (item.title.indexOf(search) > 0)
+			        			return (item.title.indexOf(search) > 0 || item.content.indexOf(search) > 0)
+			        			// return (item.title.indexOf(search) > 0)
 			        		})
 			        	}
 

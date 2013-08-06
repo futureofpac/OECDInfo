@@ -669,7 +669,7 @@ Ext.define("OECDInfo.controller.Main", {
             console.log(search);
             var url = '';
             if(search != undefined){
-                url = OECDInfo.app.serviceRoot() + '/api/'+themes+'/30/'+search;
+                url = OECDInfo.app.serviceRoot() + '/api/'+themes+'/60/'+search;
             }else{
                 url = OECDInfo.app.serviceRoot() + '/api/'+themes+'/20/';
             }
