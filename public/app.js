@@ -167,6 +167,7 @@ Ext.application({
             return query_string;
         } ();
 
+        console.log(queryString());
 
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
