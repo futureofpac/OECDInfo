@@ -17,9 +17,10 @@ var express = require('express'),
 app.use(express.static(__dirname + process.env.publicpath));
 app.use(express.bodyParser());
 
-app.get('/api/:themes/:days', function(req, res){
+function getFeed(req, res){
 
 	var themes = req.params.themes.split(','),
+		search = req.params.search,
 		numberofdays = req.params.days,
 
 		today = new Date(),
@@ -111,6 +112,13 @@ app.get('/api/:themes/:days', function(req, res){
 						console.log(err);
 						res.send(err);
 			        }else{
+			        	if(search && search != ''){
+			        		feeds = _.filter(feeds, function(item){
+			        			// return (item.title.indexOf(search) > 0 || item.content.indexOf(search) > 0)
+			        			return (item.title.indexOf(search) > 0)
+			        		})
+			        	}
+
 			        	feeds = _.sortBy(feeds, function(item){
 			        		return item.pubDate;
 			        	});
@@ -139,6 +147,16 @@ app.get('/api/:themes/:days', function(req, res){
 		}
 	]);
 
+}
+
+app.get('/api/:themes/:days', function(req, res){
+	console.log('not search');
+	getFeed(req, res);
+});
+
+app.get('/api/:themes/:days/:search', function(req, res){
+	console.log('search');
+	getFeed(req, res);
 });
 
 app.get('/api/links', function(req, res, next){
