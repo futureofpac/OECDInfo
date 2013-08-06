@@ -20,6 +20,7 @@ Ext.define("OECDInfo.controller.Main", {
             menutheme: '#theme',
             menuthemefield: '#theme checkboxfield',
             menuBtn: 'mainlist toolbar button[action="menu"]',
+            searchfield: 'menu toolbar searchfield',
             refreshBtn: 'mainlist toolbar button[action="refresh"]',
             // moviePosterListContainer:   'slidenavigationview container[title="Item 8"]',
             detail:'#detail',
@@ -58,6 +59,11 @@ Ext.define("OECDInfo.controller.Main", {
             listtop:{
                 toptap:function(){
                     alert('a')
+                }
+            },
+            searchfield:{
+                searchtap:function(search){
+                    this.callService(this.getTheme(), search)
                 }
             },
             loadmore:{
@@ -652,13 +658,20 @@ Ext.define("OECDInfo.controller.Main", {
             } 
         });
     },
-    callService:function (themes) {
+    callService:function (themes, search) {
         // if(navigator.onLine){
             var me = this;
             Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
             console.log(themes);
+            console.log(search);
+            var url = '';
+            if(search != undefined){
+                url = OECDInfo.app.serviceRoot() + '/api/'+themes+'/30/'+search;
+            }else{
+                url = OECDInfo.app.serviceRoot() + '/api/'+themes+'/20/';
+            }
             Ext.data.JsonP.request({
-                url: OECDInfo.app.serviceRoot() + '/api/'+themes+'/20/',
+                url: url,
                 callback:function(success, response){
                     console.log(response);
 

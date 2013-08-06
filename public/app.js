@@ -21,9 +21,9 @@ Ext.application({
         'Menu',
         'Detail',
         'MainList',
-        'Share',
-
-        'LogList'
+        'Share'
+        // ,
+        // 'LogList'
     ],
 
     models: [
@@ -35,9 +35,9 @@ Ext.application({
     ],
 
     controllers: [
-       'Main',
-
-       'Log'
+       'Main'
+       // ,
+       // 'Log'
     ],
 
     icon: {

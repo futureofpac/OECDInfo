@@ -19,6 +19,26 @@ Ext.define('OECDInfo.view.Menu', {
         },
         items:[
             {
+                xtype:'toolbar',
+                docked:'top',
+                ui:'light',
+                items:[
+                    {
+                        xtype: 'searchfield',
+                        // style:'height:42px',
+                        width:'90%',
+                        listeners: {
+                            keyup: function(me, e, eOpts){
+                                if (e.event.keyCode == 13){
+                                  // alert('User pressed enter'+me.getValue());
+                                  this.fireEvent('searchtap', me.getValue());
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            {
                 xtype: 'list',
                 id:'menu',
                 cls:'fb x-slideview-container-left',
