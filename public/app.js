@@ -164,10 +164,9 @@ Ext.application({
               query_string[pair[0]].push(pair[1]);
             }
           } 
+            console.log(query_string);
             return query_string;
         } ();
-
-        console.log(queryString());
 
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
