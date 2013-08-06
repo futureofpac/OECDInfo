@@ -21,7 +21,9 @@ Ext.application({
         'Menu',
         'Detail',
         'MainList',
-        'Share'
+        'Share',
+
+        'LogList'
     ],
 
     models: [
@@ -33,7 +35,9 @@ Ext.application({
     ],
 
     controllers: [
-       'Main'
+       'Main',
+
+       'Log'
     ],
 
     icon: {
@@ -164,35 +168,41 @@ Ext.application({
               query_string[pair[0]].push(pair[1]);
             }
           } 
-            console.log(query_string);
             return query_string;
         } ();
 
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 
+        var appType = queryString.type;
+
         var width = window.innerWidth;
         var device = queryString.d;
 
-        if(device == 'phone'){
-            this.isTablet = false; 
-        }else if(device == 'tablet'){
-            this.isTablet = true; 
+        if(appType == 'log'){
+            Ext.Viewport.add(Ext.create('OECDInfo.view.LogList'));
         }else{
-            if(width > 500){
+            if(device == 'phone'){
+                this.isTablet = false; 
+            }else if(device == 'tablet'){
                 this.isTablet = true; 
+            }else{
+                if(width > 500){
+                    this.isTablet = true; 
+                }
             }
+
+            console.log(this.isTablet);
+
+            Ext.Viewport.on('orientationchange', function() {
+                if (Ext.os.is.Android) {
+                    Ext.Viewport.setSize(window.innerWidth,window.innerHeight);
+                }
+            });
+            // Initialize the main view
+            Ext.Viewport.add((this.isTablet ? Ext.create('OECDInfo.view.Main') : Ext.create('OECDInfo.view.MainList')));
+
         }
-
-        console.log(this.isTablet);
-
-        Ext.Viewport.on('orientationchange', function() {
-            if (Ext.os.is.Android) {
-                Ext.Viewport.setSize(window.innerWidth,window.innerHeight);
-            }
-        });
-        // Initialize the main view
-        Ext.Viewport.add((this.isTablet ? Ext.create('OECDInfo.view.Main') : Ext.create('OECDInfo.view.MainList')));
     },
 
     onUpdated: function() {

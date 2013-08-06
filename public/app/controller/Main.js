@@ -304,7 +304,7 @@ Ext.define("OECDInfo.controller.Main", {
             url: OECDInfo.app.serviceRoot() + '/log/item',
             method:'POST',
             params:{
-                type:data.type,
+                typeName:data.typeName,
                 title:data.title,
                 image:data.image,
                 pubdate:data.pubDate

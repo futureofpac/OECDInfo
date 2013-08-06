@@ -26,7 +26,7 @@ function saveLogTheme(param){
 
 function saveLogItem(param){
 	db.logItem.save({
-		type:param.type,
+		typeName:param.typeName,
 		title:param.title,
 		image:param.image,
 		pubdate:param.pubdate,
@@ -55,7 +55,7 @@ function getLogTheme(callback){
 
 function getLogItem(callback){
 	db.logItem.group({
-		key: { title: 1, image: 1, pubdate:1 },
+		key: { title: 1, image: 1, pubdate:1, typeName},
 		// cond: { ord_dt: { $gt: new Date( '01/01/2012' ) } },
 		reduce: function ( curr, result ) {
 			result.count++;
