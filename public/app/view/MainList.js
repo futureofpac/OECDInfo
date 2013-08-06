@@ -186,7 +186,7 @@ Ext.define('OECDInfo.view.MainList', {
                     '<div style="min-height:120px;font-family:Arial, sans-serif;">',
                         '<img src="{image}_q.jpg" style="float:left;width:120px;height:120px;">',
                         '<div style="margin-left:130px;">',
-                        '<div><tpl if="this.isTypeAll()"><span style="color:#989898;margin-bottom:8px;">{typeName} : </span></tpl>{title}</div>',
+                        '<div><tpl if="this.isTypeAll()"><span style="color:#989898;margin-bottom:8px;">{typeName} : </span></tpl>{title:ellipsis(60, true)}</div>',
                         '<div style="overflow:hidden;text-overflow:ellipsis;padding-top:7px;font-size:smaller;">{content:ellipsis(90, true)}</div>',
                         '<div style="clear:both;margin-bottom:2px;"></div>',
                     '</div>',

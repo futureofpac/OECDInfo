@@ -34,6 +34,39 @@ function saveLogItem(param){
 	})
 }
 
+function getLogTheme(callback){
+	db.logTheme.group({
+		key: { theme: 1},
+		// cond: { ord_dt: { $gt: new Date( '01/01/2012' ) } },
+		reduce: function ( curr, result ) {
+			result.count++;
+		},
+		initial: { count : 0 }
+	}, function(err, items) {
+		callback(items);
+	})
+	// // var aaa = db.logTheme.find().count().toArray(function(err, items) {
+	// // 	console.log(err);
+ // //        console.log(items);
+ // //    })
+	// console.log('aaa');
+	// console.log(aaa);
+}
+
+function getLogItem(callback){
+	db.logItem.group({
+		key: { title: 1, image: 1, pubdate:1 },
+		// cond: { ord_dt: { $gt: new Date( '01/01/2012' ) } },
+		reduce: function ( curr, result ) {
+			result.count++;
+		},
+		initial: { count : 0 }
+	}, function(err, items) {
+		callback(items);
+	})
+}
+
+
 function addUserLog(req){
 	var geo = geoip.lookup(req.ip),
 		log;
@@ -81,3 +114,6 @@ module.exports.testLog = testLog;
 module.exports.saveLogInit = saveLogInit;
 module.exports.saveLogTheme = saveLogTheme;
 module.exports.saveLogItem = saveLogItem;
+
+module.exports.getLogTheme = getLogTheme;
+module.exports.getLogItem = getLogItem;

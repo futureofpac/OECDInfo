@@ -173,6 +173,7 @@ app.post('/log/init', function(req, res){
 	});
 });
 
+
 app.post('/log/theme', function(req, res){
 	var param = req.body;
 
@@ -206,6 +207,38 @@ app.post('/log/item', function(req, res){
 
 	res.jsonp({
 		result:'saved!'
+	});
+});
+
+app.get('/log/init', function(req, res){
+	var param = req.body;
+
+	weblog.saveLogInit({
+		ip:param.ip,
+	    deviceType:param.deviceType,
+	    os:param.os,
+	    osversion:param.osversion,
+	    country:param.country,
+	    countryCode:param.countryCode,
+	    city:param.city,
+	    createdat:(new Date())		
+	})
+
+	res.jsonp({
+		result:'saved!'
+	});
+});
+
+
+app.get('/log/theme', function(req, res){
+	weblog.getLogTheme(function(items){
+		res.jsonp(items);
+	});
+});
+
+app.get('/log/item', function(req, res){
+	weblog.getLogItem(function(items){
+		res.jsonp(items);
 	});
 });
 
