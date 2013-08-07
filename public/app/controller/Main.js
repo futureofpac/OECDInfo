@@ -263,8 +263,8 @@ Ext.define("OECDInfo.controller.Main", {
         this.callParent(arguments);
         // this.initMenu();
         this.initOptions();
-        // var themes = this.getTheme();
-        var themes = 'Generic';
+        var themes = this.getTheme();
+        // var themes = 'Generic';
 
         this.callService(themes);
         this.self.stopCheckEvent = true;
