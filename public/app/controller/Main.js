@@ -672,22 +672,24 @@ Ext.define("OECDInfo.controller.Main", {
         });
     },
     callService:function (themes, search) {
-        if(navigator.onLine){
-            var me = this;
-            Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
-            console.log(themes);
-            console.log(search);
-            var url = '';
-            if(search != undefined){
-                url = OECDInfo.app.serviceRoot() + '/api/'+themes+'/60/'+search;
-            }else{
-                url = OECDInfo.app.serviceRoot() + '/api/'+themes+'/20/';
-            }
-            Ext.data.JsonP.request({
-                url: url,
-                callback:function(success, response){
-                    console.log(response);
+        var me = this;
+        Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
+        console.log(themes);
+        console.log(search);
+        var url = '';
+        if(search != undefined){
+            url = OECDInfo.app.serviceRoot() + '/api/'+themes+'/60/'+search;
+        }else{
+            url = OECDInfo.app.serviceRoot() + '/api/'+themes+'/20/';
+        }
+        Ext.data.JsonP.request({
+            url: url,
+            callback:function(success, response){
+                console.log(response);
 
+                if(!success){
+                    this.callServiceOffline(true);
+                }else{
                     if(response == null){
                         Ext.Msg.alert('Alert', 'No Data, Try it later again');
                         me.displayList(1);
@@ -709,22 +711,25 @@ Ext.define("OECDInfo.controller.Main", {
                     }
                     Ext.Viewport.setMasked(false);
                     me.callLogTheme(themes);
-                } 
-            });
-        }else{
-            Ext.Msg.alert('Notice', 'No Internet connection, data will be loaded from the cache and some features might be limited.')
-            var cache = this.getFeeds();
-
-            console.log(cache);
-
-            if(cache){
-                this.self.feeds = [].concat(cache);
-            }
-            // if(cache.links){
-            //     this.self.links = [].concat(cache.links);
-            // }
-            this.displayList(1);
+                }
+            } 
+        });
+    },
+    callServiceOffline:function(useAlert){
+        if(useAlert){
+            Ext.Msg.alert('Notice', 'It seems there is no Internet connection, data will be loaded from the cache and some features might be limited.')
         }
+        var cache = this.getFeeds();
+
+        console.log(cache);
+
+        if(cache){
+            this.self.feeds = [].concat(cache);
+        }
+        // if(cache.links){
+        //     this.self.links = [].concat(cache.links);
+        // }
+        this.displayList(1);
     },
     filterFn:function (element, index, array) {
         var type = this.self.currentType;
