@@ -685,31 +685,43 @@ Ext.define("OECDInfo.controller.Main", {
         Ext.data.JsonP.request({
             url: url,
             callback:function(success, response){
+                console.log();
                 console.log(response);
+                console.log();
 
                 // if(!success){
                 //     this.callServiceOffline(true);
                 // }else{
+                console.log(1);
                     if(response == null){
+                console.log(2);
                         Ext.Msg.alert('Alert', 'No Data, Try it later again');
                         me.displayList(1);
                     }else{
+                console.log(3);
                         me.self.feeds = [].concat(response.feeds);
                         // me.self.links = [].concat(response.links);
+                console.log(4);
 
                         me.controlSearchBox(search);
-                        me.displayList(1, search);
+                console.log(5);
+                        me.displayList(1);
+                console.log(6);
                         // me.setFeeds([{test:'aaaa'}]);
                         var localFeeds = [], type = '';
+                console.log(7);
                         for(var i=0;i<response.feeds.length;i++){
                             type = response.feeds[i].typeName;
                             if(type != 'Articles' && type != 'Photos' && type != 'Videos'){
                                 localFeeds.push(response.feeds[i]);
                             }
                         }
+                console.log(8);
                         me.setFeeds(localFeeds);
                     }
+                console.log(9);
                     Ext.Viewport.setMasked(false);
+                console.log(10);
                     me.callLogTheme(themes);
                 // }
             } 

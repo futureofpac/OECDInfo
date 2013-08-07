@@ -1,7 +1,7 @@
 Ext.define('OECDInfo.view.Menu', {
     extend:'Ext.Panel',
     alias:'widget.menu',
-    require:[
+    requires:[
         'Ext.field.Search'
     ],
     initialize:function(){
