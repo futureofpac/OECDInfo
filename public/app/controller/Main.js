@@ -672,7 +672,7 @@ Ext.define("OECDInfo.controller.Main", {
         });
     },
     callService:function (themes, search) {
-        if(navigator.onLine){
+        if(Ext.device.Connection.isOnline()){
             var me = this;
             Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
             console.log(themes);
@@ -708,6 +708,7 @@ Ext.define("OECDInfo.controller.Main", {
                         me.setFeeds(localFeeds);
                     }
                     Ext.Viewport.setMasked(false);
+                    me.callLogTheme(themes);
                 } 
             });
         }else{
@@ -724,7 +725,6 @@ Ext.define("OECDInfo.controller.Main", {
             // }
             this.displayList(1);
         }
-        this.callLogTheme(themes);
     },
     filterFn:function (element, index, array) {
         var type = this.self.currentType;
