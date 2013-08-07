@@ -672,7 +672,7 @@ Ext.define("OECDInfo.controller.Main", {
         });
     },
     callService:function (themes, search) {
-        if(Ext.device.Connection.isOnline()){
+        if(navigator.onLine){
             var me = this;
             Ext.Viewport.setMasked({xtype:'loadmask', message:'Loading', zIndex:100000});
             console.log(themes);
