@@ -780,9 +780,11 @@ Ext.define("OECDInfo.controller.Main", {
 
         if(search == undefined){
             searchclear.setHidden(true);
+            this.getListtop().setTitle('OECD Info');
         }else{
+            this.getListtop().setTitle('Search Result');
             searchclear.setHidden(false);
-            searchclear.setHtml('<p style="color:black;">'+ this.self.feeds.length +' items are found related to "'+ search +'" </p>');
+            searchclear.setHtml('<p style="color:black;">"'+ search +'" ('+ this.self.feeds.length +' items)</p>');
         }
     },
     displayList:function (page) {
