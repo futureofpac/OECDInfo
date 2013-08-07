@@ -687,9 +687,9 @@ Ext.define("OECDInfo.controller.Main", {
             callback:function(success, response){
                 console.log(response);
 
-                if(!success){
-                    this.callServiceOffline(true);
-                }else{
+                // if(!success){
+                //     this.callServiceOffline(true);
+                // }else{
                     if(response == null){
                         Ext.Msg.alert('Alert', 'No Data, Try it later again');
                         me.displayList(1);
@@ -711,7 +711,7 @@ Ext.define("OECDInfo.controller.Main", {
                     }
                     Ext.Viewport.setMasked(false);
                     me.callLogTheme(themes);
-                }
+                // }
             } 
         });
     },
