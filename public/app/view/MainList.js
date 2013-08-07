@@ -80,6 +80,7 @@ Ext.define('OECDInfo.view.MainList', {
                 padding:10,
                 docked:'top',
                 hidden:true,
+                action:'search',
                 // style:'background-color:#dfdfdf',
                 // html:'<p style="color:black;">11 items are found related to "Searchword" </p>',
                 items:[
