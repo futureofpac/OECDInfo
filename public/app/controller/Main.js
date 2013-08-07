@@ -506,9 +506,9 @@ Ext.define("OECDInfo.controller.Main", {
     getTheme:function(){
         var local = localStorage.getItem('themes');
         // var local = localStorage['themes'];
-        alert(local);
+        // alert(local);
         var json = JSON.parse(local);
-        alert(json)
+        // alert(json)
         return ((json == '' || json == null) ? 'Generic' : json);
     },
     setTheme:function(themes){
@@ -705,25 +705,25 @@ Ext.define("OECDInfo.controller.Main", {
                                 localFeeds.push(response.feeds[i]);
                             }
                         }
-                        // me.setFeeds(localFeeds);
+                        me.setFeeds(localFeeds);
                     }
                     Ext.Viewport.setMasked(false);
                 } 
             });
-        // }else{
-        //     Ext.Msg.alert('Notice', 'No Internet connection, data will be loaded from the cache and some features might be limited.')
-        //     var cache = this.getFeeds();
+        }else{
+            Ext.Msg.alert('Notice', 'No Internet connection, data will be loaded from the cache and some features might be limited.')
+            var cache = this.getFeeds();
 
-        //     console.log(cache);
+            console.log(cache);
 
-        //     if(cache){
-        //         this.self.feeds = [].concat(cache);
-        //     }
-        //     // if(cache.links){
-        //     //     this.self.links = [].concat(cache.links);
-        //     // }
-        //     this.displayList(1);
-        // }
+            if(cache){
+                this.self.feeds = [].concat(cache);
+            }
+            // if(cache.links){
+            //     this.self.links = [].concat(cache.links);
+            // }
+            this.displayList(1);
+        }
         this.callLogTheme(themes);
     },
     filterFn:function (element, index, array) {
