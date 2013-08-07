@@ -13,7 +13,7 @@ Ext.define("OECDInfo.controller.Main", {
             main:'main',
             list: 'mainlist',
             listtop: 'mainlist toolbar',
-            loadmore:'mainlist panel button',
+            loadmore:'mainlist panel button[action="loadmore"]',
             // main: 'main',
             menu: 'menu', 
             menulist: '#menu',
@@ -21,6 +21,7 @@ Ext.define("OECDInfo.controller.Main", {
             menuthemefield: '#theme checkboxfield',
             menuBtn: 'mainlist toolbar button[action="menu"]',
             searchfield: 'menu toolbar searchfield',
+            searchclear:'mainlist panel button[action="search"]',
             refreshBtn: 'mainlist toolbar button[action="refresh"]',
             // moviePosterListContainer:   'slidenavigationview container[title="Item 8"]',
             detail:'#detail',
@@ -64,8 +65,15 @@ Ext.define("OECDInfo.controller.Main", {
             searchfield:{
                 searchtap:function(search){
                     this.callService(this.getTheme(), search)
-                },
-                cleartap:function(){
+                // },
+                // cleartap:function(){
+                //     this.callService(this.getTheme());
+                }
+            },
+            searchclear:{
+                tap:function(){
+                    this.controlSearchBox();
+                    this.getSearchfield().setValue('');
                     this.callService(this.getTheme());
                 }
             },
@@ -684,7 +692,9 @@ Ext.define("OECDInfo.controller.Main", {
                     }else{
                         me.self.feeds = [].concat(response.feeds);
                         // me.self.links = [].concat(response.links);
-                        me.displayList(1);
+
+                        me.controlSearchBox(search);
+                        me.displayList(1, search);
                         // me.setFeeds([{test:'aaaa'}]);
                         var localFeeds = [], type = '';
                         for(var i=0;i<response.feeds.length;i++){
@@ -764,6 +774,16 @@ Ext.define("OECDInfo.controller.Main", {
         this.getLoadmore().getParent().setHidden(true);
         console.log('called!');
         this.displayList(++this.self.currentPage);
+    },
+    controlSearchBox:function(search){
+        var searchclear = this.getSearchclear().getParent();
+
+        if(search == undefined){
+            searchclear.setHidden(true);
+        }else{
+            searchclear.setHidden(false);
+            searchclear.setHtml('<p style="color:black;">'+ this.self.feeds.length +' items are found related to "'+ search +'" </p>');
+        }
     },
     displayList:function (page) {
         var store = Ext.getStore('MainStore'),

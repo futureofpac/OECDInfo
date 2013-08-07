@@ -1,6 +1,9 @@
 Ext.define('OECDInfo.view.Menu', {
     extend:'Ext.Panel',
     alias:'widget.menu',
+    require:[
+        'Ext.field.Search'
+    ],
     initialize:function(){
         this.callParent();
     },
@@ -11,7 +14,7 @@ Ext.define('OECDInfo.view.Menu', {
         modal:true,
         hideOnMaskTap:true,
         layout:'fit',
-        style:'border:solid 1px gray',
+        style:'border-right:solid 1px gray',
         showAnimation:{
             type:'slide',
             direction:'right',
@@ -26,7 +29,7 @@ Ext.define('OECDInfo.view.Menu', {
                     {
                         xtype: 'searchfield',
                         // style:'height:42px',
-                        width:'90%',
+                        width:'93%',
                         listeners: {
                             keyup: function(me, e, eOpts){
                                 if (e.event.keyCode == 13){
@@ -225,7 +228,7 @@ Ext.define('OECDInfo.view.Menu', {
                         height:30,
                         html:'By Themes',
                         scrollDock: 'bottom',
-                        style:'background-color:gray;padding:5px 0px 5px 0px;color:#ffffff;text-align:center;'
+                        style:'background-color:#c4c4c4;padding:5px 0px 5px 0px;color:#ffffff;text-align:center;'
                     }
                 ],
                 listeners: {

@@ -10,7 +10,7 @@ Ext.define('OECDInfo.view.Detail', {
         if(this.getFromTablet()){
             // this.query('toolbar')[0].hide();
 
-            this.query('button[action=close]')[0].hide();
+            // this.query('button[action=close]')[0].hide();
             this.query('button[action=share]')[0].hide();
             this.query('button[action=prev]')[0].hide();
             this.query('button[action=next]')[0].hide();
@@ -20,7 +20,7 @@ Ext.define('OECDInfo.view.Detail', {
             this.query('button[action=twitter]')[0].show();
             // this.query('panel[id=shareContainer]')[0].show();
         }else{
-            this.query('button[action=close]')[0].show();
+            // this.query('button[action=close]')[0].show();
             this.query('button[action=share]')[0].show();
             this.query('button[action=prev]')[0].show();
             this.query('button[action=next]')[0].show();

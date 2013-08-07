@@ -51,6 +51,7 @@ Ext.define('OECDInfo.view.MainList', {
                 docked:'top',
                 title:'OECD Info',
                 ui:'light',
+                height:'48px',
                 items:[
                     {
                         xtype:'button',
@@ -71,6 +72,28 @@ Ext.define('OECDInfo.view.MainList', {
                 //  flex:1
                 //  // style:'margin:3px;padding:0px;'
                 // },
+            }
+            ,
+            {
+                xtype:'panel',
+                height:45,
+                padding:10,
+                docked:'top',
+                hidden:true,
+                // style:'background-color:#dfdfdf',
+                // html:'<p style="color:black;">11 items are found related to "Searchword" </p>',
+                items:[
+                    {
+                        xtype:'button',
+                        // docked:'right',
+                        action:'search',
+                        iconCls:'delete',
+                        width:51,
+                        top:'11%',
+                        right:7,
+                        height:'78%'
+                    }
+                ]
             }
             ,
             {
@@ -100,6 +123,7 @@ Ext.define('OECDInfo.view.MainList', {
                         // iconAlign:'right',
                         width:'50%',
                         centered:true,
+                        action:'loadmore',
                         text:'<span style="font-size:smaller;">Load More...</span>'
                         // ,
                         // handler:function(me){
