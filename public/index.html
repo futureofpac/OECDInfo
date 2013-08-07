@@ -202,6 +202,17 @@
 </body>
 <script type="text/javascript">
 
+if (typeof window.navigator == 'object')
+{
+  alert('supported');
+    // localStorage is supported
+}
+else
+{
+  alert('not supported');
+    // localStorage is not supported
+}
+
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-42960062-1']);
   _gaq.push(['_trackPageview']);
