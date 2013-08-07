@@ -506,7 +506,9 @@ Ext.define("OECDInfo.controller.Main", {
     getTheme:function(){
         // var local = localStorage.getItem('themes');
         var local = localStorage['themes'];
+        alert(local);
         var json = JSON.parse(local);
+        alert(json)
         return ((json == '' || json == null) ? 'Generic' : json);
     },
     setTheme:function(themes){
@@ -780,7 +782,7 @@ Ext.define("OECDInfo.controller.Main", {
 
         if(search == undefined){
             searchclear.setHidden(true);
-            this.getListtop().setTitle(OECDInfo.app.label);
+            this.getListtop().setTitle(OECDInfo.app.lab);
         }else{
             this.getListtop().setTitle('Search Result');
             searchclear.setHidden(false);
