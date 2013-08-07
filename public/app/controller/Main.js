@@ -504,8 +504,8 @@ Ext.define("OECDInfo.controller.Main", {
         this.self.next.hide();
     },
     getTheme:function(){
-        // var local = localStorage.getItem('themes');
-        var local = localStorage['themes'];
+        var local = localStorage.getItem('themes');
+        // var local = localStorage['themes'];
         alert(local);
         var json = JSON.parse(local);
         alert(json)
