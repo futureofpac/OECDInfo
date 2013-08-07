@@ -193,7 +193,7 @@ Ext.define("OECDInfo.controller.Main", {
             },
             menulist: {
                 typetap:function (type) {
-                    var title = (type == 'All' ? 'OECD Info' : type);
+                    var title = (type == 'All' ? OECDInfo.app.label : type);
                     toolbar = this.getList().query('toolbar')[0];
                     toolbar.setTitle(title);
 
@@ -780,7 +780,7 @@ Ext.define("OECDInfo.controller.Main", {
 
         if(search == undefined){
             searchclear.setHidden(true);
-            this.getListtop().setTitle('OECD Info');
+            this.getListtop().setTitle(OECDInfo.app.label);
         }else{
             this.getListtop().setTitle('Search Result');
             searchclear.setHidden(false);

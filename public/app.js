@@ -134,6 +134,7 @@ Ext.application({
             key:'Urban'
         }
     ],
+    label:'OECD Info',
     isTablet:false,
     currentType:'All',
     serviceRoot:function(){
