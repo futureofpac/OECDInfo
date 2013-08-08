@@ -3,14 +3,17 @@ var FeedParser = require('feedparser'),
 	request = require('request'),
 	model = require('./feed');
 
-var feed = function(feeds_theme, startDate, endDate, feeds, callback){
+var feed = function(feeds_theme, startDate, endDate, feeds, next, callback){
 	datenotchecked = true;
 
 	console.log(feeds_theme);
 
 	request(feeds_theme.url)
 	.pipe(new FeedParser())
-	.on('error', function(error) {
+	.on('error', function(err) {
+		if(err) {
+			next({stack:err.stack, isdb:false})	
+		}
 	})
 	.on('article', function (article) {
 		if(article.pubDate != null && article.pubDate != ''){

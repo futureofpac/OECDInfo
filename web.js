@@ -16,8 +16,16 @@ var express = require('express'),
 
 app.use(express.static(__dirname + process.env.publicpath));
 app.use(express.bodyParser());
+app.use(app.router);
+app.use(function(err, req, res, next){
+  console.log('error catched!');
+  console.error(err.isdb);
+  console.error(err.stack);
+  res.send(500, 'Something Wrong!');
+});
+// app.use(express.errorHandler());
 
-function getFeed(req, res){
+function getFeed(req, res, next){
 
 	var themes = req.params.themes.split(','),
 		search = req.params.search,
@@ -57,8 +65,7 @@ function getFeed(req, res){
 				console.log('already got it!');
 				callback();
 			}else{
-				option.getThemes(function(result){
-					// res.jsonp(result);
+				option.getThemes(next, function(result){
 					glbThemes = result;
 					callback();
 				})
@@ -74,7 +81,7 @@ function getFeed(req, res){
 					if(_.indexOf(themes, 'Generic') > -1){
 					    async.forEach(playlistkeys, function(key, callback) { //The second argument (callback) is the "task callback" for a specific messageId
 					    	// video.feed(key, feeds['youtube'], callback);
-					    	video.feed(key, feeds, callback);
+					    	video.feed(key, feeds, next, callback);
 					    }, callback);
 					}else{
 						callback();
@@ -83,7 +90,7 @@ function getFeed(req, res){
 				function(callback) {
 					if(_.indexOf(themes, 'Generic') > -1){
 						// photo.feed(feeds['flickr'], callback)
-						photo.feed(feeds, callback)
+						photo.feed(feeds, next, callback)
 					}else{
 						callback();
 					}
@@ -93,7 +100,7 @@ function getFeed(req, res){
 
 				    async.forEach(screen_names, function(screen_name, callback) { //The second argument (callback) is the "task callback" for a specific messageId
 						// twitter.feed(screen_name, startDate, endDate, feeds['tweets'], callback)
-						twitter.feed(screen_name, startDate, endDate, feeds, callback)
+						twitter.feed(screen_name, startDate, endDate, feeds, next, callback)
 				    }, callback);
 		    	},
 		    	function(callback) {
@@ -102,15 +109,14 @@ function getFeed(req, res){
 
 				    async.forEach(feeds_themes, function(feeds_theme, callback) { 
 				    	// article.feed(feeds_theme, startDate, endDate, feeds['article'], callback);
-				    	article.feed(feeds_theme, startDate, endDate, feeds, callback);
+				    	article.feed(feeds_theme, startDate, endDate, feeds, next, callback);
 				    }, callback);
 		    	}],
 				function(err) {
 					console.log('end');
 			        // if (err) return next(err);
-			        if (err) {
-						console.log(err);
-						res.send(err);
+					if(err) {
+						next({stack:err.stack, isdb:false});
 			        }else{
 			        	if(search && search != ''){
 			        		feeds = _.filter(feeds, function(item){
@@ -149,9 +155,29 @@ function getFeed(req, res){
 
 }
 
-app.get('/api/:themes/:days', function(req, res){
+app.get('/api/:themes/:days', function(req, res, next){
 	console.log('not search');
-	getFeed(req, res);
+
+	// if ( err ) {
+ //        var report = new Error('unable to get something in home');
+ //        report.status = 500;
+ //        report.inner = err;
+ //        next(report);
+ //        return;
+ //    }
+
+ 	// throw "some exception";
+ 	// next({stack:'hi'})
+	getFeed(req, res, next);
+	// next();
+// }, function(err,req,res,next) {
+// 	if(err){
+// 	    console.log('This error handler is called!!');
+// 	    return next(err);
+// 	}else{
+// 		console.log('no error');
+// 	}
+
 });
 
 app.get('/api/:themes/:days/:search', function(req, res){
@@ -159,14 +185,15 @@ app.get('/api/:themes/:days/:search', function(req, res){
 	getFeed(req, res);
 });
 
-app.get('/api/links', function(req, res, next){
-	option.getLinks(function(links){
+app.get('/api/links', function(req, res){
+	option.getLinks(function(err, links){
 		res.jsonp(links);
 	})
 });
 
-app.get('/api/themes', function(req, res, next){
-	option.getThemes(function(result){
+app.get('/api/themes', function(req, res){
+	option.getThemes(function(err, result){
+		console.log(result);
 		glbThemes = result;
 		// res.jsonp(result);
 	})

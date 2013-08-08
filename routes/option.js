@@ -5,54 +5,41 @@ var db = require('mongojs').connect(dburl, collection);
 // var colTheme;
 // var emitterTheme = new require('events').EventEmitter;
 function getLinks(callback){
+
 	db.links.find().toArray(function(err, items) {
-		console.log(err);
-        console.log(items);
-        callback(items);
+		if(err) callback(err)
+		else {
+	        callback(null, items);
+		}
     });
 }
 
-function getThemes(callback){
-	// if(colTheme === undefined){
-	// 	emitterTheme.on('themes-ready', function(){
-	// 		callback(colTheme);
-	// 	})
-	// }else{
-	// 	callback(colTheme)
-	// }
-
+function getThemes(next, callback){
 	db.themes.find(function(err, items) {
-		console.log(err);
-	    console.log(items);
-	    // callback(items);
-		// colTheme = items;
+		if(err) next({stack:err.stack, isdb:true})
+		else {
+			var result = {};
 
-		var result = {};
-
-		for(var i=0;i<items.length;i++){
-			console.log(items[i].name);
-			// var obj = result[items[i].name];
-			result[items[i].name] = {};
-			if(items[i].Twitter){
-				result[items[i].name]['Twitter'] = items[i].Twitter;
+			for(var i=0;i<items.length;i++){
+				console.log(items[i].name);
+				// var obj = result[items[i].name];
+				result[items[i].name] = {};
+				if(items[i].Twitter){
+					result[items[i].name]['Twitter'] = items[i].Twitter;
+				}
+				if(items[i].News){
+					result[items[i].name]['News'] = items[i].News;
+				}
+				if(items[i].Blog){
+					result[items[i].name]['Blog'] = items[i].Blog;
+				}
+				if(items[i].Publication){
+					result[items[i].name]['Publication'] = items[i].Publication;
+				}
 			}
-			if(items[i].News){
-				result[items[i].name]['News'] = items[i].News;
-			}
-			if(items[i].Blog){
-				result[items[i].name]['Blog'] = items[i].Blog;
-			}
-			if(items[i].Publication){
-				result[items[i].name]['Publication'] = items[i].Publication;
-			}
+			callback(result);
 		}
-		// colTheme = result;
-		console.log(result);
-		// emitterTheme.emit('themes-ready');
-		callback(result)
 	});
-
-
 }
 
 

@@ -4,43 +4,48 @@ var _ = require ('underscore'),
 
 var T = new twit({
     consumer_key:         process.env.twitter_consumer_key
+    // consumer_key:         'asfasdf'
   , consumer_secret:      process.env.twitter_consumer_secret
   , access_token:         process.env.twitter_access_token
   , access_token_secret:  process.env.twitter_access_token_secret
 })
 
-var feed = function(screen_name, startDate, endDate, feeds, callback){
+var feed = function(screen_name, startDate, endDate, feeds, next, callback){
 	T.get('statuses/user_timeline', { screen_name: screen_name.url, exclude_replies: true, count: 20 },  function (err, data) {
-		_.each(data, function (item, index) {
-			if(item.created_at != null && item.created_at != ''){
-				var articleDate = new Date(item.created_at);
-				if(startDate < articleDate && endDate > articleDate){
-		            var userData = item.user,
-		                userInfo = {
-		                    name:               userData.name,
-		                    screen_name:        userData.screen_name,
-		                    description:        userData.description,
-		                    url:                userData.url,
-		                    profile_banner_url: userData.profile_banner_url,
-		                    statuses_count:     userData.statuses_count,
-		                    friends_count:      userData.friends_count,
-		                    followers_count:    userData.followers_count 
-		                };
-		                
-					var f = new model({
-						theme: screen_name.theme,
-						typeName: 'Twitter',
-						title: item.text,
-						link: 'https://www.twitter.com/' +  userData.screen_name + '/status/' + item.id_str,
-						pubDate: new Date(item.created_at),
-						image: item.user.profile_image_url,
-						userInfo: userInfo
-					});
-					feeds.push(f);
+		if(err) {
+			next({stack:err, isdb:false})	
+		}else{
+			_.each(data, function (item, index) {
+				if(item.created_at != null && item.created_at != ''){
+					var articleDate = new Date(item.created_at);
+					if(startDate < articleDate && endDate > articleDate){
+			            var userData = item.user,
+			                userInfo = {
+			                    name:               userData.name,
+			                    screen_name:        userData.screen_name,
+			                    description:        userData.description,
+			                    url:                userData.url,
+			                    profile_banner_url: userData.profile_banner_url,
+			                    statuses_count:     userData.statuses_count,
+			                    friends_count:      userData.friends_count,
+			                    followers_count:    userData.followers_count 
+			                };
+			                
+						var f = new model({
+							theme: screen_name.theme,
+							typeName: 'Twitter',
+							title: item.text,
+							link: 'https://www.twitter.com/' +  userData.screen_name + '/status/' + item.id_str,
+							pubDate: new Date(item.created_at),
+							image: item.user.profile_image_url,
+							userInfo: userInfo
+						});
+						feeds.push(f);
+					}
 				}
-			}
-		})	
-		callback();
+			})	
+			callback();
+		}
 	}) 	
 }
 
