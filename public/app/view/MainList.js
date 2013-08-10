@@ -10,6 +10,7 @@ Ext.define('OECDInfo.view.MainList', {
     ],    
     config:{
         store:'MainStore', 
+        id:'list',        
         loadingText:'Loading ...',
         autoDestroy:false,
         scrollToTopOnRefresh:false,

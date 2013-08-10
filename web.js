@@ -21,6 +21,12 @@ app.use(function(err, req, res, next){
   console.log('error catched!');
   console.error(err.isdb);
   console.error(err.stack);
+
+  if(err.isdb){
+  	// save in file.
+  }else{
+  	// save in db
+  }
   res.send(500, 'Something Wrong!');
 });
 // app.use(express.errorHandler());

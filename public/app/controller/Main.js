@@ -42,15 +42,20 @@ Ext.define("OECDInfo.controller.Main", {
                     console.log(me);
                     console.log(index);
                     console.log(record.data);
-                    this.self.currentIndex = index;
-                    // var main = this.getMain();
-                    // // Ext.defer(main.moveContainer, 200, main);
-                    // main.moveContainer(null, -200, 200)
-                    if(record.data.typeName == 'Links'){
-                        this.openLink(record.data.link);
+
+                    console.log(e);
+                    console.log(target);
+
+                    if(e.target.className == "link"){
+                        this.openLink(e.target.innerText);
                     }else{
-                        this.openDetail(record.data);
-                        this.callLogItem(record.data)
+                        this.self.currentIndex = index;
+                        if(record.data.typeName == 'Links'){
+                            this.openLink(record.data.link);
+                        }else{
+                            this.openDetail(record.data);
+                            this.callLogItem(record.data)
+                        }
                     }
                 },
                 loadmoretap:function () {
@@ -120,6 +125,7 @@ Ext.define("OECDInfo.controller.Main", {
                     }
                 },
                 hide:function(){
+                    var me = this;
                     console.log(this.self.currentIndex);
                     if(this.self.currentIndex > -1 && !this.self.isTablet){
                         this.scrollListSelected();
@@ -127,6 +133,9 @@ Ext.define("OECDInfo.controller.Main", {
                     if(this.self.isTablet){
                         this.closeTabletNavi();
                     }
+                    setTimeout(function(){
+                        me.getList().deselect(me.self.currentIndex, true);
+                    },1000);
                 },
                 hidetap:function(){
                     this.hideDetail();
@@ -342,20 +351,17 @@ Ext.define("OECDInfo.controller.Main", {
         list.deselectAll();
         list.select(this.self.currentIndex);
     },
-    getLink:function(){
-        var replaceLinks = function(html, replace){
-            if(html == null) {
-                return '';
-            }
-            
-            html = html.replace(/(http:\/\/[^\s]*)/g, "<span class=\"link\" name=\"$1\">$1</span>");
-            html = html.replace(/(www.[^\s]*)/g, "<span class=\"link\" name=\"http://$1\">$1</span>");
-            html = html.replace(/(@[^\s]*)/g, "<span class=\"at\" name=\"http://$1\">$1</span>");
-            html = html.replace(/(#[^\s]*)/g, "<span class=\"shap\" name=\"http://$1\">$1</span>");
+    getLink:function(html){
+        if(html == null) {
+            return '';
+        }
+        
+        html = html.replace(/(http:\/\/[^\s]*)/g, "<span class=\"link\" name=\"$1\">$1</span>");
+        html = html.replace(/(www.[^\s]*)/g, "<span class=\"link\" name=\"http://$1\">$1</span>");
+        // html = html.replace(/(@[^\s]*)/g, "<span class=\"at\" name=\"http://$1\">$1</span>");
+        // html = html.replace(/(#[^\s]*)/g, "<span class=\"shap\" name=\"http://$1\">$1</span>");
 
-            return html;
-        }  
-
+        return html;
     },
     preloadImg:function(srcs){
         for(var i=0;i<srcs.length;i++){
@@ -820,6 +826,12 @@ Ext.define("OECDInfo.controller.Main", {
 
         var data = feeds.slice(((page - 1) * pageSize),page * pageSize);
 
+        for(var i=0;i<data.length;i++){
+            if(data[i].typeName == 'Twitter'){
+                data[i].title = this.getLink(data[i].title);
+            }
+        }
+
         if(feeds.length > data.length){
             this.getLoadmore().getParent().setHidden(false);
         }else{
@@ -890,6 +902,7 @@ Ext.define("OECDInfo.controller.Main", {
         }
         return result;
     },
+
     getDetailContent:function(data, fromTablet){
         var me = this;
         var replaceLinks = function(html, replace){
