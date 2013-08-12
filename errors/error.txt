@@ -1,0 +1,50 @@
+===========================Created at Mon Aug 12 2013 17:51:54 GMT+0900 (KST)===========================MongoError: auth fails
+    at Object.exports.toError (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/utils.js:108:11)
+    at /Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/auth/mongodb_cr.js:31:31
+    at null.<anonymous> (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/db.js:1641:20)
+    at g (events.js:175:14)
+    at EventEmitter.emit (events.js:106:17)
+    at Server.Base._callHandler (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/base.js:409:25)
+    at /Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/server.js:555:20
+    at MongoReply.parseBody (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/responses/mongo_reply.js:131:5)
+    at null.<anonymous> (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/server.js:514:22)
+    at EventEmitter.emit (events.js:95:17)===========================   			Created at Mon Aug 12 2013 18:10:27 GMT+0900 (KST)  			===========================\MongoError: auth fails
+    at Object.exports.toError (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/utils.js:108:11)
+    at /Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/auth/mongodb_cr.js:31:31
+    at null.<anonymous> (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/db.js:1641:20)
+    at g (events.js:175:14)
+    at EventEmitter.emit (events.js:106:17)
+    at Server.Base._callHandler (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/base.js:409:25)
+    at /Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/server.js:555:20
+    at MongoReply.parseBody (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/responses/mongo_reply.js:131:5)
+    at null.<anonymous> (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/server.js:514:22)
+    at EventEmitter.emit (events.js:95:17)
+ =========================== 
+Created at Mon Aug 12 2013 18:21:19 GMT+0900 (KST)
+=========================== 
+MongoError: auth fails
+    at Object.exports.toError (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/utils.js:108:11)
+    at /Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/auth/mongodb_cr.js:31:31
+    at null.<anonymous> (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/db.js:1641:20)
+    at g (events.js:175:14)
+    at EventEmitter.emit (events.js:106:17)
+    at Server.Base._callHandler (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/base.js:409:25)
+    at /Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/server.js:555:20
+    at MongoReply.parseBody (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/responses/mongo_reply.js:131:5)
+    at null.<anonymous> (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/server.js:514:22)
+    at EventEmitter.emit (events.js:95:17)
+
+====================================================== 
+Created at Mon Aug 12 2013 18:22:54 GMT+0900 (KST)
+====================================================== 
+MongoError: auth fails
+    at Object.exports.toError (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/utils.js:108:11)
+    at /Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/auth/mongodb_cr.js:31:31
+    at null.<anonymous> (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/db.js:1641:20)
+    at g (events.js:175:14)
+    at EventEmitter.emit (events.js:106:17)
+    at Server.Base._callHandler (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/base.js:409:25)
+    at /Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/server.js:555:20
+    at MongoReply.parseBody (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/responses/mongo_reply.js:131:5)
+    at null.<anonymous> (/Users/nayahun2/Documents/Projects/Heroku/oecdinfo/node_modules/mongojs/node_modules/mongodb/lib/mongodb/connection/server.js:514:22)
+    at EventEmitter.emit (events.js:95:17)

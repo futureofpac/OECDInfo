@@ -1,10 +1,12 @@
-var _ = require ('underscore');
+var _ = require ('underscore'),
+	fs = require('fs');
 
 var video = require('./routes/video'),
 	photo = require('./routes/photo'),
 	twitter = require('./routes/twitter'),
 	article = require('./routes/article'),
 	option = require('./routes/option'),
+	errlog = require('./routes/error'),
 	weblog = require('./routes/log');
 
 console.log('run web.js');
@@ -17,15 +19,24 @@ var express = require('express'),
 app.use(express.static(__dirname + process.env.publicpath));
 app.use(express.bodyParser());
 app.use(app.router);
+
 app.use(function(err, req, res, next){
   console.log('error catched!');
-  console.error(err.isdb);
-  console.error(err.stack);
-
   if(err.isdb){
-  	// save in file.
+  	// save in file when there is an error in db.
+  	var msg = 
+  			'\r\n\r\n====================================================== \r\n' +
+  			'Created at ' + (new Date()) + '\r\n' +
+  			'====================================================== \r\n' + 
+  			err.stack
+
+	fs.appendFile('./errors/error.txt', msg, function (err) {
+	  if (err) throw err;
+	  console.log('The "data to append" was appended to file!');
+	});  	
   }else{
-  	// save in db
+  	// save in db for normal errors.
+  	errlog.saveError(err);
   }
   res.send(500, 'Something Wrong!');
 });
@@ -81,8 +92,8 @@ function getFeed(req, res, next){
 			async.parallel([
 				function(callback) {
 					var playlistkeys = [
-					    'PL7D00C15B1EA60D89',
-					    'PL96BBC83DFCD8447E'
+					    'PL7D00C15B1EA60D89qqqqqq',
+					    'PL96BBC83DFCD8447Eqqqqq'
 					];
 					if(_.indexOf(themes, 'Generic') > -1){
 					    async.forEach(playlistkeys, function(key, callback) { //The second argument (callback) is the "task callback" for a specific messageId
@@ -163,27 +174,7 @@ function getFeed(req, res, next){
 
 app.get('/api/:themes/:days', function(req, res, next){
 	console.log('not search');
-
-	// if ( err ) {
- //        var report = new Error('unable to get something in home');
- //        report.status = 500;
- //        report.inner = err;
- //        next(report);
- //        return;
- //    }
-
- 	// throw "some exception";
- 	// next({stack:'hi'})
 	getFeed(req, res, next);
-	// next();
-// }, function(err,req,res,next) {
-// 	if(err){
-// 	    console.log('This error handler is called!!');
-// 	    return next(err);
-// 	}else{
-// 		console.log('no error');
-// 	}
-
 });
 
 app.get('/api/:themes/:days/:search', function(req, res){
@@ -310,7 +301,6 @@ app.get('/api/clearthemes', function(req, res){
 		result:'cleared!'
 	});
 });
-
 
 
 var port = process.env.PORT || 5000;

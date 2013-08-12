@@ -46,13 +46,16 @@ Ext.define("OECDInfo.controller.Main", {
                     console.log(e);
                     console.log(target);
 
+
                     if(e.target.className == "link"){
+                        this.getList().deselect(index);
                         this.openLink(e.target.innerText);
                     }else{
                         this.self.currentIndex = index;
                         if(record.data.typeName == 'Links'){
                             this.openLink(record.data.link);
                         }else{
+
                             this.openDetail(record.data);
                             this.callLogItem(record.data)
                         }
@@ -838,7 +841,7 @@ Ext.define("OECDInfo.controller.Main", {
             this.getLoadmore().getParent().setHidden(true);
         }
 
-
+        console.log(this.self.feeds);
             console.log(data);
 
             if(page == 1){
