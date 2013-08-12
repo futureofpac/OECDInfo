@@ -1,7 +1,7 @@
-var dburl = process.env.mongodb_uri;
-
-var collection = ['error'];
-var db = require('mongojs').connect(dburl, collection);
+var dburl = process.env.mongodb_uri,
+	collection = ['error'],
+	fs = require('fs'),
+	db = require('mongojs').connect(dburl, collection);
 
 function saveError(param){
 	db.error.save({
