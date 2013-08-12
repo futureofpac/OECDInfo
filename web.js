@@ -24,16 +24,7 @@ app.use(function(err, req, res, next){
   console.log('error catched!');
   if(err.isdb){
   	// save in file when there is an error in db.
-  	var msg = 
-  			'\r\n\r\n====================================================== \r\n' +
-  			'Created at ' + (new Date()) + '\r\n' +
-  			'====================================================== \r\n' + 
-  			err.stack
-
-	fs.appendFile('./errors/error.txt', msg, function (err) {
-	  if (err) throw err;
-	  console.log('The "data to append" was appended to file!');
-	});  	
+  	errlog.writeError(err);
   }else{
   	// save in db for normal errors.
   	errlog.saveError(err);
@@ -281,6 +272,12 @@ app.get('/log/theme', function(req, res){
 app.get('/log/item', function(req, res){
 	weblog.getLogItem(function(items){
 		res.jsonp(items);
+	});
+});
+
+app.get('/log/error', function(req, res){
+	errlog.readError(function(items){
+		res.send(items);
 	});
 });
 
