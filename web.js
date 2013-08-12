@@ -83,8 +83,8 @@ function getFeed(req, res, next){
 			async.parallel([
 				function(callback) {
 					var playlistkeys = [
-					    'PL7D00C15B1EA60D89qqqqqq',
-					    'PL96BBC83DFCD8447Eqqqqq'
+					    'PL7D00C15B1EA60D89',
+					    'PL96BBC83DFCD8447E'
 					];
 					if(_.indexOf(themes, 'Generic') > -1){
 					    async.forEach(playlistkeys, function(key, callback) { //The second argument (callback) is the "task callback" for a specific messageId
@@ -128,7 +128,7 @@ function getFeed(req, res, next){
 			        }else{
 			        	if(search && search != ''){
 			        		feeds = _.filter(feeds, function(item){
-			        			return (item.title.indexOf(search) > 0 || item.content.indexOf(search) > 0)
+			        			return (item.title.indexOf(search) > -1 || item.content.indexOf(search) > -1)
 			        			// return (item.title.indexOf(search) > 0)
 			        		})
 			        	}
