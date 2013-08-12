@@ -16,6 +16,10 @@ var express = require('express'),
 	app = express(),
 	glbThemes = null;
 
+//########################
+// Configuration
+//########################
+
 app.use(express.static(__dirname + process.env.publicpath));
 app.use(express.bodyParser());
 app.use(app.router);
@@ -32,6 +36,156 @@ app.use(function(err, req, res, next){
   res.send(500, 'Something Wrong!');
 });
 // app.use(express.errorHandler());
+
+var port = process.env.PORT || 5000;
+app.listen(port);
+
+//########################
+// Rest API for the app
+//########################
+
+app.get('/api/:themes/:days', function(req, res, next){
+	console.log('not search');
+	getFeed(req, res, next);
+});
+
+app.get('/api/:themes/:days/:search', function(req, res, next){
+	console.log('search');
+	getFeed(req, res, next);
+});
+
+app.get('/api/links', function(req, res, next){
+	option.getLinks(next, function(links){
+		res.jsonp(links);
+	})
+});
+
+app.get('/api/themes', function(req, res, next){
+	option.getThemes(next, function(result){
+		console.log(result);
+		glbThemes = result;
+	})
+});
+
+//########################
+// Rest API for the logging
+//########################
+
+app.post('/log/init', function(req, res){
+	var param = req.body;
+
+	weblog.saveLogInit({
+		ip:param.ip,
+	    deviceType:param.deviceType,
+	    os:param.os,
+	    osversion:param.osversion,
+	    country:param.country,
+	    countryCode:param.countryCode,
+	    city:param.city,
+	    createdat:(new Date())		
+	})
+
+	res.jsonp({
+		result:'saved!'
+	});
+});
+
+
+app.post('/log/theme', function(req, res){
+	var param = req.body;
+
+	var themes = param.themes;
+	// console.log('themes in log:');
+	// console.log(themes);
+	var a_themes = themes.toString().split(',');
+
+	for(var i=0;i<a_themes.length;i++){
+		weblog.saveLogTheme({
+			theme:a_themes[i],
+		    createdat:(new Date())
+		})
+	}
+
+	res.jsonp({
+		result:'saved!'
+	});
+});
+
+app.post('/log/item', function(req, res){
+	var param = req.body;
+
+	weblog.saveLogItem({
+		typeName:param.typeName,
+		title:param.title,
+		image:param.image,
+		pubdate:param.pubdate,
+		createdat:(new Date())
+	})
+
+	res.jsonp({
+		result:'saved!'
+	});
+});
+
+/*
+app.get('/log/init', function(req, res){
+	var param = req.body;
+
+	weblog.saveLogInit({
+		ip:param.ip,
+	    deviceType:param.deviceType,
+	    os:param.os,
+	    osversion:param.osversion,
+	    country:param.country,
+	    countryCode:param.countryCode,
+	    city:param.city,
+	    createdat:(new Date())		
+	})
+
+	res.jsonp({
+		result:'saved!'
+	});
+});
+*/
+
+app.get('/log/theme', function(req, res, next){
+	weblog.getLogTheme(next, function(items){
+		res.jsonp(items);
+	});
+});
+
+app.get('/log/item', function(req, res, next){
+	weblog.getLogItem(next, function(items){
+		res.jsonp(items);
+	});
+});
+
+app.get('/log/error', function(req, res){
+	errlog.readError(function(items){
+		res.send(items);
+	});
+});
+
+
+app.get('/api/clearthemes', function(req, res){
+	glbThemes = null;
+	res.jsonp({
+		result:'cleared!'
+	});
+});
+
+/*
+app.get('/testlog/:ip', function(req, res, next){
+	option.testLog(req, function(geo, ip){
+		res.jsonp([geo, ip]);
+	}, req.params.ip)
+});
+
+app.get('/testip', function(req, res, next){
+	res.jsonp(req);
+});
+*/
+
 
 function getFeed(req, res, next){
 
@@ -162,145 +316,4 @@ function getFeed(req, res, next){
 	]);
 
 }
-
-app.get('/api/:themes/:days', function(req, res, next){
-	console.log('not search');
-	getFeed(req, res, next);
-});
-
-app.get('/api/:themes/:days/:search', function(req, res){
-	console.log('search');
-	getFeed(req, res);
-});
-
-app.get('/api/links', function(req, res){
-	option.getLinks(function(err, links){
-		res.jsonp(links);
-	})
-});
-
-app.get('/api/themes', function(req, res){
-	option.getThemes(function(err, result){
-		console.log(result);
-		glbThemes = result;
-		// res.jsonp(result);
-	})
-});
-
-app.post('/log/init', function(req, res){
-	var param = req.body;
-
-	weblog.saveLogInit({
-		ip:param.ip,
-	    deviceType:param.deviceType,
-	    os:param.os,
-	    osversion:param.osversion,
-	    country:param.country,
-	    countryCode:param.countryCode,
-	    city:param.city,
-	    createdat:(new Date())		
-	})
-
-	res.jsonp({
-		result:'saved!'
-	});
-});
-
-
-app.post('/log/theme', function(req, res){
-	var param = req.body;
-
-	var themes = param.themes;
-	// console.log('themes in log:');
-	// console.log(themes);
-	var a_themes = themes.toString().split(',');
-
-	for(var i=0;i<a_themes.length;i++){
-		weblog.saveLogTheme({
-			theme:a_themes[i],
-		    createdat:(new Date())
-		})
-	}
-
-	res.jsonp({
-		result:'saved!'
-	});
-});
-
-app.post('/log/item', function(req, res){
-	var param = req.body;
-
-	weblog.saveLogItem({
-		typeName:param.typeName,
-		title:param.title,
-		image:param.image,
-		pubdate:param.pubdate,
-		createdat:(new Date())
-	})
-
-	res.jsonp({
-		result:'saved!'
-	});
-});
-
-app.get('/log/init', function(req, res){
-	var param = req.body;
-
-	weblog.saveLogInit({
-		ip:param.ip,
-	    deviceType:param.deviceType,
-	    os:param.os,
-	    osversion:param.osversion,
-	    country:param.country,
-	    countryCode:param.countryCode,
-	    city:param.city,
-	    createdat:(new Date())		
-	})
-
-	res.jsonp({
-		result:'saved!'
-	});
-});
-
-
-app.get('/log/theme', function(req, res){
-	weblog.getLogTheme(function(items){
-		res.jsonp(items);
-	});
-});
-
-app.get('/log/item', function(req, res){
-	weblog.getLogItem(function(items){
-		res.jsonp(items);
-	});
-});
-
-app.get('/log/error', function(req, res){
-	errlog.readError(function(items){
-		res.send(items);
-	});
-});
-
-
-app.get('/testlog/:ip', function(req, res, next){
-	option.testLog(req, function(geo, ip){
-		res.jsonp([geo, ip]);
-	}, req.params.ip)
-});
-
-app.get('/testip', function(req, res, next){
-	res.jsonp(req);
-});
-
-app.get('/api/clearthemes', function(req, res){
-	glbThemes = null;
-	res.jsonp({
-		result:'cleared!'
-	});
-});
-
-
-var port = process.env.PORT || 5000;
-app.listen(port);
-
 

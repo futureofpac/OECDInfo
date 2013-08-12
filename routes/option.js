@@ -4,12 +4,12 @@ var collection = ['links', 'themes'];
 var db = require('mongojs').connect(dburl, collection);
 // var colTheme;
 // var emitterTheme = new require('events').EventEmitter;
-function getLinks(callback){
+function getLinks(next, callback){
 
 	db.links.find().toArray(function(err, items) {
-		if(err) callback(err)
+		if(err) next({stack:err.stack, isdb:true})
 		else {
-	        callback(null, items);
+	        callback(items);
 		}
     });
 }
