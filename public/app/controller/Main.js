@@ -877,7 +877,16 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     openLink:function(link){
-        window.open(link, '_newtab')
+        // window.open(link, '_newtab')
+    // Create link in memory
+    var a = window.document.createElement("a");
+    a.target = '_blank';
+    a.href = link;
+ 
+    // Dispatch fake click
+    var e = window.document.createEvent("MouseEvents");
+    e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    a.dispatchEvent(e);        
     },
     controlProvider:function(direction){
         var detail = this.self.detail,
