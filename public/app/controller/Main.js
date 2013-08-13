@@ -877,7 +877,7 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     openLink:function(link){
-        window.open(link, 'OECD Info')
+        window.open(link, '_newtab')
     },
     controlProvider:function(direction){
         var detail = this.self.detail,
