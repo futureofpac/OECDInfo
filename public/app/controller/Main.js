@@ -376,16 +376,15 @@ Ext.define("OECDInfo.controller.Main", {
         var data = this.self.detail.getData();
         // window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content);
         // window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link);
-        alert('a')
-        window.open('mailto:?subject=OECD Info:', 'email' );
+        this.openLink('mailto:?subject=OECD Info:')
     },
     shareFacebook:function(data){
         var data = this.self.detail.getData();
-        window.open('https://www.facebook.com/sharer/sharer.php?u=' + data.link, 'fbsharer');
+        this.openLink('https://www.facebook.com/sharer/sharer.php?u=' + data.link, 'fbsharer');
     },
     shareTwitter:function(data){
         var data = this.self.detail.getData();
-        window.open('https://twitter.com/intent/tweet?url='+ data.link +'&text=' + data.title, 'twitter');
+        this.openLink('https://twitter.com/intent/tweet?url='+ data.link +'&text=' + data.title, 'twitter');
     },
     checkTheme:function(themes){
         // console.log(themes);
