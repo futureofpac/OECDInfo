@@ -598,6 +598,8 @@ Ext.define("OECDInfo.controller.Main", {
             carousel1 = carousel.getItems().items[1],
             carousel2 = carousel.getItems().items[2];
 
+            panelContent.getScrollable().getScroller().scrollTo(0, 0);
+
             if(fromTablet){
                 this.handleOrientationDetail();
             }
