@@ -44,11 +44,12 @@ Ext.define('OECDInfo.view.Theme', {
 	       fieldset.add(panels[1])
 	       this.add(fieldset);
         }else{
-	    	var fieldset = Ext.create('Ext.form.FieldSet', {title:title});
+	    	var fieldset = Ext.create('Ext.form.FieldSet', {title:title, style:'font-size:smaller;'});
 	        for(var i=0;i<themes.length;i++){
 	        	fieldset.add({
 					xtype:'checkboxfield',
 			        labelWidth:300,
+
 			        // ,
 			        labelAlign:'right',
 			        // ,
