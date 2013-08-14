@@ -10,9 +10,10 @@ Ext.define('OECDInfo.view.Theme', {
             html = ''
             // ,
             // panels = this.query('panel');
+            var title = 'Chose the themes you are interested in';
 
         if(this.getFromTablet()){
-	    	var fieldset = Ext.create('Ext.form.FieldSet', {layout:'hbox', title:'test'});
+	    	var fieldset = Ext.create('Ext.form.FieldSet', {layout:'hbox', title:title});
         	var panels = [];
         	panels[0] = Ext.create('Ext.Panel', { flex:1 });
         	panels[1] = Ext.create('Ext.Panel', { flex:1 });
@@ -20,7 +21,7 @@ Ext.define('OECDInfo.view.Theme', {
 	        for(var i=0;i<themes.length;i++){
 	        	panels[i % 2].add({
 					xtype:'checkboxfield',
-			        labelWidth:330,
+			        labelWidth:320,
 			        // ,
 			        labelAlign:'right',
 			        // ,
@@ -43,11 +44,11 @@ Ext.define('OECDInfo.view.Theme', {
 	       fieldset.add(panels[1])
 	       this.add(fieldset);
         }else{
-	    	var fieldset = Ext.create('Ext.form.FieldSet', {title:'test'});
+	    	var fieldset = Ext.create('Ext.form.FieldSet', {title:title});
 	        for(var i=0;i<themes.length;i++){
 	        	fieldset.add({
 					xtype:'checkboxfield',
-			        labelWidth:270,
+			        labelWidth:250,
 			        // ,
 			        labelAlign:'right',
 			        // ,

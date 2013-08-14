@@ -483,8 +483,8 @@ Ext.define("OECDInfo.controller.Main", {
                 hidden:true,
                 modal:true,
                 hideOnMaskTap:true,
-                width:780,
-                height:550,
+                width:760,
+                height:540,
                 centered:true
             });
 
@@ -567,8 +567,6 @@ Ext.define("OECDInfo.controller.Main", {
         }else{
             this.self.theme = Ext.Viewport.add({
                 xtype:'theme',
-                // instructions:'Chose themes you are interested in',
-                fromTablet:me.self.isTablet,
                 hidden:true,
                 width:'100%',
                 height:'100%'
