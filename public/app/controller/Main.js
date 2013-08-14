@@ -599,7 +599,7 @@ Ext.define("OECDInfo.controller.Main", {
             this.self.theme = Ext.Viewport.add({
                 xtype:'theme',
                 hidden:true,
-                zIndex:10005
+                zIndex:10005,
                 width:'100%',
                 height:'100%'
             });
