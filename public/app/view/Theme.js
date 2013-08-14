@@ -55,14 +55,14 @@ Ext.define('OECDInfo.view.Theme', {
 			        labelAlign:'right',
 			        // ,
 			        listeners: {change: function(me){
-			            console.log('Changed');
-			            var result = [];
-			            Ext.Object.each(me.getParent().getValues(), function(key, value, myself) {
-			                if(value != null){
-			                    result.push(value)
-			                }
-			            }); 
-			            this.fireEvent('themetap', result);
+			            // console.log('Changed');
+			            // var result = [];
+			            // Ext.Object.each(me.getParent().getValues(), function(key, value, myself) {
+			            //     if(value != null){
+			            //         result.push(value)
+			            //     }
+			            // }); 
+			            // this.fireEvent('themetap', result);
 			        }},	        		
 	    			name:themes[i].name,
 	        		label:themes[i].name,

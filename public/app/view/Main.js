@@ -6,7 +6,7 @@ Ext.define("OECDInfo.view.Main", {
     	items:[
     		{
     			xtype:'menu',
-    			width:'200px',
+    			width:'230px',
     			hidden:false,
 				modal:false,
         		hideOnMaskTap:false    			

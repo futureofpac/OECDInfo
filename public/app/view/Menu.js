@@ -8,7 +8,7 @@ Ext.define('OECDInfo.view.Menu', {
         this.callParent();
     },
     config:{
-        width:200,
+        width:230,
         zIndex:1001,
         hidden:true,
         modal:true,
