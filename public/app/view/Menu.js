@@ -87,7 +87,8 @@ Ext.define('OECDInfo.view.Menu', {
                 items: [
                     {
                         xtype:'formpanel',
-                        id:'theme',
+                        hidden:true,
+                        // id:'theme',
                         scrollDock: 'bottom',
                         // scrollable:'vertical',
                         scrollable:false,
@@ -225,8 +226,28 @@ Ext.define('OECDInfo.view.Menu', {
                     },                        
                     {
                         xtype:'panel',
+                        scrollDock: 'bottom',
+                        style:'margin-bottom:100px;', 
+                        items:[
+                            {
+                                xtype:'button',
+                                ui:'confirm',
+                                action:'btnTheme',
+                                text:'Edit Subscribtion',
+                                style:'margin:10px;font-size:smaller;'
+                            }
+                        ]
+                    },                        
+                    {
+                        xtype:'panel',
+                        scrollDock: 'bottom',
+                        action:'pnlTheme'
+                    },                        
+                    {
+                        xtype:'panel',
                         height:30,
-                        html:'By Themes',
+                        // html:'By Themes',
+                        html:'Subscribed themes',
                         scrollDock: 'bottom',
                         style:'background-color:#c4c4c4;padding:5px 0px 5px 0px;color:#ffffff;text-align:center;'
                     }

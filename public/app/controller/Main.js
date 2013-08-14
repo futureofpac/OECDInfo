@@ -16,6 +16,8 @@ Ext.define("OECDInfo.controller.Main", {
             loadmore:'mainlist panel button[action="loadmore"]',
             // main: 'main',
             menu: 'menu', 
+            pnlTheme: 'menu panel[action="pnlTheme"]', 
+            btnTheme: 'menu panel button[action="btnTheme"]', 
             menulist: '#menu',
             menutheme: '#theme',
             menuthemefield: '#theme checkboxfield',
@@ -224,6 +226,15 @@ Ext.define("OECDInfo.controller.Main", {
                     }
                 }
             },
+            btnTheme:{
+                tap:function() {
+                    if(this.self.theme.getHidden()){
+                        this.self.theme.show();
+                    }else{
+                        this.self.theme.hide();
+                    }
+                }
+            },
             menuthemefield:{
                 themetap:function(){
                     // alert('b')
@@ -264,6 +275,7 @@ Ext.define("OECDInfo.controller.Main", {
         links:[],
         detail:null,
         menu:null,
+        theme:null,
         actionsheet:null,
         stopCheckEvent:false,
         isTablet:false
@@ -279,10 +291,12 @@ Ext.define("OECDInfo.controller.Main", {
         var themes = this.getTheme();
         // var themes = 'Generic';
 
-        this.callService(themes);
+        // this.callService(themes);
         this.self.stopCheckEvent = true;
-        this.checkTheme(themes.split(','));        
+        // this.checkTheme(themes.split(','));        
+        this.labelTheme(themes.split(','));        
         this.self.stopCheckEvent = false;
+        
         // console.log(this.getMenutheme());
         // console.log(this.getMenutheme().getFieldArray());
         // Ext.Object.each(this.getMenutheme().getItems(), function(item, key, myself) {
@@ -416,11 +430,63 @@ Ext.define("OECDInfo.controller.Main", {
 
         this.getMenutheme().setValues(themesArray);
     },
+    labelTheme:function(themes){
+        // console.log(themes);
+        // // var themesArray = [];
+        // console.log(this.getMenutheme().getValues());
+
+        var index = 0;
+            themesArray = OECDInfo.app.themes,
+            html = '';
+
+        for(var i=0;i<themes.length;i++){
+            for(var j=0;j<themesArray.length;j++){
+                if(themesArray[j].key == themes[i]){
+                    html += '<div style="padding:10px;font-size:smaller;">' + themesArray[j].name + '</div>';
+                }
+            }
+        }
+
+        this.getPnlTheme().setHtml(html);
+        // this.getMenutheme().setValues(themesArray);
+    },
     initOptions:function(){
         var me = this;
         console.log(this.self.isTablet);
         this.self.isTablet = OECDInfo.app.isTablet;
+
+
+        // this.self.theme = Ext.Viewport.add({
+        //     xtype:'formpanel',
+        //     hidden:true,
+        //     layout:'fit',
+        //     items:[
+        //         {
+        //             xtype:'theme',
+        //             fromTablet:me.self.isTablet,
+        //             modal:true,
+        //             hideOnMaskTap:true,
+        //             width:740,
+        //             height:'100%',
+        //             centered:true
+        //         }
+        //     ]
+        //     // instructions:'Chose themes you are interested in',
+        // });
+
+
         if(this.self.isTablet){
+            this.self.theme = Ext.Viewport.add({
+                xtype:'theme',
+                // instructions:'Chose themes you are interested in',
+                fromTablet:true,
+                hidden:true,
+                modal:true,
+                hideOnMaskTap:true,
+                width:780,
+                height:550,
+                centered:true
+            });
 
             this.self.prev = Ext.Viewport.add(
                 {
@@ -499,6 +565,15 @@ Ext.define("OECDInfo.controller.Main", {
             ]);
 
         }else{
+            this.self.theme = Ext.Viewport.add({
+                xtype:'theme',
+                // instructions:'Chose themes you are interested in',
+                fromTablet:me.self.isTablet,
+                hidden:true,
+                width:'100%',
+                height:'100%'
+            });
+
             this.self.menu = Ext.Viewport.add({xtype:'menu'});
             this.self.detail = Ext.Viewport.add({xtype:'detail'});
             this.self.actionsheet = Ext.Viewport.add({xtype:'share'});
@@ -552,6 +627,12 @@ Ext.define("OECDInfo.controller.Main", {
         }else{
             this.self.menu.hide();
         }
+    },
+    openTheme:function(){
+        this.self.theme.show();
+    },
+    closeTheme:function(){
+        this.self.theme.hide();
     },
     handleOrientationDetail:function(){
         var width = window.innerWidth;

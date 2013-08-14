@@ -21,7 +21,8 @@ Ext.application({
         'Menu',
         'Detail',
         'MainList',
-        'Share'
+        'Share',
+        'Theme'
         // ,
         // 'LogList'
     ],
