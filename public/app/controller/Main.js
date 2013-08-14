@@ -483,9 +483,7 @@ Ext.define("OECDInfo.controller.Main", {
                 hidden:true,
                 modal:true,
                 hideOnMaskTap:true,
-                width:760,
-                height:540,
-                centered:true
+                width:760
             });
 
             this.self.prev = Ext.Viewport.add(
