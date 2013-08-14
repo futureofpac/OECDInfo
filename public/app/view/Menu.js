@@ -232,7 +232,7 @@ Ext.define('OECDInfo.view.Menu', {
                             {
                                 xtype:'button',
                                 ui:'confirm',
-                                action:'btnTheme',
+                                action:'open',
                                 text:'Edit Subscribtion',
                                 style:'margin:10px;font-size:smaller;'
                             }

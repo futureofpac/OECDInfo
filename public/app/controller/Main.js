@@ -17,7 +17,9 @@ Ext.define("OECDInfo.controller.Main", {
             // main: 'main',
             menu: 'menu', 
             pnlTheme: 'menu panel[action="pnlTheme"]', 
-            btnTheme: 'menu panel button[action="btnTheme"]', 
+            openTheme: 'menu panel button[action="open"]', 
+            cancelTheme: 'theme button[action="cancel"]', 
+            saveTheme: 'theme button[action="save"]', 
             menulist: '#menu',
             menutheme: '#theme',
             menuthemefield: '#theme checkboxfield',
@@ -226,13 +228,35 @@ Ext.define("OECDInfo.controller.Main", {
                     }
                 }
             },
-            btnTheme:{
+            openTheme:{
                 tap:function() {
-                    if(this.self.theme.getHidden()){
-                        this.self.theme.show();
-                    }else{
-                        this.self.theme.hide();
+                    // if(this.self.theme.getHidden()){
+                    //     this.self.theme.show();
+                    // }else{
+                    //     this.self.theme.hide();
+                    // }
+                    this.openTheme();
+                }
+            },
+            saveTheme:{
+                tap:function(){
+                    var checks = this.getMenutheme().query('checkboxfield'),
+                        result = [];
+
+                    for(var i=0;i<checks.length;i++){
+                        if(checks[i].getChecked()){
+                            result.push(checks[i].getValue());
+                        }
                     }
+                    alert(result.join(','))
+                    this.setTheme(result.join(','));
+                    this.callService(result.join(','));
+                    this.closeTheme();
+                }
+            },
+            cancelTheme:{
+                tap:function(){
+                    this.closeTheme();
                 }
             },
             menuthemefield:{
@@ -291,11 +315,9 @@ Ext.define("OECDInfo.controller.Main", {
         var themes = this.getTheme();
         // var themes = 'Generic';
 
-        // this.callService(themes);
-        this.self.stopCheckEvent = true;
-        // this.checkTheme(themes.split(','));        
         this.labelTheme(themes.split(','));        
-        this.self.stopCheckEvent = false;
+
+        this.callService(themes);
         
         // console.log(this.getMenutheme());
         // console.log(this.getMenutheme().getFieldArray());
@@ -403,32 +425,41 @@ Ext.define("OECDInfo.controller.Main", {
     checkTheme:function(themes){
         // console.log(themes);
         // // var themesArray = [];
-        // console.log(this.getMenutheme().getValues());
+        console.log(this.getMenutheme().query('checkboxfield'));
+        var checks = this.getMenutheme().query('checkboxfield');
 
-        var index = 0;
-        var themesArray = this.getMenutheme().getItems().items;
-        Ext.Object.each(this.getMenutheme().getValues(), function(label, val, myself) {
-
-            var check = false;
-            var key = label.split(' ')[0];
-            if(key == 'OECD'){
-                key = 'Generic'
-            }
-
-            for (var i=0;i<themes.length;i++){
-                if(themes[i] == key){
-                    check = true;
-                    break;
+        for(var i=0;i<checks.length;i++){
+            for(var j=0;j<themes.length;j++){
+                if(checks[i].getValue() == themes[j]){
+                    checks[i].check();
                 }
             }
+        }
 
-            if(check){
-                themesArray[index].check();
-            }
-            index++;
-        }); 
+        // var index = 0;
+        // var themesArray = this.getMenutheme().getItems().items;
+        // Ext.Object.each(this.getMenutheme().getValues(), function(label, val, myself) {
 
-        this.getMenutheme().setValues(themesArray);
+        //     var check = false;
+        //     var key = label.split(' ')[0];
+        //     if(key == 'OECD'){
+        //         key = 'Generic'
+        //     }
+
+        //     for (var i=0;i<themes.length;i++){
+        //         if(themes[i] == key){
+        //             check = true;
+        //             break;
+        //         }
+        //     }
+
+        //     if(check){
+        //         themesArray[index].check();
+        //     }
+        //     index++;
+        // }); 
+
+        // this.getMenutheme().setValues(themesArray);
     },
     labelTheme:function(themes){
         // console.log(themes);
@@ -483,7 +514,9 @@ Ext.define("OECDInfo.controller.Main", {
                 hidden:true,
                 modal:true,
                 hideOnMaskTap:true,
-                width:760
+                width:770,
+                height:540,
+                centered:true
             });
 
             this.self.prev = Ext.Viewport.add(
@@ -566,6 +599,7 @@ Ext.define("OECDInfo.controller.Main", {
             this.self.theme = Ext.Viewport.add({
                 xtype:'theme',
                 hidden:true,
+                zIndex:10005
                 width:'100%',
                 height:'100%'
             });
@@ -625,7 +659,13 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     openTheme:function(){
+        var themes = this.getTheme();
+
         this.self.theme.show();
+        this.self.stopCheckEvent = true;
+        this.checkTheme(themes.split(','));        
+        this.self.stopCheckEvent = false;
+
     },
     closeTheme:function(){
         this.self.theme.hide();

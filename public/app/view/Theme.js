@@ -1,19 +1,19 @@
 Ext.define('OECDInfo.view.Theme', {
     extend:'Ext.form.Panel',
     alias:'widget.theme',
-    // requires:[
-    // 	''
-    // ],
+    requires:[
+    	'Ext.form.FieldSet'
+    ],
     initialize:function(){
  		var index = 0;
             themes = OECDInfo.app.themes,
             html = ''
             // ,
             // panels = this.query('panel');
-            var title = 'Chose the themes you are interested in';
+            var title = 'Chose the themes you want to follow';
 
         if(this.getFromTablet()){
-	    	var fieldset = Ext.create('Ext.form.FieldSet', {layout:'hbox', title:title});
+	    	var fieldset = Ext.create('Ext.form.FieldSet', {layout:'hbox' ,title:title});
         	var panels = [];
         	panels[0] = Ext.create('Ext.Panel', { flex:1 });
         	panels[1] = Ext.create('Ext.Panel', { flex:1 });
@@ -26,14 +26,14 @@ Ext.define('OECDInfo.view.Theme', {
 			        labelAlign:'right',
 			        // ,
 			        listeners: {change: function(me){
-			            console.log('Changed');
-			            var result = [];
-			            Ext.Object.each(me.getParent().getValues(), function(key, value, myself) {
-			                if(value != null){
-			                    result.push(value)
-			                }
-			            }); 
-			            this.fireEvent('themetap', result);
+			            // console.log('Changed');
+			            // var result = [];
+			            // Ext.Object.each(me.getParent().getValues(), function(key, value, myself) {
+			            //     if(value != null){
+			            //         result.push(value)
+			            //     }
+			            // }); 
+			            // this.fireEvent('themetap', result);
 			        }},	        		
 	    			name:themes[i].name,
 	        		label:themes[i].name,
@@ -44,11 +44,12 @@ Ext.define('OECDInfo.view.Theme', {
 	       fieldset.add(panels[1])
 	       this.add(fieldset);
         }else{
-	    	var fieldset = Ext.create('Ext.form.FieldSet', {title:title, style:'font-size:smaller;', width:300});
+        	// style:'font-size:smaller;',
+	    	var fieldset = Ext.create('Ext.form.FieldSet', {title:title, width:300});
 	        for(var i=0;i<themes.length;i++){
 	        	fieldset.add({
 					xtype:'checkboxfield',
-			        labelWidth:260,
+			        labelWidth:250,
 
 			        // ,
 			        labelAlign:'right',
@@ -75,7 +76,7 @@ Ext.define('OECDInfo.view.Theme', {
 
     config:{
 	    fromTablet:false,
-	    id:'theme',
+	    id:'theme', 
 	    // instructions:'Chose themes you are interested in',
 	    scrollDock: 'bottom',
 	    scrollable:'vertical',
@@ -96,15 +97,22 @@ Ext.define('OECDInfo.view.Theme', {
 			{
 			    		xtype:'toolbar',
 			    		docked:'bottom',
+			    		 layout: {
+			        pack: 'center'
+			    },
 			    		items:[
 			    			{
 			    				xtype:'button',
-			    				ui:'action-round',
+			    				ui:'action',
+			    				width:150,
+			    				action:'cancel',
 			    				text:'Cancel'
 			    			},
 			    			{
 			    				xtype:'button',
-			    				ui:'confirm-round',
+			    				ui:'confirm',
+			    				width:150,
+			    				action:'save',
 			    				text:'Save'
 			    			}
 			    		]
