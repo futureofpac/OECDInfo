@@ -20,7 +20,7 @@ Ext.define('OECDInfo.view.Theme', {
 	        for(var i=0;i<themes.length;i++){
 	        	panels[i % 2].add({
 					xtype:'checkboxfield',
-			        labelWidth:320,
+			        labelWidth:330,
 			        // ,
 			        labelAlign:'right',
 			        // ,
@@ -47,7 +47,7 @@ Ext.define('OECDInfo.view.Theme', {
 	        for(var i=0;i<themes.length;i++){
 	        	fieldset.add({
 					xtype:'checkboxfield',
-			        labelWidth:290,
+			        labelWidth:270,
 			        // ,
 			        labelAlign:'right',
 			        // ,
