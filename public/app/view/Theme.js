@@ -48,7 +48,7 @@ Ext.define('OECDInfo.view.Theme', {
 	        for(var i=0;i<themes.length;i++){
 	        	fieldset.add({
 					xtype:'checkboxfield',
-			        labelWidth:250,
+			        labelWidth:300,
 			        // ,
 			        labelAlign:'right',
 			        // ,
