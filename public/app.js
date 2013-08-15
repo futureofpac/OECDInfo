@@ -136,6 +136,7 @@ Ext.application({
         }
     ],
     label:'OECD Info',
+    isInitial:false,
     isTablet:false,
     currentType:'All',
     serviceRoot:function(){

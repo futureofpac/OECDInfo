@@ -7,10 +7,22 @@ Ext.define('OECDInfo.view.Theme', {
     initialize:function(){
  		var index = 0;
             themes = OECDInfo.app.themes,
-            html = ''
+            initial = OECDInfo.app.isInitial,
+            html = '',
+            title = ''
             // ,
             // panels = this.query('panel');
-            var title = 'Chose the themes you want to follow';
+
+        if(initial){
+            this.setHideOnMaskTap(false);
+            // this.query('panel[action=intro]')[0].setHidden(false);
+            this.query('button[action=cancel]')[0].setHidden(true);
+        	title = 'Chose at least one themes you want to follow';
+        }else{
+            this.setHideOnMaskTap(true);
+            this.query('button[action=cancel]')[0].setHidden(false);
+        	title = 'Chose the themes you want to follow';
+        }
 
         if(this.getFromTablet()){
 	    	var fieldset = Ext.create('Ext.form.FieldSet', {layout:'hbox' ,title:title});
@@ -22,6 +34,8 @@ Ext.define('OECDInfo.view.Theme', {
 	        	panels[i % 2].add({
 					xtype:'checkboxfield',
 			        labelWidth:320,
+			        checked:((initial && i == 0) ? true : false),
+			        disabled:((initial && i == 0) ? true : false),
 			        // ,
 			        labelAlign:'right',
 			        // ,
@@ -50,6 +64,8 @@ Ext.define('OECDInfo.view.Theme', {
 	        	fieldset.add({
 					xtype:'checkboxfield',
 			        labelWidth:250,
+			        checked:((initial && i == 0) ? true : false),
+			        disabled:((initial && i == 0) ? true : false),
 
 			        // ,
 			        labelAlign:'right',
@@ -94,6 +110,13 @@ Ext.define('OECDInfo.view.Theme', {
 			// flex:1
 	  //   },
 	    items:[
+	    	{
+	    		xtype:'panel',
+	    		action:'intro',
+	    		height:30,
+	    		html:'<h3>Welcome to OECDInfo!</h3>',
+	    		hidden:true
+	    	},
 			{
 			    		xtype:'toolbar',
 			    		docked:'bottom',
