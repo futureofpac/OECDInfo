@@ -186,7 +186,6 @@ app.get('/testip', function(req, res, next){
 });
 */
 
-
 function getFeed(req, res, next){
 
 	var themes = req.params.themes.split(','),

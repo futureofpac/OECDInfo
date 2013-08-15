@@ -822,6 +822,8 @@ Ext.define("OECDInfo.controller.Main", {
                         me.displayList(1);
                     }else{
                         me.self.feeds = [].concat(response.feeds);
+                        console.log('in callService:');
+                        console.log(me.self.feeds);
                         // me.self.links = [].concat(response.links);
                         me.controlSearchBox(search);
                         me.displayList(1);
@@ -945,13 +947,36 @@ Ext.define("OECDInfo.controller.Main", {
             this.self.feeds.filter(filterFn)
         );
 
-        var data = feeds.slice(((page - 1) * pageSize),page * pageSize).slice(0);
+        console.log('compare1:');
+        console.log(JSON.stringify(this.self.feeds) === JSON.stringify(data) );
 
-        for(var i=0;i<data.length;i++){
-            if(data[i].typeName == 'Twitter'){
-                data[i].title = this.getLink(data[i].title);
-            }
-        }
+        // var data = [];
+            // data = 
+        // var data = [];
+        // console.log('data:');
+        // console.log(data);
+        // var data = 
+        var data = Ext.Array.clone(feeds.slice(((page - 1) * pageSize),page * pageSize));
+        // // data.slice(0);
+
+        // console.log('compare2:');
+        // console.log(JSON.stringify(this.self.feeds) === JSON.stringify(data) );
+
+        // // for(var i=0;i<feeds.length;i++){
+        // for(var i=0;i<data.length;i++){
+        //     // data.push(feeds[i]);
+        //     if(data[i].typeName == 'Twitter'){
+        //         data[i].title = this.getLink(data[i].title);
+        //         // this.getLink(data[i].title);
+        //     }
+        // // if(i==2 ){
+        // //     console.log('here:');
+        // //     console.log(data[i]);
+        // //     console.log(feeds[i]);
+        // // }
+        // }
+
+        // console.log(data);
 
         if(feeds.length > data.length){
             this.getLoadmore().getParent().setHidden(false);
@@ -959,6 +984,8 @@ Ext.define("OECDInfo.controller.Main", {
             this.getLoadmore().getParent().setHidden(true);
         }
 
+        console.log('compare4:');
+        console.log(JSON.stringify(this.self.feeds) === JSON.stringify(data) );
         console.log(this.self.feeds);
             console.log(data);
 

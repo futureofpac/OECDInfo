@@ -10,6 +10,18 @@ var T = new twit({
   , access_token_secret:  process.env.twitter_access_token_secret
 })
 
+function getLink(html){
+        if(html == null) {
+            return '';
+        }
+        
+        html = html.replace(/(http:\/\/[^\s]*)/g, "<span class=\"link\" name=\"$1\">$1</span>");
+        html = html.replace(/(www.[^\s]*)/g, "<span class=\"link\" name=\"http://$1\">$1</span>");
+        // html = html.replace(/(@[^\s]*)/g, "<span class=\"at\" name=\"http://$1\">$1</span>");
+        // html = html.replace(/(#[^\s]*)/g, "<span class=\"shap\" name=\"http://$1\">$1</span>");
+        return html;
+}
+
 var feed = function(screen_name, startDate, endDate, feeds, next, callback){
 	T.get('statuses/user_timeline', { screen_name: screen_name.url, exclude_replies: true, count: 20 },  function (err, data) {
 		if(err) {
@@ -34,7 +46,7 @@ var feed = function(screen_name, startDate, endDate, feeds, next, callback){
 						var f = new model({
 							theme: screen_name.theme,
 							typeName: 'Twitter',
-							title: item.text,
+							title: getLink(item.text),
 							link: 'https://www.twitter.com/' +  userData.screen_name + '/status/' + item.id_str,
 							pubDate: new Date(item.created_at),
 							image: item.user.profile_image_url,
