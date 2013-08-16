@@ -852,9 +852,9 @@ Ext.define("OECDInfo.controller.Main", {
                         var localFeeds = [], type = '';
                         for(var i=0;i<response.feeds.length;i++){
                             type = response.feeds[i].typeName;
-                            if(type != 'Articles' && type != 'Photos' && type != 'Videos'){
+                            // if(type != 'Articles' && type != 'Photos' && type != 'Videos'){
                                 localFeeds.push(response.feeds[i]);
-                            }
+                            // }
                         }
                         me.setFeeds(localFeeds);
                     }
