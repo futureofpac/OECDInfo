@@ -35,7 +35,7 @@ Ext.define("OECDInfo.controller.Main", {
             tabletNext:'#btnNext'
         },
         routes: {
-            '': 'closeTheme'
+            '': 'closeDialog'
         },
         control: {
             viewport:{
@@ -388,6 +388,13 @@ Ext.define("OECDInfo.controller.Main", {
             }
         });
     },
+    closeDialog:function(){
+        if(!this.self.isTablet){
+            this.closeMenu();
+        }
+        this.closeTheme();
+        this.hideDetail();
+    },
     scrollListSelected:function(){
         var list = this.getList(),
             els = list.getViewItems(),
@@ -671,7 +678,7 @@ Ext.define("OECDInfo.controller.Main", {
     openTheme:function(){
         var themes = this.getTheme();
 
-        location.href = '/#menu';
+        location.href = '/#theme';
         this.self.theme.show();
         // this.self.stopCheckEvent = true;
         if(!OECDInfo.app.isInitial){
@@ -711,7 +718,8 @@ Ext.define("OECDInfo.controller.Main", {
         // this.self.detail.animateActiveItem(1, {type:'slide', direction:'left'})
         // console.log(this.self.detail);
         // console.log(record);
-
+        location.href = '/#detail';
+        
         var fromTablet = this.self.isTablet,
             content = this.getDetailContent(data, fromTablet)
             detail = this.self.detail,
