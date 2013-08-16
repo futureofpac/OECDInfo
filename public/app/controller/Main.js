@@ -859,7 +859,8 @@ Ext.define("OECDInfo.controller.Main", {
                                     localFeeds.push(response.feeds[i]);
                                 // }
                             }
-                            me.setFeeds(localFeeds);
+                            // me.setFeeds(localFeeds);
+                            me.setFeeds(response.feeds);
                         }
                     }
                     Ext.Viewport.setMasked(false);
