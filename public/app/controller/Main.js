@@ -89,7 +89,8 @@ Ext.define("OECDInfo.controller.Main", {
                 tap:function(){
                     this.controlSearchBox();
                     this.getSearchfield().setValue('');
-                    this.callService(this.getTheme());
+                    // this.callService(this.getTheme());
+                    this.callServiceOffline();
                 }
             },
             loadmore:{
@@ -719,7 +720,7 @@ Ext.define("OECDInfo.controller.Main", {
         // console.log(this.self.detail);
         // console.log(record);
         location.href = '/#detail';
-        
+
         var fromTablet = this.self.isTablet,
             content = this.getDetailContent(data, fromTablet)
             detail = this.self.detail,
