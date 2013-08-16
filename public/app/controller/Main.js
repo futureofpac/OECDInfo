@@ -850,14 +850,17 @@ Ext.define("OECDInfo.controller.Main", {
                         me.controlSearchBox(search);
                         me.displayList(1);
                         // me.setFeeds([{test:'aaaa'}]);
-                        var localFeeds = [], type = '';
-                        for(var i=0;i<response.feeds.length;i++){
-                            type = response.feeds[i].typeName;
-                            // if(type != 'Articles' && type != 'Photos' && type != 'Videos'){
-                                localFeeds.push(response.feeds[i]);
-                            // }
+
+                        if(search == undefined){
+                            var localFeeds = [], type = '';
+                            for(var i=0;i<response.feeds.length;i++){
+                                type = response.feeds[i].typeName;
+                                // if(type != 'Articles' && type != 'Photos' && type != 'Videos'){
+                                    localFeeds.push(response.feeds[i]);
+                                // }
+                            }
+                            me.setFeeds(localFeeds);
                         }
-                        me.setFeeds(localFeeds);
                     }
                     Ext.Viewport.setMasked(false);
                     me.callLogTheme(themes);
