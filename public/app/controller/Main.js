@@ -144,34 +144,37 @@ Ext.define("OECDInfo.controller.Main", {
                         this.closeTabletNavi();
                     }
                     setTimeout(function(){
-                        me.getList().deselect(me.self.currentIndex, true);
+                        me.getList().deselectAll();
+                        // me.getList().deselect(me.self.currentIndex, true);
                     },1000);
                 },
                 hidetap:function(){
                     this.hideDetail();
                 },
                 prevtap:function () {
-                    var data = this.getDataByIndex('prev', this.self.currentIndex);
-                    if(data == 'first'){
-                        Ext.Msg.alert('', 'This is the first item')
-                    }else{
-                        // this.scrollListSelected(this.self.currentIndex);
-                        this.self.currentIndex--;
-                        this.openDetail(data);
-                    }
+                    // var data = this.getDataByIndex('prev', this.self.currentIndex);
+                    // if(data == 'first'){
+                    //     Ext.Msg.alert('', 'This is the first item')
+                    // }else{
+                    //     // this.scrollListSelected(this.self.currentIndex);
+                    //     this.self.currentIndex--;
+                    //     this.openDetail(data);
+                    // }
+                    this.naviDetail('prev');
                 },
                 nexttap:function () {
-                    var data = this.getDataByIndex('next', this.self.currentIndex);
-                    if(data == 'last'){
-                        Ext.Msg.alert('', 'This is the last item')
-                    }else{
-                        if(this.self.currentIndex == (this.self.currentPage * this.self.pageSize)-1){
-                        // this.scrollListSelected(this.self.currentIndex);
-                            this.loadMore();
-                        } 
-                        this.self.currentIndex++;
-                        this.openDetail(data);
-                    }
+                    // var data = this.getDataByIndex('next', this.self.currentIndex);
+                    // if(data == 'last'){
+                    //     Ext.Msg.alert('', 'This is the last item')
+                    // }else{
+                    //     if(this.self.currentIndex == (this.self.currentPage * this.self.pageSize)-1){
+                    //     // this.scrollListSelected(this.self.currentIndex);
+                    //         this.loadMore();
+                    //     } 
+                    //     this.self.currentIndex++;
+                    //     this.openDetail(data);
+                    // }
+                    this.naviDetail('next');
                 },
                 sharetap:function(){
                     this.openShare();
@@ -327,13 +330,88 @@ Ext.define("OECDInfo.controller.Main", {
             this.callService(themes);
         }
 
-        
+        var me = this;
+        document.onkeydown = function(e){
+            me.checkKey(e, me);
+        }
+
+        // Ext.Viewport.element.on({
+        //     onkeydown: function(e, node) {
+        //         alert('sdf')
+        //     }
+        // });
+
         // console.log(this.getMenutheme());
         // console.log(this.getMenutheme().getFieldArray());
         // Ext.Object.each(this.getMenutheme().getItems(), function(item, key, myself) {
         //     // console.log(item.getLabel());
         //     console.log(key.getLabel());
         // }); 
+    },
+    naviDetail:function(direction){
+        var data = this.getDataByIndex(direction, this.self.currentIndex);
+        if(direction == 'prev'){
+            if(data == 'first'){
+                Ext.Msg.alert('', 'This is the first item')
+            }else{
+                this.self.currentIndex--;
+                this.scrollListSelected(this.self.currentIndex);
+                this.openDetail(data);
+            }
+        }else if(direction == 'next'){
+            if(data == 'last'){
+                Ext.Msg.alert('', 'This is the last item')
+            }else{
+                // if(this.self.currentIndex == (this.self.currentPage * this.self.pageSize)-1){
+                //     this.loadMore();
+                // } 
+                this.loadWhenlast();
+                this.self.currentIndex++;
+                this.scrollListSelected(this.self.currentIndex);
+                this.openDetail(data);
+            }
+        }
+    },
+    checkKey:function(e, me) {
+        e = e || window.event;
+        // alert(e.keyCode)
+        if(me.self.detail.getHidden()){
+            if (e.keyCode == '38') {
+                // if(me.self.currentIndex > 0){
+                //     me.self.currentIndex--;
+                // }
+                if(me.self.currentIndex == 0){
+                    me.self.currentIndex=-1;
+                    me.getList().deselect(0);
+                }else if(me.self.currentIndex == 1){
+                    me.self.currentIndex--;
+                    me.getList().deselect(1);
+                    me.getList().select(0);
+                }else if(me.self.currentIndex > 1){
+                    me.self.currentIndex--;
+                    me.scrollListSelected();
+                }
+            }else if (e.keyCode == '40') {
+                if(me.self.currentIndex == -1){
+                    me.self.currentIndex++;
+                    me.getList().select(0);
+                }else{
+                    me.self.currentIndex++;
+                    this.loadWhenlast();
+                    me.scrollListSelected();
+                }
+            }else if (e.keyCode == '13') {
+                me.openDetail(me.self.feeds[me.self.currentIndex]);
+            }else if (e.keyCode == '27') {
+                me.hideDetail();
+            }
+        }else{
+            if (e.keyCode == '37') {
+                me.naviDetail('prev');
+            }else if (e.keyCode == '39') {
+                me.naviDetail('next');
+            }            
+        }
     },
     callLogInit:function(){
         var me = this;
@@ -396,10 +474,16 @@ Ext.define("OECDInfo.controller.Main", {
         this.closeTheme();
         this.hideDetail();
     },
+    loadWhenlast:function(){
+        if(this.self.currentIndex == (this.self.currentPage * this.self.pageSize)-1){
+            this.loadMore();
+        } 
+    },    
     scrollListSelected:function(){
         var list = this.getList(),
             els = list.getViewItems(),
             el = els[this.self.currentIndex-1],
+            // el = els[this.self.currentIndex],
             offset = el.bodyElement.dom.offsetTop-26;
 
         list.getScrollable().getScroller().scrollTo(0, offset);
@@ -801,6 +885,7 @@ Ext.define("OECDInfo.controller.Main", {
         // _gaq.push(['_trackEvent', 'type', type]);
     },
     hideDetail:function(){
+        // this.self.currentIndex = -1;
         this.self.detail.hide();
     },
     callLinks:function () {
