@@ -68,9 +68,19 @@
      */
     "css": [
         {
+            "path": "resources/css/sencha-touch.css",
+            "update": "delta"
+        },
+        {
             "path": "resources/css/app.css",
             "update": "delta"
         }
+        // ,
+        // {
+        // "path": "touch/resources/css/bb10.css",
+        // "platform": ["chrome", "safari", "ios", "android", "firefox"],
+        // "Theme": "Apple"
+        // }        
     ],
 
     /**

@@ -254,7 +254,6 @@ Ext.define("OECDInfo.controller.Main", {
                             result.push(checks[i].getValue());
                         }
                     }
-                    alert(result.join(','))
                     this.setTheme(result.join(','));
                     this.callService(result.join(','));
                     this.closeTheme();
@@ -331,8 +330,11 @@ Ext.define("OECDInfo.controller.Main", {
         }
 
         var me = this;
-        document.onkeydown = function(e){
-            me.checkKey(e, me);
+
+        if(Ext.os.deviceType == 'Desktop'){
+            document.onkeydown = function(e){
+                me.checkKey(e, me);
+            }
         }
 
         // Ext.Viewport.element.on({
@@ -468,11 +470,13 @@ Ext.define("OECDInfo.controller.Main", {
         });
     },
     closeDialog:function(){
-        if(!this.self.isTablet){
-            this.closeMenu();
+        if(Ext.os.deviceType == 'Desktop'){
+            if(!this.self.isTablet){
+                this.closeMenu();
+            }
+            this.closeTheme();
+            this.hideDetail();
         }
-        this.closeTheme();
-        this.hideDetail();
     },
     loadWhenlast:function(){
         if(this.self.currentIndex == (this.self.currentPage * this.self.pageSize)-1){
@@ -749,7 +753,9 @@ Ext.define("OECDInfo.controller.Main", {
         if(this.self.isTablet){
             this.getMain().query('menu')[0].setHidden(false);
         }else{
-            location.href = '/#menu';
+            if(Ext.os.deviceType == 'Desktop'){
+                location.href = '/#menu';
+            }
             this.self.menu.show();
         }
     },
@@ -763,10 +769,12 @@ Ext.define("OECDInfo.controller.Main", {
     openTheme:function(){
         var themes = this.getTheme();
 
-        location.href = '/#theme';
         this.self.theme.show();
         // this.self.stopCheckEvent = true;
         if(!OECDInfo.app.isInitial){
+            if(Ext.os.deviceType == 'Desktop'){
+                location.href = '/#theme';
+            }
             this.checkTheme(themes.split(','));        
         }
         // this.self.stopCheckEvent = false;
@@ -803,7 +811,9 @@ Ext.define("OECDInfo.controller.Main", {
         // this.self.detail.animateActiveItem(1, {type:'slide', direction:'left'})
         // console.log(this.self.detail);
         // console.log(record);
-        location.href = '/#detail';
+        if(Ext.os.deviceType == 'Desktop'){
+            location.href = '/#detail';
+        }
 
         var fromTablet = this.self.isTablet,
             content = this.getDetailContent(data, fromTablet)
@@ -1098,14 +1108,18 @@ Ext.define("OECDInfo.controller.Main", {
     openLink:function(link){
             // window.open(link, '_newtab')
         // Create link in memory
-        var a = window.document.createElement("a");
-        a.target = '_blank';
-        a.href = link;
-     
-        // Dispatch fake click
-        var e = window.document.createEvent("MouseEvents");
-        e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        a.dispatchEvent(e);        
+        if (Ext.os.is.Android) {
+            var a = window.document.createElement("a");
+            a.target = '_blank';
+            a.href = link;
+         
+            // Dispatch fake click
+            var e = window.document.createEvent("MouseEvents");
+            e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            a.dispatchEvent(e);        
+        }else{
+            var ref = window.open(link, '_blank', 'location=yes');
+        }
     },
     controlProvider:function(direction){
         var detail = this.self.detail,

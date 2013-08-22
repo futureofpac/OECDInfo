@@ -51,15 +51,44 @@
                 opacity: 0.8
             }
         }
+        
+        #theme div.x-dock{
+          margin: 0px;
+        }
+
+        #theme{
+            padding: 0px;
+            -webkit-border-radius:0px;
+            border-radius:0px;
+            border-left: solid 1px black;
+        }
 
         #theme .x-form-label-nowrap .x-form-label{
             white-space:normal;
         }
+        
+        #theme .x-component-outer {
+          width: 45px;
+        }
 
+
+        #theme .x-unsized.x-field-input{
+          width: 45px;
+        }
+        
+        #theme .x-input-el.x-input-checkbox{
+          width: 45px;
+        }
+
+        #theme .x-field-mask{
+          width: 45px;
+          right:7px;
+        }
+/*
         #theme .x-field-input .x-field-mask{
             width: 40px;
         }
-
+*/
         #detail{
             padding: 0px;
             -webkit-border-radius:0px;
@@ -185,6 +214,18 @@
           cursor: pointer;
           color:blue;
         }
+
+        #list .x-list-item.x-stretched.x-list-item-tpl.x-list-item-relative span.link,span.username,span.hashtag,span.at,span.shap{
+          text-decoration:underline;
+          cursor: pointer;
+          color:blue;
+        }
+
+        #list .x-list-item.x-stretched.x-list-item-tpl.x-list-item-relative.x-item-selected span.link,span.username,span.hashtag,span.at,span.shap{
+          text-decoration:underline;
+          cursor: pointer;
+          color:white;
+        }
         
         #detail div.x-dock{
           margin: 0px;
@@ -212,4 +253,30 @@ I=!1,r,k,o;try{o=l.localStorage,k=l.applicationCache}catch(N){}if("undefined"===
         <div></div>
     </div>
 </body>
+<script type="text/javascript">
+
+// if (typeof window.navigator == 'object')
+// {
+//   alert('supported');
+//   alert(navigator)
+//   alert(navigator.onLine)
+//     // localStorage is supported
+// }
+// else
+// {
+//   alert('not supported');
+//     // localStorage is not supported
+// }
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-42960062-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </html>

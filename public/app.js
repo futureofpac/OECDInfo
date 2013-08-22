@@ -145,7 +145,7 @@ Ext.application({
         if(protocol == 'file:'){
             return 'http://test-oecdinfo.herokuapp.com';
         }else{
-            return '';
+            return 'http://test-oecdinfo.herokuapp.com';
         }
     },
     launch: function() {

@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html manifest="" lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-itunes-app" content="app-id=599321274">
+    <!--<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>-->
+    <title>OECDInfo</title>
+    <style type="text/css">
+         /*
+        <meta name="apple-itunes-app" content="app-id=599321274, affiliate-data=myAffiliateData, app-argument=myURL">
+         * Example of an initial loading indicator.
+         * It is recommended to keep this as minimal as possible to provide instant feedback
+         * while other resources are still being loaded for the first time
+         */
+        html, body {
+            height: 100%;
+            background-color: #1985D0
+        }
+
+        #appLoadingIndicator {
+            position: absolute;
+            top: 50%;
+            margin-top: -15px;
+            text-align: center;
+            width: 100%;
+            height: 30px;
+            -webkit-animation-name: appLoadingIndicator;
+            -webkit-animation-duration: 0.5s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: linear;
+        }
+
+        #appLoadingIndicator > * {
+            background-color: #FFFFFF;
+            display: inline-block;
+            height: 30px;
+            -webkit-border-radius: 15px;
+            margin: 0 5px;
+            width: 30px;
+            opacity: 0.8;
+        }
+
+        @-webkit-keyframes appLoadingIndicator{
+            0% {
+                opacity: 0.8
+            }
+            50% {
+                opacity: 0
+            }
+            100% {
+                opacity: 0.8
+            }
+        }
+        
+        #theme div.x-dock{
+          margin: 0px;
+        }
+
+        #theme{
+            padding: 0px;
+            -webkit-border-radius:0px;
+            border-radius:0px;
+            border-left: solid 1px black;
+        }
+
+        #theme .x-form-label-nowrap .x-form-label{
+            white-space:normal;
+        }
+        
+        #theme .x-component-outer {
+          width: 45px;
+        }
+
+
+        #theme .x-unsized.x-field-input{
+          width: 45px;
+        }
+        
+        #theme .x-input-el.x-input-checkbox{
+          width: 45px;
+        }
+
+        #theme .x-field-mask{
+          width: 45px;
+          right:7px;
+        }
+/*
+        #theme .x-field-input .x-field-mask{
+            width: 40px;
+        }
+*/
+        #detail{
+            padding: 0px;
+            -webkit-border-radius:0px;
+            border-radius:0px;
+            border-left: solid 1px black;
+        }
+        #detail .x-inner.x-panel-inner{
+            -webkit-border-radius:0px;
+            border-radius:0px;
+        }
+
+        #detail div.x-dock-vertical{
+            margin: 1px;
+        }
+        
+        #menu .x-item-selected{
+          background-color:#dddddd;
+          border-top-color:#bbbbbb;
+          border-bottom-color:#bbbbbb;
+          background-image:-webkit-linear-gradient(bottom, rgb(185,189,188) 23%, rgb(187,187,187) 50%, rgb(204,203,207) 86%);
+        }
+
+        #custom-tweet-button a {
+            display: block;
+            padding: 2px 5px 2px 20px;
+            background: url('https://twitter.com/favicons/favicon.ico') 1px center no-repeat;
+            border: 1px solid #ccc;
+          }
+        span.menuicon{
+          float: left;
+          width:30px;
+          height:30px;
+          margin:-3px 9px 0px 0px;
+        }
+        span.menutext{
+          float: left;
+          height:30px;
+          padding-top: 0px;
+          vertical-align: middle;
+        }
+        span.menuicon.All {
+          background: url(resources/images/icon-allfeeds.svg);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Twitter {
+          background: url(resources/images/icon-twitter.svg);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Videos {
+          background: url(resources/images/icon-videos.svg);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Photos {
+          background: url(resources/images/icon-photos.svg);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.News {
+          background: url(resources/images/icon-news.svg);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Articles {
+          background: url(resources/images/icon-blog.svg);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Publications {
+          background: url(resources/images/icon-publications.svg);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+  /*      span.menuicon.Insight {
+          background: url(resources/images/lightning.png);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Profile {
+          background: url(resources/images/user.png);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Favorite {
+          background: url(resources/images/star.png);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.About {
+          background: url(resources/images/setting.png);
+          background-size:30px 30px;
+          background-repeat: no-repeat;
+        }
+*/
+        #detail .header,#detail .header{
+          background-image:none;background-color:#eeeeee;
+          background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #fbfbfb), color-stop(100%, #e1e1e1));
+          background-image:-webkit-linear-gradient(top, #ffffff,#fbfbfb 3%,#e1e1e1);
+          background-image:linear-gradient(top, #ffffff,#fbfbfb 3%,#e1e1e1);
+          border-bottom:1px solid #ccc;
+          border-top:1px solid #ddd;padding:1em 0.8em;
+          padding:10px 14px;
+        }
+
+        #detail .header h4 {
+          font-size: smaller;
+          padding-top: 7px;
+          color: gray;
+        }
+
+        #detail .header.Twitter h3 {
+          line-height:160%
+        }
+
+        #detail p {
+          padding: 14px;
+        }
+
+        #detail span.link,span.username,span.hashtag,span.at,span.shap{
+          text-decoration:underline;
+          cursor: pointer;
+          color:blue;
+        }
+
+        #list .x-list-item.x-stretched.x-list-item-tpl.x-list-item-relative span.link,span.username,span.hashtag,span.at,span.shap{
+          text-decoration:underline;
+          cursor: pointer;
+          color:blue;
+        }
+
+        #list .x-list-item.x-stretched.x-list-item-tpl.x-list-item-relative.x-item-selected span.link,span.username,span.hashtag,span.at,span.shap{
+          text-decoration:underline;
+          cursor: pointer;
+          color:white;
+        }
+        
+        #detail div.x-dock{
+          margin: 0px;
+        }
+    </style>
+    <!-- The line below must be kept intact for Sencha Command to build your application -->
+    <script type="text/javascript">(function(i){function k(f,c){var a=document.createElement("meta");a.setAttribute("name",f);a.setAttribute("content",c);n.appendChild(a)}var n=i.document.head;if("undefined"===typeof c)var c=i.Ext={};c.blink=function(f){var i=f.js||[],f=f.css||[],a,j,b,d,l;navigator.userAgent.match(/IEMobile\/10\.0/)&&(a=document.createElement("style"),a.appendChild(document.createTextNode("@media screen and (orientation: portrait) {@-ms-viewport {width: 320px !important;}}@media screen and (orientation: landscape) {@-ms-viewport {width: 560px !important;}}")),
+document.getElementsByTagName("head")[0].appendChild(a));k("viewport","width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no");k("apple-mobile-web-app-capable","yes");k("apple-touch-fullscreen","yes");window.Ext||(window.Ext={});c.microloaded=!0;var m=window.Ext.filterPlatform=function(a){function b(a){var c=/Mobile(\/|\s)/.test(a);return/(iPhone|iPod)/.test(a)||!/(Silk)/.test(a)&&/(Android)/.test(a)&&(/(Android 2)/.test(a)||c)||/(BlackBerry|BB)/.test(a)&&c||
+/(Windows Phone)/.test(a)}function f(a){return!b(a)&&(/iPad/.test(a)||/Android/.test(a)||/(RIM Tablet OS)/.test(a)||/MSIE 10/.test(a)&&/; Touch/.test(a))}var g=false,e=navigator.userAgent,h,c,a=[].concat(a);h=window.location.search.substr(1).split("&");c={};var d;for(d=0;d<h.length;d++){var i=h[d].split("=");c[i[0]]=i[1]}if(h=c.platform)return a.indexOf(h)!=-1;h=0;for(c=a.length;h<c;h++){switch(a[h]){case "phone":g=b(e);break;case "tablet":g=f(e);break;case "desktop":g=!b(e)&&!f(e);break;case "ios":g=
+/(iPad|iPhone|iPod)/.test(e);break;case "android":g=/(Android|Silk)/.test(e);break;case "blackberry":g=/(BlackBerry|BB)/.test(e);break;case "safari":g=/Safari/.test(e)&&!/(BlackBerry|BB)/.test(e);break;case "chrome":g=/Chrome/.test(e);break;case "ie10":g=/MSIE 10/.test(e)}if(g)return true}return false};a=0;for(j=f.length;a<j;a++){b=f[a];"string"!=typeof b&&(d=b.platform,l=b.theme,b=b.path);if(d){if(!m(d))continue;c.theme={name:l||"Default"}}document.write('<link rel="stylesheet" href="'+b+'">')}a=
+0;for(j=i.length;a<j;a++)b=i[a],"string"!=typeof b&&(d=b.platform,b=b.path),(!d||m(d))&&document.write('<script src="'+b+'"><\/script>')}})(this);;Ext.blink({"id":"7aa09338-90c2-4c2e-b083-6ede38be78f2","js":[{"path":"app.js","bundle":true,"update":"delta","type":"js"}],"css":[{"path":"touch/resources/css/bb10.css","platform":["chrome","safari","ios","android","firefox"],"Theme":"Apple","type":"css"}]})</script>
+</head>
+<body>
+    <div id="appLoadingIndicator">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+<script type="text/javascript">
+
+// if (typeof window.navigator == 'object')
+// {
+//   alert('supported');
+//   alert(navigator)
+//   alert(navigator.onLine)
+//     // localStorage is supported
+// }
+// else
+// {
+//   alert('not supported');
+//     // localStorage is not supported
+// }
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-42960062-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>
