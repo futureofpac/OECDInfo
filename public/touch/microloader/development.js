@@ -151,7 +151,6 @@
         }
 
         write('<link rel="stylesheet" href="'+path+'">');
-        console.log(path);
     }
 
     for (i = 0,ln = scripts.length; i < ln; i++) {
