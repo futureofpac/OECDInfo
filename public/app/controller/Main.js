@@ -726,16 +726,16 @@ Ext.define("OECDInfo.controller.Main", {
                 alert('onkeydown')
                 me.checkKey(e, me);
             }
-            document.onkeyup = function(e){
+            window.onkeyup = function(e){
                 alert('onkeyup')
                 // me.checkKey(e, me);
             }
-            document.onkeypress = function(e){
+            window.onkeypress = function(e){
                 alert('onkeypress')
                 // me.checkKey(e, me);
             }
             
-            
+
             this.getDetail().on('hide', function(){
                 me.setLocation('home');
             })
