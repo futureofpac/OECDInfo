@@ -721,6 +721,7 @@ Ext.define("OECDInfo.controller.Main", {
 
 
         if(!Ext.os.is.iOS){
+            alert('not ios')
             document.onkeydown = function(e){
                 me.checkKey(e, me);
             }
