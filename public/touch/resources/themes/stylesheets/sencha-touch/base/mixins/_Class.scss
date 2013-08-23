@@ -47,15 +47,16 @@
     @include absolute-position;
 }
 
+//fix for chrome 29 bug. - it just switches the order of the display rules
 @mixin st-box($important: no) {
     @if $important == important {
+        display: flex !important;
         display: -webkit-box !important;
         display: -ms-flexbox !important;
-        display: flex !important;
     } @else {
+        display: flex;
         display: -webkit-box;
         display: -ms-flexbox;
-        display: flex;
     }
 }
 

@@ -700,7 +700,8 @@ body {
 }
 /* line 11, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/base/src/layout/_Box.scss */
 .x-layout-box.x-horizontal > .x-layout-box-item.x-flexed {
-  min-width: 0 !important;
+	/*#################*/
+  /*min-width: 0 !important;*/
 }
 /* line 16, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/base/src/layout/_Box.scss */
 .x-layout-box.x-vertical {
@@ -780,7 +781,8 @@ body {
 
 /* line 71, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/base/src/layout/_Box.scss */
 .x-webkit .x-layout-box.x-horizontal > .x-layout-box-item.x-flexed {
-  width: 0 !important;
+	/*#################*/
+  /*width: 0 !important;*/
 }
 /* line 75, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/base/src/layout/_Box.scss */
 .x-webkit .x-layout-box.x-vertical > .x-layout-box-item.x-flexed {

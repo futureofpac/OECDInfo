@@ -331,11 +331,11 @@ Ext.define("OECDInfo.controller.Main", {
 
         var me = this;
 
-        if(Ext.os.deviceType == 'Desktop'){
+        // if(Ext.os.deviceType == 'Desktop'){
             document.onkeydown = function(e){
                 me.checkKey(e, me);
             }
-        }
+        // }
 
         // Ext.Viewport.element.on({
         //     onkeydown: function(e, node) {
@@ -470,13 +470,13 @@ Ext.define("OECDInfo.controller.Main", {
         });
     },
     closeDialog:function(){
-        if(Ext.os.deviceType == 'Desktop'){
+        // if(Ext.os.deviceType == 'Desktop'){
             if(!this.self.isTablet){
                 this.closeMenu();
             }
             this.closeTheme();
             this.hideDetail();
-        }
+        // }
     },
     loadWhenlast:function(){
         if(this.self.currentIndex == (this.self.currentPage * this.self.pageSize)-1){
@@ -753,9 +753,9 @@ Ext.define("OECDInfo.controller.Main", {
         if(this.self.isTablet){
             this.getMain().query('menu')[0].setHidden(false);
         }else{
-            if(Ext.os.deviceType == 'Desktop'){
+            // if(Ext.os.deviceType == 'Desktop'){
                 location.href = '/#menu';
-            }
+            // }
             this.self.menu.show();
         }
     },
@@ -767,14 +767,15 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     openTheme:function(){
+        // alert(Ext.os.deviceType)
         var themes = this.getTheme();
 
         this.self.theme.show();
         // this.self.stopCheckEvent = true;
         if(!OECDInfo.app.isInitial){
-            if(Ext.os.deviceType == 'Desktop'){
+            // if(Ext.os.deviceType == 'Desktop'){
                 location.href = '/#theme';
-            }
+            // }
             this.checkTheme(themes.split(','));        
         }
         // this.self.stopCheckEvent = false;
@@ -811,9 +812,9 @@ Ext.define("OECDInfo.controller.Main", {
         // this.self.detail.animateActiveItem(1, {type:'slide', direction:'left'})
         // console.log(this.self.detail);
         // console.log(record);
-        if(Ext.os.deviceType == 'Desktop'){
+        // if(Ext.os.deviceType == 'Desktop'){
             location.href = '/#detail';
-        }
+        // }
 
         var fromTablet = this.self.isTablet,
             content = this.getDetailContent(data, fromTablet)
@@ -1044,6 +1045,7 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     displayList:function (page) {
+        console.log('page:' + page);
         var store = Ext.getStore('MainStore'),
             list = this.getList();
 
@@ -1076,6 +1078,7 @@ Ext.define("OECDInfo.controller.Main", {
             this.getLoadmore().getParent().setHidden(true);
         }
 
+        console.log(data);
         if(page == 1){
             list.getScrollable().getScroller().scrollTo(0,0, false);
             if(data.length == 0){

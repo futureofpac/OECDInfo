@@ -1,17 +1,3 @@
-<!DOCTYPE HTML>
-<html manifest="cache.appcache" lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <meta name="apple-itunes-app" content="app-id=599321274">
-    <!--<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>-->
-    <title>OECDInfo</title>
-    <style type="text/css">
-         /*
-        <meta name="apple-itunes-app" content="app-id=599321274, affiliate-data=myAffiliateData, app-argument=myURL">
-         * Example of an initial loading indicator.
-         * It is recommended to keep this as minimal as possible to provide instant feedback
-         * while other resources are still being loaded for the first time
-         */
         html, body {
             height: 100%;
             background-color: #1985D0
@@ -105,10 +91,17 @@
         }
         
         #menu .x-item-selected{
+          color:#000000;
           background-color:#dddddd;
+          border-top-color:#cccccc;
+          border-bottom-color:#bbbbbb;
+          background-image:-webkit-linear-gradient(top, rgb(250,247,250), rgb(234,234,234) 3%, rgb(184,186,184));
+
+    /*      background-color:#dddddd;
           border-top-color:#bbbbbb;
           border-bottom-color:#bbbbbb;
-          background-image:-webkit-linear-gradient(bottom, rgb(185,189,188) 23%, rgb(187,187,187) 50%, rgb(204,203,207) 86%);
+    */
+          /*background-image:-webkit-linear-gradient(bottom, rgb(185,189,188) 23%, rgb(187,187,187) 50%, rgb(204,203,207) 86%);*/
         }
 
         #custom-tweet-button a {
@@ -119,52 +112,95 @@
           }
         span.menuicon{
           float: left;
-          width:30px;
-          height:30px;
-          margin:-3px 9px 0px 0px;
+          width:25px;
+          height:25px;
+          margin:-2px 9px 0px 0px;
         }
         span.menutext{
           float: left;
-          height:30px;
+          height:27px;
           padding-top: 0px;
+          padding-left: 3px;
           vertical-align: middle;
         }
         span.menuicon.All {
-          background: url(resources/images/icon-allfeeds.svg);
+          background: url(../images/allfeeds.png);
+          background-size:25px 25px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Twitter {
+          background: url(../images/twitter.png);
+          background-size:25px 25px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Videos {
+          background: url(../images/youtube.png);
+          background-size:25px 25px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Photos {
+          background: url(../images/image.png);
+          background-size:25px 25px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.News {
+          background: url(../images/news.png);
+          background-size:25px 25px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Articles {
+          background: url(../images/article.png);
+          background-size:25px 25px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Publications {
+          background: url(../images/books.png);
+          background-size:25px 25px;
+          background-repeat: no-repeat;
+        }
+        span.menuicon.Links {
+          background: url(../images/link.png);
+          background-size:25px 25px;
+          background-repeat: no-repeat;
+        }
+  /*      
+
+span.menuicon.All {
+          background: url(../images/icon-allfeeds.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.Twitter {
-          background: url(resources/images/icon-twitter.svg);
+          background: url(../images/icon-twitter.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.Videos {
-          background: url(resources/images/icon-videos.svg);
+          background: url(../images/icon-videos.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.Photos {
-          background: url(resources/images/icon-photos.svg);
+          background: url(../images/icon-photos.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.News {
-          background: url(resources/images/icon-news.svg);
+          background: url(../images/icon-news.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.Articles {
-          background: url(resources/images/icon-blog.svg);
+          background: url(../images/icon-blog.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
         span.menuicon.Publications {
-          background: url(resources/images/icon-publications.svg);
+          background: url(../images/icon-publications.svg);
           background-size:30px 30px;
           background-repeat: no-repeat;
         }
-  /*      span.menuicon.Insight {
+  span.menuicon.Insight {
           background: url(resources/images/lightning.png);
           background-size:30px 30px;
           background-repeat: no-repeat;
@@ -215,6 +251,10 @@
           color:blue;
         }
 
+        #detail div.x-dock{
+          margin: 0px;
+        }
+
         #list .x-list-item.x-stretched.x-list-item-tpl.x-list-item-relative span.link,span.username,span.hashtag,span.at,span.shap{
           text-decoration:underline;
           cursor: pointer;
@@ -226,46 +266,13 @@
           cursor: pointer;
           color:white;
         }
-        
-        #detail div.x-dock{
-          margin: 0px;
+
+
+        #list .x-list-item.x-stretched.x-list-item-tpl.x-list-item-relative span.typeName{
+          color:#989898;
+          margin-bottom:8px;
         }
-    </style>
-    <!-- The line below must be kept intact for Sencha Command to build your application -->
-    <style type="text/css" link="resources/css/app.css"></style>
-    <script type="text/javascript" src="app.js"></script>
-</head>
-<body>
-    <div id="appLoadingIndicator">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</body>
-<script type="text/javascript">
 
-// if (typeof window.navigator == 'object')
-// {
-//   alert('supported');
-//   alert(navigator)
-//   alert(navigator.onLine)
-//     // localStorage is supported
-// }
-// else
-// {
-//   alert('not supported');
-//     // localStorage is not supported
-// }
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-42960062-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-</html>
+        #list .x-list-item.x-stretched.x-list-item-tpl.x-list-item-relative.x-item-selected span.typeName{
+          color:white;
+        }
