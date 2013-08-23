@@ -431,7 +431,7 @@ Ext.define("OECDInfo.controller.Main", {
         });
     },
     closeDialog:function(){
-        if(!Ext.os.is.iOS && !OECDInfo.app.isInitial){
+        if(!Ext.os.is.iOS){
             if(!this.self.isTablet){
                 if(!this.self.menu.getHidden()){
                     this.closeMenu();
