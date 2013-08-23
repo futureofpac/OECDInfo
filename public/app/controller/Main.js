@@ -333,6 +333,7 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     checkKey:function(e, me) {
+        alert('in checkKey')
         e = e || window.event;
         alert(e.keyCode)
 
@@ -721,8 +722,8 @@ Ext.define("OECDInfo.controller.Main", {
 
 
         if(!Ext.os.is.iOS){
-            alert('not ios')
             document.onkeydown = function(e){
+                alert('onkeydown')
                 me.checkKey(e, me);
             }
             this.getDetail().on('hide', function(){
