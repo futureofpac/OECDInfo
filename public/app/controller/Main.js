@@ -433,10 +433,21 @@ Ext.define("OECDInfo.controller.Main", {
     closeDialog:function(){
         if(!Ext.os.is.iOS && !OECDInfo.app.isInitial){
             if(!this.self.isTablet){
-                this.closeMenu();
+                if(!this.self.menu.getHidden()){
+                    this.closeMenu();
+                }
+            }else{
+                if(!this.getMenu().getHidden()){
+                    this.closeMenu();
+                }
             }
-            this.closeTheme();
-            this.closeDetail();
+
+            if(!this.self.theme.getHidden()){
+                this.closeTheme();
+            }
+            if(!this.self.detail.getHidden()){
+                this.closeDetail();
+            }
         }
     },
     loadWhenlast:function(){
