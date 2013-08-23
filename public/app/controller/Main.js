@@ -334,7 +334,7 @@ Ext.define("OECDInfo.controller.Main", {
     },
     checkKey:function(e, me) {
         e = e || window.event;
-        // alert(e.keyCode)
+        alert(e.keyCode)
 
         if (e.keyCode == '8' || e.keyCode == '27') {
             me.closeDialog();
