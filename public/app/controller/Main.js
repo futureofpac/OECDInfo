@@ -34,9 +34,9 @@ Ext.define("OECDInfo.controller.Main", {
             tabletPrev:'#btnPrev',
             tabletNext:'#btnNext'
         },
-        // routes: {
-        //     '/#home': 'closeDialog'
-        // },
+        routes: {
+            'home': 'closeDialog'
+        },
         control: {
             // viewport:{
             //     onrientationchange:function () {
@@ -306,6 +306,7 @@ Ext.define("OECDInfo.controller.Main", {
     launch:function(){
         this.callParent(arguments);
         // this.initMenu();
+        this.setLocation('home');
         this.initOptions();
     },
     naviDetail:function(direction){
@@ -333,13 +334,11 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     checkKey:function(e, me) {
-        alert('in checkKey')
         e = e || window.event;
-        alert(e.keyCode)
 
-        if (e.keyCode == '8' || e.keyCode == '27') {
-            me.closeDialog();
-        }
+        // if (e.keyCode == '8' || e.keyCode == '27') {
+        //     me.closeDialog();
+        // }
 
         if(me.self.detail.getHidden()){
             if (e.keyCode == '38') {
@@ -432,15 +431,9 @@ Ext.define("OECDInfo.controller.Main", {
         });
     },
     closeDialog:function(){
-        if(!Ext.os.is.iOS){
+        if(!Ext.os.is.iOS && !OECDInfo.app.isInitial){
             if(!this.self.isTablet){
-                if(!this.self.menu.getHidden()){
-                    this.closeMenu();
-                }
-            }else{
-                if(!this.getMenu().getHidden()){
-                    this.closeMenu();
-                }
+                this.closeMenu();
             }
 
             if(!this.self.theme.getHidden()){
@@ -563,9 +556,9 @@ Ext.define("OECDInfo.controller.Main", {
     setLocation:function(type){
         if(!Ext.os.is.iOS){
             var url = location.href.toString();
-            // if(type == 'close'){
+            // if(type == 'home'){
             //     if(url.indexOf('#') > -1){
-            //         url = url.split('#')[0];
+            //         url = url.split('#')[0] + '#home';
             //     }
             //     location.href = url;
             // }else{
@@ -723,18 +716,8 @@ Ext.define("OECDInfo.controller.Main", {
 
         if(!Ext.os.is.iOS){
             document.onkeydown = function(e){
-                alert('onkeydown')
                 me.checkKey(e, me);
             }
-            window.onkeyup = function(e){
-                alert('onkeyup')
-                // me.checkKey(e, me);
-            }
-            window.onkeypress = function(e){
-                alert('onkeypress')
-                // me.checkKey(e, me);
-            }
-            
 
             this.getDetail().on('hide', function(){
                 me.setLocation('home');
@@ -981,6 +964,8 @@ Ext.define("OECDInfo.controller.Main", {
             url: url,
             callback:function(success, response){
                 console.log(response);
+
+                OECDInfo.app.isInitial = false;
                 // if(!success){
                 //     this.callServiceOffline(true);
                 // }else{
