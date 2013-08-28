@@ -1,10 +1,3 @@
-/**
- *  @class SlideNavigationExample.controller.Main
- *
- *  This {@link Ext.app.Controller} serves as a demonstration of how to
- *  listen to various events relating to a {@link Ext.ux.slidenavigation.View}.
- *
- */
 Ext.define("OECDInfo.controller.Main", {
     extend: 'Ext.app.Controller',
     
@@ -191,7 +184,7 @@ Ext.define("OECDInfo.controller.Main", {
                     this.shareEmail(data);
                 },
                 facebooktap:function(data){
-                    this.shareFacebook(data);
+                    this.shareFacebook();
                 },
                 twittertap:function(data){
                     this.shareTwitter(data);
@@ -274,12 +267,15 @@ Ext.define("OECDInfo.controller.Main", {
             // },
             share:{
                 emailtap:function(){
+                    this.self.actionsheet.hide();
                     this.shareEmail();
                 },
                 facebooktap:function(){
+                    this.self.actionsheet.hide();
                     this.shareFacebook();
                 },
                 twittertap:function(){
+                    this.self.actionsheet.hide();
                     this.shareTwitter();
                 }
             }
@@ -486,13 +482,15 @@ Ext.define("OECDInfo.controller.Main", {
         // window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link);
         this.openLink('mailto:?subject=OECD Info:')
     },
-    shareFacebook:function(data){
+    shareFacebook:function(){
         var data = this.self.detail.getData();
-        this.openLink('https://www.facebook.com/sharer/sharer.php?u=' + data.link, 'fbsharer');
+        var link = data.link;
+        this.openLink('https://www.facebook.com/sharer/sharer.php?u=' + data.link);
     },
     shareTwitter:function(data){
         var data = this.self.detail.getData();
-        this.openLink('https://twitter.com/intent/tweet?url='+ data.link +'&text=' + data.title, 'twitter');
+        // this.openLink('https://twitter.com/intent/tweet?url='+ data.link +'&text=' + data.title, 'twitter');
+        this.openLink('https://twitter.com/intent/tweet');
     },
     checkTheme:function(themes){
         // console.log(themes);
@@ -662,27 +660,29 @@ Ext.define("OECDInfo.controller.Main", {
                     }                
                 }
             );
-            this.self.actionsheet = Ext.Viewport.add(
-                {
-                    xtype:'share',
-                    isTablet:true
-                    // ,
-                    // width:200,
-                    // height:160,
-                    // style:'font-size:smaller;',
-                    // // modal:true,
-                    // showAnimation:{
-                    //     type:'fadeIn',
-                    //     // direction:'top',
-                    //     duration:150
-                    // },
-                    // hideAnimation:{
-                    //     type:'fadeOut',
-                    //     // direction:'top',
-                    //     duration:150
-                    // }
-                }
-            );
+
+
+            // this.self.actionsheet = Ext.Viewport.add(
+            //     {
+            //         xtype:'share',
+            //         isTablet:true
+            //         // ,
+            //         // width:200,
+            //         // height:160,
+            //         // style:'font-size:smaller;',
+            //         // // modal:true,
+            //         // showAnimation:{
+            //         //     type:'fadeIn',
+            //         //     // direction:'top',
+            //         //     duration:150
+            //         // },
+            //         // hideAnimation:{
+            //         //     type:'fadeOut',
+            //         //     // direction:'top',
+            //         //     duration:150
+            //         // }
+            //     }
+            // );
 
             this.preloadImg([
                 'resources/images/arrow_left.png',
@@ -1364,13 +1364,14 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },   
     openShare:function(){
-        if(this.self.isTablet){
-            var btnShare = this.getDetail().query('button[action=share]')[0];
-            this.self.actionsheet.showBy(btnShare);
-        }else{
+        // if(this.self.isTablet){
+        //     var btnShare = this.getDetail().query('button[action=share]')[0];
+        //     this.self.actionsheet.showBy(btnShare);
+        // }else{
             this.self.actionsheet.show();
-        }
+        // }
         // console.log(actionsheet);
+        // this.getShare().show();
     }
 });
 
