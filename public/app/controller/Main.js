@@ -122,11 +122,11 @@ Ext.define("OECDInfo.controller.Main", {
                 }
             },         
             detail:{
-                show:function () {
-                    if(this.self.isTablet){
-                        this.openTabletNavi();
-                    }
-                },
+                // show:function () {
+                //     if(this.self.isTablet){
+                //         this.openTabletNavi();
+                //     }
+                // },
                 hide:function(){
                     var me = this;
                     console.log(this.self.currentIndex);
@@ -508,31 +508,6 @@ Ext.define("OECDInfo.controller.Main", {
                 }
             }
         }
-
-        // var index = 0;
-        // var themesArray = this.getMenutheme().getItems().items;
-        // Ext.Object.each(this.getMenutheme().getValues(), function(label, val, myself) {
-
-        //     var check = false;
-        //     var key = label.split(' ')[0];
-        //     if(key == 'OECD'){
-        //         key = 'Generic'
-        //     }
-
-        //     for (var i=0;i<themes.length;i++){
-        //         if(themes[i] == key){
-        //             check = true;
-        //             break;
-        //         }
-        //     }
-
-        //     if(check){
-        //         themesArray[index].check();
-        //     }
-        //     index++;
-        // }); 
-
-        // this.getMenutheme().setValues(themesArray);
     },
     labelTheme:function(themes){
         console.log(themes);
@@ -581,6 +556,9 @@ Ext.define("OECDInfo.controller.Main", {
         OECDInfo.app.isInitial = (themes == '' ? true : false);
 
         if(this.self.isTablet){
+
+            Ext.Viewport.on('orientationchange', 'handleOrientationDetail', this);
+
             this.self.theme = Ext.Viewport.add({
                 xtype:'theme',
                 // instructions:'Chose themes you are interested in',
@@ -781,6 +759,7 @@ Ext.define("OECDInfo.controller.Main", {
     },
     handleOrientationDetail:function(){
         var width = window.innerWidth;
+    alert(width)
 
         if(width > 800){
             this.self.prev.setTop(330);
@@ -803,6 +782,7 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     openDetail:function(data){
+
         // console.log('detail');
         // this.self.detail.animateActiveItem(1, {type:'slide', direction:'left'})
         // console.log(this.self.detail);
@@ -828,6 +808,7 @@ Ext.define("OECDInfo.controller.Main", {
 
             if(fromTablet){
                 this.handleOrientationDetail();
+                this.openTabletNavi();
             }
             // panelProvider = panel[1];
             detail.setData(data);
