@@ -362,7 +362,10 @@ Ext.define("OECDInfo.controller.Main", {
                     me.scrollListSelected();
                 }
             }else if (e.keyCode == '13') {
-                me.openDetail(me.self.feeds[me.self.currentIndex]);
+                console.log(e);
+                if(e.target.className.toString().indexOf('search') == -1){
+                    me.openDetail(me.self.feeds[me.self.currentIndex]);
+                }
             }
         }else{
             if (e.keyCode == '37') {
@@ -940,6 +943,7 @@ Ext.define("OECDInfo.controller.Main", {
                         // me.setFeeds([{test:'aaaa'}]);
 
                         if(search == undefined){
+
                             var localFeeds = [], type = '';
                             for(var i=0;i<response.feeds.length;i++){
                                 type = response.feeds[i].typeName;
@@ -949,6 +953,10 @@ Ext.define("OECDInfo.controller.Main", {
                             }
                             // me.setFeeds(localFeeds);
                             me.setFeeds(response.feeds);
+                        }else{
+                            if(!me.self.isTablet){
+                                me.closeMenu();
+                            }
                         }
                     }
                     Ext.Viewport.setMasked(false);

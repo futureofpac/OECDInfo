@@ -33,7 +33,6 @@ Ext.define('OECDInfo.view.Menu', {
                         listeners: {
                             keyup: function(me, e, eOpts){
                                 if (e.event.keyCode == 13){
-                                  // alert('User pressed enter'+me.getValue());
                                   this.fireEvent('searchtap', me.getValue());
                                 }
                             },

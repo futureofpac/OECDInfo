@@ -281,7 +281,7 @@ function getFeed(req, res, next){
 			        }else{
 			        	if(search && search != ''){
 			        		feeds = _.filter(feeds, function(item){
-			        			return (item.title.indexOf(search) > -1 || item.content.indexOf(search) > -1)
+			        			return (item.title.toLowerCase().indexOf(search.toLowerCase()) > -1 || item.content.toLowerCase().indexOf(search.toLowerCase()) > -1)
 			        			// return (item.title.indexOf(search) > 0)
 			        		})
 			        	}
