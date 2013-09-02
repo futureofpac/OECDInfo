@@ -187,7 +187,7 @@ Ext.define('OECDInfo.view.Detail', {
                         action:'facebook'
                     },
                     {
-                        text:'Twitter',
+                        text:'Tweet',
                         action:'twitter'
                     },
 
