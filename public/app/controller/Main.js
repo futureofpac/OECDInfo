@@ -641,7 +641,7 @@ Ext.define("OECDInfo.controller.Main", {
 
             this.self.menu = Ext.Viewport.add({xtype:'menu'});
             this.self.detail = Ext.Viewport.add({xtype:'detail'});
-            // this.self.actionsheet = Ext.Viewport.add({xtype:'share'});
+            this.self.actionsheet = Ext.Viewport.add({xtype:'share'});
         }
 
         if(!OECDInfo.app.isInitial){
