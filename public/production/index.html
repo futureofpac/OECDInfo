@@ -4,192 +4,8 @@
     <meta charset="UTF-8">
     <meta name="apple-itunes-app" content="app-id=599321274">
     <!--<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>-->
+    <!--<meta name="apple-itunes-app" content="app-id=599321274, affiliate-data=myAffiliateData, app-argument=myURL">-->
     <title>OECDInfo</title>
-    <style type="text/css">
-         /*
-        <meta name="apple-itunes-app" content="app-id=599321274, affiliate-data=myAffiliateData, app-argument=myURL">
-         * Example of an initial loading indicator.
-         * It is recommended to keep this as minimal as possible to provide instant feedback
-         * while other resources are still being loaded for the first time
-         */
-        html, body {
-            height: 100%;
-            background-color: #1985D0
-        }
-
-        #appLoadingIndicator {
-            position: absolute;
-            top: 50%;
-            margin-top: -15px;
-            text-align: center;
-            width: 100%;
-            height: 30px;
-            -webkit-animation-name: appLoadingIndicator;
-            -webkit-animation-duration: 0.5s;
-            -webkit-animation-iteration-count: infinite;
-            -webkit-animation-direction: linear;
-        }
-
-        #appLoadingIndicator > * {
-            background-color: #FFFFFF;
-            display: inline-block;
-            height: 30px;
-            -webkit-border-radius: 15px;
-            margin: 0 5px;
-            width: 30px;
-            opacity: 0.8;
-        }
-
-        @-webkit-keyframes appLoadingIndicator{
-            0% {
-                opacity: 0.8
-            }
-            50% {
-                opacity: 0
-            }
-            100% {
-                opacity: 0.8
-            }
-        }
-
-        #theme .x-form-label-nowrap .x-form-label{
-            white-space:normal;
-        }
-
-        #theme .x-field-input .x-field-mask{
-            width: 40px;
-        }
-
-        #detail{
-            padding: 0px;
-            -webkit-border-radius:0px;
-            border-radius:0px;
-            border-left: solid 1px black;
-        }
-        #detail .x-inner.x-panel-inner{
-            -webkit-border-radius:0px;
-            border-radius:0px;
-        }
-
-        #detail div.x-dock-vertical{
-            margin: 1px;
-        }
-        
-        #menu .x-item-selected{
-          background-color:#dddddd;
-          border-top-color:#bbbbbb;
-          border-bottom-color:#bbbbbb;
-          background-image:-webkit-linear-gradient(bottom, rgb(185,189,188) 23%, rgb(187,187,187) 50%, rgb(204,203,207) 86%);
-        }
-
-        #custom-tweet-button a {
-            display: block;
-            padding: 2px 5px 2px 20px;
-            background: url('https://twitter.com/favicons/favicon.ico') 1px center no-repeat;
-            border: 1px solid #ccc;
-          }
-        span.menuicon{
-          float: left;
-          width:30px;
-          height:30px;
-          margin:-3px 9px 0px 0px;
-        }
-        span.menutext{
-          float: left;
-          height:30px;
-          padding-top: 0px;
-          vertical-align: middle;
-        }
-        span.menuicon.All {
-          background: url(resources/images/icon-allfeeds.svg);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-        span.menuicon.Twitter {
-          background: url(resources/images/icon-twitter.svg);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-        span.menuicon.Videos {
-          background: url(resources/images/icon-videos.svg);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-        span.menuicon.Photos {
-          background: url(resources/images/icon-photos.svg);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-        span.menuicon.News {
-          background: url(resources/images/icon-news.svg);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-        span.menuicon.Articles {
-          background: url(resources/images/icon-blog.svg);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-        span.menuicon.Publications {
-          background: url(resources/images/icon-publications.svg);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-  /*      span.menuicon.Insight {
-          background: url(resources/images/lightning.png);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-        span.menuicon.Profile {
-          background: url(resources/images/user.png);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-        span.menuicon.Favorite {
-          background: url(resources/images/star.png);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-        span.menuicon.About {
-          background: url(resources/images/setting.png);
-          background-size:30px 30px;
-          background-repeat: no-repeat;
-        }
-*/
-        #detail .header,#detail .header{
-          background-image:none;background-color:#eeeeee;
-          background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #fbfbfb), color-stop(100%, #e1e1e1));
-          background-image:-webkit-linear-gradient(top, #ffffff,#fbfbfb 3%,#e1e1e1);
-          background-image:linear-gradient(top, #ffffff,#fbfbfb 3%,#e1e1e1);
-          border-bottom:1px solid #ccc;
-          border-top:1px solid #ddd;padding:1em 0.8em;
-          padding:10px 14px;
-        }
-
-        #detail .header h4 {
-          font-size: smaller;
-          padding-top: 7px;
-          color: gray;
-        }
-
-        #detail .header.Twitter h3 {
-          line-height:160%
-        }
-
-        #detail p {
-          padding: 14px;
-        }
-
-        #detail span.link,span.username,span.hashtag,span.at,span.shap{
-          text-decoration:underline;
-          cursor: pointer;
-          color:blue;
-        }
-        
-        #detail div.x-dock{
-          margin: 0px;
-        }
-    </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <script type="text/javascript">(function(l){function s(b){function d(a,b){var c=a.length,d,e;for(d=0;d<c;d++){e=a[d];var h=a,j=d,f=void 0;"string"==typeof e&&(e={path:e});e.shared?(e.version=e.shared,f=e.shared+e.path):(B.href=e.path,f=B.href);e.uri=f;e.key=i+"-"+f;g[f]=e;h[j]=e;e.type=b;e.index=d;e.collection=a;e.ready=!1;e.evaluated=!1}return a}var c;"string"==typeof b?(c=b,b=C(c)):c=JSON.stringify(b);var i=b.id,j=i+"-"+D+p,g={};this.key=j;this.css=d(b.css,"css");this.js=d(b.js,"js");window.Ext||(window.Ext={});n.microloaded=
 !0;var f=window.Ext.filterPlatform=function(a){function b(a){var c=/Mobile(\/|\s)/.test(a);return/(iPhone|iPod)/.test(a)||!/(Silk)/.test(a)&&/(Android)/.test(a)&&(/(Android 2)/.test(a)||c)||/(BlackBerry|BB)/.test(a)&&c||/(Windows Phone)/.test(a)}function d(a){return!b(a)&&(/iPad/.test(a)||/Android/.test(a)||/(RIM Tablet OS)/.test(a)||/MSIE 10/.test(a)&&/; Touch/.test(a))}var c=false,e=navigator.userAgent,h,g,a=[].concat(a);h=window.location.search.substr(1).split("&");g={};var f;for(f=0;f<h.length;f++){var i=
@@ -212,4 +28,30 @@ I=!1,r,k,o;try{o=l.localStorage,k=l.applicationCache}catch(N){}if("undefined"===
         <div></div>
     </div>
 </body>
+<script type="text/javascript">
+
+// if (typeof window.navigator == 'object')
+// {
+//   alert('supported');
+//   alert(navigator)
+//   alert(navigator.onLine)
+//     // localStorage is supported
+// }
+// else
+// {
+//   alert('not supported');
+//     // localStorage is not supported
+// }
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-42960062-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </html>
