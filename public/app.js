@@ -61,6 +61,7 @@ Ext.application({
     // viewport: {
     //     autoMaximize: true
     // },    
+    menus:['All', 'News', 'Articles', 'Publications', 'Twitter', 'Photos', 'Videos', 'Links'],
     themes:[
         {
             name:'OECD News',

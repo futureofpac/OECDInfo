@@ -288,6 +288,7 @@ Ext.define("OECDInfo.controller.Main", {
         currentIndex:-1,
         pageSize:40,
         feeds:[],
+        feed:[],
         links:[],
         detail:null,
         menu:null,
@@ -918,6 +919,7 @@ Ext.define("OECDInfo.controller.Main", {
                 console.log(response);
 
                 OECDInfo.app.isInitial = false;
+                var menus = OECDInfo.app.menus;
                 // if(!success){
                 //     this.callServiceOffline(true);
                 // }else{
@@ -927,11 +929,25 @@ Ext.define("OECDInfo.controller.Main", {
                     }else{
                         me.self.feeds = [].concat(response.feeds);
                         console.log('in callService:');
-                        console.log(me.self.feeds);
+                        // console.log(me.self.feeds);
                         // me.self.links = [].concat(response.links);
                         me.controlSearchBox(search);
                         me.displayList(1);
                         // me.setFeeds([{test:'aaaa'}]);
+
+                        for(var i=0;i<menus.length;i++){
+                            if(menus[i] != 'All' && menus[i] != 'Links'){
+                                console.log(me.self.feed[menus[i]]);
+                                me.self.feed[menus[i]] = [];
+                                console.log(me.self.feed[menus[i]]);
+                            }
+                        }
+
+                        for(var i=0;i<response.feeds.length;i++){
+                            if(response.feeds[i].typeName){
+                                me.self.feed[response.feeds[i].typeName].push(response.feeds[i])
+                            }
+                        }
 
                         if(search == undefined){
 
@@ -1048,25 +1064,36 @@ Ext.define("OECDInfo.controller.Main", {
         var me = this,
             pageSize = this.self.pageSize;
 
-        var filterFn = function (element, index, array) {
-            var type = me.self.currentType;
-            return (element.typeName == type);
-        }
+        // var filterFn = function (element, index, array) {
+        //     var type = me.self.currentType;
+        //     return (element.typeName == type);
+        // }
+
+        // var feeds = (
+        //     (
+        //         this.self.currentType == '' || this.self.currentType == 'All'
+        //     ) ? 
+        //     this.self.feeds :
+        //     this.self.feeds.filter(filterFn)
+        // );
 
         var feeds = (
             (
                 this.self.currentType == '' || this.self.currentType == 'All'
             ) ? 
             this.self.feeds :
-            this.self.feeds.filter(filterFn)
+            this.self.feed[this.self.currentType]
         );
 
         var data = feeds.slice(((page - 1) * pageSize),page * pageSize);
 
-        if(feeds.length > data.length){
-            this.getLoadmore().getParent().setHidden(false);
-        }else{
+        // if(feeds.length < data.length){
+        if(data.length < pageSize){
+            //hidden
             this.getLoadmore().getParent().setHidden(true);
+        }else{
+            //show
+            this.getLoadmore().getParent().setHidden(false);
         }
 
         console.log(data);
