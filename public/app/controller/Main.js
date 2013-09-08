@@ -444,9 +444,16 @@ Ext.define("OECDInfo.controller.Main", {
                 this.closeMenu();
             }
 
-            if(!this.self.theme.getHidden()){
+            // if(!this.self.theme){
+            //     if(!this.self.theme.getHidden()){
+            //         this.closeTheme();
+            //     }
+            // }
+        
+            if(Ext.getCmp('theme')){
                 this.closeTheme();
             }
+
             if(!this.self.detail.getHidden()){
                 this.closeDetail();
             }
@@ -621,22 +628,26 @@ Ext.define("OECDInfo.controller.Main", {
         var themes = this.getTheme();
         OECDInfo.app.isInitial = (themes == '' ? true : false);
 
+        if(OECDInfo.app.isInitial){
+            this.openTheme();
+        }
+
         if(this.self.isTablet){
 
             Ext.Viewport.on('orientationchange', 'handleOrientationDetail', this);
 
-            this.self.theme = Ext.Viewport.add({
-                xtype:'theme',
-                // instructions:'Chose themes you are interested in',
-                fromTablet:true,
-                hidden:(OECDInfo.app.isInitial ? false : true),
-                modal:true,
-                hideOnMaskTap:true,
-                // zIndex:10001,
-                width:770,
-                height:540,
-                centered:true
-            });
+            // this.self.theme = Ext.Viewport.add({
+            //     xtype:'theme',
+            //     // instructions:'Chose themes you are interested in',
+            //     fromTablet:true,
+            //     hidden:(OECDInfo.app.isInitial ? false : true),
+            //     modal:true,
+            //     hideOnMaskTap:true,
+            //     // zIndex:10001,
+            //     width:770,
+            //     height:540,
+            //     centered:true
+            // });
 
             this.self.prev = Ext.Viewport.add(
                 {
@@ -695,14 +706,14 @@ Ext.define("OECDInfo.controller.Main", {
             ]);
 
         }else{
-            this.self.theme = Ext.Viewport.add({
-                xtype:'theme',
-                hidden:(OECDInfo.app.isInitial ? false : true),
-                zIndex:10005,
-                centered:true,
-                width:'100%',
-                height:'100%'
-            });
+            // this.self.theme = Ext.Viewport.add({
+            //     xtype:'theme',
+            //     hidden:(OECDInfo.app.isInitial ? false : true),
+            //     zIndex:10005,
+            //     centered:true,
+            //     width:'100%',
+            //     height:'100%'
+            // });
 
             this.self.menu = Ext.Viewport.add({xtype:'menu'});
             this.self.detail = Ext.Viewport.add({xtype:'detail'});
@@ -727,9 +738,9 @@ Ext.define("OECDInfo.controller.Main", {
             this.getDetail().on('hide', function(){
                 me.setLocation('home');
             })
-            this.self.theme.on('hide', function(){
-                me.setLocation('home');
-            })
+            // this.self.theme.on('hide', function(){
+            //     me.setLocation('home');
+            // })
             if(this.self.isTablet){
                 this.getMenu().on('hide', function(){
                     me.setLocation('home');
@@ -812,16 +823,44 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     openTheme:function(){
-        console.log(this.self.theme.getHidden());
-        this.self.theme.show();
-        console.log(this.self.theme.getHidden());
-        // this.self.theme.setHidden(false);
+        // this.self.theme.show();
+        if(this.self.isTablet){
+
+            this.self.theme = Ext.Viewport.add({
+                xtype:'theme',
+                // instructions:'Chose themes you are interested in',
+                fromTablet:true,
+                modal:true,
+                hideOnMaskTap:true,
+                // zIndex:10001,
+                width:770,
+                height:540,
+                centered:true
+            });
+        }else{
+            this.self.theme = Ext.Viewport.add({
+                xtype:'theme',
+                zIndex:10005,
+                centered:true,
+                width:'100%',
+                height:'100%'
+            });
+        }
+
+        var me = this;
+        if(!Ext.os.is.iOS){
+            this.self.theme.on('hide', function(){
+                me.setLocation('home');
+            })
+        }
+
         this.setLocation('theme');
         var themes = this.getTheme();
         this.checkTheme(themes.split(','));        
     },
     closeTheme:function(){
-        this.self.theme.hide();
+        this.self.theme = null;
+        Ext.Viewport.remove(Ext.getCmp('theme'));
     },
     handleOrientationDetail:function(){
         var width = window.innerWidth;
