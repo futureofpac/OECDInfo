@@ -185,9 +185,8 @@ Ext.define("OECDInfo.controller.Main", {
                     this.openLink(link);
                 },
                 providertap:function(direction){
-                    var detail =  this.self.detail;
-
-                    this.controlProvider(direction);
+                    // var detail =  this.self.detail;
+                    // this.controlProvider(direction);
                 },
                 emailtap:function(){
                     this.shareEmail();
@@ -390,7 +389,7 @@ Ext.define("OECDInfo.controller.Main", {
         Ext.data.JsonP.request({
             url: 'http://smart-ip.net/geoip-json',
             // url: OECDInfo.app.serviceRoot() + '/api/links/',
-            timeout: 20000,
+            // timeout: 20000,
             callback:function(success, response){
                 var log = {
                     ip:(response == null ? '' : response.host),

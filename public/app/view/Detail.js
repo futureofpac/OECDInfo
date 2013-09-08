@@ -43,11 +43,11 @@ Ext.define('OECDInfo.view.Detail', {
         zIndex:100,
         width:'100%',
         height:'100%',
-        showAnimation:{
-            type:'slide',
-            direction:'left',
-            duration:150
-        },
+        // showAnimation:{
+        //     type:'slide',
+        //     direction:'left',
+        //     duration:150
+        // },
         // hideAnimation:{
         //     type:'slide',
         //     direction:'right',
