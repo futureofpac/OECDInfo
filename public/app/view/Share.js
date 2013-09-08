@@ -68,7 +68,7 @@ Ext.define('OECDInfo.view.Share', {
                 // }
             },
             {
-                text:'Twitter',
+                text:'Tweet',
                 action:'twitter'
             },
             {

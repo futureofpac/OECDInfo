@@ -174,6 +174,14 @@ Ext.define("OECDInfo.controller.Main", {
                     this.openShare();
                 },
                 opentap:function(link){
+                    var data = this.self.detail.getData();
+
+                    if(data.typeName == 'Twitter'){
+                        link = this.getUrl(data);
+                    }else{
+                        link = link;
+                    }
+
                     this.openLink(link);
                 },
                 providertap:function(direction){
@@ -181,14 +189,14 @@ Ext.define("OECDInfo.controller.Main", {
 
                     this.controlProvider(direction);
                 },
-                emailtap:function(data){
-                    this.shareEmail(data);
+                emailtap:function(){
+                    this.shareEmail();
                 },
-                facebooktap:function(data){
+                facebooktap:function(){
                     this.shareFacebook();
                 },
-                twittertap:function(data){
-                    this.shareTwitter(data);
+                twittertap:function(){
+                    this.shareTwitter();
                 }
             },
             menuBtn: {
@@ -475,6 +483,37 @@ Ext.define("OECDInfo.controller.Main", {
 
         return html;
     },
+    getUrl:function(data){
+        var link = false,
+            title = data.title;
+
+        if(data.typeName == 'Twitter'){
+
+            var first = title.indexOf('http://');
+
+            if(first > -1){
+                title = title.substr(first);
+                var last = title.indexOf('"');
+                link = title.substr(0, last);
+            }else{
+                link = false;
+            }
+
+            console.log(link);
+
+            // console.log(data.title);
+            // link = data.title.toString().replace(/(http:\/\/[^\s]*)/g, "$1 ");
+            // console.log(link);
+            // link = link.split(' ')[0];
+            // link = this.getUrl(data.title);
+        }
+
+        if(data.typeName != 'Twitter' && !link){
+            link = (data.link ? data.link : false);
+        }
+
+        return link;
+    },
     preloadImg:function(srcs){
         for(var i=0;i<srcs.length;i++){
             var images = new Image()
@@ -482,20 +521,46 @@ Ext.define("OECDInfo.controller.Main", {
         }
     },
     shareEmail:function(){
-        var data = this.self.detail.getData();
         // window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link + data.content);
         // window.open('mailto:?subject=OECD Info:' + data.title + '&body=' + data.link);
-        this.openLink('mailto:?subject=OECD Info:')
+        var data = this.self.detail.getData(),
+            content = 'mailto:?',
+            hasTitle = false,
+            link = this.getUrl(data);
+
+        if(data.title){
+            hasTitle = true;
+            if(data.typeName == 'Twitter'){
+                content += 'subject=OECDInfo Tweet';
+            }else{
+                content += 'subject=' + data.title;
+            }
+        }
+        if(link != false){
+            content += (hasTitle ? '&' : '') + 'body=' + link;
+        }
+
+        this.openLink(content);
     },
     shareFacebook:function(){
-        var data = this.self.detail.getData();
-        var link = data.link;
-        this.openLink('https://www.facebook.com/sharer/sharer.php?u=' + data.link);
+        var data = this.self.detail.getData(),
+            link = this.getUrl(data);
+
+        if(!link){
+            Ext.Msg.alert('Alert', 'The link is not good, try again.');
+        }else{
+            this.openLink('https://www.facebook.com/sharer/sharer.php?u=' + link);
+        }
     },
-    shareTwitter:function(data){
-        var data = this.self.detail.getData();
-        // this.openLink('https://twitter.com/intent/tweet?url='+ data.link +'&text=' + data.title, 'twitter');
-        this.openLink('https://twitter.com/intent/tweet');
+    shareTwitter:function(){
+        var data = this.self.detail.getData(),
+            link = this.getUrl(data);
+
+        if(!link){
+            Ext.Msg.alert('Alert', 'The link is not good, try again.');
+        }else{
+            this.openLink('https://twitter.com/intent/tweet?url=' + link);
+        }
     },
     checkTheme:function(themes){
         // console.log(themes);
